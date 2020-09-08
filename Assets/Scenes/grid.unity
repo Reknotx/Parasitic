@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 10
+    serializedVersion: 12
     m_Resolution: 2
     m_BakeResolution: 40
     m_AtlasSize: 1024
@@ -62,6 +62,7 @@ LightmapSettings:
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
@@ -76,10 +77,16 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVRFilteringMode: 1
+    m_PVREnvironmentMIS: 0
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -87,7 +94,9 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -991,9 +1000,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -2838,7 +2848,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  serializedVersion: 9
+  serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -2858,6 +2868,9 @@ Mesh:
   m_BindPose: []
   m_BoneNameHashes: 
   m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
   m_KeepVertices: 1
@@ -2865,7 +2878,7 @@ Mesh:
   m_IndexFormat: 0
   m_IndexBuffer: 00000c0001000c000d00010001000d0002000d000e00020002000e0003000e000f00030003000f0004000f0010000400040010000500100011000500050011000600110012000600060012000700120013000700070013000800130014000800080014000900140015000900090015000a00150016000a000a0016000b00160017000b000c0018000d00180019000d000d0019000e0019001a000e000e001a000f001a001b000f000f001b0010001b001c00100010001c0011001c001d00110011001d0012001d001e00120012001e0013001e001f00130013001f0014001f0020001400140020001500200021001500150021001600210022001600160022001700220023001700180024001900240025001900190025001a00250026001a001a0026001b00260027001b001b0027001c00270028001c001c0028001d00280029001d001d0029001e0029002a001e001e002a001f002a002b001f001f002b0020002b002c00200020002c0021002c002d00210021002d0022002d002e00220022002e0023002e002f002300240030002500300031002500250031002600310032002600260032002700320033002700270033002800330034002800280034002900340035002900290035002a00350036002a002a0036002b00360037002b002b0037002c00370038002c002c0038002d00380039002d002d0039002e0039003a002e002e003a002f003a003b002f0030003c0031003c003d00310031003d0032003d003e00320032003e0033003e003f00330033003f0034003f0040003400340040003500400041003500350041003600410042003600360042003700420043003700370043003800430044003800380044003900440045003900390045003a00450046003a003a0046003b00460047003b003c0048003d00480049003d003d0049003e0049004a003e003e004a003f004a004b003f003f004b0040004b004c00400040004c0041004c004d00410041004d0042004d004e00420042004e0043004e004f00430043004f0044004f0050004400440050004500500051004500450051004600510052004600460052004700520053004700480054004900540055004900490055004a00550056004a004a0056004b00560057004b004b0057004c00570058004c004c0058004d00580059004d004d0059004e0059005a004e004e005a004f005a005b004f004f005b0050005b005c00500050005c0051005c005d00510051005d0052005d005e00520052005e0053005e005f005300540060005500600061005500550061005600610062005600560062005700620063005700570063005800630064005800580064005900640065005900590065005a00650066005a005a0066005b00660067005b005b0067005c00670068005c005c0068005d00680069005d005d0069005e0069006a005e005e006a005f006a006b005f0060006c0061006c006d00610061006d0062006d006e00620062006e0063006e006f00630063006f0064006f0070006400640070006500700071006500650071006600710072006600660072006700720073006700670073006800730074006800680074006900740075006900690075006a00750076006a006a0076006b00760077006b006c0078006d00780079006d006d0079006e0079007a006e006e007a006f007a007b006f006f007b0070007b007c00700070007c0071007c007d00710071007d0072007d007e00720072007e0073007e007f00730073007f0074007f0080007400740080007500800081007500750081007600810082007600760082007700820083007700780084007900840085007900790085007a00850086007a007a0086007b00860087007b007b0087007c00870088007c007c0088007d00880089007d007d0089007e0089008a007e007e008a007f008a008b007f007f008b0080008b008c00800080008c0081008c008d00810081008d0082008d008e00820082008e0083008e008f008300840090008500900091008500850091008600910092008600860092008700920093008700870093008800930094008800880094008900940095008900890095008a00950096008a008a0096008b00960097008b008b0097008c00970098008c008c0098008d00980099008d008d0099008e0099009a008e008e009a008f009a009b008f00
   m_VertexData:
-    serializedVersion: 2
+    serializedVersion: 3
     m_VertexCount: 156
     m_Channels:
     - stream: 0
@@ -2986,7 +2999,7 @@ Mesh:
   m_BakedTriangleCollisionMesh: 
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
-  m_MeshOptimized: 0
+  m_MeshOptimizationFlags: -1
   m_StreamData:
     offset: 0
     size: 0
@@ -3071,10 +3084,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b245d7d21996f84588224af1a78bceb, type: 2}
+  - {fileID: 2100000, guid: ac892ebca569c6e4ea9692fce92fd8ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3082,6 +3096,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3539,6 +3554,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3550,6 +3566,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4734,12 +4751,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279286288}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -4749,6 +4768,24 @@ Light:
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -4756,12 +4793,15 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1279286290
@@ -5113,6 +5153,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5124,6 +5165,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7433,6 +7475,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7444,6 +7487,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
