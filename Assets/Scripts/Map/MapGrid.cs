@@ -39,14 +39,12 @@ public class MapGrid : MonoBehaviour
     {
         grid = new Tile[columns, rows];
         GetTiles();
-        FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
-        print("start: "+ TileFromPosition(start.transform.position) + "end: " + TileFromPosition(end.transform.position));
-        RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
     }
 
     private void Update()
     {
-
+        FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
+        RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
     }
 
     public void GetTiles()
@@ -90,9 +88,9 @@ public class MapGrid : MonoBehaviour
         }
         else
         {
-            print((columns - 1) * percentX);
-            int posX = Mathf.RoundToInt((columns-1) * percentX);
-            int posZ = Mathf.RoundToInt((rows-1) * percentZ);
+            //print((columns - 1) * percentX);
+            int posX = (int)((columns) * percentX);
+            int posZ = (int)((rows) * percentZ);
             return grid[posX, posZ];
         }
     }
@@ -110,27 +108,28 @@ public class MapGrid : MonoBehaviour
             Tile currentTile = frontier[0];
             for (int i = 1; i < frontier.Count; i++)
             {
-                if (frontier[i].fCost < currentTile.fCost || (frontier[i].fCost == currentTile.fCost && frontier[i].hCost < currentTile.hCost))
+                if (frontier[i].fCost < currentTile.fCost || frontier[i].fCost == currentTile.fCost && frontier[i].hCost < currentTile.hCost)
                 {
                     currentTile = frontier[i];
                 }
             }
+
             frontier.Remove(currentTile);
-            print(currentTile);
             explored.Add(currentTile);
+
             if (currentTile == endTile)
             {
-                //print("found endtile");
                 return;
             }
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
+                //print(currentTile + " Neighbor: " + neighbor);
                 if(!neighbor.movementTile || explored.Contains(neighbor))
                 {
                     continue;
                 }
                 int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
-                if(currentCost <neighbor.gCost || !explored.Contains(neighbor))
+                if(currentCost <neighbor.gCost || !frontier.Contains(neighbor))
                 {
                     neighbor.gCost = currentCost;
                     neighbor.hCost = GetDistanceCost(neighbor, endTile);

@@ -13,9 +13,9 @@ public class Tile : MonoBehaviour
     [HideInInspector]
     public Vector2 gridPosition;
     [HideInInspector]
-    public int gCost;
+    public int gCost = 0;
     [HideInInspector]
-    public int hCost;
+    public int hCost = 0;
     [HideInInspector]
     public Tile parent;
 
