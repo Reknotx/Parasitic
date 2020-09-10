@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736326468471990901}
-  - component: {fileID: 6736326468471990900}
+  - component: {fileID: 210008559}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6736326468471990900
+--- !u!114 &210008559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMoveSpeed: 100
   cameraRotationSpeed: 55
-  zoomSensitivity: 120
-  zoomPoint1: {fileID: 0}
-  zoomPoint2: {fileID: 0}
+  zoomSensitivity: 125
+  zoomPoint1: {fileID: 6736326469692029395}
+  zoomPoint2: {fileID: 6736326468847792228}
   mapLimitX1: 450
   mapLimitX2: -450
   mapLimitY1: 450
@@ -80,7 +80,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6736326468847792229}
   m_LocalRotation: {x: 0.38268274, y: -0, z: -0, w: 0.9238798}
-  m_LocalPosition: {x: 0, y: -10.2, z: 9.6}
+  m_LocalPosition: {x: 0, y: -7.9, z: 6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6736326468471990901}
@@ -149,7 +149,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6736326469692029396}
   m_LocalRotation: {x: 0.38268274, y: -0, z: -0, w: 0.9238798}
-  m_LocalPosition: {x: 0, y: 36, z: -38.1}
+  m_LocalPosition: {x: 0, y: 280.2, z: -220.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6736326468471990901}

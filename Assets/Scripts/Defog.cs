@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Defog : MonoBehaviour
 {
-    [Header("Group of Clouds to be deactivated")]
-    public GameObject[] cloudGroups = new GameObject[1];
+    [Header("FogObjects to be deactivated")]
+    public GameObject[] fogObjects = new GameObject[1];
 
     [Header("Enemies and Other Objects to Reveal With this Trigger")]
     public GameObject[] objectsToReveal = new GameObject[1];
@@ -15,24 +15,35 @@ public class Defog : MonoBehaviour
     {
         if(other.tag == "playerUnit")
         {
-            HideClouds();
+            HideFog();
             ChangeLayers();
         }
     }
 
+    /// <summary>
+    /// Changes objects in objectsToReveal to be on the Default Layer
+    /// </summary>
     private void ChangeLayers()
     {
-        foreach( GameObject objectToReveal in objectsToReveal)
+        if (objectsToReveal[0] != null)
         {
-            objectToReveal.layer = 0;
+            foreach (GameObject objectToReveal in objectsToReveal)
+            {
+                objectToReveal.layer = 0;
+            }
         }
+        
     }
 
-    private void HideClouds()
+    /// <summary>
+    /// Hides objects in fogObjects
+    /// </summary>
+    private void HideFog()
     {
-        foreach(GameObject cloudGroup in cloudGroups)
+
+        foreach(GameObject fogObjects in fogObjects)
         {
-            cloudGroup.SetActive(false);
+            fogObjects.SetActive(false);
         }
     }
 }
