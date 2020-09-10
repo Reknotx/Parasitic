@@ -8,7 +8,7 @@ public abstract class Enemy : Humanoid, IEnemy
     public abstract void Defend();
     public abstract void Dodge();
 
-    public override void Move()
+    public override void Move(Transform start, Transform target)
     {
         //Enemy movement is dependent on the Astar algorithm
         Debug.Log("Enemy movement");

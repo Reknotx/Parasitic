@@ -11,7 +11,7 @@ public abstract class Player : Humanoid, IPlayer
         Debug.Log("Hello");
     }
 
-    public override void Move()
+    public override void Move(Transform start, Transform target)
     {
         // Player movement based on player input
         Debug.Log("Player movement");

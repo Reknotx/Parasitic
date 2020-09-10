@@ -536,7 +536,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  selectedPlayer: {fileID: 476365574}
 --- !u!4 &174609894
 Transform:
   m_ObjectHideFlags: 0
@@ -664,6 +663,7 @@ GameObject:
   - component: {fileID: 249576286}
   - component: {fileID: 249576285}
   - component: {fileID: 249576284}
+  - component: {fileID: 249576288}
   m_Layer: 0
   m_Name: Shambler
   m_TagString: Untagged
@@ -746,6 +746,19 @@ Transform:
   m_Father: {fileID: 63831641}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249576288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249576283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aeee1204cfed654bbdee083d6be3edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseStats: {fileID: 11400000, guid: a9a8f5b1a7937cc4898cc409d1a6cb2a, type: 2}
 --- !u!1 &473237072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1137,7 @@ GameObject:
   - component: {fileID: 809685862}
   - component: {fileID: 809685861}
   - component: {fileID: 809685860}
+  - component: {fileID: 809685864}
   m_Layer: 0
   m_Name: Spiker
   m_TagString: Untagged
@@ -1206,6 +1220,19 @@ Transform:
   m_Father: {fileID: 63831641}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &809685864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809685859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fab292af25c46247871610076c8b1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseStats: {fileID: 11400000, guid: 9803e8d20b3bfb34fa4b648a01c099a3, type: 2}
 --- !u!1 &969640492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1652,7 @@ GameObject:
   - component: {fileID: 1673962931}
   - component: {fileID: 1673962930}
   - component: {fileID: 1673962929}
+  - component: {fileID: 1673962933}
   m_Layer: 0
   m_Name: Larva
   m_TagString: Untagged
@@ -1707,6 +1735,19 @@ Transform:
   m_Father: {fileID: 63831641}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1673962933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673962928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd18ef4f34808348836d977aff04ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseStats: {fileID: 11400000, guid: 87fe7d63e200f7b4d94eac7988a73175, type: 2}
 --- !u!1 &1695577365
 GameObject:
   m_ObjectHideFlags: 0

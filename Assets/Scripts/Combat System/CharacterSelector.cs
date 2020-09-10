@@ -5,8 +5,8 @@ public class CharacterSelector : MonoBehaviour
     // Update is called once per frame
     public static CharacterSelector Instance;
 
-    [HideInInspector] public bool selectPlayer = true;
-    [HideInInspector] public bool selectTarget = false;
+    //[HideInInspector] public bool selectPlayer = true;
+    //[HideInInspector] public bool selectTarget = false;
 
     private void Start()
     {
@@ -28,19 +28,16 @@ public class CharacterSelector : MonoBehaviour
 
             if (hit)
             {
+                Debug.Log("Selected " + info.transform.gameObject.name);
 
-                if (info.transform.gameObject.layer == 8 && selectPlayer)
+                if (info.transform.gameObject.layer == 8 && CombatSystem.Instance.state == BattleState.Player)
                 {
-                    Debug.Log("Selected " + info.transform.gameObject.name);
-                    //Debug.Log(info.transform.gameObject.layer);
-                    CombatSystem.Instance.selectedPlayer = info.transform.gameObject.GetComponent<Player>();
+                    CombatSystem.Instance.SetPlayer(info.transform.gameObject.GetComponent<Player>());
                 }
-                else if ((info.transform.gameObject.layer == 8 || info.transform.gameObject.layer == 9) && selectTarget)
+                else if (CombatSystem.Instance.state == BattleState.Targetting)
                 {
-                    Debug.Log("Selected " + info.transform.gameObject.name);
-                    CombatSystem.Instance.target = info.transform.gameObject.GetComponent<Humanoid>();
+                    CombatSystem.Instance.SetTarget(info.transform.gameObject.GetComponent<Humanoid>());
                 }
-
             }
         }
     }
