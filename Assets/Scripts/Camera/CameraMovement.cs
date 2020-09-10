@@ -97,7 +97,6 @@ public class CameraMovement : MonoBehaviour
         _zoomPos = Mathf.Clamp01(_zoomPos);
 
 
-        Debug.Log(_zoomPos + "     " + _zoomAxis);
         _mainCamera.transform.position = Vector3.Lerp(zoomPoint1.position, zoomPoint2.position, _zoomPos);
 
        
