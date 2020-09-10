@@ -43,8 +43,8 @@ public class MapGrid : MonoBehaviour
 
     private void Update()
     {
-        FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
-        RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
+        //FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
+        //RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
     }
 
     public void GetTiles()
@@ -96,7 +96,7 @@ public class MapGrid : MonoBehaviour
     }
 
     //A* algorithm
-    public void FindPath(Tile startTile, Tile endTile)
+    public List<Tile> FindPath(Tile startTile, Tile endTile)
     {
         //nodes that need to be evaluated
         List<Tile> frontier = new List<Tile>();
@@ -119,7 +119,7 @@ public class MapGrid : MonoBehaviour
 
             if (currentTile == endTile)
             {
-                return;
+                return RetracePath(startTile,endTile);
             }
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
@@ -142,10 +142,10 @@ public class MapGrid : MonoBehaviour
             }
         }
         //print("frontier explored");
-        return;
+        return null;
     }
 
-    private void RetracePath(Tile startTile, Tile endTile)
+    private List<Tile> RetracePath(Tile startTile, Tile endTile)
     {
         path = new List<Tile>();
         Tile currentTile = endTile;
@@ -155,6 +155,7 @@ public class MapGrid : MonoBehaviour
             currentTile = currentTile.parent;
         }
         path.Reverse();
+        return path;
     }
 
     public int GetDistanceCost(Tile tileA, Tile tileB)
