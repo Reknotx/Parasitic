@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics

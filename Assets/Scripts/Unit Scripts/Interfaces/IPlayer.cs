@@ -2,7 +2,9 @@
 
 public interface IPlayer
 {
-    void NormalAttack();
-    void AbilityOne();
-    void AbilityTwo();
+    void NormalAttack(Humanoid target);
+    void AbilityOne(Humanoid target);
+    void AbilityTwo(Humanoid target);
+    void Defend();
+    void Pass();
 }

@@ -11,9 +11,9 @@ public class TEST : MonoBehaviour
     {
         foreach (IPlayer player in players)
         {
-            player.NormalAttack();
-            player.AbilityOne();
-            player.AbilityTwo();
+            //player.NormalAttack();
+            //player.AbilityOne();
+            //player.AbilityTwo();
         }
 
         foreach (IStatistics playerStats in players)
