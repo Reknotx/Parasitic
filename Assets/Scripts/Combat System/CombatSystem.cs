@@ -11,6 +11,9 @@ public enum BattleState
     Lost
 }
 
+/// <summary>
+/// Main entry point of the program (for the moment) where all data is handled.
+/// </summary>
 public class CombatSystem : MonoBehaviour
 {
     public BattleState state;
@@ -36,6 +39,9 @@ public class CombatSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets up the map and necessary information.
+    /// </summary>
     void SetupBattle()
     {
         SetState(BattleState.Player);
