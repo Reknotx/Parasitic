@@ -4,6 +4,7 @@ using UnityEngine.UI;
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
+    public int AttackRange;
     private int _maxHealth;
 
     /// <summary> Health of the unit. </summary>
@@ -26,6 +27,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public Text healthText;
     public Text damageText;
+
+    public Color selectedColor = Color.green;
+    public Color unselectedColor = Color.white;
 
     public Slider healthBar;
     

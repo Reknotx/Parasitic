@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 
 public interface IPlayer
 {
@@ -6,19 +6,19 @@ public interface IPlayer
     /// Triggers normal attack of unit.
     /// </summary>
     /// <param name="target">The target of attack.</param>
-    void NormalAttack(Humanoid target);
+    void NormalAttack(Humanoid targets);
 
     /// <summary>
     /// Triggers the first ability of the unit.
     /// </summary>
-    /// <param name="target">The target of unit's ability.</param>
-    void AbilityOne(Humanoid target);
+    /// <param name="target">The target(s) of unit's ability.</param>
+    void AbilityOne(List<Humanoid> targets);
 
     /// <summary>
     /// Triggers the second ability of the unit.
     /// </summary>
-    /// <param name="target">The target of unit's ability.</param>
-    void AbilityTwo(Humanoid target);
+    /// <param name="target">The target(s) of unit's ability.</param>
+    void AbilityTwo(List<Humanoid> target);
 
     /// <summary>
     /// Triggers defense animation.

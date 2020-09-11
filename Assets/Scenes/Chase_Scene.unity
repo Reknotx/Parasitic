@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  turnSwitch: {fileID: 0}
 --- !u!4 &174609894
 Transform:
   m_ObjectHideFlags: 0
@@ -759,9 +760,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeee1204cfed654bbdee083d6be3edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 0
   _baseStats: {fileID: 11400000, guid: a9a8f5b1a7937cc4898cc409d1a6cb2a, type: 2}
   healthText: {fileID: 734751542}
   damageText: {fileID: 734751541}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 1990695643}
 --- !u!1001 &469239928
 PrefabInstance:
@@ -1082,10 +1086,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354a65e239ab4724c92bce8d5fa69696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 1
   _baseStats: {fileID: 11400000, guid: be118dc0b88cec841ab2fca20bbcea88, type: 2}
   healthText: {fileID: 1676686997}
   damageText: {fileID: 1676686996}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 491587481}
+  Ability1Range: 0
+  Ability2Range: 0
 --- !u!114 &491587481 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4774314655745685651, guid: f623d44eb1765294390042ba8d3e13f4,
@@ -1557,9 +1566,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fab292af25c46247871610076c8b1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 0
   _baseStats: {fileID: 11400000, guid: 9803e8d20b3bfb34fa4b648a01c099a3, type: 2}
   healthText: {fileID: 1743558703}
   damageText: {fileID: 1743558702}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 614751549}
 --- !u!114 &875728297 stripped
 MonoBehaviour:
@@ -1905,10 +1917,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f305740fc53c6224c87feb0cdec49a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 0
   _baseStats: {fileID: 11400000, guid: 0adc3d50be60f4e438224792aeb67fef, type: 2}
   healthText: {fileID: 2005334247}
   damageText: {fileID: 2005334246}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 875728297}
+  Ability1Range: 0
+  Ability2Range: 2
 --- !u!65 &1523342488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2104,9 +2121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd18ef4f34808348836d977aff04ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 0
   _baseStats: {fileID: 11400000, guid: 87fe7d63e200f7b4d94eac7988a73175, type: 2}
   healthText: {fileID: 1943199131}
   damageText: {fileID: 1943199130}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 518335280}
 --- !u!1001 &1676686994
 PrefabInstance:
@@ -2319,10 +2339,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1288f9e6e5bb5af4a8e6bb8e0907f51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 3
   _baseStats: {fileID: 11400000, guid: 6ea382c103738cb4286dab95563aa95d, type: 2}
   healthText: {fileID: 469239931}
   damageText: {fileID: 469239930}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 1640134398}
+  Ability1Range: 5
+  Ability2Range: 0
 --- !u!65 &1695577367
 BoxCollider:
   m_ObjectHideFlags: 0
