@@ -25,7 +25,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     [SerializeField] private CharacterStats _baseStats;
 
     public Text healthText;
-    public Image healthBar;
+    public Text damageText;
+
+    public Slider healthBar;
     
     private void Start()
     {
@@ -37,13 +39,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         _maxHealth = Health;
 
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
-        if (healthBar == null) { healthBar = GetComponentInChildren<Image>(); }
+        if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
 
         healthText.text = Health + "/" + _maxHealth;
 
-        healthBar.fillMethod = Image.FillMethod.Horizontal;
-        healthBar.fillAmount = 50f;
-        
+        healthBar.value = 1f;
     }
 
     public virtual void Move(Transform start, Transform target)
@@ -61,11 +61,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public bool TakeDamage(int damage)
     {
         Health -= damage;
-
-        //Activate the damage text to display how much damage is dealt.
+        damageText.text = damage.ToString();
         healthText.text = Health + "/" + _maxHealth;
-        //Update the image fill (?)
+        //Update the image fill
+        
+
+        healthBar.value = (float)Health / (float) _maxHealth;
+
         return Health <= 0 ? true : false;
     }
-
 }
