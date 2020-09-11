@@ -1,10 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    // Update is called once per frame
+    
     public static CharacterSelector Instance;
 
+    //layermask only hits player and grid layers
+    int layermask = ((1 << 8) | (1 << 9));
+
+    Player SelectedUnit;
+    GameObject SelectedUnitObj;
+    Vector3 gridSelection;
+    List<Tile> path;
+    Tile selectedTile;
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
 
@@ -35,6 +44,42 @@ public class CharacterSelector : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
+            //Ryan's Implementation
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out info, 100f, layermask))
+            {
+                Transform objectHit = info.transform;
+                if (objectHit.CompareTag("Player"))
+                {
+                    if (objectHit.gameObject != SelectedUnit)
+                    {
+                        if (SelectedUnit)
+                        {
+                            SelectedUnit.UnitDeselected();
+                        }
+                        SelectedUnitObj = objectHit.gameObject;
+                        SelectedUnit = SelectedUnitObj.GetComponent<Player>();
+                        SelectedUnit.UnitSelected();
+                        print("Selected Player Unit");
+                    }
+
+                }
+                else if (SelectedUnit)
+                {
+                    selectedTile = MapGrid.Instance.TileFromPosition(info.point);
+                    //if the tile selected is a valid tile to move to find the path
+                    if (selectedTile.movementTile && !selectedTile.occupied)
+                    {
+                        path = MapGrid.Instance.FindPath(SelectedUnit.currentTile, selectedTile);
+                        SelectedUnit.BeginMovement(path);
+                        SelectedUnit.UnitDeselected();
+                        SelectedUnit = null;
+                    }
+                }
+
+            }
+
+            //Chris's Implementation
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
 
             if (hit)
@@ -50,6 +95,7 @@ public class CharacterSelector : MonoBehaviour
                     CombatSystem.Instance.SetTarget(info.transform.gameObject.GetComponent<Humanoid>());
                 }
             }
+
         }
     }
 }
