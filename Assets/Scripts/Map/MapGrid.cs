@@ -19,8 +19,6 @@ public class MapGrid : MonoBehaviour
     public float tileSize = 1;
     public Mesh gizmoMesh;
     public bool drawGizmoMesh = true;
-    public GameObject start;
-    public GameObject end;
     List<Tile> path;
 
     //make singlton
@@ -250,7 +248,7 @@ public class MapGrid : MonoBehaviour
         Gizmos.color = Color.green;
         if(drawGizmoMesh)
             Gizmos.DrawMesh(gizmoMesh,gizmoPos,Quaternion.identity,gizmoScale);
-        if(grid != null) {
+        /*if(grid != null) {
             foreach (Tile t in grid)
             {
                 Gizmos.color = Color.cyan;
@@ -262,7 +260,7 @@ public class MapGrid : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }
 
