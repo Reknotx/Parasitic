@@ -14,4 +14,13 @@ public abstract class Enemy : Humanoid, IEnemy
         Debug.Log("Enemy movement");
     }
 
+    //public void OnMouseOver()
+    //{
+    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+    //}
 }

@@ -57,8 +57,7 @@ public class CombatSystem : MonoBehaviour
         }
 
         player = selection;
-        Debug.Log(selection.GetComponent<Renderer>().material.color);
-        selection.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        selection.gameObject.GetComponent<Renderer>().material.color = Color.green;
     }
 
     public void SetTarget(Humanoid selection)

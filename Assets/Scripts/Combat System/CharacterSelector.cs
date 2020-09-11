@@ -20,9 +20,20 @@ public class CharacterSelector : MonoBehaviour
 
     void Update()
     {
+        RaycastHit info = new RaycastHit();
+
+        if (CombatSystem.Instance.state == BattleState.Player || CombatSystem.Instance.state == BattleState.Targetting)
+        {
+            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
+
+            if (hit)
+            {
+
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit info = new RaycastHit();
 
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
 
