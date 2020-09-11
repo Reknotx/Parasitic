@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
+    private int _maxHealth;
+
     /// <summary> Health of the unit. </summary>
     [HideInInspector] public int Health { get; set; }
 
@@ -21,6 +24,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary>The base stats of the unit.</summary>
     [SerializeField] private CharacterStats _baseStats;
 
+    public Text healthText;
+    public Image healthBar;
+    
     private void Start()
     {
         Health = _baseStats.Health;
@@ -28,6 +34,16 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         BaseDefense = _baseStats.BaseDefense;
         Movement = _baseStats.Movement;
         Dexterity = _baseStats.Dexterity;
+        _maxHealth = Health;
+
+        if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
+        if (healthBar == null) { healthBar = GetComponentInChildren<Image>(); }
+
+        healthText.text = Health + "/" + _maxHealth;
+
+        healthBar.fillMethod = Image.FillMethod.Horizontal;
+        healthBar.fillAmount = 50f;
+        
     }
 
     public virtual void Move(Transform start, Transform target)
@@ -46,6 +62,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     {
         Health -= damage;
 
+        //Activate the damage text to display how much damage is dealt.
+        healthText.text = Health + "/" + _maxHealth;
+        //Update the image fill (?)
         return Health <= 0 ? true : false;
     }
+
 }

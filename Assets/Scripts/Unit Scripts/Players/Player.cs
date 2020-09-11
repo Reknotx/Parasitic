@@ -26,4 +26,14 @@ public abstract class Player : Humanoid, IPlayer
     {
         throw new System.NotImplementedException();
     }
+
+    //public void OnMouseOver()
+    //{
+    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+    //}
 }

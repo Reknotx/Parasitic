@@ -51,16 +51,20 @@ public class CombatSystem : MonoBehaviour
 
     public void SetPlayer(Player selection)
     {
+        if (player != null)
+        {
+            player.GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+
         player = selection;
-        Debug.Log(selection.GetComponent<Renderer>().material.color);
-        selection.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        selection.gameObject.GetComponent<Renderer>().material.color = Color.green;
     }
 
     public void SetTarget(Humanoid selection)
     {
         if (selection == player)
         {
-            Debug.Log("Can't select yourself for attack");
+            Debug.Log("Can't select yourself for attack.");
             return;
         }
         target = selection;
@@ -83,13 +87,22 @@ public class CombatSystem : MonoBehaviour
         if (player == null) return;
 
         StopAllCoroutines();
-
-        ((IPlayer)player).AbilityOne(target);
+        SetState(BattleState.Targetting);
+        StartCoroutine(AbilityOneCR());
     }
 
     public void AbilityTwo()
     {
-        ((IPlayer)player).AbilityTwo(target);
+        if (player == null) return;
+
+        StopAllCoroutines();
+        SetState(BattleState.Targetting);
+        StartCoroutine(AbilityTwoCR());
+    }
+
+    private void ClearSystem()
+    {
+       
     }
 
     public void Cancel()
@@ -113,5 +126,16 @@ public class CombatSystem : MonoBehaviour
         player = null;
         target = null;
         SetState(BattleState.Player);
+    }
+
+    IEnumerator AbilityOneCR()
+    {
+        yield return new WaitUntil(() => target != null);
+
+    }
+
+    IEnumerator AbilityTwoCR()
+    {
+        yield return new WaitUntil(() => target != null);
     }
 }
