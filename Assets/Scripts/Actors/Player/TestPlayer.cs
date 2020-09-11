@@ -6,17 +6,15 @@ using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
-    public Camera camera;
+    public Camera mainCamera;
     public GameObject SelectedUnitObj;
+    //layermask only hits player and grid layers
     public int layermask = ((1 << 8) | (1 << 9));
     TestUnit SelectedUnit;
     Vector3 gridSelection;
     List<Tile> path;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Tile selectedTile;
+
 
     // Update is called once per frame
     void Update()
@@ -24,7 +22,7 @@ public class TestPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out hit, 100f, layermask))
             {
                 Transform objectHit = hit.transform;
@@ -45,11 +43,15 @@ public class TestPlayer : MonoBehaviour
                 }
                 else if (SelectedUnit)
                 {
-                    path = MapGrid.Instance.FindPath(SelectedUnit.currentTile, MapGrid.Instance.TileFromPosition(hit.point));
-                    SelectedUnit.BeginMovement(path);
-                    SelectedUnit.UnitDeselected();
-                    SelectedUnit = null;
-                    
+                    selectedTile = MapGrid.Instance.TileFromPosition(hit.point);
+                    //if the tile selected is a valid tile to move to find the path
+                    if(selectedTile.movementTile && !selectedTile.occupied)
+                    {
+                        path = MapGrid.Instance.FindPath(SelectedUnit.currentTile, selectedTile);
+                        SelectedUnit.BeginMovement(path);
+                        SelectedUnit.UnitDeselected();
+                        SelectedUnit = null;
+                    }
                 }
                 
             }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    bool occupied = false;
+    //[HideInInspector]
+    public bool occupied = false;
     public bool movementTile = true;
     bool drawTileGizmo = true;
     private float gizmoHeight = 0.5f;

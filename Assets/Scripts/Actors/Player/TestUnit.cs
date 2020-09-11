@@ -10,19 +10,18 @@ public class TestUnit : MonoBehaviour
     Material defaultMat;
     public Material selectedMat;
     public Tile currentTile;
+    //time it takes the player to move across a single tile
     public float tileCrossTime = 0.3f;
     bool moving = false;
-    float timeStart;
-    private int _pathMove;
-    public Vector3 p0;
-    public Vector3 p1;
-    public Vector3 p01;
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
         defaultMat = GetComponent<MeshRenderer>().material;
-        
+        currentTile = MapGrid.Instance.TileFromPosition(transform.position);
+        currentTile.occupied = true;
     }
 
     // Update is called once per frame
@@ -35,7 +34,6 @@ public class TestUnit : MonoBehaviour
     {
         GetComponent<MeshRenderer>().material = selectedMat;
         selected = true;
-        currentTile = MapGrid.Instance.TileFromPosition(transform.position);
     }
 
     public void UnitDeselected()
@@ -46,26 +44,43 @@ public class TestUnit : MonoBehaviour
 
     public void BeginMovement(List<Tile> path)
     {
-        moving = true;
-        
-        StartCoroutine(Move(path));
+        if (path != null)
+        {
+            StartCoroutine(Move(path));
+        }
     }
 
     IEnumerator Move(List<Tile> path)
     {
-        _pathMove = 0;
-        foreach(Tile tile in path)
+        Vector3 p0;
+        Vector3 p1;
+        Vector3 p01;
+        float timeStart;
+        foreach (Tile tile in path)
         {
-            if(_pathMove != path.Count - 1)
-            {
-                timeStart = Time.time;
-                moving = true;
-                p0 = tile.transform.position;
-                p0 = new Vector3(p0.x, transform.position.y, p0.z);
-                p1 = path[_pathMove + 1].transform.position;
-                p1 = new Vector3(p1.x, transform.position.y, p1.z);
-                print(currentTile);
-            }
+
+           
+            timeStart = Time.time;
+            moving = true;
+            
+            //get the position of the tile the unit is starting on
+            p0 = currentTile.transform.position;
+            
+
+            //get the positon of the tile to move to
+            p1 = tile.transform.position;
+
+            // set the y position to be that of the moving unit
+            p0 = new Vector3(p0.x, transform.position.y, p0.z);
+            p1 = new Vector3(p1.x, transform.position.y, p1.z);
+
+            //mark the starting tile as no longer occupied
+            currentTile.occupied = false;
+            //change the current tile to the tile being moved to
+            currentTile = tile;
+            //mark it as occupied
+            currentTile.occupied = true;
+            //interpolate between the two points
             while (moving)
             {
                 float u = (Time.time - timeStart) / tileCrossTime;
@@ -79,9 +94,6 @@ public class TestUnit : MonoBehaviour
                 transform.position = p01;
                 yield return new WaitForFixedUpdate();
             }
-            _pathMove++;
         }
-
-        
     }
 }

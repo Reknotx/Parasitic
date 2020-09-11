@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Ryan Dangerfield
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,12 +34,14 @@ public class MapGrid : MonoBehaviour
         {
             Instance = this;
         }
+        grid = new Tile[columns, rows];
+        //find tile fill tile array
+        GetTiles();
     }
 
     void Start()
     {
-        grid = new Tile[columns, rows];
-        GetTiles();
+
     }
 
     private void Update()
@@ -47,6 +50,7 @@ public class MapGrid : MonoBehaviour
         //RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
     }
 
+    //fills grid array with tiles in the scene
     public void GetTiles()
     {
         Transform tiles = transform.Find("Tiles");
@@ -64,7 +68,9 @@ public class MapGrid : MonoBehaviour
 
                 foreach(Transform column in row.transform)
                 {
+                    //add Tile to array
                     grid[x, z] = column.GetComponent<Tile>();
+                    //set variable of tiles grid position in each tile
                     grid[x, z].gridPosition = new Vector2(x, z);
                     x++;
                     
@@ -103,12 +109,14 @@ public class MapGrid : MonoBehaviour
         //nodes that have been evaluated
         HashSet<Tile> explored = new HashSet<Tile>();
         frontier.Add(startTile);
+        //will loop until every possible pathway is exhausted
         while (frontier.Count > 0)
         {
             Tile currentTile = frontier[0];
+            //sets currentTile to tile with lowest fCost (or lowest hCost if fCost is the same) in the frontier
             for (int i = 1; i < frontier.Count; i++)
             {
-                if (frontier[i].fCost < currentTile.fCost || frontier[i].fCost == currentTile.fCost && frontier[i].hCost < currentTile.hCost)
+                if (frontier[i].fCost < currentTile.fCost || (frontier[i].fCost == currentTile.fCost && frontier[i].hCost < currentTile.hCost))
                 {
                     currentTile = frontier[i];
                 }
@@ -117,19 +125,22 @@ public class MapGrid : MonoBehaviour
             frontier.Remove(currentTile);
             explored.Add(currentTile);
 
+            
             if (currentTile == endTile)
             {
+                //end tile has been reached
                 return RetracePath(startTile,endTile);
             }
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
-                //print(currentTile + " Neighbor: " + neighbor);
-                if(!neighbor.movementTile || explored.Contains(neighbor))
+                //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
+                if(!neighbor.movementTile || explored.Contains(neighbor) || neighbor.occupied)
                 {
                     continue;
                 }
                 int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
-                if(currentCost <neighbor.gCost || !frontier.Contains(neighbor))
+                //if the current cost of moving to the tile is lower than the previous set it to the new cost
+                if(currentCost < neighbor.gCost || !frontier.Contains(neighbor))
                 {
                     neighbor.gCost = currentCost;
                     neighbor.hCost = GetDistanceCost(neighbor, endTile);
@@ -142,6 +153,7 @@ public class MapGrid : MonoBehaviour
             }
         }
         //print("frontier explored");
+        //failed to find a path that connects the points
         return null;
     }
 
@@ -165,23 +177,28 @@ public class MapGrid : MonoBehaviour
         return 10 * (distZ + distX);
     }
 
+    //returns list of tiles neighboring tile passed in
     public List<Tile> GetNeighbors(Tile tile)
     {
         List<Tile> neighbors = new List<Tile>();
         int tilePosX = (int)tile.gridPosition.x;
         int tilePosZ = (int)tile.gridPosition.y;
+        //check above
         if (tilePosZ > 0)
         {
             neighbors.Add(grid[tilePosX, tilePosZ - 1]);
         }
+        //check left
         if (tilePosX > 0)
         {
             neighbors.Add(grid[tilePosX - 1, tilePosZ]);
         }
+        //check right
         if (tilePosX < columns - 1)
         {
             neighbors.Add(grid[tilePosX + 1, tilePosZ]);
         }
+        //check below
         if (tilePosZ < rows - 1)
         {
             neighbors.Add(grid[tilePosX, tilePosZ + 1]);
@@ -200,9 +217,9 @@ public class MapGrid : MonoBehaviour
         }
         else
         {
-            print("tiles has children");
             foreach (Transform row in tiles.transform)
             {
+                //number of columns only need to be counted once
                 if (x == 0)
                 {
                     foreach (Transform column in row.transform)
@@ -216,6 +233,7 @@ public class MapGrid : MonoBehaviour
         return new Vector2(x, z);
     }
 
+    //returns the greater int or int a if equal 
     private int GreaterInt(int a, int b)
     {
         if (a >= b)
