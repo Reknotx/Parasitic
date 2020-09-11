@@ -1,14 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class Player : Humanoid, IPlayer
 {
-    public abstract void AbilityOne(Humanoid target);
-    public abstract void AbilityTwo(Humanoid target);
-    public abstract void NormalAttack(Humanoid target);
     bool selected = false;
     Material defaultMat;
     public Material selectedMat;
 
+
+    public int Ability1Range;
+    public int Ability2Range;
+
+    public abstract void AbilityOne(List<Humanoid> targets);
+    public abstract void AbilityTwo(List<Humanoid> targets);
+    public abstract void NormalAttack(Humanoid target);
 
     public override void Start()
     {
@@ -28,12 +33,6 @@ public abstract class Player : Humanoid, IPlayer
         selected = false;
     }
 
-    public void Hello()
-    {
-        Debug.Log("Hello");
-    }
-
-
 
     public override void Move(Transform start, Transform target)
     {
@@ -41,6 +40,9 @@ public abstract class Player : Humanoid, IPlayer
         Debug.Log("Player movement");
     }
 
+    /// <summary>
+    /// Raises the defense stat of the player temporarily.
+    /// </summary>
     public void Defend()
     {
 
