@@ -102,6 +102,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         if (path != null)
         {
             State = HumanoidState.Moving;
+            Debug.Log(path.ToString());
             StartCoroutine(Move(path));
         }
     }

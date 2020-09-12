@@ -207,6 +207,10 @@ public class CombatSystem : MonoBehaviour
             if (enemiesToGo.Count == 0) { StartCoroutine(TurnSwitchCR()); }
         }
 
+
+        player.GetComponent<MeshRenderer>().material.color = Color.gray;
+        player = null;
+        target = null;
         
         unit.State = HumanoidState.Done;
     }
@@ -240,10 +244,6 @@ public class CombatSystem : MonoBehaviour
         if (target == player) yield break;
 
         if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
-
-        player.GetComponent<MeshRenderer>().material.color = Color.gray;
-        player = null;
-        target = null;
 
         EndUnitTurn(player);
     }

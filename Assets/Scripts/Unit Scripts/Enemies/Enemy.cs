@@ -16,7 +16,7 @@ public abstract class Enemy : Humanoid, IEnemy
 
     public void TestForMovement()
     {
-        Player[] activePlayers = GameObject.FindObjectsOfType<Player>();
+        Player[] activePlayers = FindObjectsOfType<Player>();
 
         Player targetPlayer = null;
         float shortestDist = 0f;
@@ -32,21 +32,57 @@ public abstract class Enemy : Humanoid, IEnemy
             }
         }
 
-        List<Tile> tempNeighbors = MapGrid.Instance.GetNeighbors(targetPlayer.currentTile);
-        Tile target = null;
-        float nearestTileDist = 0f;
+        Tile target = targetPlayer.currentTile;
+        List<Tile> path = null;
+        List<Tile> tempPath = MapGrid.Instance.FindPath(currentTile, target, false, true);
 
-        foreach (Tile tile in tempNeighbors)
+        //Debug.Log(currentTile);
+        //Debug.Log(tempPath.ToString());
+        if (tempPath == null)
         {
-            if (tile.occupied || !tile.movementTile) continue;
-
-            if (nearestTileDist == 0f || Vector2.Distance(tile.gridPosition, currentTile.gridPosition) < nearestTileDist)
+            tempPath = MapGrid.Instance.FindPath(currentTile, target, true);
+            if (tempPath == null)
             {
-                target = tile;
+                //find a different target
+                for (int index = 0; index < activePlayers.Length; index++)
+                {
+                    if (activePlayers[index] == targetPlayer)
+                    {
+                        activePlayers[index] = null;
+                        break;
+                    }
+                }
+                //Examine what is the second closest player
+                foreach (Player player in activePlayers)
+                {
+                    if (player == null) continue;
+
+                    float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
+
+                    if (shortestDist == 0f || tempDist < shortestDist)
+                    {
+                        targetPlayer = player;
+                        shortestDist = tempDist;
+                    }
+                }
+            }
+            else
+            {
+                //truncate (remove tiles from path until we are no longer blocked.)
+                foreach(Tile tile in tempPath)
+                {
+                    if (tile.occupied) break;
+                    path.Add(tile);
+                    Debug.Log(tile);
+                }
             }
         }
+        else
+        {
+            path = tempPath;
 
-        List<Tile> path = MapGrid.Instance.FindPath(currentTile, target);
+            path.RemoveAt(path.Count - 1);
+        }
 
         BeginMovement(path);
     }
