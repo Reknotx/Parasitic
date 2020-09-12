@@ -44,6 +44,7 @@ public class Warrior : Player
     {
         Debug.Log("Warrior Normal Attack");
 
+        ///Execute the animation
         target.TakeDamage(BaseAttack);
     }
 }

@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum HumanoidState
+{
+    Idle,
+    Selected,
+    Moving,
+    Targetting,
+    Attacking,
+    Defending,
+    Done
+}
+
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
+    /// <summary> The range of the normal attack. </summary>
     public int AttackRange;
+
+    /// <summary> The max health of this unit. </summary>
     private int _maxHealth;
 
     /// <summary> Health of the unit. </summary>
@@ -31,10 +45,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public float tileCrossTime = 0.3f;
     bool moving = false;
 
+    protected bool HasMoved { get; set; }
+    protected bool HasAttacked { get; set; }
+
     /// <summary>The base stats of the unit.</summary>
     [SerializeField] private CharacterStats _baseStats;
-
-    
 
     public Text healthText;
     public Text damageText;
@@ -43,6 +58,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public Color unselectedColor = Color.white;
 
     public Slider healthBar;
+
+    /// <summary>
+    /// The state of the humanoid in combat.
+    /// </summary>
+    public HumanoidState State { get; set; }
     
     public virtual void Start()
     {
@@ -63,6 +83,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         currentTile = MapGrid.Instance.TileFromPosition(transform.position);
         currentTile.occupied = true;
+
+        State = HumanoidState.Idle;
     }
 
     public virtual void Move(Transform start, Transform target)
@@ -70,10 +92,15 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         throw new System.NotImplementedException();
     }
 
+    /// <summary>
+    /// Begins the movement coroutine for moving on map.
+    /// </summary>
+    /// <param name="path">The path the unit will take.</param>
     public void BeginMovement(List<Tile> path)
     {
         if (path != null)
         {
+            State = HumanoidState.Moving;
             StartCoroutine(Move(path));
         }
     }
@@ -123,6 +150,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 yield return new WaitForFixedUpdate();
             }
         }
+
+        State = HumanoidState.Idle;
+        HasMoved = true;
     }
 
     /**
@@ -144,4 +174,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         return Health <= 0 ? true : false;
     }
+
+    /// <summary>
+    /// Sets the unit's HasAttacked variable to true.
+    /// </summary>
+    protected void AttackComplete() { HasAttacked = true; }
 }

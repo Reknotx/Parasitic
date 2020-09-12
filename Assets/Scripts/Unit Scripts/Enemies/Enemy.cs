@@ -14,6 +14,43 @@ public abstract class Enemy : Humanoid, IEnemy
         Debug.Log("Enemy movement");
     }
 
+    public void TestForMovement()
+    {
+        Player[] activePlayers = GameObject.FindObjectsOfType<Player>();
+
+        Player targetPlayer = null;
+        float shortestDist = 0f;
+
+        foreach (Player player in activePlayers)
+        {
+            float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
+
+            if (shortestDist == 0f || tempDist < shortestDist)
+            {
+                targetPlayer = player;
+                shortestDist = tempDist;
+            }
+        }
+
+        List<Tile> tempNeighbors = MapGrid.Instance.GetNeighbors(targetPlayer.currentTile);
+        Tile target = null;
+        float nearestTileDist = 0f;
+
+        foreach (Tile tile in tempNeighbors)
+        {
+            if (tile.occupied || !tile.movementTile) continue;
+
+            if (nearestTileDist == 0f || Vector2.Distance(tile.gridPosition, currentTile.gridPosition) < nearestTileDist)
+            {
+                target = tile;
+            }
+        }
+
+        List<Tile> path = MapGrid.Instance.FindPath(currentTile, target);
+
+        BeginMovement(path);
+    }
+
     //public void OnMouseOver()
     //{
     //    gameObject.GetComponent<MeshRenderer>().material.color = Color.red;

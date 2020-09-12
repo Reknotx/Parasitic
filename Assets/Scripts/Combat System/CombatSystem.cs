@@ -21,8 +21,12 @@ public class CombatSystem : MonoBehaviour
 
     public static CombatSystem Instance;
 
+    /// <summary> The selected player for combat. </summary>
     private Player player;
+
+    /// <summary> The target of combat. </summary>
     private Humanoid target;
+
     public GameObject turnSwitch;
     private List<Player> playersToGo = new List<Player>();
     private List<Enemy> enemiesToGo = new List<Enemy>();
@@ -65,6 +69,13 @@ public class CombatSystem : MonoBehaviour
         }
 
         SetState(BattleState.Player);
+    }
+
+    public void MoveRandEnemy()
+    {
+        int index = Random.Range(0, enemiesToGo.Count);
+
+        enemiesToGo[index].TestForMovement();
     }
 
     /// <summary>
@@ -179,7 +190,7 @@ public class CombatSystem : MonoBehaviour
     /// <summary>
     /// Ends the turn for the current unit. Removing them from the list.
     /// </summary>
-    /// <param name="unit"></param>
+    /// <param name="unit">The unit whose turn is over.</param>
     private void EndUnitTurn(Humanoid unit)
     {
 
@@ -195,6 +206,9 @@ public class CombatSystem : MonoBehaviour
 
             if (enemiesToGo.Count == 0) { StartCoroutine(TurnSwitchCR()); }
         }
+
+        
+        unit.State = HumanoidState.Done;
     }
 
     /// <summary>

@@ -24,12 +24,14 @@ public abstract class Player : Humanoid, IPlayer
     public void UnitSelected()
     {
         GetComponent<MeshRenderer>().material = selectedMat;
+        State = HumanoidState.Selected;
         selected = true;
     }
 
     public void UnitDeselected()
     {
         GetComponent<MeshRenderer>().material = defaultMat;
+        State = HumanoidState.Idle;
         selected = false;
     }
 
