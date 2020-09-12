@@ -78,6 +78,23 @@ public class CombatSystem : MonoBehaviour
         enemiesToGo[index].TestForMovement();
     }
 
+    public void TriggerEnemyAttack()
+    {
+        int index = Random.Range(0, enemiesToGo.Count);
+
+        List<Tile> temp =  MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
+
+        foreach (Tile tile in temp)
+        {
+            if (tile.occupied && tile.occupant is Player)
+            {
+                tile.occupant.TakeDamage(enemiesToGo[index].BaseAttack);
+                break;
+            }
+        }
+
+    }
+
     /// <summary>
     /// Sets the state of the game.
     /// </summary>
