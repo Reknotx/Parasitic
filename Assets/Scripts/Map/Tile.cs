@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public bool occupied = false;
     public bool movementTile = true;
     bool drawTileGizmo = true;
@@ -19,6 +19,9 @@ public class Tile : MonoBehaviour
     public int hCost = 0;
     [HideInInspector]
     public Tile parent;
+    //unit currently on tile
+    [HideInInspector]
+    public Humanoid occupant;
 
     private void OnDrawGizmos()
     {

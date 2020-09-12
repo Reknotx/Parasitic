@@ -85,6 +85,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         currentTile.occupied = true;
 
         State = HumanoidState.Idle;
+        currentTile.occupant = this;
     }
 
     public virtual void Move(Transform start, Transform target)
@@ -131,10 +132,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
             //mark the starting tile as no longer occupied
             currentTile.occupied = false;
+            currentTile.occupant = null;
             //change the current tile to the tile being moved to
             currentTile = tile;
             //mark it as occupied
             currentTile.occupied = true;
+            currentTile.occupant = this;
             //interpolate between the two points
             while (moving)
             {
