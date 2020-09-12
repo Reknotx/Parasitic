@@ -132,9 +132,9 @@ public class MapGrid : MonoBehaviour
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
-                if(!neighbor.movementTile || explored.Contains(neighbor) || (neighbor.occupied && (!ignoreOccupied ||!(ignoreEnd && neighbor == endTile))))
+                if(!neighbor.movementTile || explored.Contains(neighbor) || (neighbor.occupied && !ignoreOccupied))
                 {
-                    if (endTile != neighbor)
+                    if (!(ignoreEnd && (endTile == neighbor)))
                         continue;
                 }
                 int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
