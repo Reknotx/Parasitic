@@ -100,7 +100,7 @@ public class MapGrid : MonoBehaviour
     }
 
     //A* algorithm
-    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreEnd = false, bool ignoreOccupied = false)
+    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreOccupied = false, bool ignoreEnd = false)
     {
         //nodes that need to be evaluated
         List<Tile> frontier = new List<Tile>();
