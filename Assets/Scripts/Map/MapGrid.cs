@@ -100,7 +100,7 @@ public class MapGrid : MonoBehaviour
     }
 
     //A* algorithm
-    public List<Tile> FindPath(Tile startTile, Tile endTile)
+    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreEnd = false, bool ignoreOccupied = false)
     {
         //nodes that need to be evaluated
         List<Tile> frontier = new List<Tile>();
@@ -132,7 +132,7 @@ public class MapGrid : MonoBehaviour
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
-                if(!neighbor.movementTile || explored.Contains(neighbor) || neighbor.occupied)
+                if(!neighbor.movementTile || explored.Contains(neighbor) || (neighbor.occupied && (!ignoreOccupied ||!(ignoreEnd && currentTile == endTile))))
                 {
                     continue;
                 }
@@ -203,6 +203,63 @@ public class MapGrid : MonoBehaviour
         }
         return neighbors;
     }
+
+
+    //Realized while making this that is was actually not ideal for what we need to accomplish
+    //public Tile NearestOpenTile(Tile startTile, Tile targetTile)
+    //{
+    //    List<Tile> occupied = new List<Tile>();
+    //    List<Tile> open = new List<Tile>();
+    //    HashSet<Tile> explored = new HashSet<Tile>();
+    //    Tile currentTile = targetTile;
+    //    occupied.Add(currentTile);
+    //    if (!targetTile.occupied && targetTile.movementTile)
+    //    {
+    //        return targetTile;
+    //    }
+
+    //    while (occupied.Count > 0)
+    //    {
+    //        occupied.Remove(currentTile);
+    //        explored.Add(currentTile);
+    //        foreach (Tile neighbor in GetNeighbors(currentTile))
+    //        {
+    //            if (!neighbor.movementTile || explored.Contains(neighbor))
+    //            {
+    //                continue;
+    //            }
+    //            else if (neighbor.occupied)
+    //            {
+    //                occupied.Add(neighbor);
+    //            }
+    //            else
+    //            {
+    //                open.Add(neighbor);
+    //            }
+    //        }
+    //        if(open.Count > 0)
+    //        {
+    //            int shortestDist = -1;
+    //            Tile shortestTile = open[0];
+    //            if(open.Count == 1)
+    //            {
+    //                return shortestTile;
+    //            }
+    //            foreach (Tile tile in open)
+    //            {
+    //                int pathDist = FindPath(tile, startTile).Count;
+    //                if (shortestDist > pathDist || shortestDist == -1)
+    //                {
+    //                    shortestDist = pathDist;
+    //                    shortestTile = tile;
+    //                }
+    //            }
+    //            return shortestTile;
+    //        }
+    //        else()
+    //    }
+        
+    //}
 
     public Vector2 TileCount()
     {
