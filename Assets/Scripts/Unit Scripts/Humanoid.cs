@@ -41,8 +41,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Tile the unit currently occupies </summary>
     [HideInInspector] public Tile currentTile;
 
+    /// <summary> Tiles the unit can move to </summary>
+    [HideInInspector] public bool[,] TileRange { get; set; } 
+
     ///time it takes the player to move across a single tile
     public float tileCrossTime = 0.3f;
+    /// <summary> Is unity currently moving along its path </summary>
     bool moving = false;
 
     protected bool HasMoved { get; set; }
@@ -86,6 +90,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         State = HumanoidState.Idle;
         currentTile.occupant = this;
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
     }
 
     public virtual void Move(Transform start, Transform target)
@@ -102,7 +107,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         if (path != null)
         {
             State = HumanoidState.Moving;
-            Debug.Log(path.ToString());
             StartCoroutine(Move(path));
         }
     }
@@ -154,7 +158,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 yield return new WaitForFixedUpdate();
             }
         }
-
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
         HasMoved = true;
     }

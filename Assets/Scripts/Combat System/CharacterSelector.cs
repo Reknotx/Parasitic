@@ -17,8 +17,10 @@ public class CharacterSelector : MonoBehaviour
     Tile selectedTile;
     public GameObject PathLine;
     public GameObject EndPoint;
+    public GameObject BoarderLine;
     public float pathHeight = 0.3f;
     LineRenderer lineRenderer;
+    LineRenderer boarderRenderer;
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
 
@@ -29,6 +31,7 @@ public class CharacterSelector : MonoBehaviour
             Destroy(this.gameObject);
         }
         Instance = this;
+        boarderRenderer = BoarderLine.GetComponent<LineRenderer>();
         lineRenderer = PathLine.GetComponent<LineRenderer>();
     }
 
@@ -88,6 +91,8 @@ public class CharacterSelector : MonoBehaviour
                     SelectedUnitObj = objectHit.gameObject;
                     SelectedUnit = SelectedUnitObj.GetComponent<Player>();
                     SelectedUnit.UnitSelected();
+                    MapGrid.Instance.DrawBoarder(SelectedUnit.TileRange, ref boarderRenderer);
+                    BoarderLine.SetActive(true);
                     print("Selected Player Unit");
                 }
 
@@ -97,7 +102,7 @@ public class CharacterSelector : MonoBehaviour
                 Tile lastTile = selectedTile;
                 selectedTile = MapGrid.Instance.TileFromPosition(info.point);
                 //if the tile selected is a valid tile to move to find the path
-                if (selectedTile.movementTile && !selectedTile.occupied)
+                if (selectedTile.movementTile && !selectedTile.occupied && SelectedUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                 {
                     //only recalculate path if tile has changed
                     if(lastTile != selectedTile)
@@ -112,6 +117,7 @@ public class CharacterSelector : MonoBehaviour
                         SelectedUnit.UnitDeselected();
                         SelectedUnit = null;
                         selectedTile = null;
+                        BoarderLine.SetActive(false);
                         HidePath();
                     }
                 }

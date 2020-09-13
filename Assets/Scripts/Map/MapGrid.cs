@@ -108,6 +108,10 @@ public class MapGrid : MonoBehaviour
         HashSet<Tile> explored = new HashSet<Tile>();
         frontier.Add(startTile);
         //will loop until every possible pathway is exhausted
+        foreach (Tile tile in grid)
+        {
+            tile.gCost = 0;
+        }
         while (frontier.Count > 0)
         {
             Tile currentTile = frontier[0];
@@ -261,6 +265,108 @@ public class MapGrid : MonoBehaviour
     //    }
         
     //}
+
+    //Breadth first search
+    public bool[,] FindTilesInRange(Tile startTile, int range)
+    {
+        print("range: " + range);
+        print("start tile: " + startTile.name);
+        List<Tile> frontier = new List<Tile>();
+        HashSet<Tile> explored = new HashSet<Tile>();
+        Tile currentTile = startTile;
+        frontier.Add(startTile);
+        bool[,] inRange = new bool[columns, rows];
+        inRange[(int)startTile.gridPosition.x, (int)startTile.gridPosition.y] = true;
+        foreach (Tile tile in grid)
+        {
+            tile.gCost = 0;
+        }
+        while (frontier.Count > 0)
+        {
+            currentTile = frontier[0];
+            frontier.Remove(currentTile);
+            explored.Add(currentTile);
+            foreach (Tile neighbor in GetNeighbors(currentTile))
+            {
+                //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
+                if (neighbor.movementTile && !explored.Contains(neighbor) && !neighbor.occupied)
+                {
+
+                    int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
+                    if (currentCost < neighbor.gCost || !frontier.Contains(neighbor))
+                    {
+
+                        neighbor.gCost = currentCost;
+                        print("current cost" + currentCost);
+                        if(currentCost <= range * 10)
+                        {
+
+                            frontier.Add(neighbor);
+                            inRange[(int)neighbor.gridPosition.x, (int)neighbor.gridPosition.y] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return inRange;
+    }
+
+    public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
+    {
+        List<Vector3> points = new List<Vector3>();
+        Vector3 pos;
+        Vector3 lowPos;
+        Vector3 highPos;
+        //up right search
+        for (int y = 0; y< inRange.GetLength(1); y++)
+        {
+            for (int x = 0; x < inRange.GetLength(0); x++)
+            {
+                if (inRange[x, y])
+                {
+                    pos = grid[x, y].transform.position;
+                    lowPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                    highPos = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
+                    if (!points.Contains(lowPos))
+                    {
+                        points.Add(lowPos);
+                    }
+                    if (!points.Contains(highPos))
+                    {
+                        points.Add(highPos);
+                    }
+                    break;
+                }
+            }
+        }
+        //down left search
+        for (int y = inRange.GetLength(1)-1; y >= 0; y--)
+        {
+            for (int x = inRange.GetLength(0)-1; x >= 0; x--)
+            {
+                if (inRange[x, y])
+                {
+                    pos = grid[x, y].transform.position;
+                    lowPos = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
+                    highPos = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
+                    if (!points.Contains(highPos))
+                    {
+                        points.Add(highPos);
+                    }
+
+                    if (!points.Contains(lowPos))
+                    {
+                        points.Add(lowPos);
+                    }
+                    break;
+                }
+            }
+        }
+
+        boarder.positionCount = points.Count;
+        boarder.SetPositions(points.ToArray());
+    }
 
     public Vector2 TileCount()
     {
