@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
     bool selected = false;
@@ -18,28 +19,30 @@ public abstract class Player : Humanoid, IPlayer
     public override void Start()
     {
         defaultMat = GetComponent<MeshRenderer>().material;
+        if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
+
         base.Start();
     }
 
     public void UnitSelected()
     {
+        print("Player selected");
         GetComponent<MeshRenderer>().material = selectedMat;
         State = HumanoidState.Selected;
+
+        CombatSystem.Instance.ActivateCombatButtons();
+        CombatSystem.Instance.SetPlayer(this);
         selected = true;
     }
 
     public void UnitDeselected()
     {
+        print("Player deselected");
         GetComponent<MeshRenderer>().material = defaultMat;
         State = HumanoidState.Idle;
+        CombatSystem.Instance.SetPlayer(null);
+        CombatSystem.Instance.DeactivateCombatButtons();
         selected = false;
-    }
-
-
-    public override void Move(Transform start, Transform target)
-    {
-        // Player movement based on player input
-        Debug.Log("Player movement");
     }
 
     /// <summary>
@@ -52,7 +55,11 @@ public abstract class Player : Humanoid, IPlayer
 
     public void Pass()
     {
-        throw new System.NotImplementedException();
+        HasAttacked = true;
+        HasMoved = true;
+
+        CharacterSelector.Instance.SelectedPlayerUnit = null;
+        State = HumanoidState.Done;
     }
 
     //public void OnMouseOver()

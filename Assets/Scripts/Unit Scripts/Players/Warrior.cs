@@ -25,6 +25,7 @@ public class Warrior : Player
          * 
          * 
          */
+        AttackComplete();
     }
 
     /// <summary>
@@ -34,6 +35,7 @@ public class Warrior : Player
     public override void AbilityTwo(List<Humanoid> targets)
     {
         Debug.Log("Warrior Ability Two");
+        AttackComplete();
     }
 
     /// <summary>
@@ -46,5 +48,6 @@ public class Warrior : Player
 
         ///Execute the animation
         target.TakeDamage(BaseAttack);
+        AttackComplete();
     }
 }

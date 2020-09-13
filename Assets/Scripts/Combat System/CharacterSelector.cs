@@ -1,4 +1,13 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/8/2020
+ * 
+ * Brief: Fires a ray through the camera at the mouse cursor's position to 
+ * select game objects in the scene.
+ */
+
+
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,8 +18,14 @@ public class CharacterSelector : MonoBehaviour
 
     //layermask only hits player and grid layers
     int layermask = ((1 << 8) | (1 << 9));
+    int enemyLayerMask = (1 << 10);
 
-    Player SelectedUnit;
+    /// <summary> The selected player unit. </summary>
+    [HideInInspector] public Player SelectedPlayerUnit;
+
+    /// <summary> The selected enemy unit. </summary>
+    [HideInInspector] public Enemy SelectedEnemyUnit;
+
     GameObject SelectedUnitObj;
     Vector3 gridSelection;
     List<Tile> path;
@@ -21,6 +36,7 @@ public class CharacterSelector : MonoBehaviour
     public float pathHeight = 0.3f;
     LineRenderer lineRenderer;
     LineRenderer boarderRenderer;
+    public bool debugKeepMoving = false;
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
 
@@ -38,84 +54,61 @@ public class CharacterSelector : MonoBehaviour
 
     void Update()
     {
+        if (CombatSystem.Instance.activeUnits == ActiveUnits.Enemies) return;
+
         RaycastHit info = new RaycastHit();
 
-        if (CombatSystem.Instance.state == BattleState.Player || CombatSystem.Instance.state == BattleState.Targetting)
-        {
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
-
-            if (hit)
-            {
-
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-
-
-            //Chris's Implementation
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
-
-            if (hit)
-            {
-                Debug.Log("Selected " + info.transform.gameObject.name);
-
-                if (info.transform.gameObject.layer == 8 && CombatSystem.Instance.state == BattleState.Player)
-                {
-                    CombatSystem.Instance.SetPlayer(info.transform.gameObject.GetComponent<Player>());
-                }
-                else if (CombatSystem.Instance.state == BattleState.Targetting)
-                {
-                    CombatSystem.Instance.SetTarget(info.transform.gameObject.GetComponent<Humanoid>());
-                }
-            }
-
-        }
-
-        
         //Ryan's Implementation
+        //Added features of Chase's implementation to help drive combat better.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100f, layermask))
+        if (CombatSystem.Instance.state != BattleState.Targetting && Physics.Raycast(ray, out info, 100f, layermask))
         {
             Transform objectHit = info.transform;
             if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player"))
             {
-                if (objectHit.gameObject != SelectedUnit)
+                Player playerObj = objectHit.gameObject.GetComponent<Player>();
+
+                if (playerObj != SelectedPlayerUnit)
                 {
-                    if (SelectedUnit)
-                    {
-                        SelectedUnit.UnitDeselected();
-                    }
-                    SelectedUnitObj = objectHit.gameObject;
-                    SelectedUnit = SelectedUnitObj.GetComponent<Player>();
-                    SelectedUnit.UnitSelected();
-                    MapGrid.Instance.DrawBoarder(SelectedUnit.TileRange, ref boarderRenderer);
+                    
+                    //This will never be reached
+                    if (SelectedPlayerUnit != null) { SelectedPlayerUnit.UnitDeselected(); }
+                    SelectedUnitObj = playerObj.gameObject;
+                    SelectedPlayerUnit = playerObj;
+                    SelectedPlayerUnit.UnitSelected();
+                    MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
                     BoarderLine.SetActive(true);
                     print("Selected Player Unit");
                 }
-
+                else if (playerObj.gameObject == SelectedPlayerUnit.gameObject)
+                {
+                    print("Deselecting the already selected unit.");
+                    SelectedPlayerUnit.UnitDeselected();
+                    SelectedUnitObj = null;
+                    SelectedPlayerUnit = null;
+                }
             }
-            else if (SelectedUnit)
+            else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
             {
+                //Selected player unit can move this turn.
+
                 Tile lastTile = selectedTile;
                 selectedTile = MapGrid.Instance.TileFromPosition(info.point);
                 //if the tile selected is a valid tile to move to find the path
-                if (selectedTile.movementTile && !selectedTile.occupied && SelectedUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
+                if (selectedTile.movementTile && !selectedTile.occupied && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                 {
                     //only recalculate path if tile has changed
-                    if(lastTile != selectedTile)
+                    if (lastTile != selectedTile)
                     {
-                        path = MapGrid.Instance.FindPath(SelectedUnit.currentTile, selectedTile);
+                        path = MapGrid.Instance.FindPath(SelectedPlayerUnit.currentTile, selectedTile);
                         DrawPath();
                         //redraw path between points
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        SelectedUnit.BeginMovement(path);
-                        SelectedUnit.UnitDeselected();
-                        SelectedUnit = null;
+                        SelectedPlayerUnit.Move(path);
+                        SelectedPlayerUnit.UnitDeselected();
+                        SelectedPlayerUnit = null;
                         selectedTile = null;
                         BoarderLine.SetActive(false);
                         HidePath();
@@ -126,7 +119,35 @@ public class CharacterSelector : MonoBehaviour
                     HidePath();
                 }
             }
+            
+        }
+        else if (CombatSystem.Instance.state == BattleState.Targetting && Physics.Raycast(ray, out info, 100f, enemyLayerMask))
+        {
+            Transform objectHit = info.transform;
+            if (SelectedPlayerUnit && SelectedPlayerUnit.HasAttacked == false)
+            {
+                //Player unit has moved and can now attack.
+                if (objectHit.gameObject.GetComponent<Humanoid>() is Enemy)
+                {
+                    SelectedEnemyUnit = objectHit.gameObject.GetComponent<Enemy>();
 
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        //We are about to perform an attack on an enemy game object.
+                        List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
+
+                        foreach (Tile tile in neighbors)
+                        {
+                            if (tile.occupied && tile.occupant == SelectedEnemyUnit)
+                            {
+                                //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
+                                CombatSystem.Instance.SetTarget(SelectedEnemyUnit);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -137,7 +158,7 @@ public class CharacterSelector : MonoBehaviour
         void DrawPath()
         {
             List<Vector3> points = new List<Vector3>();
-            points.Add(new Vector3(SelectedUnit.transform.position.x,pathHeight, SelectedUnit.transform.position.z));
+            points.Add(new Vector3(SelectedPlayerUnit.transform.position.x,pathHeight, SelectedPlayerUnit.transform.position.z));
             foreach (Tile tile in path){
                 points.Add(new Vector3(tile.transform.position.x,pathHeight, tile.transform.position.z));
             }

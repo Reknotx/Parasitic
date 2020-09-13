@@ -4,17 +4,24 @@ using UnityEngine;
 
 public abstract class Enemy : Humanoid, IEnemy
 {
-    public abstract void Attack();
-    public abstract void Defend();
-    public abstract void Dodge();
-
-    public override void Move(Transform start, Transform target)
+    public virtual void Attack()
     {
-        //Enemy movement is dependent on the Astar algorithm
-        Debug.Log("Enemy movement");
+        _currTarget.TakeDamage(BaseAttack);
     }
 
-    public void TestForMovement()
+    public virtual void Defend()
+    {
+
+    }
+
+    public virtual void Dodge()
+    {
+
+    }
+
+    private Player _currTarget;
+
+    public List<Tile> FindNearestPlayer()
     {
         Player[] activePlayers = FindObjectsOfType<Player>();
 
@@ -31,6 +38,7 @@ public abstract class Enemy : Humanoid, IEnemy
                 shortestDist = tempDist;
             }
         }
+
 
         Tile target = targetPlayer.currentTile;
         List<Tile> path = null;
@@ -73,7 +81,6 @@ public abstract class Enemy : Humanoid, IEnemy
                 {
                     if (tile.occupied) break;
                     path.Add(tile);
-                    Debug.Log(tile);
                 }
             }
         }
@@ -84,16 +91,21 @@ public abstract class Enemy : Humanoid, IEnemy
             path.RemoveAt(path.Count - 1);
         }
 
-        BeginMovement(path);
+        _currTarget = targetPlayer;
+        return path;
     }
 
-    //public void OnMouseOver()
-    //{
-    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-    //}
+    public bool CheckIfInRangeOfTarget()
+    {
+        List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
 
-    //public void OnMouseExit()
-    //{
-    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-    //}
+        foreach (Tile tile in neighbors)
+        {
+            if (tile.occupant == _currTarget)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
