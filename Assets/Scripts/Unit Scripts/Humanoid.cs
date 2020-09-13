@@ -45,17 +45,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public float tileCrossTime = 0.3f;
     bool moving = false;
 
-    protected bool HasMoved { get; set; }
-    protected bool HasAttacked { get; set; }
+    public bool HasMoved { get; set; }
+    public bool HasAttacked { get; set; }
 
     /// <summary>The base stats of the unit.</summary>
     [SerializeField] private CharacterStats _baseStats;
 
     public Text healthText;
     public Text damageText;
-
-    public Color selectedColor = Color.green;
-    public Color unselectedColor = Color.white;
 
     public Slider healthBar;
 
@@ -86,28 +83,26 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         State = HumanoidState.Idle;
         currentTile.occupant = this;
-    }
 
-    public virtual void Move(Transform start, Transform target)
-    {
-        throw new System.NotImplementedException();
+        HasMoved = false;
+        HasAttacked = false;
     }
 
     /// <summary>
     /// Begins the movement coroutine for moving on map.
     /// </summary>
     /// <param name="path">The path the unit will take.</param>
-    public void BeginMovement(List<Tile> path)
+    public virtual void Move(List<Tile> path)
     {
         if (path != null)
         {
+            CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
             State = HumanoidState.Moving;
-            Debug.Log(path.ToString());
-            StartCoroutine(Move(path));
+            StartCoroutine(MoveCR(path));
         }
     }
 
-    IEnumerator Move(List<Tile> path)
+    IEnumerator MoveCR(List<Tile> path)
     {
         Vector3 p0;
         Vector3 p1;
@@ -183,4 +178,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// Sets the unit's HasAttacked variable to true.
     /// </summary>
     protected void AttackComplete() { HasAttacked = true; }
+
+    public void SetHumanoidState(HumanoidState state) { State = state; }
+
+
 }

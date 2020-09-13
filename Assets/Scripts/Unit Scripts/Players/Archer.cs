@@ -10,6 +10,7 @@ public class Archer : Player
     public override void AbilityOne(List<Humanoid> targets)
     {
         Debug.Log("Archer Ability One");
+        AttackComplete();
     }
 
     /// <summary>
@@ -19,6 +20,7 @@ public class Archer : Player
     public override void AbilityTwo(List<Humanoid> targets)
     {
         Debug.Log("Archer Ability Two");
+        AttackComplete();
     }
 
     /// <summary>
@@ -28,5 +30,6 @@ public class Archer : Player
     public override void NormalAttack(Humanoid target)
     {
         Debug.Log("Archer Normal Attack");
+        AttackComplete();
     }
 }

@@ -10,6 +10,7 @@ public class Mage : Player
     public override void AbilityOne(List<Humanoid> targets)
     {
         Debug.Log("Mage Ability One");
+        AttackComplete();
     }
 
     /// <summary>
@@ -19,6 +20,7 @@ public class Mage : Player
     public override void AbilityTwo(List<Humanoid> targets)
     {
         Debug.Log("Mage Ability Two");
+        AttackComplete();
     }
 
     /// <summary>
@@ -28,5 +30,6 @@ public class Mage : Player
     public override void NormalAttack(Humanoid target)
     {
         Debug.Log("Mage Normal Attack");
+        AttackComplete();
     }
 }

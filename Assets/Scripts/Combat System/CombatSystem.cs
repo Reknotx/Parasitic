@@ -1,15 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+/// <summary>
+/// Enum for the various states of combat we can be in.
+/// </summary>
 public enum BattleState
 {
     Start,
-    Player,
-    Enemy,
+    Idle,
+    PerformingAction,
     Targetting,
     Won,
     Lost
+}
+
+/// <summary>
+/// Enum for the units in system that are currently active.
+/// </summary>
+public enum ActiveUnits
+{
+    Players,
+    Enemies
 }
 
 /// <summary>
@@ -17,7 +30,15 @@ public enum BattleState
 /// </summary>
 public class CombatSystem : MonoBehaviour
 {
+    /// <summary>
+    /// The current state of the battle system.
+    /// </summary>
     public BattleState state;
+
+    /// <summary>
+    /// The currently active units. Either player's or enemies.
+    /// </summary>
+    public ActiveUnits activeUnits;
 
     public static CombatSystem Instance;
 
@@ -32,6 +53,8 @@ public class CombatSystem : MonoBehaviour
     private List<Enemy> enemiesToGo = new List<Enemy>();
     private List<Humanoid> unitsAlive = new List<Humanoid>();
 
+    public List<Button> combatButtons = new List<Button>();
+
     void Start()
     {
         state = BattleState.Start;
@@ -41,11 +64,6 @@ public class CombatSystem : MonoBehaviour
         }
         Instance = this;
         SetupBattle();
-    }
-
-    void Move()
-    {
-
     }
 
     /// <summary>
@@ -68,14 +86,19 @@ public class CombatSystem : MonoBehaviour
             unitsAlive.Add(enemy);
         }
 
-        SetState(BattleState.Player);
+        DeactivateCombatButtons();
+
+        SetBattleState(BattleState.Start);
+        SetActiveUnits(ActiveUnits.Players);
     }
 
     public void MoveRandEnemy()
     {
         int index = Random.Range(0, enemiesToGo.Count);
 
-        enemiesToGo[index].TestForMovement();
+        List<Tile> path = enemiesToGo[index].FindNearestPlayer();
+
+        enemiesToGo[index].Move(path);
     }
 
     public void TriggerEnemyAttack()
@@ -99,7 +122,13 @@ public class CombatSystem : MonoBehaviour
     /// Sets the state of the game.
     /// </summary>
     /// <param name="state">The new state of the game.</param>
-    public void SetState(BattleState state) { this.state = state; }
+    public void SetBattleState(BattleState state) { this.state = state; }
+
+    /// <summary> 
+    /// Sets the current active units of the game. 
+    /// </summary>
+    /// <param name="activeUnits">The new active units.</param>
+    public void SetActiveUnits(ActiveUnits activeUnits) { this.activeUnits = activeUnits; }
 
     /// <summary>
     /// Sets the player we have currently selected.
@@ -113,14 +142,7 @@ public class CombatSystem : MonoBehaviour
             return;
         }
 
-        if (player != null)
-        {
-            player.GetComponent<MeshRenderer>().material.color = Color.white;
-        }
-
-
         player = selection;
-        selection.gameObject.GetComponent<Renderer>().material.color = Color.green;
     }
 
     /// <summary>
@@ -143,9 +165,14 @@ public class CombatSystem : MonoBehaviour
     public void NormalAttack()
     {
         //((IPlayer)selectedPlayer).NormalAttack(target);
-        if (player == null) return;
+        //if (player == null) return;
+        //StopAllCoroutines();
+        //SetState(BattleState.Targetting);
+        //StartCoroutine(NormalAttackCR());
+
+        if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         StopAllCoroutines();
-        SetState(BattleState.Targetting);
+        SetBattleState(BattleState.Targetting);
         StartCoroutine(NormalAttackCR());
     }
 
@@ -157,7 +184,7 @@ public class CombatSystem : MonoBehaviour
         if (player == null) return;
 
         StopAllCoroutines();
-        SetState(BattleState.Targetting);
+        SetBattleState(BattleState.Targetting);
         StartCoroutine(AbilityOneCR());
     }
 
@@ -169,16 +196,21 @@ public class CombatSystem : MonoBehaviour
         if (player == null) return;
 
         StopAllCoroutines();
-        SetState(BattleState.Targetting);
+        SetBattleState(BattleState.Targetting);
         StartCoroutine(AbilityTwoCR());
     }
 
     /// <summary>
-    /// 
+    /// Currently a hard pass which cancels all of the player's actions.
     /// </summary>
-    private void ClearSystem()
+    public void Pass()
     {
-       
+        if (player == null) return;
+
+        StopAllCoroutines();
+        SetBattleState(BattleState.Idle);
+        player.Pass();
+        EndUnitTurn(player);
     }
 
     /// <summary>
@@ -188,20 +220,7 @@ public class CombatSystem : MonoBehaviour
     {
         player = null;
         target = null;
-        SetState(BattleState.Player);
-    }
-
-    /// <summary>
-    /// Checks if there are any units left to go this round.
-    /// </summary>
-    /// <returns>Returns true if everyone has gone, false otherwise.</returns>
-    private bool CheckUnitsLeft()
-    {
-        if (playersToGo.Count == 0 && enemiesToGo.Count == 0)
-        {
-            return true;
-        }
-        return false;
+        SetBattleState(BattleState.Start);
     }
 
     /// <summary>
@@ -214,8 +233,10 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            player.GetComponent<MeshRenderer>().material.color = Color.gray;
 
-            if (playersToGo.Count == 0) { SetState(BattleState.Enemy); }
+            if (playersToGo.Count == 0) { StartCoroutine(EnemyTurn()); }
+
         }
         else
         {
@@ -224,8 +245,6 @@ public class CombatSystem : MonoBehaviour
             if (enemiesToGo.Count == 0) { StartCoroutine(TurnSwitchCR()); }
         }
 
-
-        player.GetComponent<MeshRenderer>().material.color = Color.gray;
         player = null;
         target = null;
         
@@ -245,7 +264,12 @@ public class CombatSystem : MonoBehaviour
                 unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             }
             else if (unit is Enemy) enemiesToGo.Add((Enemy)unit);
+
+            unit.HasMoved = false;
+            unit.HasAttacked = false;
         }
+
+        SetActiveUnits(ActiveUnits.Players);
     }
 
     /// <summary>
@@ -260,7 +284,9 @@ public class CombatSystem : MonoBehaviour
 
         if (target == player) yield break;
 
-        if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
+        //if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
+
+        ((IPlayer)player).NormalAttack(target);
 
         EndUnitTurn(player);
     }
@@ -278,10 +304,68 @@ public class CombatSystem : MonoBehaviour
 
     IEnumerator TurnSwitchCR()
     {
-        turnSwitch.SetActive(true);
-        yield return new WaitForSeconds(4f);
-        turnSwitch.SetActive(false);
+        //turnSwitch.SetActive(true);
+        yield return new WaitForSeconds(0f);
+        //turnSwitch.SetActive(false);
 
         NewRound();
+    }
+
+    IEnumerator EnemyTurn()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (enemiesToGo.Count != 0)
+        {
+            int index = Random.Range(0, enemiesToGo.Count);
+
+            Enemy tempE = enemiesToGo[index];
+
+            tempE.Move(tempE.FindNearestPlayer());
+
+            yield return new WaitUntil(() => tempE.HasMoved == true);
+
+            if (tempE.CheckIfInRangeOfTarget())
+            {
+                tempE.Attack();
+            }
+
+
+            EndUnitTurn(enemiesToGo[index]);
+        }
+
+        //foreach (Enemy enemy in enemiesToGo)
+        //{
+        //    enemy.Move(enemy.FindNearestPlayer());
+
+        //    yield return new WaitUntil(() => enemy.HasMoved == true);
+
+        //    EndUnitTurn(enemy);
+        //}
+
+
+    }
+
+    /// <summary>
+    /// Checks if there are any units left to go this round.
+    /// </summary>
+    /// <returns>Returns true if everyone has gone, false otherwise.</returns>
+    private bool CheckUnitsLeft()
+    {
+        if (playersToGo.Count == 0 && enemiesToGo.Count == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void ActivateCombatButtons()
+    {
+        foreach (Button button in combatButtons) { button.interactable = true; }
+    }
+
+    public void DeactivateCombatButtons()
+    {
+        foreach (Button button in combatButtons) { button.interactable = false; }
     }
 }
