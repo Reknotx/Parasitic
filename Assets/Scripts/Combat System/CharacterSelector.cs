@@ -26,17 +26,33 @@ public class CharacterSelector : MonoBehaviour
     /// <summary> The selected enemy unit. </summary>
     [HideInInspector] public Enemy SelectedEnemyUnit;
 
+    /// <summary> GameObject of unity selcted </summary>
     GameObject SelectedUnitObj;
-    Vector3 gridSelection;
+
+    /// <summary> Tile path between unit and tile selction </summary>
     List<Tile> path;
+
+    /// <summary> The currently slected tile </summary>
     Tile selectedTile;
+
+    /// <summary> Line drawn from selcted player to tile </summary>
     public GameObject PathLine;
+    /// <summary> GameObject that shows which tile the mouse is hovering over at the end of the line</summary>
     public GameObject EndPoint;
+
+    /// <summary> Line that surrounds the range a player can move </summary>
     public GameObject BoarderLine;
+
+    /// <summary> Height of path line </summary>
     public float pathHeight = 0.3f;
-    LineRenderer lineRenderer;
+
+    /// <summary> Line Renderers for the path and boarder </summary>
+    LineRenderer lineRenderer; 
     LineRenderer boarderRenderer;
+
+    /// <summary> When true a player can still move after they have already moved </summary>
     public bool debugKeepMoving = false;
+
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
 
@@ -86,6 +102,7 @@ public class CharacterSelector : MonoBehaviour
                     SelectedPlayerUnit.UnitDeselected();
                     SelectedUnitObj = null;
                     SelectedPlayerUnit = null;
+                    BoarderLine.SetActive(false);
                 }
             }
             else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
