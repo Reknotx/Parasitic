@@ -28,11 +28,16 @@ public class CharacterSelector : MonoBehaviour
 
     GameObject SelectedUnitObj;
     Vector3 gridSelection;
+    /// <summary>
+    /// The current path of movement.
+    /// </summary>
     List<Tile> path;
     Tile selectedTile;
     public GameObject PathLine;
     public GameObject EndPoint;
     public float pathHeight = 0.3f;
+
+    /// <summary> The line renderer for the path. </summary>
     LineRenderer lineRenderer;
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
@@ -66,7 +71,6 @@ public class CharacterSelector : MonoBehaviour
 
                 if (playerObj != SelectedPlayerUnit)
                 {
-                    //This will never be reached
                     if (SelectedPlayerUnit != null) { SelectedPlayerUnit.UnitDeselected(); }
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;

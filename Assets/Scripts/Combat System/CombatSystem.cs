@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/20/2020
+ * 
+ * Brief: The main script that handles combat logic.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,12 +55,22 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The target of combat. </summary>
     private Humanoid target;
 
+
     public GameObject turnSwitch;
+
+    /// <summary> The list of player's that have yet to go this round. </summary>
     private List<Player> playersToGo = new List<Player>();
+
+    /// <summary> The list of enemies that have yet to go this round. </summary>
     private List<Enemy> enemiesToGo = new List<Enemy>();
+
+    /// <summary> The master list of all units that are currently alive. </summary>
     private List<Humanoid> unitsAlive = new List<Humanoid>();
 
+    /// <summary> The list of buttons used for combat when a player is selected. </summary>
     public List<Button> combatButtons = new List<Button>();
+
+    public Text turnIndicator;
 
     void Start()
     {
@@ -92,6 +109,9 @@ public class CombatSystem : MonoBehaviour
         SetActiveUnits(ActiveUnits.Players);
     }
 
+    /// <summary>
+    /// Moves a random enemy on the grid. For testing purposes only.
+    /// </summary>
     public void MoveRandEnemy()
     {
         int index = Random.Range(0, enemiesToGo.Count);
@@ -101,6 +121,9 @@ public class CombatSystem : MonoBehaviour
         enemiesToGo[index].Move(path);
     }
 
+    /// <summary>
+    /// Triggers a random enemy attack on grid if they are near a player. For testing purposes only
+    /// </summary>
     public void TriggerEnemyAttack()
     {
         int index = Random.Range(0, enemiesToGo.Count);
