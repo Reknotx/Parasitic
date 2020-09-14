@@ -35,10 +35,13 @@ public class CharacterSelector : MonoBehaviour
     Tile selectedTile;
     public GameObject PathLine;
     public GameObject EndPoint;
+    public GameObject BoarderLine;
     public float pathHeight = 0.3f;
 
     /// <summary> The line renderer for the path. </summary>
     LineRenderer lineRenderer;
+    LineRenderer boarderRenderer;
+    public bool debugKeepMoving = false;
     //[HideInInspector] public bool selectPlayer = true;
     //[HideInInspector] public bool selectTarget = false;
 
@@ -49,6 +52,7 @@ public class CharacterSelector : MonoBehaviour
             Destroy(this.gameObject);
         }
         Instance = this;
+        boarderRenderer = BoarderLine.GetComponent<LineRenderer>();
         lineRenderer = PathLine.GetComponent<LineRenderer>();
     }
 
@@ -75,6 +79,8 @@ public class CharacterSelector : MonoBehaviour
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;
                     SelectedPlayerUnit.UnitSelected();
+                    MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
+                    BoarderLine.SetActive(true);
                     print("Selected Player Unit");
                 }
                 else if (playerObj.gameObject == SelectedPlayerUnit.gameObject)
@@ -85,14 +91,14 @@ public class CharacterSelector : MonoBehaviour
                     SelectedPlayerUnit = null;
                 }
             }
-            else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false)
+            else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
             {
                 //Selected player unit can move this turn.
 
                 Tile lastTile = selectedTile;
                 selectedTile = MapGrid.Instance.TileFromPosition(info.point);
                 //if the tile selected is a valid tile to move to find the path
-                if (selectedTile.movementTile && !selectedTile.occupied)
+                if (selectedTile.movementTile && !selectedTile.occupied && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                 {
                     //only recalculate path if tile has changed
                     if (lastTile != selectedTile)
@@ -107,6 +113,7 @@ public class CharacterSelector : MonoBehaviour
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedPlayerUnit = null;
                         selectedTile = null;
+                        BoarderLine.SetActive(false);
                         HidePath();
                     }
                 }

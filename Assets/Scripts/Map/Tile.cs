@@ -13,9 +13,9 @@ public class Tile : MonoBehaviour
     //used for pathfinding
     [HideInInspector]
     public Vector2 gridPosition;
-    [HideInInspector]
+    //[HideInInspector]
     public int gCost = 0;
-    [HideInInspector]
+    //[HideInInspector]
     public int hCost = 0;
     [HideInInspector]
     public Tile parent;
