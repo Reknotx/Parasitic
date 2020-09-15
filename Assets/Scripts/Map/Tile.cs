@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [HideInInspector]
-    public bool occupied = false;
+    /// <summary> Unit is currently occupying space </summary>
+    [HideInInspector] public bool occupied = false;
+
+    /// <summary> Tile can be moved over </summary>
     public bool movementTile = true;
+
+    /// <summary> Ranged attacks will pass through tile if false</summary>
+    public bool blocksLOS = false;
+
     bool drawTileGizmo = true;
     private float gizmoHeight = 0.5f;
 
     //used for pathfinding
     [HideInInspector]
     public Vector2 gridPosition;
-    //[HideInInspector]
+    [HideInInspector]
     public int gCost = 0;
-    //[HideInInspector]
+    [HideInInspector]
     public int hCost = 0;
     [HideInInspector]
     public Tile parent;
-    //unit currently on tile
+    //reference to unit currently on tile
     [HideInInspector]
     public Humanoid occupant;
 
@@ -29,6 +35,10 @@ public class Tile : MonoBehaviour
         if (!movementTile)
         {
             Gizmos.color = Color.red;
+            if (!blocksLOS)
+            {
+                Gizmos.color = Color.yellow;
+            }
         }
 
         if (drawTileGizmo)

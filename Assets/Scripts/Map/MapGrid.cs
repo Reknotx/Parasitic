@@ -7,7 +7,7 @@ public class MapGrid : MonoBehaviour
 {
 
     public static MapGrid Instance;
-    [HideInInspector] public Tile[,] grid;
+    public Tile[,] grid;
     
     //X-axis
     [HideInInspector]
@@ -263,11 +263,11 @@ public class MapGrid : MonoBehaviour
     //        }
     //        else()
     //    }
-        
+
     //}
 
     //Breadth first search
-    public bool[,] FindTilesInRange(Tile startTile, int range)
+    public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false)
     {
         List<Tile> frontier = new List<Tile>();
         HashSet<Tile> explored = new HashSet<Tile>();
@@ -287,7 +287,7 @@ public class MapGrid : MonoBehaviour
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
-                if (neighbor.movementTile && !explored.Contains(neighbor) && !neighbor.occupied)
+                if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
                 {
 
                     int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
