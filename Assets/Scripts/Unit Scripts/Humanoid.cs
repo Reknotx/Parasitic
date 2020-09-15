@@ -172,7 +172,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public bool TakeDamage(int damage)
     {
         Health -= damage;
-        //damageText.text = damage.ToString();
+        
         StartCoroutine(ShowDamage(damage));
         healthText.text = Health + "/" + _maxHealth;
         //Update the image fill
@@ -190,7 +190,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
 
-
+    /// <summary>
+    /// Displays "damage" for a short time
+    /// </summary>
+    /// <param name="damage"> Amount of Damage to Display</param>
+    /// <returns></returns>
     IEnumerator ShowDamage(int damage)
     {
         damageText.text = damage.ToString();
