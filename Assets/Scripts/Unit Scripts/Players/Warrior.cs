@@ -69,16 +69,17 @@ public class Warrior : Player
 
     protected override IEnumerator AbilityOneCR(Action callback)
     {
-        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        Tile[,] tempGrid = MapGrid.Instance.grid;
 
-        for (int i = 0; i < MapGrid.Instance.grid.GetLength(0); i++)
+        for (int i = 0; i < tempGrid.GetLength(0); i++)
         {
-            for (int j = 0; j < MapGrid.Instance.grid.GetLength(1); j++)
+            for (int j = 0; j < tempGrid.GetLength(1); j++)
             {
                 //Spot was not in range.
                 if (!range[i, j]) continue;
 
-
+                //if (tempGrid[i, j].occupied && tempGrid)
             }
         }
         yield return null;

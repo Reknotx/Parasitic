@@ -146,7 +146,7 @@ public class CharacterSelector : MonoBehaviour
                 {
                     Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
 
-                    bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange);
+                    bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
 
                     if (!tempRange[(int)tempE.currentTile.gridPosition.x, (int)tempE.currentTile.gridPosition.y])
                     {
