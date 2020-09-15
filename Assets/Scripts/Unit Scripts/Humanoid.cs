@@ -49,7 +49,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Is unity currently moving along its path </summary>
     bool moving = false;
 
+    /// <summary> Indicates that the unit has moved this turn. </summary>
     public bool HasMoved { get; set; }
+
+    /// <summary> Indicates that the unit has attacked this turn. </summary>
     public bool HasAttacked { get; set; }
 
     /// <summary>The base stats of the unit.</summary>
