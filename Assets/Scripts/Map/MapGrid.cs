@@ -269,8 +269,6 @@ public class MapGrid : MonoBehaviour
     //Breadth first search
     public bool[,] FindTilesInRange(Tile startTile, int range)
     {
-        print("range: " + range);
-        print("start tile: " + startTile.name);
         List<Tile> frontier = new List<Tile>();
         HashSet<Tile> explored = new HashSet<Tile>();
         Tile currentTile = startTile;
@@ -297,7 +295,6 @@ public class MapGrid : MonoBehaviour
                     {
 
                         neighbor.gCost = currentCost;
-                        print("current cost" + currentCost);
                         if(currentCost <= range * 10)
                         {
 
