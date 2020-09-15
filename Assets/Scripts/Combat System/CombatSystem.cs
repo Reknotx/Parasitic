@@ -56,7 +56,10 @@ public class CombatSystem : MonoBehaviour
     private Humanoid target;
 
 
-    public GameObject turnSwitch;
+    //public GameObject turnSwitch;
+
+    /// <summary> The text stating which side is active. </summary>
+    public Text activeSideText;
 
     /// <summary> The list of player's that have yet to go this round. </summary>
     private List<Player> playersToGo = new List<Player>();
@@ -258,7 +261,11 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Remove((Player)unit);
             player.GetComponent<MeshRenderer>().material.color = Color.gray;
 
-            if (playersToGo.Count == 0) { StartCoroutine(EnemyTurn()); }
+            if (playersToGo.Count == 0)
+            {
+                StartCoroutine(EnemyTurn());
+                activeSideText.text = "Enemy Turn";
+            }
 
         }
         else
@@ -293,6 +300,8 @@ public class CombatSystem : MonoBehaviour
         }
 
         SetActiveUnits(ActiveUnits.Players);
+
+        activeSideText.text = "Player's turn";
     }
 
     /// <summary>
