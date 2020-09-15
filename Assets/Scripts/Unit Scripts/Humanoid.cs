@@ -44,6 +44,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Tiles the unit can move to </summary>
     [HideInInspector] public bool[,] TileRange { get; set; } 
 
+    /// <summary> Tiles the unit can attack on </summary>
+    [HideInInspector] public bool[,] AttackTileRange { get; set; }
+
     ///time it takes the player to move across a single tile
     public float tileCrossTime = 0.3f;
     /// <summary> Is unity currently moving along its path </summary>
