@@ -18,7 +18,7 @@ public enum HumanoidState
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
     /// <summary> The range of the normal attack. </summary>
-    public int AttackRange;
+    public int AttackRange; 
 
     /// <summary> The max health of this unit. </summary>
     private int _maxHealth;

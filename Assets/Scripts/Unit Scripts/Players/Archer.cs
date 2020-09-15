@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Archer : Player
@@ -6,30 +8,41 @@ public class Archer : Player
     /// <summary>
     /// Triggers the archer's first ability.
     /// </summary>
-    /// <param name="target">The target(s) of the archer's ability.</param>
-    public override void AbilityOne(List<Humanoid> targets)
+    public override void AbilityOne(Action callback)
     {
         Debug.Log("Archer Ability One");
-        AttackComplete();
     }
 
     /// <summary>
     /// Triggers the archer's second ability.
     /// </summary>
-    /// <param name="targets">The target(s) of the archer's ability.</param>
-    public override void AbilityTwo(List<Humanoid> targets)
+    public override void AbilityTwo(Action callback)
     {
         Debug.Log("Archer Ability Two");
-        AttackComplete();
     }
 
     /// <summary>
     /// Triggers the normal attack of the archer.
     /// </summary>
-    /// <param name="target">The target of the archer's attack.</param>
-    public override void NormalAttack(Humanoid target)
+    public override void NormalAttack(Action callback)
     {
         Debug.Log("Archer Normal Attack");
-        AttackComplete();
+    }
+
+    protected override IEnumerator NormalAttackCR(Action callback)
+    {
+        callback();
+        yield return null;
+    }
+
+    protected override IEnumerator AbilityOneCR(Action callback)
+    {
+        yield return null;
+        throw new System.NotImplementedException();
+    }
+
+    protected override IEnumerator AbilityTwoCR(Action callback)
+    {
+        throw new System.NotImplementedException();
     }
 }

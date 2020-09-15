@@ -1,20 +1,48 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/20
+ * 
+ * Brief: The base player class that all classes extend.
+ * 
+ */
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
+    protected enum Attack
+    {
+        NormalAttack,
+        AbilityOne,
+        AbilityTwo
+    }
+
+
     bool selected = false;
     Material defaultMat;
+    /// <summary> The material for the player when they are selected. </summary>
     public Material selectedMat;
 
-
+    /// <summary> Range of player's first ability. </summary>
     public int Ability1Range;
+    /// <summary> Range of player's second ability. </summary>
     public int Ability2Range;
 
-    public abstract void AbilityOne(List<Humanoid> targets);
-    public abstract void AbilityTwo(List<Humanoid> targets);
-    public abstract void NormalAttack(Humanoid target);
+    /// <summary> Abstract method for player ability one.</summary>
+    public abstract void AbilityOne(Action callback);
+    /// <summary> Abstract method for player ability two.</summary>
+    public abstract void AbilityTwo(Action callback);
+    /// <summary> Abstract method for player normal attack.</summary>
+    public abstract void NormalAttack(Action callback);
+
+    protected abstract IEnumerator NormalAttackCR(Action callback);
+    protected abstract IEnumerator AbilityOneCR(Action callback);
+    protected abstract IEnumerator AbilityTwoCR(Action callback);
 
     public override void Start()
     {
@@ -51,6 +79,7 @@ public abstract class Player : Humanoid, IPlayer
     public void Defend()
     {
 
+
     }
 
     public void Pass()
@@ -61,14 +90,4 @@ public abstract class Player : Humanoid, IPlayer
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         State = HumanoidState.Done;
     }
-
-    //public void OnMouseOver()
-    //{
-    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-    //}
-
-    //public void OnMouseExit()
-    //{
-    //    gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-    //}
 }

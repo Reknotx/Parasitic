@@ -37,6 +37,14 @@ public enum ActiveUnits
 /// </summary>
 public class CombatSystem : MonoBehaviour
 {
+    /// <summary> Enum representing which attack was executed. </summary>
+    enum Attack
+    {
+        NormalAttack,
+        AbilityOne,
+        AbilityTwo
+    }
+
     /// <summary>
     /// The current state of the battle system.
     /// </summary>
@@ -162,7 +170,7 @@ public class CombatSystem : MonoBehaviour
     /// <param name="selection">The player we have selected</param>
     public void SetPlayer(Player selection)
     {
-        if (!playersToGo.Contains(selection))
+        if (!playersToGo.Contains(selection) && selection != null)
         {
             Debug.Log("Player has already gone this round");
             return;
@@ -199,7 +207,8 @@ public class CombatSystem : MonoBehaviour
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
-        StartCoroutine(NormalAttackCR());
+        //StartCoroutine(NormalAttackCR());
+        StartCoroutine(ProcessAttack(Attack.NormalAttack));
     }
 
     /// <summary>
@@ -207,11 +216,12 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void AbilityOne()
     {
-        if (player == null) return;
+        if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
 
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
-        StartCoroutine(AbilityOneCR());
+        //StartCoroutine(AbilityOneCR());
+        StartCoroutine(ProcessAttack(Attack.AbilityOne));
     }
 
     /// <summary>
@@ -219,11 +229,12 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void AbilityTwo()
     {
-        if (player == null) return;
+        if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
 
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
-        StartCoroutine(AbilityTwoCR());
+        //StartCoroutine(AbilityTwoCR());
+        StartCoroutine(ProcessAttack(Attack.AbilityTwo));
     }
 
     /// <summary>
@@ -304,34 +315,38 @@ public class CombatSystem : MonoBehaviour
         activeSideText.text = "Player's turn";
     }
 
-    /// <summary>
-    /// Normal attack targetting coroutine.
-    /// </summary>
-    /// <returns>Waits until a target has been selected.</returns>
-    IEnumerator NormalAttackCR()
+    IEnumerator ProcessAttack(Attack type)
     {
-        Debug.Log("Select target for normal attack.");
-        yield return new WaitUntil(() => target != null);
-        Debug.Log("Attacking " + target.gameObject.name);
+        switch (type)
+        {
+            case Attack.NormalAttack:
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).NormalAttack(AttackComplete);
+                break;
 
-        if (target == player) yield break;
+            case Attack.AbilityOne:
+                ((IPlayer)player).AbilityOne(AttackComplete);
+                break;
 
-        //if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
+            case Attack.AbilityTwo:
+                ((IPlayer)player).AbilityTwo(AttackComplete);
+                break;
 
-        ((IPlayer)player).NormalAttack(target);
+            default:
+                break;
+        }
 
-        EndUnitTurn(player);
+        yield return null;
     }
 
-    IEnumerator AbilityOneCR()
+    public void AttackComplete()
     {
-        yield return new WaitUntil(() => target != null);
+        Debug.Log("Hello from attack complete!");
 
-    }
+        EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
 
-    IEnumerator AbilityTwoCR()
-    {
-        yield return new WaitUntil(() => target != null);
+        CharacterSelector.Instance.SelectedPlayerUnit = null;
+        CharacterSelector.Instance.SelectedTargetUnit = null;
+
     }
 
     IEnumerator TurnSwitchCR()
@@ -365,17 +380,6 @@ public class CombatSystem : MonoBehaviour
 
             EndUnitTurn(enemiesToGo[index]);
         }
-
-        //foreach (Enemy enemy in enemiesToGo)
-        //{
-        //    enemy.Move(enemy.FindNearestPlayer());
-
-        //    yield return new WaitUntil(() => enemy.HasMoved == true);
-
-        //    EndUnitTurn(enemy);
-        //}
-
-
     }
 
     /// <summary>

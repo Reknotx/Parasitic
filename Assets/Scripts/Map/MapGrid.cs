@@ -7,7 +7,7 @@ public class MapGrid : MonoBehaviour
 {
 
     public static MapGrid Instance;
-    Tile[,] grid;
+    [HideInInspector] public Tile[,] grid;
     
     //X-axis
     [HideInInspector]
