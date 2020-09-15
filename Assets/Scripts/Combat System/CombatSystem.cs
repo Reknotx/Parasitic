@@ -81,8 +81,6 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The list of buttons used for combat when a player is selected. </summary>
     public List<Button> combatButtons = new List<Button>();
 
-    public Text turnIndicator;
-
     void Start()
     {
         state = BattleState.Start;
