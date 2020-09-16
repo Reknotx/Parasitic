@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/// AUTHOR: Jeremy Casada
+/// DATE: 9/15/2020
+/// 
+/// Used to Control Menu UI while In-Game
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,10 +22,7 @@ public class UI : MonoBehaviour
     
 
     private bool _isPaused;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pause if not paused, otherwise Unpause
+    /// </summary>
     public void Pause()
     {
         if(_isPaused)
@@ -50,7 +54,9 @@ public class UI : MonoBehaviour
 
     
 
-
+    /// <summary>
+    /// Hides All Menus
+    /// </summary>
     public void HideAll()
     {
         controlMenu.SetActive(false);
@@ -60,12 +66,18 @@ public class UI : MonoBehaviour
         optionMenu.SetActive(false);
     }
 
-
+    /// <summary>
+    /// Quits The Game
+    /// </summary>
     public void Quit()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Either Returns to the Main Menu or Shows the Pause Menu based on value
+    /// </summary>
+    /// <param name="value">True = Go to Main Menu, False = Go Back to Pause Menu</param>
     public void ReturnToMain(bool value)
     {
         if(value)
@@ -78,7 +90,10 @@ public class UI : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Hides Other Menus and Shows the Menu that is Input
+    /// </summary>
+    /// <param name="menu"> Menu to Show</param>
     public void ShowMenu(GameObject menu)
     {
         HideAll();
