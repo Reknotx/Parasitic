@@ -18,7 +18,7 @@ public enum HumanoidState
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
     /// <summary> The range of the normal attack. </summary>
-    public int AttackRange;
+    public int AttackRange; 
 
     /// <summary> The max health of this unit. </summary>
     private int _maxHealth;
@@ -43,6 +43,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary> Tiles the unit can move to </summary>
     [HideInInspector] public bool[,] TileRange { get; set; } 
+
+    /// <summary> Tiles the unit can attack on </summary>
+    [HideInInspector] public bool[,] AttackTileRange { get; set; }
 
     ///time it takes the player to move across a single tile
     public float tileCrossTime = 0.3f;

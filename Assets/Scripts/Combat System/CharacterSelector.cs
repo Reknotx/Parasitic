@@ -24,7 +24,7 @@ public class CharacterSelector : MonoBehaviour
     [HideInInspector] public Player SelectedPlayerUnit;
 
     /// <summary> The selected enemy unit. </summary>
-    [HideInInspector] public Enemy SelectedEnemyUnit;
+    [HideInInspector] public Humanoid SelectedTargetUnit;
 
     /// <summary> GameObject of unity selcted </summary>
     GameObject SelectedUnitObj;
@@ -144,23 +144,40 @@ public class CharacterSelector : MonoBehaviour
                 //Player unit has moved and can now attack.
                 if (objectHit.gameObject.GetComponent<Humanoid>() is Enemy)
                 {
-                    SelectedEnemyUnit = objectHit.gameObject.GetComponent<Enemy>();
+                    Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
+
+                    bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
+
+                    if (!tempRange[(int)tempE.currentTile.gridPosition.x, (int)tempE.currentTile.gridPosition.y])
+                    {
+                        //If the tile at position in grid is false, meaning not in our range, then return
+                        //and cancel the rest of the execution.
+                        Debug.Log("Enemy not in range.");
+                        return;
+                    }
+
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        //We are about to perform an attack on an enemy game object.
-                        List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
-
-                        foreach (Tile tile in neighbors)
-                        {
-                            if (tile.occupied && tile.occupant == SelectedEnemyUnit)
-                            {
-                                //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
-                                CombatSystem.Instance.SetTarget(SelectedEnemyUnit);
-                                break;
-                            }
-                        }
+                        SelectedTargetUnit = tempE;
+                        return; 
                     }
+
+                    //if (Input.GetMouseButtonDown(0))
+                    //{
+                    //    //We are about to perform an attack on an enemy game object.
+                    //    List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
+
+                    //    foreach (Tile tile in neighbors)
+                    //    {
+                    //        if (tile.occupied && tile.occupant == SelectedTargetUnit)
+                    //        {
+                    //            //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
+                    //            CombatSystem.Instance.SetTarget(SelectedTargetUnit);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
