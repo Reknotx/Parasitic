@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject optionMenu;
     [SerializeField]
-    private GameObject menuPrompt;
+    private GameObject restartPrompt;
     [SerializeField]
-    private GameObject exitPrompt;
+    private GameObject mainMenuPrompt;
+    [SerializeField]
+    private GameObject quitPrompt;
     
 
     private bool _isPaused;
@@ -61,9 +64,20 @@ public class UI : MonoBehaviour
     {
         controlMenu.SetActive(false);
         pauseMenu.SetActive(false);
-        exitPrompt.SetActive(false);
-        menuPrompt.SetActive(false);
+        quitPrompt.SetActive(false);
+        mainMenuPrompt.SetActive(false);
+        restartPrompt.SetActive(false);
         optionMenu.SetActive(false);
+    }
+
+    /// <summary>
+    /// Restarts the Level
+    /// </summary>
+    public void Restart()
+    {
+        Debug.Log("Restart Level");
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -71,6 +85,7 @@ public class UI : MonoBehaviour
     /// </summary>
     public void Quit()
     {
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 
