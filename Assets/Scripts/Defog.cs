@@ -9,16 +9,19 @@ using UnityEngine;
 
 public class Defog : MonoBehaviour
 {
+
     [Header("FogObjects to be deactivated")]
     public GameObject[] fogObjects = new GameObject[1];
 
     [Header("Enemies and Other Objects to Reveal With this Trigger")]
     public GameObject[] objectsToReveal = new GameObject[1];
 
+    [Header("Tag of Player, Make sure to Spell correctly")]
+    public string playerTag = "";
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "playerUnit")
+        if(other.tag == playerTag)
         {
             HideFog();
             ChangeLayers();
