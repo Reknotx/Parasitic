@@ -33,6 +33,11 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> Range of player's second ability. </summary>
     public int Ability2Range;
 
+    /// <summary> Tiles ability1 affects </summary>
+    [HideInInspector] public bool[,] Ability1TileRange { get; set; }
+    /// <summary> Tiles ability 1 affects </summary>
+    [HideInInspector] public bool[,] Ability2TileRange { get; set; }
+
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
     /// <summary> Abstract method for player ability two.</summary>
@@ -89,5 +94,13 @@ public abstract class Player : Humanoid, IPlayer
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         State = HumanoidState.Done;
+    }
+
+    public void FindActionRanges()
+    {
+        AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+        Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
+        print("Ranges found");
     }
 }

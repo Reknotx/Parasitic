@@ -309,6 +309,7 @@ public class MapGrid : MonoBehaviour
         return inRange;
     }
 
+    //TODO: limmit search to tiles in range around selected unit
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
         List<Vector3> points = new List<Vector3>();
