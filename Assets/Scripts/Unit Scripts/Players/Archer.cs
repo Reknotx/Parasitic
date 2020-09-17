@@ -6,6 +6,14 @@ using UnityEngine;
 public class Archer : Player
 {
     /// <summary>
+    /// Triggers the normal attack of the archer.
+    /// </summary>
+    public override void NormalAttack(Action callback)
+    {
+        Debug.Log("Archer Normal Attack");
+    }
+
+    /// <summary>
     /// Triggers the archer's first ability.
     /// </summary>
     public override void AbilityOne(Action callback)
@@ -21,18 +29,23 @@ public class Archer : Player
         Debug.Log("Archer Ability Two");
     }
 
-    /// <summary>
-    /// Triggers the normal attack of the archer.
-    /// </summary>
-    public override void NormalAttack(Action callback)
-    {
-        Debug.Log("Archer Normal Attack");
-    }
-
     protected override IEnumerator NormalAttackCR(Action callback)
     {
+        Debug.Log("Select a target for the archer's normal attack.");
+
+        yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
+        Debug.Log("Given a target");
+        if (CharacterSelector.Instance.SelectedTargetUnit == this)
+        {
+            Debug.Log("Can't attack yourself.");
+        }
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack))
+        {
+            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+        }
+
         callback();
-        yield return null;
     }
 
     protected override IEnumerator AbilityOneCR(Action callback)

@@ -336,6 +336,7 @@ public class CombatSystem : MonoBehaviour
         yield return null;
     }
 
+
     public void AttackComplete()
     {
         Debug.Log("Hello from attack complete!");
@@ -391,6 +392,24 @@ public class CombatSystem : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Kills the unit in game and removes it from system.
+    /// </summary>
+    /// <param name="unit">The unit who's health is at or below 0.</param>
+    public void KillUnit(Humanoid unit)
+    {
+        if (unit is Player)
+        {
+            playersToGo.Remove((Player)unit);
+        }
+        else
+        {
+            enemiesToGo.Remove((Enemy)unit);
+        }
+
+        unitsAlive.Remove(unit);
     }
 
     public void ActivateCombatButtons()

@@ -162,22 +162,6 @@ public class CharacterSelector : MonoBehaviour
                         SelectedTargetUnit = tempE;
                         return; 
                     }
-
-                    //if (Input.GetMouseButtonDown(0))
-                    //{
-                    //    //We are about to perform an attack on an enemy game object.
-                    //    List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
-
-                    //    foreach (Tile tile in neighbors)
-                    //    {
-                    //        if (tile.occupied && tile.occupant == SelectedTargetUnit)
-                    //        {
-                    //            //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
-                    //            CombatSystem.Instance.SetTarget(SelectedTargetUnit);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }

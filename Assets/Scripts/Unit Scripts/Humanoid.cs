@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Enum representing the unit's current state in the system.
+/// </summary>
 public enum HumanoidState
 {
     Idle,

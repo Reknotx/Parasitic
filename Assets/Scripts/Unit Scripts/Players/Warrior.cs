@@ -34,9 +34,9 @@ public class Warrior : Player
         /*
          * Scare the surrounding enemies of the warrior and causing those
          * enemies to deal less damage. Effectively lowering their attack stat.
-         * 
-         * 
          */
+
+        StartCoroutine(AbilityOneCR(callback));
     }
 
     /// <summary>
@@ -58,9 +58,9 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else
+        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack))
         {
-            CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack);
+            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
 
         callback();
@@ -79,10 +79,15 @@ public class Warrior : Player
                 //Spot was not in range.
                 if (!range[i, j]) continue;
 
-                //if (tempGrid[i, j].occupied && tempGrid)
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                {
+
+                }
             }
         }
         yield return null;
+
+        callback();
     }
 
     protected override IEnumerator AbilityTwoCR(Action callback)
