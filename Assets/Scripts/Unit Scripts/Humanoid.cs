@@ -160,7 +160,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 yield return new WaitForFixedUpdate();
             }
         }
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
+        //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
         HasMoved = true;
     }
@@ -184,6 +184,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         healthBar.value = (float)Health / (float) _maxHealth;
 
         return Health <= 0 ? true : false;
+    }
+
+    public void FindMovementRange()
+    {
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
     }
 
     /// <summary>
