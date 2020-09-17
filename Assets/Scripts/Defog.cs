@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/// AUTHOR: Jeremy Casada
+/// DATE: 9/9/2020
+/// 
+/// Disables All objects in fogObjects while revealing all objects 
+/// in objectsToReveal when player unit enters the attached trigger
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
