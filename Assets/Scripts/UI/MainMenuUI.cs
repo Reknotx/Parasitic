@@ -31,18 +31,14 @@ public class MainMenuUI : MonoBehaviour
         options.SetActive(true);
     }
 
-    
+
     /// <summary>
     /// Loads Level by name using levelName
     /// </summary>
     /// <param name="levelName">name of level to be loaded</param>
     public void LoadLevel(string levelName)
     {
-        Debug.Log("Load " + levelName);
-        if(SceneManager.GetSceneByName(levelName).IsValid())
-        {
-            SceneManager.LoadScene(levelName);
-        }
+        SceneManager.LoadScene(levelName);
     }
 
 
