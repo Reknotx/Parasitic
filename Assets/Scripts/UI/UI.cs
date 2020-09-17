@@ -10,18 +10,13 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject pauseMenu;
-    [SerializeField]
-    private GameObject controlMenu;
-    [SerializeField]
-    private GameObject optionMenu;
-    [SerializeField]
-    private GameObject restartPrompt;
-    [SerializeField]
-    private GameObject mainMenuPrompt;
-    [SerializeField]
-    private GameObject quitPrompt;
+
+    public GameObject pauseMenu;
+    public GameObject controlMenu;
+    public GameObject optionMenu;
+    public GameObject restartPrompt;
+    public GameObject mainMenuPrompt;
+    public GameObject quitPrompt;
     
 
     private bool _isPaused;
