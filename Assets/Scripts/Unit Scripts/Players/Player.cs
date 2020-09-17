@@ -101,6 +101,6 @@ public abstract class Player : Humanoid, IPlayer
         AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
         Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
-        print("Ranges found");
+        //print("Ranges found");
     }
 }

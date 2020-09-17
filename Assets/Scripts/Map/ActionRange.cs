@@ -16,6 +16,7 @@ public class ActionRange : MonoBehaviour
     Material lineMaterial;
     float height = 0.3f;
     bool[,] range;
+    bool actionSelected = false;
     Color color;
 
     private void Start()
@@ -62,6 +63,11 @@ public class ActionRange : MonoBehaviour
         lineMaterial.color = color;
         MapGrid.Instance.DrawBoarder(range, ref lineRenderer,height);
         gameObject.SetActive(true);
+    }
+
+    void AcionSelected()
+    {
+        actionSelected = true;
     }
 
     public void HideBoarder()
