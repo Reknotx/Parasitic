@@ -18,7 +18,6 @@ public class Warrior : Player
     public override void NormalAttack(Action callback)
     {
         Debug.Log("Warrior Normal Attack");
-
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
         StartCoroutine(NormalAttackCR(callback));
@@ -58,7 +57,7 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack))
+        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
@@ -71,6 +70,8 @@ public class Warrior : Player
     {
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
+        List<Enemy> enemies = new List<Enemy>();
+
 
         for (int i = 0; i < tempGrid.GetLength(0); i++)
         {
@@ -81,10 +82,14 @@ public class Warrior : Player
 
                 if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
                 {
-
+                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
                 }
             }
         }
+
+
+
+
         yield return null;
 
         callback();

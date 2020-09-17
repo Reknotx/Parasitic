@@ -1,8 +1,8 @@
 ﻿/*
  * Author: Chase O'Connor
- * Date: 9/4/20
+ * Date: 9/4/2020
  * 
- * Brief: The base player class that all classes extend.
+ * Brief: The base player class 
  * 
  */
 
@@ -15,7 +15,7 @@ using UnityEngine;
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
-    protected enum Attack
+    protected enum AttackType
     {
         NormalAttack,
         AbilityOne,

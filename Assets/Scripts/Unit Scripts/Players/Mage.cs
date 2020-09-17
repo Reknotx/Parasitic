@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/2020
+ * 
+ * Brief: Mage class file
+ */
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +49,7 @@ public class Mage : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack))
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }

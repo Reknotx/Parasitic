@@ -112,6 +112,8 @@ public class CombatSystem : MonoBehaviour
             unitsAlive.Add(enemy);
         }
 
+
+
         DeactivateCombatButtons();
 
         SetBattleState(BattleState.Start);
@@ -143,7 +145,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (tile.occupied && tile.occupant is Player)
             {
-                tile.occupant.TakeDamage(enemiesToGo[index].BaseAttack);
+                tile.occupant.TakeDamage(enemiesToGo[index].AttackStat);
                 break;
             }
         }
@@ -264,6 +266,8 @@ public class CombatSystem : MonoBehaviour
     /// <param name="unit">The unit whose turn is over.</param>
     private void EndUnitTurn(Humanoid unit)
     {
+        unit.HasAttacked = true;
+        unit.HasMoved = true;
 
         if (unit is Player)
         {
@@ -315,6 +319,8 @@ public class CombatSystem : MonoBehaviour
 
     IEnumerator ProcessAttack(Attack type)
     {
+        SetBattleState(BattleState.PerformingAction);
+
         switch (type)
         {
             case Attack.NormalAttack:
@@ -345,6 +351,8 @@ public class CombatSystem : MonoBehaviour
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
+
+        SetBattleState(BattleState.Idle);
 
     }
 
@@ -420,5 +428,48 @@ public class CombatSystem : MonoBehaviour
     public void DeactivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = false; }
+    }
+
+
+    public List<Humanoid> alteredUnits = new List<Humanoid>();
+
+    /// <summary>
+    /// Subscribes a unit that has been buffed or debuffed to the system.
+    /// After every round these units will have their counters updated.
+    /// </summary>
+    /// <param name="subject">The unit that is altered.</param>
+    public void SubscribeAlteredUnit(Humanoid subject)
+    {
+        alteredUnits.Add(subject);
+    }
+
+    /// <summary>
+    /// Unsubscribes the altered unit when their (de)buff timer has run out.
+    /// </summary>
+    /// <param name="subject">The unit that was previously altered.</param>
+    public void UnsubscribeAlteredUnit(Humanoid subject)
+    {
+        removeList.Add(subject);
+    }
+
+    private List<Humanoid> removeList = new List<Humanoid>();
+
+    private void UpdateList()
+    {
+        removeList = new List<Humanoid>();
+
+        foreach (Humanoid unit in alteredUnits)
+        {
+            unit.AdvanceTimer();
+        }
+
+
+        foreach (Humanoid unit in removeList)
+        {
+            unit.ResetStats();
+            alteredUnits.Remove(unit);
+        }
+
+        removeList.Clear();
     }
 }

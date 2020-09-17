@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/2020
+ * 
+ * Brief: Enemy base class file
+ */
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +14,7 @@ public abstract class Enemy : Humanoid, IEnemy
 {
     public virtual void Attack()
     {
-        _currTarget.TakeDamage(BaseAttack);
+        _currTarget.TakeDamage(base.AttackStat);
     }
 
     public virtual void Defend()
@@ -19,8 +27,15 @@ public abstract class Enemy : Humanoid, IEnemy
 
     }
 
+    /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;
 
+
+    /// <summary>
+    /// Runs a search on all of the active players to see which player is closer. Then
+    /// will find the path to that player.
+    /// </summary>
+    /// <returns>The path to the closest player.</returns>
     public List<Tile> FindNearestPlayer()
     {
         Player[] activePlayers = FindObjectsOfType<Player>();
@@ -95,6 +110,11 @@ public abstract class Enemy : Humanoid, IEnemy
         return path;
     }
 
+
+    /// <summary>
+    /// Runs a check to see if the target player is within range of their attack.
+    /// </summary>
+    /// <returns>True if in range, false otherwise.</returns>
     public bool CheckIfInRangeOfTarget()
     {
         List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
@@ -107,5 +127,11 @@ public abstract class Enemy : Humanoid, IEnemy
             }
         }
         return false;
+    }
+
+    public void ForceTarget(Player player)
+    {
+        State = HumanoidState.Taunted;
+        _currTarget = player;
     }
 }

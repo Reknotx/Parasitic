@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/2020
+ * 
+ * Brief: Humanoid base class file.
+ */
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +22,9 @@ public enum HumanoidState
     Targetting,
     Attacking,
     Defending,
+    Taunted,
+    Buffed,
+    Debuffed,
     Done
 }
 
@@ -30,16 +41,16 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     [HideInInspector] public int Health { get; set; }
 
     /// <summary>Attack of the unit. </summary>
-    [HideInInspector] public int BaseAttack { get; set; }
+    [HideInInspector] public int AttackStat { get; set; }
 
     /// <summary>Defense of the unit.</summary>
-    [HideInInspector] public int BaseDefense { get; set; }
+    [HideInInspector] public int DefenseStat { get; set; }
 
     /// <summary>Movement value of the unit. </summary>
-    [HideInInspector] public int Movement { get; set; }
+    [HideInInspector] public int MovementStat { get; set; }
 
     /// <summary>Dexterity (or dodge chance) of the unit.</summary>
-    [HideInInspector] public float Dexterity { get; set; }
+    [HideInInspector] public float DexterityStat { get; set; }
 
     /// <summary> Tile the unit currently occupies </summary>
     [HideInInspector] public Tile currentTile;
@@ -54,6 +65,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public float tileCrossTime = 0.3f;
     /// <summary> Is unity currently moving along its path </summary>
     bool moving = false;
+
+    /// <summary> The value representing the remaining time on the buff/debuff
+    /// currently active on this unit. </summary>
+    int buffTimer = 0;
 
     /// <summary> Indicates that the unit has moved this turn. </summary>
     public bool HasMoved { get; set; }
@@ -77,10 +92,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public virtual void Start()
     {
         Health = _baseStats.Health;
-        BaseAttack = _baseStats.BaseAttack;
-        BaseDefense = _baseStats.BaseDefense;
-        Movement = _baseStats.Movement;
-        Dexterity = _baseStats.Dexterity;
+        AttackStat = _baseStats.BaseAttack;
+        DefenseStat = _baseStats.BaseDefense;
+        MovementStat = _baseStats.Movement;
+        DexterityStat = _baseStats.Dexterity;
         _maxHealth = Health;
 
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
@@ -96,7 +111,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         State = HumanoidState.Idle;
         currentTile.occupant = this;
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
 
         HasMoved = false;
         HasAttacked = false;
@@ -163,9 +178,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 yield return new WaitForFixedUpdate();
             }
         }
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
         State = HumanoidState.Idle;
         HasMoved = true;
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
     }
 
     /**
@@ -189,10 +205,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         return Health <= 0 ? true : false;
     }
 
-    /// <summary>
-    /// Sets the unit's HasAttacked variable to true.
-    /// </summary>
-    protected void AttackComplete() { HasAttacked = true; }
+    ///// <summary>
+    ///// Sets the unit's HasAttacked variable to true.
+    ///// </summary>
+    //protected void AttackComplete() { HasAttacked = true; }
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
 
@@ -207,4 +223,26 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         yield return new WaitForSecondsRealtime(1.5f);
         damageText.text = "";
     }
+
+    /// <summary>
+    /// Advances the timer on the unit's buff/debuff clock.
+    /// </summary>
+    public void AdvanceTimer()
+    {
+        buffTimer--;
+
+        if (buffTimer == 0) CombatSystem.Instance.UnsubscribeAlteredUnit(this);
+    }
+
+    public void ResetStats()
+    {
+        Health = _baseStats.Health;
+        AttackStat = _baseStats.BaseAttack;
+        DefenseStat = _baseStats.BaseDefense;
+        MovementStat = _baseStats.Movement;
+        DexterityStat = _baseStats.Dexterity;
+        _maxHealth = Health;
+    }
+
+
 }
