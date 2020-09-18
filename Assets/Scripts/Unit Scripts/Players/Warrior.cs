@@ -82,13 +82,11 @@ public class Warrior : Player
 
                 if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
                 {
+                    if (!enemies.Contains((Enemy)(tempGrid[i, j].occupant)))
                     enemies.Add((Enemy)(tempGrid[i, j].occupant));
                 }
             }
         }
-
-
-
 
         yield return null;
 
@@ -97,7 +95,34 @@ public class Warrior : Player
 
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
-        throw new System.NotImplementedException();
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        Tile[,] tempGrid = MapGrid.Instance.grid;
+        List<Enemy> enemies = new List<Enemy>();
+
+
+        for (int i = 0; i < tempGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < tempGrid.GetLength(1); j++)
+            {
+                //Spot was not in range.
+                if (!range[i, j]) continue;
+
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                {
+                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
+                }
+            }
+        }
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.ForceTarget(this);
+            enemy.CreateTauntedStatusEffect();
+        }
+
+        yield return null;
+
+        callback();
     }
 
     //IEnumerator NormalAttackCR()

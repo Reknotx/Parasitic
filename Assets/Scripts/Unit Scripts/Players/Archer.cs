@@ -5,7 +5,6 @@
  * Brief: Archer class file.
  */
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,8 +57,16 @@ public class Archer : Player
 
     protected override IEnumerator AbilityOneCR(Action callback)
     {
-        yield return null;
-        throw new System.NotImplementedException();
+        yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
+        if (CharacterSelector.Instance.SelectedTargetUnit is Player)
+        {
+            Player target = (Player) CharacterSelector.Instance.SelectedTargetUnit;
+
+            target.Health += Mathf.FloorToInt(target.MaxHealth * 0.2f);
+        }
+
+        callback();
     }
 
     protected override IEnumerator AbilityTwoCR(Action callback)

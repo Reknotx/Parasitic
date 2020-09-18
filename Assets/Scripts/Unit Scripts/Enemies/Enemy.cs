@@ -30,6 +30,8 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;
 
+    public bool Taunted { get; set; } = false;
+
 
     /// <summary>
     /// Runs a search on all of the active players to see which player is closer. Then
@@ -43,17 +45,23 @@ public abstract class Enemy : Humanoid, IEnemy
         Player targetPlayer = null;
         float shortestDist = 0f;
 
-        foreach (Player player in activePlayers)
+        if(Taunted && _currTarget != null)
         {
-            float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
-
-            if (shortestDist == 0f || tempDist < shortestDist)
+            foreach (Player player in activePlayers)
             {
-                targetPlayer = player;
-                shortestDist = tempDist;
+                float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
+
+                if (shortestDist == 0f || tempDist < shortestDist)
+                {
+                    targetPlayer = player;
+                    shortestDist = tempDist;
+                }
             }
         }
-
+        else
+        {
+            targetPlayer = _currTarget;
+        }
 
         Tile target = targetPlayer.currentTile;
         List<Tile> path = null;
@@ -110,7 +118,6 @@ public abstract class Enemy : Humanoid, IEnemy
         return path;
     }
 
-
     /// <summary>
     /// Runs a check to see if the target player is within range of their attack.
     /// </summary>
@@ -131,7 +138,39 @@ public abstract class Enemy : Humanoid, IEnemy
 
     public void ForceTarget(Player player)
     {
-        State = HumanoidState.Taunted;
         _currTarget = player;
+        Taunted = true;
+    }
+
+    public override void AdvanceTimer()
+    {
+        foreach (StatusEffect effect in statusEffects)
+        {
+            if (effect.ReduceDuration())
+            {
+
+                switch (effect.GetEffectType())
+                {
+                    case StatusEffect.StatusEffectType.Taunted:
+                        Taunted = false;
+                        _currTarget = null;
+                        break;
+
+                    case StatusEffect.StatusEffectType.AttackDown:
+                        ResetStats();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                statusEffects.Remove(effect);
+
+                if (statusEffects.Count == 0)
+                {
+                    CombatSystem.Instance.UnsubscribeAlteredUnit(this);
+                }
+            }
+        }
     }
 }

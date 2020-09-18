@@ -22,9 +22,6 @@ public enum HumanoidState
     Targetting,
     Attacking,
     Defending,
-    Taunted,
-    Buffed,
-    Debuffed,
     Done
 }
 
@@ -39,6 +36,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary> Health of the unit. </summary>
     [HideInInspector] public int Health { get; set; }
+
+    [HideInInspector] public int MaxHealth { get { return _maxHealth; } }
 
     /// <summary>Attack of the unit. </summary>
     [HideInInspector] public int AttackStat { get; set; }
@@ -78,6 +77,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary>The base stats of the unit.</summary>
     [SerializeField] private CharacterStats _baseStats;
+
+    protected List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public Text healthText;
     public Text damageText;
@@ -227,11 +228,44 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary>
     /// Advances the timer on the unit's buff/debuff clock.
     /// </summary>
-    public void AdvanceTimer()
+    public virtual void AdvanceTimer()
     {
-        buffTimer--;
+        foreach (StatusEffect effect in statusEffects)
+        {
+            if (effect.ReduceDuration())
+            {
+                statusEffects.Remove(effect);
 
-        if (buffTimer == 0) CombatSystem.Instance.UnsubscribeAlteredUnit(this);
+                if (statusEffects.Count == 0)
+                {
+                    CombatSystem.Instance.UnsubscribeAlteredUnit(this);
+                }
+            }
+        }
+    }
+
+    public void CreateTauntedStatusEffect()
+    {
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 3);
+        AddEffectToList(temp);
+    }
+
+    public void CreateAttackUpStatusEffect()
+    {
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 3);
+        AddEffectToList(temp);
+    }
+
+    public void CreateAttackDownStatusEffect()
+    {
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3);
+        AddEffectToList(temp);
+    }
+
+    private void AddEffectToList(StatusEffect effect)
+    {
+        statusEffects.Add(effect);
+        CombatSystem.Instance.SubscribeAlteredUnit(this);
     }
 
     public void ResetStats()
@@ -245,4 +279,38 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
 
 
+    protected class StatusEffect
+    {
+        public enum StatusEffectType
+        {
+            Taunted,
+            AttackDown,
+            AttackUp
+        }
+
+        int _duration;
+
+        StatusEffectType type;
+        int Duration { get { return _duration; } }
+
+        public StatusEffect(StatusEffectType type, int duration)
+        {
+            this.type = type;
+            _duration = duration;
+        }
+
+        public bool ReduceDuration()
+        {
+            _duration--;
+
+            if (_duration == 0) { return true; }
+
+            return false;
+        }
+
+        public StatusEffectType GetEffectType()
+        {
+            return type;
+        }
+    }
 }

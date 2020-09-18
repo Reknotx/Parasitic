@@ -208,7 +208,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(NormalAttackCR());
-        StartCoroutine(ProcessAttack(Attack.NormalAttack));
+        ProcessAttack(Attack.NormalAttack);
     }
 
     /// <summary>
@@ -221,7 +221,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityOneCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityOne));
+        ProcessAttack(Attack.AbilityOne);
     }
 
     /// <summary>
@@ -234,7 +234,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityTwoCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityTwo));
+        ProcessAttack(Attack.AbilityTwo);
     }
 
     /// <summary>
@@ -312,12 +312,14 @@ public class CombatSystem : MonoBehaviour
             unit.HasAttacked = false;
         }
 
+        UpdateList();
+
         SetActiveUnits(ActiveUnits.Players);
 
         activeSideText.text = "Player's turn";
     }
 
-    IEnumerator ProcessAttack(Attack type)
+    void ProcessAttack(Attack type)
     {
         SetBattleState(BattleState.PerformingAction);
 
@@ -328,25 +330,24 @@ public class CombatSystem : MonoBehaviour
                 break;
 
             case Attack.AbilityOne:
-                ((IPlayer)player).AbilityOne(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityOne(AttackComplete);
                 break;
 
             case Attack.AbilityTwo:
-                ((IPlayer)player).AbilityTwo(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityTwo(AttackComplete);
                 break;
 
             default:
                 break;
         }
-
-        yield return null;
     }
 
-
+    /// <summary>
+    /// Called when the attack or ability is completed.
+    /// Set's the battle state to idle.
+    /// </summary>
     public void AttackComplete()
     {
-        Debug.Log("Hello from attack complete!");
-
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;

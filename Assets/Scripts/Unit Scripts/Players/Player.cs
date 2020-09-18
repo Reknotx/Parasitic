@@ -29,9 +29,21 @@ public abstract class Player : Humanoid, IPlayer
     public Material selectedMat;
 
     /// <summary> Range of player's first ability. </summary>
+    [Header("The range of the player's first ability.")]
     public int Ability1Range;
+
+    [Space]
     /// <summary> Range of player's second ability. </summary>
+    [Header("The range of the player's second ability.")]
     public int Ability2Range;
+
+    [Space]
+    [Header("The cooldown of the player's first ability.")]
+    public int Ability1Cooldown;
+
+    [Space]
+    [Header("The cooldown of the player's second ability.")]
+    public int Ability2Cooldown;
 
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);

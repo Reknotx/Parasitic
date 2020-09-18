@@ -13,8 +13,17 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
+
+    public enum TargettingType
+    {
+        TargetPlayers,
+        TargetEnemies
+    }
+
     
     public static CharacterSelector Instance;
+
+    [HideInInspector] public TargettingType targettingType;
 
     //layermask only hits player and grid layers
     int layermask = ((1 << 8) | (1 << 9));
@@ -136,9 +145,14 @@ public class CharacterSelector : MonoBehaviour
                     HidePath();
                 }
             }
-            
+
         }
-        else if (CombatSystem.Instance.state == BattleState.Targetting && Physics.Raycast(ray, out info, 100f, enemyLayerMask))
+        else if (CombatSystem.Instance.state == BattleState.Targetting &&
+            ( (targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask) )
+            || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask) )
+            )
+            
+            )
         {
             Transform objectHit = info.transform;
             if (SelectedPlayerUnit && SelectedPlayerUnit.HasAttacked == false)
@@ -194,5 +208,10 @@ public class CharacterSelector : MonoBehaviour
             EndPoint.SetActive(false);
         }
 
+    }
+
+    public void SetTargettingType(TargettingType type)
+    {
+        targettingType = type;
     }
 }
