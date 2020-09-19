@@ -101,8 +101,13 @@ public class CharacterSelector : MonoBehaviour
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;
                     SelectedPlayerUnit.UnitSelected();
-                    MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
-                    BoarderLine.SetActive(true);
+                    if(SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+                    {
+                        SelectedPlayerUnit.FindMovementRange();
+                        MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
+                        BoarderLine.SetActive(true);
+                    }
+                    SelectedPlayerUnit.FindActionRanges();
                     print("Selected Player Unit");
                 }
                 else if (playerObj.gameObject == SelectedPlayerUnit.gameObject)
@@ -114,7 +119,7 @@ public class CharacterSelector : MonoBehaviour
                     BoarderLine.SetActive(false);
                 }
             }
-            else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+            else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
             {
                 //Selected player unit can move this turn.
 
@@ -162,7 +167,8 @@ public class CharacterSelector : MonoBehaviour
                 {
                     Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
 
-                    bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
+                    //bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
+                    bool[,] tempRange = SelectedPlayerUnit.AttackTileRange;
 
                     if (!tempRange[(int)tempE.currentTile.gridPosition.x, (int)tempE.currentTile.gridPosition.y])
                     {

@@ -179,7 +179,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 yield return new WaitForFixedUpdate();
             }
         }
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
+        //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
         HasMoved = true;
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
@@ -206,10 +206,15 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         return Health <= 0 ? true : false;
     }
 
-    ///// <summary>
-    ///// Sets the unit's HasAttacked variable to true.
-    ///// </summary>
-    //protected void AttackComplete() { HasAttacked = true; }
+    public void FindMovementRange()
+    {
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
+    }
+
+    // /// <summary>
+    // /// Sets the unit's HasAttacked variable to true.
+    // /// </summary>
+    // protected void AttackComplete() { HasAttacked = true; }
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
 
