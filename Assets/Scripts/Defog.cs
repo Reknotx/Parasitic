@@ -38,6 +38,10 @@ public class Defog : MonoBehaviour
             foreach (GameObject objectToReveal in objectsToReveal)
             {
                 objectToReveal.layer = 0;
+                foreach (Transform child in objectToReveal.transform)
+                {
+                    child.gameObject.layer = 0;
+                }
             }
         }
         
@@ -48,10 +52,12 @@ public class Defog : MonoBehaviour
     /// </summary>
     private void HideFog()
     {
-
-        foreach(GameObject fogObjects in fogObjects)
+        if(fogObjects[0] != null)
         {
-            fogObjects.SetActive(false);
+            foreach (GameObject fogObjects in fogObjects)
+            {
+                fogObjects.SetActive(false);
+            }
         }
     }
 }
