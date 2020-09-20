@@ -19,6 +19,28 @@ public class Defog : MonoBehaviour
     [Header("Tag of Player, Make sure to Spell correctly")]
     public string playerTag = "";
 
+
+    private int[] _defaultLayers;
+
+    private void Start()
+    {
+        _defaultLayers = new int[objectsToReveal.Length];
+        for(int index = 0; index < objectsToReveal.Length; index++)
+        {
+            _defaultLayers[index] = objectsToReveal[index].layer;
+
+            objectsToReveal[index].layer = 14;
+            foreach (Transform child in objectsToReveal[index].transform)
+            {
+                child.gameObject.layer = 14;
+            }
+            
+        }
+
+        
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == playerTag)
@@ -35,12 +57,12 @@ public class Defog : MonoBehaviour
     {
         if (objectsToReveal[0] != null)
         {
-            foreach (GameObject objectToReveal in objectsToReveal)
+            for(int index = 0; index < objectsToReveal.Length; index++)
             {
-                objectToReveal.layer = 0;
-                foreach (Transform child in objectToReveal.transform)
+                objectsToReveal[index].layer = _defaultLayers[index];
+                foreach (Transform child in objectsToReveal[index].transform)
                 {
-                    child.gameObject.layer = 0;
+                    child.gameObject.layer = _defaultLayers[index];
                 }
             }
         }
