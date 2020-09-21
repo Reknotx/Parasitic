@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354a65e239ab4724c92bce8d5fa69696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 1
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: be118dc0b88cec841ab2fca20bbcea88, type: 2}
   healthText: {fileID: 3135795940075178233}
   damageText: {fileID: 8181069626858822741}
@@ -117,6 +117,8 @@ MonoBehaviour:
   selectedMat: {fileID: 0}
   Ability1Range: 0
   Ability2Range: 0
+  Ability1Cooldown: 0
+  Ability2Cooldown: 0
 --- !u!1001 &8181069624772819151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +126,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8181069626810469720}
     m_Modifications:
+    - target: {fileID: 4774314655745685651, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5228965071397274234, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_AnchorMax.y
