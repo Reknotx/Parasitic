@@ -510,7 +510,7 @@ public class CombatSystem : MonoBehaviour
 
         endGameText.text = "You Lose!";
 
-        endCanvas.SetActive(false);
+        endCanvas.SetActive(true);
     }
 
 
