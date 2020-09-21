@@ -453,6 +453,8 @@ public class CombatSystem : MonoBehaviour
     /// <param name="unit">The unit who's health is at or below 0.</param>
     public void KillUnit(Humanoid unit)
     {
+        unitsAlive.Remove(unit);
+
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
@@ -464,7 +466,6 @@ public class CombatSystem : MonoBehaviour
             if (CheckWinCondition()) GameWon();
         }
 
-        unitsAlive.Remove(unit);
 
         Destroy(unit.gameObject);
 
