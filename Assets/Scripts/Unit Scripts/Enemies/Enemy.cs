@@ -30,7 +30,11 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;
 
+    /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
     public bool Taunted { get; set; } = false;
+
+    /// <summary> Indicates that an enemy is not hidden by fog. </summary>
+    public bool Revealed { get; set; } = true;
 
 
     /// <summary>
@@ -114,7 +118,7 @@ public abstract class Enemy : Humanoid, IEnemy
             path.RemoveAt(path.Count - 1);
         }
 
-        int movementDist = Mathf.Min(Movement, path.Count);
+        int movementDist = Mathf.Min(MovementStat, path.Count);
         //truncate path to movement range
         path.RemoveRange(movementDist, path.Count - movementDist);
         _currTarget = targetPlayer;
@@ -139,6 +143,18 @@ public abstract class Enemy : Humanoid, IEnemy
         return false;
     }
 
+
+    public void OnFogLifted()
+    {
+        Revealed = true;
+
+        CombatSystem.Instance.SubscribeEnemy(this);
+    }
+
+    /// <summary>
+    /// Forces the enemy to have a set target. (I.e. when the enemy is taunted.)
+    /// </summary>
+    /// <param name="player">The target player.</param>
     public void ForceTarget(Player player)
     {
         _currTarget = player;

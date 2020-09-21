@@ -108,11 +108,10 @@ public class CombatSystem : MonoBehaviour
 
         foreach (Enemy enemy in tempE)
         {
-            enemiesToGo.Add(enemy);
+
+            if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
         }
-
-
 
         DeactivateCombatButtons();
 
@@ -307,7 +306,10 @@ public class CombatSystem : MonoBehaviour
                 playersToGo.Add((Player)unit);
                 unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             }
-            else if (unit is Enemy) enemiesToGo.Add((Enemy)unit);
+            else if (unit is Enemy && ((Enemy)unit).Revealed != false)
+            {
+                enemiesToGo.Add((Enemy)unit);
+            }
 
             unit.HasMoved = false;
             unit.HasAttacked = false;
@@ -320,6 +322,8 @@ public class CombatSystem : MonoBehaviour
         activeSideText.text = "Player's turn";
     }
 
+    /// <summary> Executes the attack type that we have passed in. </summary>
+    /// <param name="type">The attack of the selected player to activate. </param>
     void ProcessAttack(Attack type)
     {
         SetBattleState(BattleState.PerformingAction);
@@ -358,6 +362,10 @@ public class CombatSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Switches the turn after a few seconds. Is this in though(?)
+    /// </summary>
+    /// <returns>Whatever a coroutine returns</returns>
     IEnumerator TurnSwitchCR()
     {
         //turnSwitch.SetActive(true);
@@ -367,6 +375,10 @@ public class CombatSystem : MonoBehaviour
         NewRound();
     }
 
+    /// <summary>
+    /// Executes the logic for the enemies turn.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
@@ -374,6 +386,12 @@ public class CombatSystem : MonoBehaviour
         while (enemiesToGo.Count != 0)
         {
             int index = Random.Range(0, enemiesToGo.Count);
+
+            if (enemiesToGo[index].Revealed == false)
+            {
+                enemiesToGo.Remove(enemiesToGo[index]);
+                continue;
+            }
 
             Enemy tempE = enemiesToGo[index];
 
@@ -405,7 +423,8 @@ public class CombatSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Kills the unit in game and removes it from system.
+    /// Kills the unit in game and removes it from system. Also checks the win condition
+    /// and ends the game if it is met.
     /// </summary>
     /// <param name="unit">The unit who's health is at or below 0.</param>
     public void KillUnit(Humanoid unit)
@@ -420,17 +439,56 @@ public class CombatSystem : MonoBehaviour
         }
 
         unitsAlive.Remove(unit);
+
+        Destroy(unit.gameObject);
+
+        if (CheckWinCondition()) GameWon();
     }
 
+
+    /// <summary> Checks the win condition to see if it's met. </summary>
+    private bool CheckWinCondition()
+    {
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy) return false;
+        }
+
+        return true;
+    }
+
+    /// <summary> Activate the win screen canvas here when the win condition is met. </summary>
+    private void GameWon()
+    {
+        SetBattleState(BattleState.Won);
+
+        //winCanvas.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Activates the combat buttons.
+    /// </summary>
     public void ActivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = true; }
     }
 
+    /// <summary>
+    /// Deactivates the combat buttons.
+    /// </summary>
     public void DeactivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = false; }
     }
+
+    /// <summary> Adds a revealed enemy to the turn system. </summary>
+    /// <param name="enemy">The enemy to add.</param>
+    public void SubscribeEnemy(Enemy enemy)
+    {
+        enemiesToGo.Add(enemy);
+    }
+
 
 
     public List<Humanoid> alteredUnits = new List<Humanoid>();
@@ -456,6 +514,10 @@ public class CombatSystem : MonoBehaviour
 
     private List<Humanoid> removeList = new List<Humanoid>();
 
+
+    /// <summary>
+    /// Updates the list of altered units.
+    /// </summary>
     private void UpdateList()
     {
         removeList = new List<Humanoid>();
