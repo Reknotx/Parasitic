@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Ryan Dangerfield
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class MapGrid : MonoBehaviour
 {
 
     public static MapGrid Instance;
-    Tile[,] grid;
+    public Tile[,] grid;
     
     //X-axis
     [HideInInspector]
@@ -18,8 +19,6 @@ public class MapGrid : MonoBehaviour
     public float tileSize = 1;
     public Mesh gizmoMesh;
     public bool drawGizmoMesh = true;
-    public GameObject start;
-    public GameObject end;
     List<Tile> path;
 
     //make singlton
@@ -33,22 +32,23 @@ public class MapGrid : MonoBehaviour
         {
             Instance = this;
         }
+        grid = new Tile[columns, rows];
+        //find tile fill tile array
+        GetTiles();
     }
 
     void Start()
     {
-        grid = new Tile[columns, rows];
-        GetTiles();
-        FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
-        print("start: "+ TileFromPosition(start.transform.position) + "end: " + TileFromPosition(end.transform.position));
-        RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
+
     }
 
     private void Update()
     {
-
+        //FindPath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
+        //RetracePath(TileFromPosition(start.transform.position), TileFromPosition(end.transform.position));
     }
 
+    //fills grid array with tiles in the scene
     public void GetTiles()
     {
         Transform tiles = transform.Find("Tiles");
@@ -66,7 +66,9 @@ public class MapGrid : MonoBehaviour
 
                 foreach(Transform column in row.transform)
                 {
+                    //add Tile to array
                     grid[x, z] = column.GetComponent<Tile>();
+                    //set variable of tiles grid position in each tile
                     grid[x, z].gridPosition = new Vector2(x, z);
                     x++;
                     
@@ -90,24 +92,30 @@ public class MapGrid : MonoBehaviour
         }
         else
         {
-            print((columns - 1) * percentX);
-            int posX = Mathf.RoundToInt((columns-1) * percentX);
-            int posZ = Mathf.RoundToInt((rows-1) * percentZ);
+            //print((columns - 1) * percentX);
+            int posX = (int)((columns) * percentX);
+            int posZ = (int)((rows) * percentZ);
             return grid[posX, posZ];
         }
     }
 
     //A* algorithm
-    public void FindPath(Tile startTile, Tile endTile)
+    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreOccupied = false, bool ignoreEnd = false)
     {
         //nodes that need to be evaluated
         List<Tile> frontier = new List<Tile>();
         //nodes that have been evaluated
         HashSet<Tile> explored = new HashSet<Tile>();
         frontier.Add(startTile);
+        //will loop until every possible pathway is exhausted
+        foreach (Tile tile in grid)
+        {
+            tile.gCost = 0;
+        }
         while (frontier.Count > 0)
         {
             Tile currentTile = frontier[0];
+            //sets currentTile to tile with lowest fCost (or lowest hCost if fCost is the same) in the frontier
             for (int i = 1; i < frontier.Count; i++)
             {
                 if (frontier[i].fCost < currentTile.fCost || (frontier[i].fCost == currentTile.fCost && frontier[i].hCost < currentTile.hCost))
@@ -115,22 +123,27 @@ public class MapGrid : MonoBehaviour
                     currentTile = frontier[i];
                 }
             }
+
             frontier.Remove(currentTile);
-            print(currentTile);
             explored.Add(currentTile);
+
+            
             if (currentTile == endTile)
             {
-                //print("found endtile");
-                return;
+                //end tile has been reached
+                return RetracePath(startTile,endTile);
             }
             foreach (Tile neighbor in GetNeighbors(currentTile))
             {
-                if(!neighbor.movementTile || explored.Contains(neighbor))
+                //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
+                if(!neighbor.movementTile || explored.Contains(neighbor) || (neighbor.occupied && !ignoreOccupied))
                 {
-                    continue;
+                    if (!(ignoreEnd && (endTile == neighbor)))
+                        continue;
                 }
                 int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
-                if(currentCost <neighbor.gCost || !explored.Contains(neighbor))
+                //if the current cost of moving to the tile is lower than the previous set it to the new cost
+                if(currentCost < neighbor.gCost || !frontier.Contains(neighbor))
                 {
                     neighbor.gCost = currentCost;
                     neighbor.hCost = GetDistanceCost(neighbor, endTile);
@@ -143,10 +156,11 @@ public class MapGrid : MonoBehaviour
             }
         }
         //print("frontier explored");
-        return;
+        //failed to find a path that connects the points
+        return null;
     }
 
-    private void RetracePath(Tile startTile, Tile endTile)
+    private List<Tile> RetracePath(Tile startTile, Tile endTile)
     {
         path = new List<Tile>();
         Tile currentTile = endTile;
@@ -156,6 +170,7 @@ public class MapGrid : MonoBehaviour
             currentTile = currentTile.parent;
         }
         path.Reverse();
+        return path;
     }
 
     public int GetDistanceCost(Tile tileA, Tile tileB)
@@ -165,28 +180,190 @@ public class MapGrid : MonoBehaviour
         return 10 * (distZ + distX);
     }
 
+    //returns list of tiles neighboring tile passed in
     public List<Tile> GetNeighbors(Tile tile)
     {
         List<Tile> neighbors = new List<Tile>();
         int tilePosX = (int)tile.gridPosition.x;
         int tilePosZ = (int)tile.gridPosition.y;
+        //check above
         if (tilePosZ > 0)
         {
             neighbors.Add(grid[tilePosX, tilePosZ - 1]);
         }
+        //check left
         if (tilePosX > 0)
         {
             neighbors.Add(grid[tilePosX - 1, tilePosZ]);
         }
+        //check right
         if (tilePosX < columns - 1)
         {
             neighbors.Add(grid[tilePosX + 1, tilePosZ]);
         }
+        //check below
         if (tilePosZ < rows - 1)
         {
             neighbors.Add(grid[tilePosX, tilePosZ + 1]);
         }
         return neighbors;
+    }
+
+
+    //Realized while making this that is was actually not ideal for what we need to accomplish
+    //public Tile NearestOpenTile(Tile startTile, Tile targetTile)
+    //{
+    //    List<Tile> occupied = new List<Tile>();
+    //    List<Tile> open = new List<Tile>();
+    //    HashSet<Tile> explored = new HashSet<Tile>();
+    //    Tile currentTile = targetTile;
+    //    occupied.Add(currentTile);
+    //    if (!targetTile.occupied && targetTile.movementTile)
+    //    {
+    //        return targetTile;
+    //    }
+
+    //    while (occupied.Count > 0)
+    //    {
+    //        occupied.Remove(currentTile);
+    //        explored.Add(currentTile);
+    //        foreach (Tile neighbor in GetNeighbors(currentTile))
+    //        {
+    //            if (!neighbor.movementTile || explored.Contains(neighbor))
+    //            {
+    //                continue;
+    //            }
+    //            else if (neighbor.occupied)
+    //            {
+    //                occupied.Add(neighbor);
+    //            }
+    //            else
+    //            {
+    //                open.Add(neighbor);
+    //            }
+    //        }
+    //        if(open.Count > 0)
+    //        {
+    //            int shortestDist = -1;
+    //            Tile shortestTile = open[0];
+    //            if(open.Count == 1)
+    //            {
+    //                return shortestTile;
+    //            }
+    //            foreach (Tile tile in open)
+    //            {
+    //                int pathDist = FindPath(tile, startTile).Count;
+    //                if (shortestDist > pathDist || shortestDist == -1)
+    //                {
+    //                    shortestDist = pathDist;
+    //                    shortestTile = tile;
+    //                }
+    //            }
+    //            return shortestTile;
+    //        }
+    //        else()
+    //    }
+
+    //}
+
+    //Breadth first search
+    public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false)
+    {
+        List<Tile> frontier = new List<Tile>();
+        HashSet<Tile> explored = new HashSet<Tile>();
+        Tile currentTile = startTile;
+        frontier.Add(startTile);
+        bool[,] inRange = new bool[columns, rows];
+        inRange[(int)startTile.gridPosition.x, (int)startTile.gridPosition.y] = true;
+        foreach (Tile tile in grid)
+        {
+            tile.gCost = 0;
+        }
+        while (frontier.Count > 0)
+        {
+            currentTile = frontier[0];
+            frontier.Remove(currentTile);
+            explored.Add(currentTile);
+            foreach (Tile neighbor in GetNeighbors(currentTile))
+            {
+                //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
+                if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
+                {
+
+                    int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
+                    if (currentCost < neighbor.gCost || !frontier.Contains(neighbor))
+                    {
+
+                        neighbor.gCost = currentCost;
+                        if(currentCost <= range * 10)
+                        {
+
+                            frontier.Add(neighbor);
+                            inRange[(int)neighbor.gridPosition.x, (int)neighbor.gridPosition.y] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return inRange;
+    }
+
+    //TODO: limmit search to tiles in range around selected unit
+    public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
+    {
+        List<Vector3> points = new List<Vector3>();
+        Vector3 pos;
+        Vector3 lowPos;
+        Vector3 highPos;
+        //up right search
+        for (int y = 0; y< inRange.GetLength(1); y++)
+        {
+            for (int x = 0; x < inRange.GetLength(0); x++)
+            {
+                if (inRange[x, y])
+                {
+                    pos = grid[x, y].transform.position;
+                    lowPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                    highPos = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
+                    if (!points.Contains(lowPos))
+                    {
+                        points.Add(lowPos);
+                    }
+                    if (!points.Contains(highPos))
+                    {
+                        points.Add(highPos);
+                    }
+                    break;
+                }
+            }
+        }
+        //down left search
+        for (int y = inRange.GetLength(1)-1; y >= 0; y--)
+        {
+            for (int x = inRange.GetLength(0)-1; x >= 0; x--)
+            {
+                if (inRange[x, y])
+                {
+                    pos = grid[x, y].transform.position;
+                    lowPos = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
+                    highPos = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
+                    if (!points.Contains(highPos))
+                    {
+                        points.Add(highPos);
+                    }
+
+                    if (!points.Contains(lowPos))
+                    {
+                        points.Add(lowPos);
+                    }
+                    break;
+                }
+            }
+        }
+
+        boarder.positionCount = points.Count;
+        boarder.SetPositions(points.ToArray());
     }
 
     public Vector2 TileCount()
@@ -200,9 +377,9 @@ public class MapGrid : MonoBehaviour
         }
         else
         {
-            print("tiles has children");
             foreach (Transform row in tiles.transform)
             {
+                //number of columns only need to be counted once
                 if (x == 0)
                 {
                     foreach (Transform column in row.transform)
@@ -216,6 +393,7 @@ public class MapGrid : MonoBehaviour
         return new Vector2(x, z);
     }
 
+    //returns the greater int or int a if equal 
     private int GreaterInt(int a, int b)
     {
         if (a >= b)
@@ -232,7 +410,7 @@ public class MapGrid : MonoBehaviour
         Gizmos.color = Color.green;
         if(drawGizmoMesh)
             Gizmos.DrawMesh(gizmoMesh,gizmoPos,Quaternion.identity,gizmoScale);
-        if(grid != null) {
+        /*if(grid != null) {
             foreach (Tile t in grid)
             {
                 Gizmos.color = Color.cyan;
@@ -244,7 +422,7 @@ public class MapGrid : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }
 

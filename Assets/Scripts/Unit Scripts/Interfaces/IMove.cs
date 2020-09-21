@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public interface IMove
 {
-    void Move();
+    /// <summary>
+    /// Triggers movement for unit on grid map.
+    /// </summary>
+    void Move(List<Tile> path);
 }

@@ -15,7 +15,7 @@ public class MapGenerator : MonoBehaviour
     public float gridSize = 1;
     public Mesh gizmoMesh;
     public bool drawGizmoMesh = true;
-    public GameObject gridMesh;
+    public GameObject grid;
     public MeshFilter meshFilter;
 
     public Vector2 TileCount()
@@ -55,6 +55,12 @@ public class MapGenerator : MonoBehaviour
         Vector2 currentSize = TileCount();
         Debug.Log(currentSize);
         meshFilter.sharedMesh = gridMesh.CreateMesh();
+        MeshCollider meshCollider = grid.GetComponent<MeshCollider>();
+        if (meshCollider)
+        {
+            DestroyImmediate(meshCollider);
+        }
+        grid.AddComponent<MeshCollider>();
         Transform tiles = transform.Find("Tiles");
         GameObject currentRow;
         GameObject currentTile;

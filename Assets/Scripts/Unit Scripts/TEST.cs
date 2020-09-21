@@ -9,21 +9,6 @@ public class TEST : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (IPlayer player in players)
-        {
-            player.NormalAttack();
-            player.AbilityOne();
-            player.AbilityTwo();
-        }
-
-        foreach (IStatistics playerStats in players)
-        {
-            Debug.Log(playerStats.Health);
-        }
-
-        foreach (IMove moveable in players)
-        {
-            moveable.Move();
-        }
+        
     }
 }
