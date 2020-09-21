@@ -426,6 +426,10 @@ public class CombatSystem : MonoBehaviour
             {
                 tempE.Attack();
             }
+            else
+            {
+                tempE.Defend();
+            }
 
             EndUnitTurn(enemiesToGo[index]);
         }

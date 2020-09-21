@@ -86,6 +86,8 @@ public class CharacterSelector : MonoBehaviour
 
         if (CombatSystem.Instance.state == BattleState.PerformingAction) return;
 
+        if (CombatSystem.Instance.state == BattleState.Won || CombatSystem.Instance.state == BattleState.Lost) return;
+
         RaycastHit info = new RaycastHit();
 
         //Ryan's Implementation

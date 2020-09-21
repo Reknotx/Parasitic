@@ -131,15 +131,31 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <returns>True if in range, false otherwise.</returns>
     public bool CheckIfInRangeOfTarget()
     {
-        List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
+        //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
+        bool [,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+        Tile[,] tempGrid = MapGrid.Instance.grid;
+        List<Player> players = new List<Player>();
 
-        foreach (Tile tile in neighbors)
+
+        for (int i = 0; i < neighbors.GetLength(0); i++)
         {
-            if (tile.occupant == _currTarget)
+            for (int j = 0; j < neighbors.GetLength(1); j++)
             {
-                return true;
+                if (!neighbors[i, j]) continue;
+
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                {
+                    if (!players.Contains((Player)(tempGrid[i, j].occupant)))
+                        players.Add((Player)(tempGrid[i, j].occupant));
+                }
             }
         }
+
+        foreach (Player player in players)
+        {
+            if (player == _currTarget) return true;
+        }
+
         return false;
     }
 
