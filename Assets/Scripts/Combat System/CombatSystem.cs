@@ -282,15 +282,26 @@ public class CombatSystem : MonoBehaviour
 
             if (playersToGo.Count == 0)
             {
-                StartCoroutine(EnemyTurn());
-                activeSideText.text = "Enemy Turn";
+                if (enemiesToGo.Count > 0)
+                {
+                    StartCoroutine(EnemyTurn());
+                    activeSideText.text = "Enemy Turn";
+                }
+                else
+                {
+                    NewRound();
+                }
             }
         }
         else
         {
             enemiesToGo.Remove((Enemy)unit);
 
-            if (enemiesToGo.Count == 0) { StartCoroutine(TurnSwitchCR()); }
+            if (enemiesToGo.Count == 0)
+            {
+                //StartCoroutine(TurnSwitchCR());
+                NewRound();
+            }
         }
 
         player = null;
