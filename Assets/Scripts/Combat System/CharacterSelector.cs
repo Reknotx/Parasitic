@@ -59,6 +59,9 @@ public class CharacterSelector : MonoBehaviour
     LineRenderer lineRenderer; 
     LineRenderer boarderRenderer;
 
+    /// <summary> Player unit is currently moving in the scene</summary>
+    [HideInInspector] public bool unitMoving = false;
+
     /// <summary> When true a player can still move after they have already moved </summary>
     public bool debugKeepMoving = false;
 
@@ -91,7 +94,7 @@ public class CharacterSelector : MonoBehaviour
         if (CombatSystem.Instance.state != BattleState.Targetting && Physics.Raycast(ray, out info, 100f, layermask))
         {
             Transform objectHit = info.transform;
-            if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player"))
+            if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player") && !unitMoving)
             {
                 Player playerObj = objectHit.gameObject.GetComponent<Player>();
 

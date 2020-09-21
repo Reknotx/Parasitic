@@ -132,6 +132,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     {
         if (path != null)
         {
+            CharacterSelector.Instance.unitMoving = true;
             CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
             State = HumanoidState.Moving;
             StartCoroutine(MoveCR(path));
@@ -188,7 +189,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
         HasMoved = true;
+
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
+        CharacterSelector.Instance.unitMoving = false;
     }
 
     /**

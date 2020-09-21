@@ -114,6 +114,9 @@ public abstract class Enemy : Humanoid, IEnemy
             path.RemoveAt(path.Count - 1);
         }
 
+        int movementDist = Mathf.Min(Movement, path.Count);
+        //truncate path to movement range
+        path.RemoveRange(movementDist, path.Count - movementDist);
         _currTarget = targetPlayer;
         return path;
     }

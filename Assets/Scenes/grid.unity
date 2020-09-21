@@ -2381,6 +2381,7 @@ MonoBehaviour:
   EndPoint: {fileID: 1717658083}
   BoarderLine: {fileID: 191394517}
   pathHeight: 0.3
+  unitMoving: 0
   debugKeepMoving: 0
 --- !u!1 &327281487
 GameObject:
@@ -15656,7 +15657,6 @@ GameObject:
   - component: {fileID: 2037904839}
   - component: {fileID: 2037904838}
   - component: {fileID: 2037904837}
-  - component: {fileID: 2037904841}
   - component: {fileID: 2037904842}
   m_Layer: 8
   m_Name: Mage
@@ -15740,21 +15740,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2037904841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037904836}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f050cd035906a52458b3df08ba4c353b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedMat: {fileID: 2100000, guid: 2a3d23bea6773534683deb31827aa0af, type: 2}
-  currentTile: {fileID: 0}
-  tileCrossTime: 0.3
 --- !u!114 &2037904842
 MonoBehaviour:
   m_ObjectHideFlags: 0
