@@ -322,7 +322,7 @@ public class CombatSystem : MonoBehaviour
                 playersToGo.Add((Player)unit);
                 unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             }
-            else if (unit is Enemy && ((Enemy)unit).Revealed != false)
+            else if (unit is Enemy && ((Enemy)unit).Revealed == true)
             {
                 enemiesToGo.Add((Enemy)unit);
             }
