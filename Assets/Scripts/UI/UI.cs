@@ -21,6 +21,8 @@ public class UI : MonoBehaviour
 
     private bool _isPaused;
 
+    private GameObject activeMenu;
+    private GameObject previousMenu;
 
     // Update is called once per frame
     void Update()
@@ -28,6 +30,7 @@ public class UI : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+            activeMenu = pauseMenu;
         }
     }
 
@@ -92,7 +95,7 @@ public class UI : MonoBehaviour
     {
         if(value)
         {
-            Debug.Log("Return to Main Menu");
+            SceneManager.LoadScene("MainMenuTest");
         }
         else
         {
@@ -100,13 +103,22 @@ public class UI : MonoBehaviour
         }
     }
 
+
+
     /// <summary>
     /// Hides Other Menus and Shows the Menu that is Input
     /// </summary>
     /// <param name="menu"> Menu to Show</param>
     public void ShowMenu(GameObject menu)
     {
+        previousMenu = activeMenu;
+        activeMenu = menu;
         HideAll();
         menu.SetActive(true);
+    }
+
+    public void OpenLink(string url)
+    {
+        Application.OpenURL(url);
     }
 }
