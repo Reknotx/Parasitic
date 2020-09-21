@@ -489,7 +489,7 @@ public class CombatSystem : MonoBehaviour
     {
         foreach (Humanoid unit in unitsAlive)
         {
-            if (unit is Enemy) return false;
+            if (unit is Player) return false;
         }
 
         return true;
