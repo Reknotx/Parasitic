@@ -42,6 +42,8 @@ public class Archer : Player
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        ActionRange.Instance.ActionDeselected();
+
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
@@ -58,6 +60,7 @@ public class Archer : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+        ActionRange.Instance.ActionDeselected();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
@@ -71,6 +74,7 @@ public class Archer : Player
 
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
+
         throw new System.NotImplementedException();
     }
 }

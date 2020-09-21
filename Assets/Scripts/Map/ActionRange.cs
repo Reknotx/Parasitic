@@ -10,6 +10,8 @@ using UnityEngine;
 public class ActionRange : MonoBehaviour
 {
 
+    public static ActionRange Instance;
+
     //color of line for normal attack
     public Color attackLineColor;
     //color of line for ability1
@@ -40,6 +42,14 @@ public class ActionRange : MonoBehaviour
 
     private void Start()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+
+
         lineRenderer = GetComponent<LineRenderer>();
         lineMaterial = lineRenderer.material;
         gameObject.SetActive(false);

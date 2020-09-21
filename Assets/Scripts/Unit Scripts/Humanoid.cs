@@ -69,6 +69,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// currently active on this unit. </summary>
     int buffTimer = 0;
 
+    /// <summary>
+    /// Refers to how many remaining actions the unit has left this turn. Useful for 
+    ///overriding the system if necessary.
+    /// </summary>
+    [HideInInspector] public int RemainingActions = 2;
+
     /// <summary> Indicates that the unit has moved this turn. </summary>
     public bool HasMoved { get; set; }
 
@@ -208,7 +214,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void FindMovementRange()
     {
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
     }
 
     // /// <summary>
@@ -263,6 +269,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void CreateAttackDownStatusEffect()
     {
+        AttackStat = AttackStat / 2;
+
         StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3);
         AddEffectToList(temp);
     }

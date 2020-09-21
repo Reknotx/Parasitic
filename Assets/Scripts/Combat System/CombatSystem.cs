@@ -266,6 +266,8 @@ public class CombatSystem : MonoBehaviour
     /// <param name="unit">The unit whose turn is over.</param>
     private void EndUnitTurn(Humanoid unit)
     {
+        //Sets both HasAttacked and HasMoved to true just to make
+        //sure that nothing is missed.
         unit.HasAttacked = true;
         unit.HasMoved = true;
 
@@ -279,7 +281,6 @@ public class CombatSystem : MonoBehaviour
                 StartCoroutine(EnemyTurn());
                 activeSideText.text = "Enemy Turn";
             }
-
         }
         else
         {

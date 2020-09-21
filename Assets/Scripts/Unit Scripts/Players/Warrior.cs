@@ -52,6 +52,8 @@ public class Warrior : Player
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        ActionRange.Instance.ActionDeselected();
+
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
@@ -66,8 +68,12 @@ public class Warrior : Player
 
     }
 
+    /// <summary>
+    /// Warrior's first ability. Lowers attack of enemies in radius.
+    /// </summary>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
+        ActionRange.Instance.ActionDeselected();
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
@@ -88,13 +94,22 @@ public class Warrior : Player
             }
         }
 
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.CreateAttackDownStatusEffect();
+        }
+
         yield return null;
 
         callback();
     }
 
+    /// <summary>
+    /// Warrior's second ability. Taunts nearby enemies.
+    /// </summary>
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
+        ActionRange.Instance.ActionDeselected();
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
