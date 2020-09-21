@@ -63,9 +63,14 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The target of combat. </summary>
     private Humanoid target;
 
-    [Header("The canvas that is displayed when you have met the win condition.")]
+    [Header("The canvas that is displayed when you have met the win/lose condition.")]
     /// <summary> The canvas that is displayed when the game has been won.</summary>
-    public GameObject winCanvas;
+    public GameObject endCanvas;
+
+    [Space]
+
+    [Header("The text that tells you whether you win or lose.")]
+    public Text endGameText;
     
     //public GameObject turnSwitch;
 
@@ -121,7 +126,7 @@ public class CombatSystem : MonoBehaviour
         SetBattleState(BattleState.Start);
         SetActiveUnits(ActiveUnits.Players);
 
-        if (winCanvas.activeSelf) winCanvas.SetActive(false);
+        if (endCanvas.activeSelf) endCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -451,22 +456,36 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            if (CheckLoseCondition()) GameLost();
         }
         else
         {
             enemiesToGo.Remove((Enemy)unit);
+            if (CheckWinCondition()) GameWon();
         }
 
         unitsAlive.Remove(unit);
 
         Destroy(unit.gameObject);
 
-        if (CheckWinCondition()) GameWon();
     }
 
 
     /// <summary> Checks the win condition to see if it's met. </summary>
+    /// <returns>True if win condition met, false otherwise.</returns>
     private bool CheckWinCondition()
+    {
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy) return false;
+        }
+
+        return true;
+    }
+
+    /// <summary> Checks the lose condition to see if it's met. </summary>
+    /// <returns>True if lose condition met, false otherwise. </returns>
+    private bool CheckLoseCondition()
     {
         foreach (Humanoid unit in unitsAlive)
         {
@@ -481,7 +500,17 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Won);
 
-        winCanvas.SetActive(true);
+        endCanvas.SetActive(true);
+    }
+
+
+    private void GameLost()
+    {
+        SetBattleState(BattleState.Lost);
+
+        endGameText.text = "You Lose!";
+
+        endCanvas.SetActive(false);
     }
 
 
