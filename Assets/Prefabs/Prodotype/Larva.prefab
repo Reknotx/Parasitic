@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!225 &6925792249400567099
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184180413175318362}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &6925792248520418742
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +39,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925792248520418742}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.21, y: 0, z: 6.8999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -108,25 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd18ef4f34808348836d977aff04ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 0
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: 87fe7d63e200f7b4d94eac7988a73175, type: 2}
   healthText: {fileID: 4184180412080958888}
   damageText: {fileID: 6925792250074560772}
   healthBar: {fileID: 2476028413971490061}
---- !u!225 &6925792249400567099
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4184180413175318362}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1001 &6925792248787557790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,6 +147,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.47632825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.24870951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509434
       objectReference: {fileID: 0}
     - target: {fileID: 2300033362009899273, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
