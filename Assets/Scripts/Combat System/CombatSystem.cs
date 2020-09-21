@@ -426,6 +426,10 @@ public class CombatSystem : MonoBehaviour
             {
                 tempE.Attack();
             }
+            else
+            {
+                tempE.Defend();
+            }
 
             EndUnitTurn(enemiesToGo[index]);
         }
@@ -454,6 +458,9 @@ public class CombatSystem : MonoBehaviour
     public void KillUnit(Humanoid unit)
     {
         unitsAlive.Remove(unit);
+
+        unit.currentTile.occupant = null;
+        unit.currentTile.occupied = false;
 
         if (unit is Player)
         {
