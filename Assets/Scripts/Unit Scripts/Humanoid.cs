@@ -203,6 +203,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
      */
     public bool TakeDamage(int damage)
     {
+        if (this == null) return false;
+
         Health -= damage;
         
         StartCoroutine(ShowDamage(damage));

@@ -190,7 +190,7 @@ public class CombatSystem : MonoBehaviour
     public void SetTarget(Humanoid selection)
     {
         if (selection == player)
-        {
+        {   
             Debug.Log("Can't select yourself for attack.");
             return;
         }
@@ -285,6 +285,7 @@ public class CombatSystem : MonoBehaviour
                 if (enemiesToGo.Count > 0)
                 {
                     StartCoroutine(EnemyTurn());
+                    SetActiveUnits(ActiveUnits.Enemies);
                     activeSideText.text = "Enemy Turn";
                 }
                 else
@@ -300,7 +301,8 @@ public class CombatSystem : MonoBehaviour
             if (enemiesToGo.Count == 0)
             {
                 //StartCoroutine(TurnSwitchCR());
-                NewRound();
+                StopCoroutine(EnemyTurn());
+                //NewRound();
             }
         }
 
@@ -342,7 +344,7 @@ public class CombatSystem : MonoBehaviour
     /// <param name="type">The attack of the selected player to activate. </param>
     void ProcessAttack(Attack type)
     {
-        SetBattleState(BattleState.PerformingAction);
+        //SetBattleState(BattleState.PerformingAction);
 
         switch (type)
         {
@@ -399,7 +401,7 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count != 0)
+        while (enemiesToGo.Count > 0)
         {
             int index = Random.Range(0, enemiesToGo.Count);
 
@@ -420,9 +422,10 @@ public class CombatSystem : MonoBehaviour
                 tempE.Attack();
             }
 
-
             EndUnitTurn(enemiesToGo[index]);
         }
+
+        NewRound();
     }
 
     /// <summary>
