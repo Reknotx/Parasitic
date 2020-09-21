@@ -131,6 +131,7 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <returns>True if in range, false otherwise.</returns>
     public bool CheckIfInRangeOfTarget()
     {
+
         //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
         bool [,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
@@ -143,7 +144,7 @@ public abstract class Enemy : Humanoid, IEnemy
             {
                 if (!neighbors[i, j]) continue;
 
-                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Player    )
                 {
                     if (!players.Contains((Player)(tempGrid[i, j].occupant)))
                         players.Add((Player)(tempGrid[i, j].occupant));

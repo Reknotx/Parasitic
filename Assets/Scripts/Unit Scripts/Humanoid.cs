@@ -29,27 +29,27 @@ public enum HumanoidState
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
     /// <summary> The range of the normal attack. </summary>
-    public int AttackRange; 
+    public int AttackRange { get; set; } 
 
     /// <summary> The max health of this unit. </summary>
     private int _maxHealth;
 
     /// <summary> Health of the unit. </summary>
-    [HideInInspector] public int Health { get; set; }
+    public int Health { get; set; }
 
-    [HideInInspector] public int MaxHealth { get { return _maxHealth; } }
+    public int MaxHealth { get { return _maxHealth; } }
 
     /// <summary>Attack of the unit. </summary>
-    [HideInInspector] public int AttackStat { get; set; }
+    public int AttackStat { get; set; }
 
     /// <summary>Defense of the unit.</summary>
-    [HideInInspector] public int DefenseStat { get; set; }
+    public int DefenseStat { get; set; }
 
     /// <summary>Movement value of the unit. </summary>
-    [HideInInspector] public int MovementStat { get; set; }
+    public int MovementStat { get; set; }
 
     /// <summary>Dexterity (or dodge chance) of the unit.</summary>
-    [HideInInspector] public float DexterityStat { get; set; }
+    public float DexterityStat { get; set; }
 
     /// <summary> Tile the unit currently occupies </summary>
     [HideInInspector] public Tile currentTile;
@@ -103,6 +103,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         DefenseStat = _baseStats.BaseDefense;
         MovementStat = _baseStats.Movement;
         DexterityStat = _baseStats.Dexterity;
+        AttackRange = _baseStats.AttackRange;
         _maxHealth = Health;
 
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
