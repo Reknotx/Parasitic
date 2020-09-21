@@ -18,6 +18,7 @@ public class Warrior : Player
     public override void NormalAttack(Action callback)
     {
         Debug.Log("Warrior Normal Attack");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
         StartCoroutine(NormalAttackCR(callback));

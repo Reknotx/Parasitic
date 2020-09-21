@@ -18,6 +18,8 @@ public class Archer : Player
     public override void NormalAttack(Action callback)
     {
         Debug.Log("Archer Normal Attack");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+
     }
 
     /// <summary>

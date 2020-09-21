@@ -13,6 +13,16 @@ using UnityEngine;
 
 public class Mage : Player
 {
+
+    /// <summary>
+    /// Mage's normal attack.
+    /// </summary>
+    public override void NormalAttack(Action callback)
+    {
+        Debug.Log("Mage Normal Attack");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+    }
+
     /// <summary>
     /// Mage's first ability. AOE fire blast.
     /// </summary>
@@ -32,13 +42,7 @@ public class Mage : Player
         CreateAttackUpStatusEffect();
     }
 
-    /// <summary>
-    /// Mage's normal attack.
-    /// </summary>
-    public override void NormalAttack(Action callback)
-    {
-        Debug.Log("Mage Normal Attack");
-    }
+    
 
     protected override IEnumerator NormalAttackCR(Action callback)
     {

@@ -14,7 +14,7 @@ public abstract class Enemy : Humanoid, IEnemy
 {
     public virtual void Attack()
     {
-        _currTarget.TakeDamage(base.AttackStat);
+        if (_currTarget.TakeDamage(base.AttackStat)) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
     public virtual void Defend()
