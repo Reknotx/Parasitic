@@ -22,7 +22,7 @@ public class Defog : MonoBehaviour
 
     private int[] _defaultLayers;
 
-    private void Start()
+    private void Awake()
     {
         _defaultLayers = new int[objectsToReveal.Length];
         for(int index = 0; index < objectsToReveal.Length; index++)

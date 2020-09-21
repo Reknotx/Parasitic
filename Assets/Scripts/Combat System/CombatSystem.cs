@@ -63,7 +63,10 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The target of combat. </summary>
     private Humanoid target;
 
-
+    [Header("The canvas that is displayed when you have met the win condition.")]
+    /// <summary> The canvas that is displayed when the game has been won.</summary>
+    public GameObject winCanvas;
+    
     //public GameObject turnSwitch;
 
     /// <summary> The text stating which side is active. </summary>
@@ -117,6 +120,8 @@ public class CombatSystem : MonoBehaviour
 
         SetBattleState(BattleState.Start);
         SetActiveUnits(ActiveUnits.Players);
+
+        if (winCanvas.activeSelf) winCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -462,7 +467,7 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Won);
 
-        //winCanvas.SetActive(true);
+        winCanvas.SetActive(true);
     }
 
 
