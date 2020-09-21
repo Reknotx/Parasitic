@@ -120,6 +120,8 @@ public class CombatSystem : MonoBehaviour
 
         SetBattleState(BattleState.Start);
         SetActiveUnits(ActiveUnits.Players);
+
+        if (winCanvas.activeSelf) winCanvas.SetActive(false);
     }
 
     /// <summary>
