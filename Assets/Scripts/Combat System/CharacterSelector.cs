@@ -13,8 +13,17 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
+
+    public enum TargettingType
+    {
+        TargetPlayers,
+        TargetEnemies
+    }
+
     
     public static CharacterSelector Instance;
+
+    [HideInInspector] public TargettingType targettingType;
 
     //layermask only hits player and grid layers
     int layermask = ((1 << 8) | (1 << 9));
@@ -74,6 +83,8 @@ public class CharacterSelector : MonoBehaviour
     void Update()
     {
         if (CombatSystem.Instance.activeUnits == ActiveUnits.Enemies) return;
+
+        if (CombatSystem.Instance.state == BattleState.PerformingAction) return;
 
         RaycastHit info = new RaycastHit();
 
@@ -142,9 +153,14 @@ public class CharacterSelector : MonoBehaviour
                     HidePath();
                 }
             }
-            
+
         }
-        else if (CombatSystem.Instance.state == BattleState.Targetting && Physics.Raycast(ray, out info, 100f, enemyLayerMask))
+        else if (CombatSystem.Instance.state == BattleState.Targetting &&
+            ( (targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask) )
+            || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask) )
+            )
+            
+            )
         {
             Transform objectHit = info.transform;
             if (SelectedPlayerUnit && SelectedPlayerUnit.HasAttacked == false)
@@ -171,22 +187,6 @@ public class CharacterSelector : MonoBehaviour
                         SelectedTargetUnit = tempE;
                         return; 
                     }
-
-                    //if (Input.GetMouseButtonDown(0))
-                    //{
-                    //    //We are about to perform an attack on an enemy game object.
-                    //    List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
-
-                    //    foreach (Tile tile in neighbors)
-                    //    {
-                    //        if (tile.occupied && tile.occupant == SelectedTargetUnit)
-                    //        {
-                    //            //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
-                    //            CombatSystem.Instance.SetTarget(SelectedTargetUnit);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }
@@ -217,5 +217,10 @@ public class CharacterSelector : MonoBehaviour
             EndPoint.SetActive(false);
         }
 
+    }
+
+    public void SetTargettingType(TargettingType type)
+    {
+        targettingType = type;
     }
 }

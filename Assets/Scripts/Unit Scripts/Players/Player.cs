@@ -1,8 +1,8 @@
 ﻿/*
  * Author: Chase O'Connor
- * Date: 9/4/20
+ * Date: 9/4/2020
  * 
- * Brief: The base player class that all classes extend.
+ * Brief: The base player class 
  * 
  */
 
@@ -15,7 +15,7 @@ using UnityEngine;
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
-    protected enum Attack
+    protected enum AttackType
     {
         NormalAttack,
         AbilityOne,
@@ -29,10 +29,28 @@ public abstract class Player : Humanoid, IPlayer
     public Material selectedMat;
 
     /// <summary> Range of player's first ability. </summary>
+    [Header("The range of the player's first ability.")]
     public int Ability1Range;
+
+    [Space]
     /// <summary> Range of player's second ability. </summary>
+    [Header("The range of the player's second ability.")]
     public int Ability2Range;
 
+    [Space]
+    [Header("The cooldown of the player's first ability.")]
+    public int Ability1Cooldown;
+
+    [Space]
+    [Header("The cooldown of the player's second ability.")]
+    public int Ability2Cooldown;
+
+    /// <summary> The remaining cooldown on ability one. </summary>
+    int remainingAbility1CD;
+
+    /// <summary> The remaining cooldown on ability two.  </summary>
+    int remainingAbility2CD;
+    
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
@@ -94,6 +112,16 @@ public abstract class Player : Humanoid, IPlayer
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         State = HumanoidState.Done;
+    }
+
+    public override void AdvanceTimer()
+    {
+        base.AdvanceTimer();
+
+        if (remainingAbility1CD > 0) remainingAbility1CD--;
+
+        if (remainingAbility2CD > 0) remainingAbility2CD--;
+
     }
 
     public void FindActionRanges()

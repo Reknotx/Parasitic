@@ -18,7 +18,6 @@ public class Warrior : Player
     public override void NormalAttack(Action callback)
     {
         Debug.Log("Warrior Normal Attack");
-
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
         StartCoroutine(NormalAttackCR(callback));
@@ -34,9 +33,9 @@ public class Warrior : Player
         /*
          * Scare the surrounding enemies of the warrior and causing those
          * enemies to deal less damage. Effectively lowering their attack stat.
-         * 
-         * 
          */
+
+        StartCoroutine(AbilityOneCR(callback));
     }
 
     /// <summary>
@@ -53,24 +52,32 @@ public class Warrior : Player
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        ActionRange.Instance.ActionDeselected();
+
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
         }
-        else
+        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
         {
-            CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(BaseAttack);
+            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
 
         callback();
 
     }
 
+    /// <summary>
+    /// Warrior's first ability. Lowers attack of enemies in radius.
+    /// </summary>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
+        ActionRange.Instance.ActionDeselected();
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
+        List<Enemy> enemies = new List<Enemy>();
+
 
         for (int i = 0; i < tempGrid.GetLength(0); i++)
         {
@@ -79,15 +86,58 @@ public class Warrior : Player
                 //Spot was not in range.
                 if (!range[i, j]) continue;
 
-                //if (tempGrid[i, j].occupied && tempGrid)
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                {
+                    if (!enemies.Contains((Enemy)(tempGrid[i, j].occupant)))
+                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
+                }
             }
         }
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.CreateAttackDownStatusEffect();
+        }
+
         yield return null;
+
+        callback();
     }
 
+    /// <summary>
+    /// Warrior's second ability. Taunts nearby enemies.
+    /// </summary>
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
-        throw new System.NotImplementedException();
+        ActionRange.Instance.ActionDeselected();
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        Tile[,] tempGrid = MapGrid.Instance.grid;
+        List<Enemy> enemies = new List<Enemy>();
+
+
+        for (int i = 0; i < tempGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < tempGrid.GetLength(1); j++)
+            {
+                //Spot was not in range.
+                if (!range[i, j]) continue;
+
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
+                {
+                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
+                }
+            }
+        }
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.ForceTarget(this);
+            enemy.CreateTauntedStatusEffect();
+        }
+
+        yield return null;
+
+        callback();
     }
 
     //IEnumerator NormalAttackCR()

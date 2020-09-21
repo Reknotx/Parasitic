@@ -108,7 +108,8 @@ public class CombatSystem : MonoBehaviour
 
         foreach (Enemy enemy in tempE)
         {
-            enemiesToGo.Add(enemy);
+
+            if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
         }
 
@@ -143,7 +144,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (tile.occupied && tile.occupant is Player)
             {
-                tile.occupant.TakeDamage(enemiesToGo[index].BaseAttack);
+                tile.occupant.TakeDamage(enemiesToGo[index].AttackStat);
                 break;
             }
         }
@@ -206,7 +207,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(NormalAttackCR());
-        StartCoroutine(ProcessAttack(Attack.NormalAttack));
+        ProcessAttack(Attack.NormalAttack);
     }
 
     /// <summary>
@@ -219,7 +220,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityOneCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityOne));
+        ProcessAttack(Attack.AbilityOne);
     }
 
     /// <summary>
@@ -232,7 +233,7 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityTwoCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityTwo));
+        ProcessAttack(Attack.AbilityTwo);
     }
 
     /// <summary>
@@ -264,6 +265,10 @@ public class CombatSystem : MonoBehaviour
     /// <param name="unit">The unit whose turn is over.</param>
     private void EndUnitTurn(Humanoid unit)
     {
+        //Sets both HasAttacked and HasMoved to true just to make
+        //sure that nothing is missed.
+        unit.HasAttacked = true;
+        unit.HasMoved = true;
 
         if (unit is Player)
         {
@@ -275,7 +280,6 @@ public class CombatSystem : MonoBehaviour
                 StartCoroutine(EnemyTurn());
                 activeSideText.text = "Enemy Turn";
             }
-
         }
         else
         {
@@ -302,19 +306,28 @@ public class CombatSystem : MonoBehaviour
                 playersToGo.Add((Player)unit);
                 unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             }
-            else if (unit is Enemy) enemiesToGo.Add((Enemy)unit);
+            else if (unit is Enemy && ((Enemy)unit).Revealed != false)
+            {
+                enemiesToGo.Add((Enemy)unit);
+            }
 
             unit.HasMoved = false;
             unit.HasAttacked = false;
         }
+
+        UpdateList();
 
         SetActiveUnits(ActiveUnits.Players);
 
         activeSideText.text = "Player's turn";
     }
 
-    IEnumerator ProcessAttack(Attack type)
+    /// <summary> Executes the attack type that we have passed in. </summary>
+    /// <param name="type">The attack of the selected player to activate. </param>
+    void ProcessAttack(Attack type)
     {
+        SetBattleState(BattleState.PerformingAction);
+
         switch (type)
         {
             case Attack.NormalAttack:
@@ -322,31 +335,37 @@ public class CombatSystem : MonoBehaviour
                 break;
 
             case Attack.AbilityOne:
-                ((IPlayer)player).AbilityOne(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityOne(AttackComplete);
                 break;
 
             case Attack.AbilityTwo:
-                ((IPlayer)player).AbilityTwo(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityTwo(AttackComplete);
                 break;
 
             default:
                 break;
         }
-
-        yield return null;
     }
 
+    /// <summary>
+    /// Called when the attack or ability is completed.
+    /// Set's the battle state to idle.
+    /// </summary>
     public void AttackComplete()
     {
-        Debug.Log("Hello from attack complete!");
-
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
+        SetBattleState(BattleState.Idle);
+
     }
 
+    /// <summary>
+    /// Switches the turn after a few seconds. Is this in though(?)
+    /// </summary>
+    /// <returns>Whatever a coroutine returns</returns>
     IEnumerator TurnSwitchCR()
     {
         //turnSwitch.SetActive(true);
@@ -356,6 +375,10 @@ public class CombatSystem : MonoBehaviour
         NewRound();
     }
 
+    /// <summary>
+    /// Executes the logic for the enemies turn.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
@@ -363,6 +386,12 @@ public class CombatSystem : MonoBehaviour
         while (enemiesToGo.Count != 0)
         {
             int index = Random.Range(0, enemiesToGo.Count);
+
+            if (enemiesToGo[index].Revealed == false)
+            {
+                enemiesToGo.Remove(enemiesToGo[index]);
+                continue;
+            }
 
             Enemy tempE = enemiesToGo[index];
 
@@ -393,13 +422,118 @@ public class CombatSystem : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Kills the unit in game and removes it from system. Also checks the win condition
+    /// and ends the game if it is met.
+    /// </summary>
+    /// <param name="unit">The unit who's health is at or below 0.</param>
+    public void KillUnit(Humanoid unit)
+    {
+        if (unit is Player)
+        {
+            playersToGo.Remove((Player)unit);
+        }
+        else
+        {
+            enemiesToGo.Remove((Enemy)unit);
+        }
+
+        unitsAlive.Remove(unit);
+
+        Destroy(unit.gameObject);
+
+        if (CheckWinCondition()) GameWon();
+    }
+
+
+    /// <summary> Checks the win condition to see if it's met. </summary>
+    private bool CheckWinCondition()
+    {
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy) return false;
+        }
+
+        return true;
+    }
+
+    /// <summary> Activate the win screen canvas here when the win condition is met. </summary>
+    private void GameWon()
+    {
+        SetBattleState(BattleState.Won);
+
+        //winCanvas.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Activates the combat buttons.
+    /// </summary>
     public void ActivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = true; }
     }
 
+    /// <summary>
+    /// Deactivates the combat buttons.
+    /// </summary>
     public void DeactivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = false; }
+    }
+
+    /// <summary> Adds a revealed enemy to the turn system. </summary>
+    /// <param name="enemy">The enemy to add.</param>
+    public void SubscribeEnemy(Enemy enemy)
+    {
+        enemiesToGo.Add(enemy);
+    }
+
+
+
+    public List<Humanoid> alteredUnits = new List<Humanoid>();
+
+    /// <summary>
+    /// Subscribes a unit that has been buffed or debuffed to the system.
+    /// After every round these units will have their counters updated.
+    /// </summary>
+    /// <param name="subject">The unit that is altered.</param>
+    public void SubscribeAlteredUnit(Humanoid subject)
+    {
+        alteredUnits.Add(subject);
+    }
+
+    /// <summary>
+    /// Unsubscribes the altered unit when their (de)buff timer has run out.
+    /// </summary>
+    /// <param name="subject">The unit that was previously altered.</param>
+    public void UnsubscribeAlteredUnit(Humanoid subject)
+    {
+        removeList.Add(subject);
+    }
+
+    private List<Humanoid> removeList = new List<Humanoid>();
+
+
+    /// <summary>
+    /// Updates the list of altered units.
+    /// </summary>
+    private void UpdateList()
+    {
+        removeList = new List<Humanoid>();
+
+        foreach (Humanoid unit in alteredUnits)
+        {
+            unit.AdvanceTimer();
+        }
+
+
+        foreach (Humanoid unit in removeList)
+        {
+            unit.ResetStats();
+            alteredUnits.Remove(unit);
+        }
+
+        removeList.Clear();
     }
 }

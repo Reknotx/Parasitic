@@ -34,6 +34,11 @@ public class Defog : MonoBehaviour
             {
                 child.gameObject.layer = 14;
             }
+
+            if (objectsToReveal[index].GetComponent<Enemy>() != null)
+            {
+                objectsToReveal[index].GetComponent<Enemy>().Revealed = false;
+            }
             
         }
 
@@ -63,6 +68,11 @@ public class Defog : MonoBehaviour
                 foreach (Transform child in objectsToReveal[index].transform)
                 {
                     child.gameObject.layer = _defaultLayers[index];
+                }
+
+                if (objectsToReveal[index].GetComponent<Enemy>() != null)
+                {
+                    objectsToReveal[index].GetComponent<Enemy>().OnFogLifted();
                 }
             }
         }

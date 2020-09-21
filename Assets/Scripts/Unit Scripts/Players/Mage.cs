@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/2020
+ * 
+ * Brief: Mage class file
+ */
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +19,7 @@ public class Mage : Player
     public override void AbilityOne(Action callback)
     {
         Debug.Log("Mage Ability One");
+
     }
 
     /// <summary>
@@ -19,6 +28,8 @@ public class Mage : Player
     public override void AbilityTwo(Action callback)
     {
         Debug.Log("Mage Ability Two");
+
+        CreateAttackUpStatusEffect();
     }
 
     /// <summary>
@@ -32,12 +43,29 @@ public class Mage : Player
     protected override IEnumerator NormalAttackCR(Action callback)
     {
 
-        callback.Invoke();
-        yield return null;
+        Debug.Log("Select a target for the mage's normal attack.");
+
+        yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
+        Debug.Log("Given a target");
+        if (CharacterSelector.Instance.SelectedTargetUnit == this)
+        {
+            Debug.Log("Can't attack yourself.");
+        }
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        {
+            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+        }
+
+        callback();
     }
 
     protected override IEnumerator AbilityOneCR(Action callback)
     {
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+
+
         throw new System.NotImplementedException();
     }
 

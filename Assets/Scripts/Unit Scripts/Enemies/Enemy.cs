@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 9/4/2020
+ * 
+ * Brief: Enemy base class file
+ */
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +14,7 @@ public abstract class Enemy : Humanoid, IEnemy
 {
     public virtual void Attack()
     {
-        _currTarget.TakeDamage(BaseAttack);
+        _currTarget.TakeDamage(base.AttackStat);
     }
 
     public virtual void Defend()
@@ -19,8 +27,21 @@ public abstract class Enemy : Humanoid, IEnemy
 
     }
 
+    /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;
 
+    /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
+    public bool Taunted { get; set; } = false;
+
+    /// <summary> Indicates that an enemy is not hidden by fog. </summary>
+    public bool Revealed { get; set; } = true;
+
+
+    /// <summary>
+    /// Runs a search on all of the active players to see which player is closer. Then
+    /// will find the path to that player.
+    /// </summary>
+    /// <returns>The path to the closest player.</returns>
     public List<Tile> FindNearestPlayer()
     {
         Player[] activePlayers = FindObjectsOfType<Player>();
@@ -28,17 +49,23 @@ public abstract class Enemy : Humanoid, IEnemy
         Player targetPlayer = null;
         float shortestDist = 0f;
 
-        foreach (Player player in activePlayers)
+        if(Taunted && _currTarget != null)
         {
-            float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
-
-            if (shortestDist == 0f || tempDist < shortestDist)
+            foreach (Player player in activePlayers)
             {
-                targetPlayer = player;
-                shortestDist = tempDist;
+                float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
+
+                if (shortestDist == 0f || tempDist < shortestDist)
+                {
+                    targetPlayer = player;
+                    shortestDist = tempDist;
+                }
             }
         }
-
+        else
+        {
+            targetPlayer = _currTarget;
+        }
 
         Tile target = targetPlayer.currentTile;
         List<Tile> path = null;
@@ -91,13 +118,17 @@ public abstract class Enemy : Humanoid, IEnemy
             path.RemoveAt(path.Count - 1);
         }
 
-        int movementDist = Mathf.Min(Movement, path.Count);
+        int movementDist = Mathf.Min(MovementStat, path.Count);
         //truncate path to movement range
         path.RemoveRange(movementDist, path.Count - movementDist);
         _currTarget = targetPlayer;
         return path;
     }
 
+    /// <summary>
+    /// Runs a check to see if the target player is within range of their attack.
+    /// </summary>
+    /// <returns>True if in range, false otherwise.</returns>
     public bool CheckIfInRangeOfTarget()
     {
         List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
@@ -110,5 +141,55 @@ public abstract class Enemy : Humanoid, IEnemy
             }
         }
         return false;
+    }
+
+
+    public void OnFogLifted()
+    {
+        Revealed = true;
+
+        CombatSystem.Instance.SubscribeEnemy(this);
+    }
+
+    /// <summary>
+    /// Forces the enemy to have a set target. (I.e. when the enemy is taunted.)
+    /// </summary>
+    /// <param name="player">The target player.</param>
+    public void ForceTarget(Player player)
+    {
+        _currTarget = player;
+        Taunted = true;
+    }
+
+    public override void AdvanceTimer()
+    {
+        foreach (StatusEffect effect in statusEffects)
+        {
+            if (effect.ReduceDuration())
+            {
+
+                switch (effect.GetEffectType())
+                {
+                    case StatusEffect.StatusEffectType.Taunted:
+                        Taunted = false;
+                        _currTarget = null;
+                        break;
+
+                    case StatusEffect.StatusEffectType.AttackDown:
+                        ResetStats();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                statusEffects.Remove(effect);
+
+                if (statusEffects.Count == 0)
+                {
+                    CombatSystem.Instance.UnsubscribeAlteredUnit(this);
+                }
+            }
+        }
     }
 }
