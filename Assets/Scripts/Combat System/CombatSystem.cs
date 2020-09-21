@@ -455,6 +455,9 @@ public class CombatSystem : MonoBehaviour
     {
         unitsAlive.Remove(unit);
 
+        unit.currentTile.occupant = null;
+        unit.currentTile.occupied = false;
+
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
