@@ -959,33 +959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &689893867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6736326469223159566, guid: ae651d14e31650441a2e30c91fd6d8aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1735055572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &689893871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689893867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a746ff3ca65331c4fbbac1c23d074c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targettingType: 0
-  SelectedPlayerUnit: {fileID: 0}
-  SelectedTargetUnit: {fileID: 0}
-  PathLine: {fileID: 8319176650916841514}
-  EndPoint: {fileID: 8319176651218130396}
-  BoarderLine: {fileID: 8319176650463741674}
-  pathHeight: 0.3
-  unitMoving: 0
-  debugKeepMoving: 0
 --- !u!1001 &734751539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2040,6 +2013,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 689893871, guid: ae651d14e31650441a2e30c91fd6d8aa, type: 3}
+      propertyPath: PathLine
+      value: 
+      objectReference: {fileID: 8319176650916841514}
+    - target: {fileID: 689893871, guid: ae651d14e31650441a2e30c91fd6d8aa, type: 3}
+      propertyPath: EndPoint
+      value: 
+      objectReference: {fileID: 8319176651218130396}
+    - target: {fileID: 689893871, guid: ae651d14e31650441a2e30c91fd6d8aa, type: 3}
+      propertyPath: BoarderLine
+      value: 
+      objectReference: {fileID: 8319176650463741674}
     - target: {fileID: 6736326468471990901, guid: ae651d14e31650441a2e30c91fd6d8aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2099,11 +2084,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CameraController
-      objectReference: {fileID: 0}
-    - target: {fileID: 6736326469223159564, guid: ae651d14e31650441a2e30c91fd6d8aa,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae651d14e31650441a2e30c91fd6d8aa, type: 3}

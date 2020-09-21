@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6736326469223159563}
   - component: {fileID: 6736326469223159564}
   - component: {fileID: 6736326469223159565}
+  - component: {fileID: 689893871}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -149,7 +150,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -169,6 +170,27 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6736326469223159566}
   m_Enabled: 1
+--- !u!114 &689893871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736326469223159566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a746ff3ca65331c4fbbac1c23d074c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targettingType: 0
+  SelectedPlayerUnit: {fileID: 0}
+  SelectedTargetUnit: {fileID: 0}
+  PathLine: {fileID: 0}
+  EndPoint: {fileID: 0}
+  BoarderLine: {fileID: 0}
+  pathHeight: 0.3
+  unitMoving: 0
+  debugKeepMoving: 0
 --- !u!1 &6736326469692029396
 GameObject:
   m_ObjectHideFlags: 0
