@@ -49,7 +49,7 @@ public abstract class Enemy : Humanoid, IEnemy
         Player targetPlayer = null;
         float shortestDist = 0f;
 
-        if(Taunted && _currTarget != null)
+        if(!Taunted && _currTarget == null)
         {
             foreach (Player player in activePlayers)
             {
