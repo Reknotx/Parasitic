@@ -310,12 +310,14 @@ public class CombatSystem : MonoBehaviour
         }
         else
         {
+            //(Enemy)unit.
+
             enemiesToGo.Remove((Enemy)unit);
 
             if (enemiesToGo.Count == 0)
             {
                 //StartCoroutine(TurnSwitchCR());
-                StopCoroutine(EnemyTurn());
+                //StopCoroutine(EnemyTurn());
                 //NewRound();
             }
         }
