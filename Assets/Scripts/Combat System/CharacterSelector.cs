@@ -118,7 +118,7 @@ public class CharacterSelector : MonoBehaviour
                     SelectedPlayerUnit.FindActionRanges();
                     print("Selected Player Unit");
                 }
-                else if (playerObj.gameObject == SelectedPlayerUnit.gameObject)
+                else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                 {
                     print("Deselecting the already selected unit.");
                     SelectedPlayerUnit.UnitDeselected();
