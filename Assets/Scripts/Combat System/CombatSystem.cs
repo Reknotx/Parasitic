@@ -284,7 +284,10 @@ public class CombatSystem : MonoBehaviour
         {
             playersToGo.Remove((Player)unit);
             player.GetComponent<MeshRenderer>().material.color = Color.gray;
-
+            //Make sure action range is no longer displayed
+            ActionRange.Instance.ActionDeselected();
+            //Make sure movement range is no longer displayed
+            CharacterSelector.Instance.HidePath();
             if (playersToGo.Count == 0)
             {
                 if (enemiesToGo.Count > 0)
