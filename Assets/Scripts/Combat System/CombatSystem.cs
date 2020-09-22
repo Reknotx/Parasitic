@@ -286,9 +286,14 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            //Make sure action range is no longer displayed
+            ActionRange.Instance.ActionDeselected();
+            //Make sure movement range is no longer displayed
+            CharacterSelector.Instance.BoarderLine.SetActive(false);
+            //Deactivate combat buttons
+            DeactivateCombatButtons();
            // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             player.GetComponent<MeshRenderer>().material = player.defaultMat;
-
             if (playersToGo.Count == 0)
             {
                 if (enemiesToGo.Count > 0)

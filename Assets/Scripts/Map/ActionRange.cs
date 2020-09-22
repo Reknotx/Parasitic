@@ -111,6 +111,7 @@ public class ActionRange : MonoBehaviour
         actionSelected = true;
         selectedRange = tempRange;
         selectedColor = tempColor;
+        movementActive = false;
     }
 
     /// <summary> Current range is no longer selected - Hide range </summary>
@@ -118,6 +119,7 @@ public class ActionRange : MonoBehaviour
     {
         actionSelected = false;
         gameObject.SetActive(false);
+        movementActive = false;
     }
 
     /// <summary> Hide temperary range selection </summary>
