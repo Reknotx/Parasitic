@@ -71,6 +71,8 @@ public class CombatSystem : MonoBehaviour
 
     [Header("The text that tells you whether you win or lose.")]
     public Text endGameText;
+
+    public Text enemiesAliveText;
     
     //public GameObject turnSwitch;
 
@@ -98,6 +100,7 @@ public class CombatSystem : MonoBehaviour
         }
         Instance = this;
         SetupBattle();
+        SetEnemyCountText();
     }
 
     /// <summary>
@@ -461,6 +464,8 @@ public class CombatSystem : MonoBehaviour
     {
         unitsAlive.Remove(unit);
 
+        SetEnemyCountText();
+
         unit.currentTile.occupant = null;
         unit.currentTile.occupied = false;
 
@@ -480,6 +485,22 @@ public class CombatSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets enemiesAliveText
+    /// </summary>
+    /// Author: Jeremy Casada
+    public void SetEnemyCountText()
+    {
+        int count = 0;
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy)
+            {
+                count++;
+            }
+        }
+        enemiesAliveText.text = "Enemies Left: " + count;
+    }
 
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>

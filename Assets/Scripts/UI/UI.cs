@@ -23,6 +23,12 @@ public class UI : MonoBehaviour
 
     public bool _isPaused;
 
+    private CombatSystem combatSystem;
+
+    private void Start()
+    {
+        combatSystem = CombatSystem.Instance;
+    }
 
     // Update is called once per frame
     void Update()
