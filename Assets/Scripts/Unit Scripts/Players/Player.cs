@@ -24,7 +24,7 @@ public abstract class Player : Humanoid, IPlayer
 
 
     bool selected = false;
-    Material defaultMat;
+     public Material defaultMat;
     /// <summary> The material for the player when they are selected. </summary>
     public Material selectedMat;
 

@@ -283,7 +283,8 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
-            player.GetComponent<MeshRenderer>().material.color = Color.gray;
+           // player.GetComponent<MeshRenderer>().material.color = Color.gray;
+            player.GetComponent<MeshRenderer>().material = player.defaultMat;
 
             if (playersToGo.Count == 0)
             {
@@ -327,7 +328,8 @@ public class CombatSystem : MonoBehaviour
             if (unit is Player)
             {
                 playersToGo.Add((Player)unit);
-                unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
             else if (unit is Enemy && ((Enemy)unit).Revealed == true)
             {

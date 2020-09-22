@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!225 &6925792249400567099
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184180413175318362}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &6925792248520418742
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,8 +23,8 @@ GameObject:
   - component: {fileID: 6925792248520418738}
   - component: {fileID: 6925792248520418741}
   - component: {fileID: 6925792248520418740}
-  - component: {fileID: 6925792248520418743}
   - component: {fileID: 6925792248520418739}
+  - component: {fileID: 393808207521862078}
   m_Layer: 10
   m_Name: Larva
   m_TagString: Untagged
@@ -27,8 +39,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925792248520418742}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.21, y: 0, z: 6.8999996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.21, y: 0.082763, z: 6.8999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4184180413175318374}
@@ -42,7 +54,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925792248520418742}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6925792248520418740
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +73,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a434ed9a1700dfb49826c78ee0707c40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,20 +94,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6925792248520418743
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925792248520418742}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6925792248520418739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,25 +106,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd18ef4f34808348836d977aff04ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 0
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: 87fe7d63e200f7b4d94eac7988a73175, type: 2}
   healthText: {fileID: 4184180412080958888}
   damageText: {fileID: 6925792250074560772}
   healthBar: {fileID: 2476028413971490061}
---- !u!225 &6925792249400567099
-CanvasGroup:
+--- !u!65 &393808207521862078
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4184180413175318362}
+  m_GameObject: {fileID: 6925792248520418742}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6925792248787557790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,6 +146,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.47632825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.24870951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060963320320250811, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509434
       objectReference: {fileID: 0}
     - target: {fileID: 2300033362009899273, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
@@ -172,6 +186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488678474177933367, guid: f623d44eb1765294390042ba8d3e13f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775492, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
@@ -201,7 +220,7 @@ PrefabInstance:
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0010786
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
@@ -251,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.2
+      value: 1.294
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
@@ -296,17 +315,17 @@ PrefabInstance:
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -0.05263158
+      value: -0.045441348
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.052631576
+      value: 0.043932345
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.052631576
+      value: 0.045441344
       objectReference: {fileID: 0}
     - target: {fileID: 7075510429254800912, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}

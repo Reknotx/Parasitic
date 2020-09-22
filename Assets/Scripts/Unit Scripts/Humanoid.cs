@@ -91,6 +91,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public Slider healthBar;
 
+    /// <summary> time it takes to switch directions </summary>
+    float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+
     /// <summary>
     /// The state of the humanoid in combat.
     /// </summary>
@@ -146,6 +150,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Vector3 p1;
         Vector3 p01;
         float timeStart;
+        Vector3 direction;
         foreach (Tile tile in path)
         {
 
@@ -181,7 +186,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                     u = 1;
                     moving = false;
                 }
-
+                direction = (p1 - p0).normalized;
+                LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
                 yield return new WaitForFixedUpdate();
@@ -193,6 +199,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
+    }
+
+    protected void LookInDirection(Vector3 direction)
+    {
+        
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /**
