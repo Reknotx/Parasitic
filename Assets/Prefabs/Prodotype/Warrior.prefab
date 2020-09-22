@@ -723,7 +723,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2406582231655661398}
   m_HandleRect: {fileID: 0}
@@ -748,6 +748,7 @@ GameObject:
   - component: {fileID: 7634975540100827325}
   - component: {fileID: 7634975540100827324}
   - component: {fileID: 7634975540100827320}
+  - component: {fileID: 8181069625044875816}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Player
@@ -762,7 +763,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7634975540100827327}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0.96986, z: 1.5}
   m_LocalScale: {x: 1, y: 1.6897459, z: 1}
   m_Children:
@@ -829,8 +830,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.002602, z: 1}
-  m_Center: {x: 0, y: 0.0013001275, z: 0}
+  m_Size: {x: 1, y: 0.2774198, z: 1}
+  m_Center: {x: 0, y: -0.36129215, z: 0}
 --- !u!114 &7634975540100827320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +857,22 @@ MonoBehaviour:
   Ability2Range: 0
   Ability1Cooldown: 0
   Ability2Cooldown: 0
+--- !u!54 &8181069625044875816
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634975540100827327}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7634975540158355892
 GameObject:
   m_ObjectHideFlags: 0
