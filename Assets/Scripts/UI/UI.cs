@@ -17,7 +17,7 @@ public class UI : MonoBehaviour
     public GameObject restartPrompt;
     public GameObject mainMenuPrompt;
     public GameObject quitPrompt;
-    
+    public GameObject pauseBG;
 
     
 
@@ -51,6 +51,7 @@ public class UI : MonoBehaviour
     /// </summary>
     public void Pause()
     {
+        ShowMenu(pauseBG);
         ShowMenu(pauseMenu);
         _isPaused = true;
         Time.timeScale = 0;
@@ -63,6 +64,7 @@ public class UI : MonoBehaviour
     public void UnPause()
     {
         HideAll();
+        Hide(pauseBG);
         _isPaused = false;
         Time.timeScale = 1;
     }
