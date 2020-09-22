@@ -106,7 +106,8 @@ public class CharacterSelector : MonoBehaviour
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;
                     SelectedPlayerUnit.UnitSelected();
-                    if(SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+                    BoarderLine.SetActive(false);
+                    if (SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
                     {
                         SelectedPlayerUnit.FindMovementRange();
                         MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);

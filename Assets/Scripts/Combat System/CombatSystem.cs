@@ -289,7 +289,9 @@ public class CombatSystem : MonoBehaviour
             //Make sure action range is no longer displayed
             ActionRange.Instance.ActionDeselected();
             //Make sure movement range is no longer displayed
-            CharacterSelector.Instance.HidePath();
+            CharacterSelector.Instance.BoarderLine.SetActive(false);
+            //Deactivate combat buttons
+            DeactivateCombatButtons();
            // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
