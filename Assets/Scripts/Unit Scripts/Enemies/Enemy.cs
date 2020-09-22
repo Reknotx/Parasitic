@@ -68,14 +68,14 @@ public abstract class Enemy : Humanoid, IEnemy
         }
 
         Tile target = targetPlayer.currentTile;
-        List<Tile> path = null;
+        List<Tile> path = new List<Tile>();
         List<Tile> tempPath = MapGrid.Instance.FindPath(currentTile, target, false, true);
 
         //Debug.Log(currentTile);
         //Debug.Log(tempPath.ToString());
         if (tempPath == null)
         {
-            tempPath = MapGrid.Instance.FindPath(currentTile, target, true);
+            tempPath = MapGrid.Instance.FindPath(currentTile, target, true, true);
             if (tempPath == null)
             {
                 //find a different target
