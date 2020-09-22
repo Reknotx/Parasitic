@@ -19,53 +19,74 @@ public class UI : MonoBehaviour
     public GameObject quitPrompt;
     
 
-    private bool _isPaused;
+    
 
-    private GameObject activeMenu;
-    private GameObject previousMenu;
+    public bool _isPaused;
+
+    private CombatSystem combatSystem;
+
+    private void Start()
+    {
+        combatSystem = CombatSystem.Instance;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
-            activeMenu = pauseMenu;
+            if(_isPaused)
+            {
+                UnPause();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
 
     /// <summary>
-    /// Pause if not paused, otherwise Unpause
+    /// Pause Game
     /// </summary>
     public void Pause()
     {
-        if(_isPaused)
-        {
-            HideAll();
-            _isPaused = false;
-            Time.timeScale = 1;
-        }
-        else
-        {
-            ShowMenu(pauseMenu);
-            _isPaused = true;
-            Time.timeScale = 0;
-        }
+        ShowMenu(pauseMenu);
+        _isPaused = true;
+        Time.timeScale = 0;
+
     }
 
+    /// <summary>
+    /// Unpause Game
+    /// </summary>
+    public void UnPause()
+    {
+        HideAll();
+        _isPaused = false;
+        Time.timeScale = 1;
+    }
     
+    /// <summary>
+    /// Disables the Specified Menu
+    /// </summary>
+    /// <param name="menuObject">Menu to Disable</param>
+    public void Hide(GameObject menuObject)
+    {
+        menuObject.SetActive(false);
+    }
 
     /// <summary>
     /// Hides All Menus
     /// </summary>
     public void HideAll()
     {
-        controlMenu.SetActive(false);
-        pauseMenu.SetActive(false);
-        quitPrompt.SetActive(false);
-        mainMenuPrompt.SetActive(false);
-        restartPrompt.SetActive(false);
-        optionMenu.SetActive(false);
+        Hide(controlMenu);
+        Hide(pauseMenu);
+        Hide(quitPrompt);
+        Hide(mainMenuPrompt);
+        Hide(restartPrompt);
+        Hide(optionMenu);
     }
 
     /// <summary>
@@ -111,14 +132,19 @@ public class UI : MonoBehaviour
     /// <param name="menu"> Menu to Show</param>
     public void ShowMenu(GameObject menu)
     {
-        previousMenu = activeMenu;
-        activeMenu = menu;
+
         HideAll();
         menu.SetActive(true);
     }
 
+    /// <summary>
+    /// Opens Link Specified by input string "url"
+    /// </summary>
+    /// <param name="url">URL to be opened</param>
     public void OpenLink(string url)
     {
         Application.OpenURL(url);
     }
+
+    
 }

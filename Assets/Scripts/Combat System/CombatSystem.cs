@@ -71,6 +71,8 @@ public class CombatSystem : MonoBehaviour
 
     [Header("The text that tells you whether you win or lose.")]
     public Text endGameText;
+
+    public Text enemiesAliveText;
     
     //public GameObject turnSwitch;
 
@@ -98,6 +100,7 @@ public class CombatSystem : MonoBehaviour
         }
         Instance = this;
         SetupBattle();
+        SetEnemyCountText();
     }
 
     /// <summary>
@@ -283,11 +286,12 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
-            player.GetComponent<MeshRenderer>().material.color = Color.gray;
             //Make sure action range is no longer displayed
             ActionRange.Instance.ActionDeselected();
             //Make sure movement range is no longer displayed
             CharacterSelector.Instance.HidePath();
+           // player.GetComponent<MeshRenderer>().material.color = Color.gray;
+            player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
                 if (enemiesToGo.Count > 0)
@@ -330,7 +334,8 @@ public class CombatSystem : MonoBehaviour
             if (unit is Player)
             {
                 playersToGo.Add((Player)unit);
-                unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
             else if (unit is Enemy && ((Enemy)unit).Revealed == true)
             {
@@ -462,6 +467,8 @@ public class CombatSystem : MonoBehaviour
     {
         unitsAlive.Remove(unit);
 
+        SetEnemyCountText();
+
         unit.currentTile.occupant = null;
         unit.currentTile.occupied = false;
 
@@ -481,6 +488,22 @@ public class CombatSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets enemiesAliveText
+    /// </summary>
+    /// Author: Jeremy Casada
+    public void SetEnemyCountText()
+    {
+        int count = 0;
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy)
+            {
+                count++;
+            }
+        }
+        enemiesAliveText.text = "Enemies Left: " + count;
+    }
 
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>
