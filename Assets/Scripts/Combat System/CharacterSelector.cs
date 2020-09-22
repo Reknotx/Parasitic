@@ -100,21 +100,18 @@ public class CharacterSelector : MonoBehaviour
             {
                 Player playerObj = objectHit.gameObject.GetComponent<Player>();
 
-                if (playerObj != SelectedPlayerUnit && !playerObj.HasAttacked)
+                if (playerObj != SelectedPlayerUnit)
                 {
                     if (SelectedPlayerUnit != null) { SelectedPlayerUnit.UnitDeselected(); }
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;
                     SelectedPlayerUnit.UnitSelected();
-                    BoarderLine.SetActive(false);
-                    if (SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+                    if(SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
                     {
                         SelectedPlayerUnit.FindMovementRange();
                         MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
                         BoarderLine.SetActive(true);
                     }
-                    //Make sure previous action range is no longer displayed
-                    ActionRange.Instance.ActionDeselected();
                     SelectedPlayerUnit.FindActionRanges();
                     print("Selected Player Unit");
                 }
@@ -201,30 +198,27 @@ public class CharacterSelector : MonoBehaviour
         }
 
 
-        
-
-    }
-
-    void DrawPath()
-    {
-        List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, pathHeight, SelectedPlayerUnit.transform.position.z));
-        foreach (Tile tile in path)
+        void DrawPath()
         {
-            points.Add(new Vector3(tile.transform.position.x, pathHeight, tile.transform.position.z));
+            List<Vector3> points = new List<Vector3>();
+            points.Add(new Vector3(SelectedPlayerUnit.transform.position.x,pathHeight, SelectedPlayerUnit.transform.position.z));
+            foreach (Tile tile in path){
+                points.Add(new Vector3(tile.transform.position.x,pathHeight, tile.transform.position.z));
+            }
+            lineRenderer.positionCount = points.Count;
+            lineRenderer.SetPositions(points.ToArray());
+            EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, 0.25f, selectedTile.transform.position.z);
+            PathLine.SetActive(true);
+            EndPoint.SetActive(true);
         }
-        lineRenderer.positionCount = points.Count;
-        lineRenderer.SetPositions(points.ToArray());
-        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, 0.25f, selectedTile.transform.position.z);
-        PathLine.SetActive(true);
-        EndPoint.SetActive(true);
-    }
 
-    public void HidePath()
-    {
-        selectedTile = null;
-        PathLine.SetActive(false);
-        EndPoint.SetActive(false);
+        void HidePath()
+        {
+            selectedTile = null;
+            PathLine.SetActive(false);
+            EndPoint.SetActive(false);
+        }
+
     }
 
     public void SetTargettingType(TargettingType type)
