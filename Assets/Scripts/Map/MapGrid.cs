@@ -317,6 +317,7 @@ public class MapGrid : MonoBehaviour
     public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false, ActionShape actionShape = ActionShape.Flood)
     {
         List<Tile> frontier = new List<Tile>();
+        HashSet<Tile> blocks = new HashSet<Tile>();
         HashSet<Tile> explored = new HashSet<Tile>();
         Tile currentTile = startTile;
         frontier.Add(startTile);
@@ -335,6 +336,10 @@ public class MapGrid : MonoBehaviour
             foreach (Tile neighbor in GetNeighbors(currentTile, actionShape))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
+                if(neighbor.blocksLOS && !blocks.Contains(neighbor))
+                {
+                    blocks.Add(neighbor);
+                }
                 if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
                 {
 
@@ -353,60 +358,198 @@ public class MapGrid : MonoBehaviour
                 }
             }
         }
+        if (actionShape != ActionShape.Flood)
+        {
+            /*for (int y = 0; y < inRange.GetLength(1); y++)
+            {
+                for (int x = 0; x < inRange.GetLength(0); x++)
+                {
+                    if (!inRange[x,y])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        foreach(Tile block in blocks)
+                        {
+                            //check if block and tile are in the same coordinate plane relative to the start position
+                            if((Mathf.Sign(y-startTile.gridPosition.y)== Mathf.Sign(block.gridPosition.y - startTile.gridPosition.y) || block.gridPosition.y == startTile.gridPosition.y)
+                                && Mathf.Sign(x - startTile.gridPosition.x) == Mathf.Sign(block.gridPosition.x - startTile.gridPosition.x) || block.gridPosition.x == startTile.gridPosition.x)
+                            {
+                                //make sure tile is further from start than block
+                                if(Mathf.Abs(x- startTile.gridPosition.x) >= Mathf.Abs(x - block.gridPosition.x) && Mathf.Abs(y - startTile.gridPosition.y) >= Mathf.Abs(y - block.gridPosition.y))
+                                {
 
+                                }
+                            }
+                            if((x < block.gridPosition.x + y - block.gridPosition.y) && block.gridPosition.x >= startTile.gridPosition.x )
+                        }
+                    }
+                }*/
+            /*foreach (Tile block in blocks)
+            {
+
+            }*/
+        }
         return inRange;
     }
 
+    enum Dir { left, up, right, down }
     //TODO: limmit search to tiles in range around selected unit
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
         List<Vector3> points = new List<Vector3>();
-        Vector3 pos;
-        Vector3 lowPos;
-        Vector3 highPos;
-        //up right search
-        for (int y = 0; y< inRange.GetLength(1); y++)
+        Vector3 pos = Vector3.zero;
+        Vector3 startPos = Vector3.zero;
+        Vector3 hitPoint;
+        bool startFound = false;
+        bool endFound = false;
+        //current position on boarder
+        int xCoord = 0;
+        int yCoord = 0;
+        Dir facing = Dir.left;
+
+        //find start position (bottom leftmost in range tile)
+        for (int y = 0; y < inRange.GetLength(1); y++)
         {
             for (int x = 0; x < inRange.GetLength(0); x++)
             {
                 if (inRange[x, y])
                 {
                     pos = grid[x, y].transform.position;
-                    lowPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
-                    highPos = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
-                    if (!points.Contains(lowPos))
-                    {
-                        points.Add(lowPos);
-                    }
-                    if (!points.Contains(highPos))
-                    {
-                        points.Add(highPos);
-                    }
+                    startPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                    //make start current position
+                    xCoord = x;
+                    yCoord = y;
+                    points.Add(startPos);
+                    startFound = true;
                     break;
                 }
+                
             }
+            if (startFound) break;
         }
-        //down left search
-        for (int y = inRange.GetLength(1)-1; y >= 0; y--)
+        //travel around boarder until start position is encountered again
+        //if tile ahead is not in range boarder position is added to the list and the check rotates right
+        //if tile ahead is in range move that tile and rotate left
+        while (startFound && !endFound)
         {
-            for (int x = inRange.GetLength(0)-1; x >= 0; x--)
+            switch (facing)
             {
-                if (inRange[x, y])
-                {
-                    pos = grid[x, y].transform.position;
-                    lowPos = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
-                    highPos = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
-                    if (!points.Contains(highPos))
+                case Dir.left:
+                    //valid space ahead
+                    if (xCoord-1 >= 0 && inRange[xCoord-1, yCoord])
                     {
-                        points.Add(highPos);
+                        xCoord--;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.down;
                     }
-
-                    if (!points.Contains(lowPos))
+                    //out of range, therefore left boarder
+                    else
                     {
-                        points.Add(lowPos);
+                        //rotate right
+                        facing = Dir.up;
+                        //add point to list
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+                        
                     }
                     break;
-                }
+                case Dir.up:
+                    //valid space ahead
+                    if (yCoord + 1 < inRange.GetLength(1) && inRange[xCoord, yCoord +1])
+                    {
+                        yCoord++;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.left;
+                    }
+                    //out of range, therefore upper boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.right;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                case Dir.right:
+                    //valid space ahead
+                    if (xCoord +1 < inRange.GetLength(0) && inRange[xCoord + 1, yCoord])
+                    {
+                        xCoord++;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.up;
+                    }
+                    //out of range, therefore right boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.down;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                case Dir.down:
+                    //valid space ahead
+                    if (yCoord - 1 >= 0 && inRange[xCoord, yCoord -1])
+                    {
+                        yCoord--;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.right;
+                    }
+                    //out of range, therefore bottom boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.left;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
