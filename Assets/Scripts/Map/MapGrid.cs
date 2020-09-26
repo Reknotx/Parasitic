@@ -100,7 +100,7 @@ public class MapGrid : MonoBehaviour
     }
 
     //A* algorithm
-    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreOccupied = false, bool ignoreEnd = false)
+    public List<Tile> FindPath(Tile startTile, Tile endTile, bool ignoreOccupied = false, bool ignoreEnd = false, ActionShape actionShape = ActionShape.Flood)
     {
         //nodes that need to be evaluated
         List<Tile> frontier = new List<Tile>();
@@ -108,6 +108,7 @@ public class MapGrid : MonoBehaviour
         HashSet<Tile> explored = new HashSet<Tile>();
         frontier.Add(startTile);
         //will loop until every possible pathway is exhausted
+        startTile.parent = null;
         foreach (Tile tile in grid)
         {
             tile.gCost = 0;
@@ -126,14 +127,13 @@ public class MapGrid : MonoBehaviour
 
             frontier.Remove(currentTile);
             explored.Add(currentTile);
-
             
             if (currentTile == endTile)
             {
                 //end tile has been reached
                 return RetracePath(startTile,endTile);
             }
-            foreach (Tile neighbor in GetNeighbors(currentTile))
+            foreach (Tile neighbor in GetNeighbors(currentTile, actionShape))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
                 if(!neighbor.movementTile || explored.Contains(neighbor) || (neighbor.occupied && !ignoreOccupied))
@@ -141,12 +141,12 @@ public class MapGrid : MonoBehaviour
                     if (!(ignoreEnd && (endTile == neighbor)))
                         continue;
                 }
-                int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
+                int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor, actionShape);
                 //if the current cost of moving to the tile is lower than the previous set it to the new cost
                 if(currentCost < neighbor.gCost || !frontier.Contains(neighbor))
                 {
                     neighbor.gCost = currentCost;
-                    neighbor.hCost = GetDistanceCost(neighbor, endTile);
+                    neighbor.hCost = GetDistanceCost(neighbor, endTile, actionShape);
                     neighbor.parent = currentTile;
                     if (!explored.Contains(neighbor))
                     {
@@ -173,38 +173,85 @@ public class MapGrid : MonoBehaviour
         return path;
     }
 
-    public int GetDistanceCost(Tile tileA, Tile tileB)
+    public int GetDistanceCost(Tile tileA, Tile tileB, ActionShape actionShape)
     {
         int distZ = (int)Mathf.Abs(tileA.gridPosition.y - tileB.gridPosition.y);
         int distX = (int)Mathf.Abs(tileA.gridPosition.x - tileB.gridPosition.x);
-        return 10 * (distZ + distX);
+        if (actionShape != ActionShape.Square)
+        {
+            return 10 * (distZ + distX);
+        }
+        else
+        {
+            if (distX > distZ)
+            {
+                return 10 * distZ + 10 * (distX - distZ);
+            }
+            else
+            {
+                return 10 * distX + 10 * (distZ - distX);
+            }
+        }
+        
     }
 
     //returns list of tiles neighboring tile passed in
-    public List<Tile> GetNeighbors(Tile tile)
+    public List<Tile> GetNeighbors(Tile tile, ActionShape actionShape = ActionShape.Flood)
     {
         List<Tile> neighbors = new List<Tile>();
         int tilePosX = (int)tile.gridPosition.x;
         int tilePosZ = (int)tile.gridPosition.y;
-        //check above
-        if (tilePosZ > 0)
+        if (actionShape != ActionShape.Cross || tile.parent == null || tile.parent.gridPosition.x == tilePosX)
         {
-            neighbors.Add(grid[tilePosX, tilePosZ - 1]);
+            //check above
+            if (tilePosZ > 0)
+            {
+                neighbors.Add(grid[tilePosX, tilePosZ - 1]);
+                if(actionShape == ActionShape.Square)
+                {
+                    //check left
+                    if (tilePosX > 0)
+                    {
+                        neighbors.Add(grid[tilePosX - 1, tilePosZ - 1]);
+                    }
+                    //check right
+                    if (tilePosX < columns - 1)
+                    {
+                        neighbors.Add(grid[tilePosX + 1, tilePosZ - 1]);
+                    }
+                }
+            }
+            //check below
+            if (tilePosZ < rows - 1)
+            {
+                neighbors.Add(grid[tilePosX, tilePosZ + 1]);
+                if (actionShape == ActionShape.Square)
+                {
+                    //check left
+                    if (tilePosX > 0)
+                    {
+                        neighbors.Add(grid[tilePosX - 1, tilePosZ + 1]);
+                    }
+                    //check right
+                    if (tilePosX < columns - 1)
+                    {
+                        neighbors.Add(grid[tilePosX + 1, tilePosZ + 1]);
+                    }
+                }
+            }
         }
-        //check left
-        if (tilePosX > 0)
+        if (actionShape != ActionShape.Cross || tile.parent == null || tile.parent.gridPosition.y == tilePosZ)
         {
-            neighbors.Add(grid[tilePosX - 1, tilePosZ]);
-        }
-        //check right
-        if (tilePosX < columns - 1)
-        {
-            neighbors.Add(grid[tilePosX + 1, tilePosZ]);
-        }
-        //check below
-        if (tilePosZ < rows - 1)
-        {
-            neighbors.Add(grid[tilePosX, tilePosZ + 1]);
+            //check left
+            if (tilePosX > 0)
+            {
+                neighbors.Add(grid[tilePosX - 1, tilePosZ]);
+            }
+            //check right
+            if (tilePosX < columns - 1)
+            {
+                neighbors.Add(grid[tilePosX + 1, tilePosZ]);
+            }
         }
         return neighbors;
     }
@@ -267,7 +314,7 @@ public class MapGrid : MonoBehaviour
     //}
 
     //Breadth first search
-    public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false)
+    public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false, ActionShape actionShape = ActionShape.Flood)
     {
         List<Tile> frontier = new List<Tile>();
         HashSet<Tile> explored = new HashSet<Tile>();
@@ -275,6 +322,7 @@ public class MapGrid : MonoBehaviour
         frontier.Add(startTile);
         bool[,] inRange = new bool[columns, rows];
         inRange[(int)startTile.gridPosition.x, (int)startTile.gridPosition.y] = true;
+        startTile.parent = null;
         foreach (Tile tile in grid)
         {
             tile.gCost = 0;
@@ -284,20 +332,20 @@ public class MapGrid : MonoBehaviour
             currentTile = frontier[0];
             frontier.Remove(currentTile);
             explored.Add(currentTile);
-            foreach (Tile neighbor in GetNeighbors(currentTile))
+            foreach (Tile neighbor in GetNeighbors(currentTile, actionShape))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
                 if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
                 {
 
-                    int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor);
+                    int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor, actionShape);
                     if (currentCost < neighbor.gCost || !frontier.Contains(neighbor))
                     {
 
                         neighbor.gCost = currentCost;
                         if(currentCost <= range * 10)
                         {
-
+                            neighbor.parent = currentTile;
                             frontier.Add(neighbor);
                             inRange[(int)neighbor.gridPosition.x, (int)neighbor.gridPosition.y] = true;
                         }

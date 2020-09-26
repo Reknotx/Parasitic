@@ -25,6 +25,17 @@ public enum HumanoidState
     Done
 }
 
+/// <summary>
+/// Enum of the shape of actions
+/// </summary>
+public enum ActionShape
+{
+    Flood, //diamond shape that can move around corners (used for movement)
+    Diamond,
+    Square,
+    Cross
+}
+
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
@@ -50,6 +61,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary>Dexterity (or dodge chance) of the unit.</summary>
     public float DexterityStat { get; set; }
+
+    /// <summary> The shape of the unitys attack </summary>
+    public ActionShape AttackShape = ActionShape.Diamond;
 
     /// <summary> Tile the unit currently occupies </summary>
     [HideInInspector] public Tile currentTile;

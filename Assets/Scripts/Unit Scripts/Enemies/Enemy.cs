@@ -75,7 +75,7 @@ public abstract class Enemy : Humanoid, IEnemy
         //Debug.Log(tempPath.ToString());
         if (tempPath == null)
         {
-            tempPath = MapGrid.Instance.FindPath(currentTile, target, true);
+            tempPath = MapGrid.Instance.FindPath(currentTile, target, true, true);
             if (tempPath == null)
             {
                 //find a different target
