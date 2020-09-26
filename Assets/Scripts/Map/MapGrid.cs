@@ -1,4 +1,5 @@
 ﻿//Ryan Dangerfield
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -317,7 +318,6 @@ public class MapGrid : MonoBehaviour
     public bool[,] FindTilesInRange(Tile startTile, int range, bool ignoreOccupied = false, ActionShape actionShape = ActionShape.Flood)
     {
         List<Tile> frontier = new List<Tile>();
-        HashSet<Tile> blocks = new HashSet<Tile>();
         HashSet<Tile> explored = new HashSet<Tile>();
         Tile currentTile = startTile;
         frontier.Add(startTile);
@@ -336,10 +336,6 @@ public class MapGrid : MonoBehaviour
             foreach (Tile neighbor in GetNeighbors(currentTile, actionShape))
             {
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
-                if(neighbor.blocksLOS && !blocks.Contains(neighbor))
-                {
-                    blocks.Add(neighbor);
-                }
                 if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
                 {
 
@@ -360,36 +356,22 @@ public class MapGrid : MonoBehaviour
         }
         if (actionShape != ActionShape.Flood)
         {
-            /*for (int y = 0; y < inRange.GetLength(1); y++)
+            for (int y = 0; y < inRange.GetLength(1); y++)
             {
                 for (int x = 0; x < inRange.GetLength(0); x++)
                 {
-                    if (!inRange[x,y])
+                    //ignore if not in range
+                    if (!inRange[x, y])
                     {
                         continue;
                     }
+                    //if in range check if it can be seen
                     else
                     {
-                        foreach(Tile block in blocks)
-                        {
-                            //check if block and tile are in the same coordinate plane relative to the start position
-                            if((Mathf.Sign(y-startTile.gridPosition.y)== Mathf.Sign(block.gridPosition.y - startTile.gridPosition.y) || block.gridPosition.y == startTile.gridPosition.y)
-                                && Mathf.Sign(x - startTile.gridPosition.x) == Mathf.Sign(block.gridPosition.x - startTile.gridPosition.x) || block.gridPosition.x == startTile.gridPosition.x)
-                            {
-                                //make sure tile is further from start than block
-                                if(Mathf.Abs(x- startTile.gridPosition.x) >= Mathf.Abs(x - block.gridPosition.x) && Mathf.Abs(y - startTile.gridPosition.y) >= Mathf.Abs(y - block.gridPosition.y))
-                                {
-
-                                }
-                            }
-                            if((x < block.gridPosition.x + y - block.gridPosition.y) && block.gridPosition.x >= startTile.gridPosition.x )
-                        }
+                        inRange[x, y] = InLineOfSight((int)startTile.gridPosition.x, (int)startTile.gridPosition.y, x, y);
                     }
-                }*/
-            /*foreach (Tile block in blocks)
-            {
-
-            }*/
+                }
+            }
         }
         return inRange;
     }
@@ -582,6 +564,62 @@ public class MapGrid : MonoBehaviour
             }
         }
         return new Vector2(x, z);
+    }
+
+    //Bresenham's Line drawing algorithm
+    bool InLineOfSight(int x1, int y1, int x2, int y2)
+    {
+        bool steep = (Mathf.Abs(y2 - y1) > Mathf.Abs(x2 - x1));
+        if (steep)
+        {
+            Swap<int>(ref x1, ref y1);
+            Swap<int>(ref x2, ref y2);
+        }
+        if (x1 > x2)
+        {
+            Swap<int>(ref x1, ref x2);
+            Swap<int>(ref y1, ref y2);
+        }
+        int y = y1;
+        int dx = x2 - x1;
+        int dy = Mathf.Abs(y2 - y1);
+        int err = dx / 2;
+        int ystep = 1;
+        if(y1 > y2)
+        {
+            ystep = -1;
+        }
+        for (int x = x1; x<= x2; ++x)
+        {
+            if (steep)
+            {
+                if (grid[y, x].blocksLOS)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (grid[x,y].blocksLOS)
+                {
+                    return false;
+                }
+            }
+            err -= dy;
+            if(err < 0)
+            {
+                y += ystep;
+                err += dx;
+            }
+        }
+        return true;
+    }
+
+    public static void Swap<T>(ref T lhs, ref T rhs)
+    {
+        T temp = lhs;
+        lhs = rhs;
+        rhs = temp;
     }
 
     //returns the greater int or int a if equal 
