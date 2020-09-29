@@ -49,8 +49,8 @@ public abstract class Enemy : Humanoid, IEnemy
         Player targetPlayer = null;
         float shortestDist = 0f;
 
-        if(!Taunted && _currTarget == null)
-        {
+        //if(!Taunted && _currTarget == null)
+        //{
             foreach (Player player in activePlayers)
             {
                 float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
@@ -61,11 +61,11 @@ public abstract class Enemy : Humanoid, IEnemy
                     shortestDist = tempDist;
                 }
             }
-        }
-        else
-        {
-            targetPlayer = _currTarget;
-        }
+        //}
+        //else
+        //{
+        //    targetPlayer = _currTarget;
+        //}
 
         Tile target = targetPlayer.currentTile;
         List<Tile> path = new List<Tile>();
