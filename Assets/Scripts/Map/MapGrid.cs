@@ -1,4 +1,5 @@
 ﻿//Ryan Dangerfield
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -353,60 +354,184 @@ public class MapGrid : MonoBehaviour
                 }
             }
         }
-
+        if (actionShape != ActionShape.Flood)
+        {
+            for (int y = 0; y < inRange.GetLength(1); y++)
+            {
+                for (int x = 0; x < inRange.GetLength(0); x++)
+                {
+                    //ignore if not in range
+                    if (!inRange[x, y])
+                    {
+                        continue;
+                    }
+                    //if in range check if it can be seen
+                    else
+                    {
+                        inRange[x, y] = InLineOfSight((int)startTile.gridPosition.x, (int)startTile.gridPosition.y, x, y);
+                    }
+                }
+            }
+        }
         return inRange;
     }
 
+    enum Dir { left, up, right, down }
     //TODO: limmit search to tiles in range around selected unit
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
         List<Vector3> points = new List<Vector3>();
-        Vector3 pos;
-        Vector3 lowPos;
-        Vector3 highPos;
-        //up right search
-        for (int y = 0; y< inRange.GetLength(1); y++)
+        Vector3 pos = Vector3.zero;
+        Vector3 startPos = Vector3.zero;
+        Vector3 hitPoint;
+        bool startFound = false;
+        bool endFound = false;
+        //current position on boarder
+        int xCoord = 0;
+        int yCoord = 0;
+        Dir facing = Dir.left;
+
+        //find start position (bottom leftmost in range tile)
+        for (int y = 0; y < inRange.GetLength(1); y++)
         {
             for (int x = 0; x < inRange.GetLength(0); x++)
             {
                 if (inRange[x, y])
                 {
                     pos = grid[x, y].transform.position;
-                    lowPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
-                    highPos = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
-                    if (!points.Contains(lowPos))
-                    {
-                        points.Add(lowPos);
-                    }
-                    if (!points.Contains(highPos))
-                    {
-                        points.Add(highPos);
-                    }
+                    startPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                    //make start current position
+                    xCoord = x;
+                    yCoord = y;
+                    points.Add(startPos);
+                    startFound = true;
                     break;
                 }
+                
             }
+            if (startFound) break;
         }
-        //down left search
-        for (int y = inRange.GetLength(1)-1; y >= 0; y--)
+        //travel around boarder until start position is encountered again
+        //if tile ahead is not in range boarder position is added to the list and the check rotates right
+        //if tile ahead is in range move that tile and rotate left
+        while (startFound && !endFound)
         {
-            for (int x = inRange.GetLength(0)-1; x >= 0; x--)
+            switch (facing)
             {
-                if (inRange[x, y])
-                {
-                    pos = grid[x, y].transform.position;
-                    lowPos = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
-                    highPos = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
-                    if (!points.Contains(highPos))
+                case Dir.left:
+                    //valid space ahead
+                    if (xCoord-1 >= 0 && inRange[xCoord-1, yCoord])
                     {
-                        points.Add(highPos);
+                        xCoord--;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.down;
                     }
-
-                    if (!points.Contains(lowPos))
+                    //out of range, therefore left boarder
+                    else
                     {
-                        points.Add(lowPos);
+                        //rotate right
+                        facing = Dir.up;
+                        //add point to list
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+                        
                     }
                     break;
-                }
+                case Dir.up:
+                    //valid space ahead
+                    if (yCoord + 1 < inRange.GetLength(1) && inRange[xCoord, yCoord +1])
+                    {
+                        yCoord++;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.left;
+                    }
+                    //out of range, therefore upper boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.right;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                case Dir.right:
+                    //valid space ahead
+                    if (xCoord +1 < inRange.GetLength(0) && inRange[xCoord + 1, yCoord])
+                    {
+                        xCoord++;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.up;
+                    }
+                    //out of range, therefore right boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.down;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                case Dir.down:
+                    //valid space ahead
+                    if (yCoord - 1 >= 0 && inRange[xCoord, yCoord -1])
+                    {
+                        yCoord--;
+                        //move to tile
+                        pos = grid[xCoord, yCoord].transform.position;
+                        //rotate left
+                        facing = Dir.right;
+                    }
+                    //out of range, therefore bottom boarder
+                    else
+                    {
+                        //rotate right
+                        facing = Dir.left;
+                        //add pint to list
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                        if (hitPoint != startPos)
+                        {
+                            points.Add(hitPoint);
+                        }
+                        else
+                        {
+                            endFound = true;
+                        }
+
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -439,6 +564,62 @@ public class MapGrid : MonoBehaviour
             }
         }
         return new Vector2(x, z);
+    }
+
+    //Bresenham's Line drawing algorithm
+    bool InLineOfSight(int x1, int y1, int x2, int y2)
+    {
+        bool steep = (Mathf.Abs(y2 - y1) > Mathf.Abs(x2 - x1));
+        if (steep)
+        {
+            Swap<int>(ref x1, ref y1);
+            Swap<int>(ref x2, ref y2);
+        }
+        if (x1 > x2)
+        {
+            Swap<int>(ref x1, ref x2);
+            Swap<int>(ref y1, ref y2);
+        }
+        int y = y1;
+        int dx = x2 - x1;
+        int dy = Mathf.Abs(y2 - y1);
+        int err = dx / 2;
+        int ystep = 1;
+        if(y1 > y2)
+        {
+            ystep = -1;
+        }
+        for (int x = x1; x<= x2; ++x)
+        {
+            if (steep)
+            {
+                if (grid[y, x].blocksLOS)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (grid[x,y].blocksLOS)
+                {
+                    return false;
+                }
+            }
+            err -= dy;
+            if(err < 0)
+            {
+                y += ystep;
+                err += dx;
+            }
+        }
+        return true;
+    }
+
+    public static void Swap<T>(ref T lhs, ref T rhs)
+    {
+        T temp = lhs;
+        lhs = rhs;
+        rhs = temp;
     }
 
     //returns the greater int or int a if equal 
