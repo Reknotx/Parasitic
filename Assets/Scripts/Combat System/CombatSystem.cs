@@ -205,9 +205,7 @@ public class CombatSystem : MonoBehaviour
         target = selection;
     }
 
-    /// <summary>
-    /// Executes the coroutine for normal attack of player.
-    /// </summary>
+    /// <summary> Executes the coroutine for normal attack of player. </summary>
     public void NormalAttack()
     {
         //((IPlayer)selectedPlayer).NormalAttack(target);
@@ -223,9 +221,7 @@ public class CombatSystem : MonoBehaviour
         ProcessAttack(Attack.NormalAttack);
     }
 
-    /// <summary>
-    /// The first ability of the player.
-    /// </summary>
+    /// <summary> The first ability of the player. </summary>
     public void AbilityOne()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
@@ -236,9 +232,7 @@ public class CombatSystem : MonoBehaviour
         ProcessAttack(Attack.AbilityOne);
     }
 
-    /// <summary>
-    /// The second ability of the player.
-    /// </summary>
+    /// <summary> The second ability of the player. </summary>
     public void AbilityTwo()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
@@ -249,9 +243,7 @@ public class CombatSystem : MonoBehaviour
         ProcessAttack(Attack.AbilityTwo);
     }
 
-    /// <summary>
-    /// Currently a hard pass which cancels all of the player's actions.
-    /// </summary>
+    /// <summary> Currently a hard pass which cancels all of the player's actions. </summary>
     public void Pass()
     {
         if (player == null) return;
@@ -262,9 +254,7 @@ public class CombatSystem : MonoBehaviour
         EndUnitTurn(player);
     }
 
-    /// <summary>
-    /// Cancles the current action we have selected.
-    /// </summary>
+    /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel()
     {
         player = null;
@@ -272,7 +262,7 @@ public class CombatSystem : MonoBehaviour
         SetBattleState(BattleState.Start);
     }
 
-    /// <summary>
+    /// <summary> 
     /// Ends the turn for the current unit. Removing them from the list.
     /// </summary>
     /// <param name="unit">The unit whose turn is over.</param>
@@ -350,7 +340,7 @@ public class CombatSystem : MonoBehaviour
             unit.HasAttacked = false;
         }
 
-        UpdateList();
+        UpdateTimers();
 
         SetActiveUnits(ActiveUnits.Players);
 
@@ -430,7 +420,14 @@ public class CombatSystem : MonoBehaviour
 
             Enemy tempE = enemiesToGo[index];
 
-            tempE.Move(tempE.FindNearestPlayer());
+            if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+            {
+                tempE.Move(tempE.TauntedPath());
+            }
+            else
+            {
+                tempE.Move(tempE.FindNearestPlayer());
+            }
 
             yield return new WaitUntil(() => tempE.HasMoved == true);
 
@@ -538,6 +535,8 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Won);
 
+        endGameText.text = "You Win!";
+
         endCanvas.SetActive(true);
     }
 
@@ -557,7 +556,12 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void ActivateCombatButtons()
     {
-        foreach (Button button in combatButtons) { button.interactable = true; }
+        foreach (Button button in combatButtons)
+        {
+            //if ()
+
+            button.interactable = true;
+        }
     }
 
     /// <summary>
@@ -574,8 +578,6 @@ public class CombatSystem : MonoBehaviour
     {
         enemiesToGo.Add(enemy);
     }
-
-
 
     public List<Humanoid> alteredUnits = new List<Humanoid>();
 
@@ -604,7 +606,7 @@ public class CombatSystem : MonoBehaviour
     /// <summary>
     /// Updates the list of altered units.
     /// </summary>
-    private void UpdateList()
+    private void UpdateTimers()
     {
         removeList = new List<Humanoid>();
 
@@ -621,5 +623,10 @@ public class CombatSystem : MonoBehaviour
         }
 
         removeList.Clear();
+    }
+
+    private void SetAbilityOneButtonState(bool activeState)
+    {
+        
     }
 }

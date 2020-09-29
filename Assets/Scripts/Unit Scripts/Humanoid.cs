@@ -275,37 +275,50 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// </summary>
     public virtual void AdvanceTimer()
     {
+        List<StatusEffect> removeList = new List<StatusEffect>();
+
         foreach (StatusEffect effect in statusEffects)
         {
             if (effect.ReduceDuration())
             {
-                statusEffects.Remove(effect);
-
-                if (statusEffects.Count == 0)
-                {
-                    CombatSystem.Instance.UnsubscribeAlteredUnit(this);
-                }
+                removeList.Add(effect);
             }
         }
+
+        foreach (StatusEffect effect in removeList)
+        {
+            statusEffects.Remove(effect);
+        }
+
+        removeList.Clear();
     }
 
-    public void CreateTauntedStatusEffect()
+    public void CreateTauntedStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 3);
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 
+                                            duration, 
+                                            source, 
+                                            target);
         AddEffectToList(temp);
     }
 
-    public void CreateAttackUpStatusEffect()
+    public void CreateAttackUpStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 3);
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 
+                                            duration, 
+                                            source, 
+                                            target);
         AddEffectToList(temp);
     }
 
-    public void CreateAttackDownStatusEffect()
+    public void CreateAttackDownStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
         AttackStat = AttackStat / 2;
 
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3);
+        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 
+                                            duration, 
+                                            source, 
+                                            target);
         AddEffectToList(temp);
     }
 
@@ -325,8 +338,26 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         _maxHealth = Health;
     }
 
+    public int GetNumOfStatusEffects()
+    {
+        return statusEffects.Count;
+    }
 
-    protected class StatusEffect
+    public Humanoid GetSourceOfStatusEffect(StatusEffect.StatusEffectType type)
+    {
+        foreach (StatusEffect effect in statusEffects)
+        {
+            if (effect.Type == type)
+            {
+                return effect.Source;
+            }
+        }
+
+        return null;
+    }
+
+
+    public class StatusEffect
     {
         public enum StatusEffectType
         {
@@ -337,13 +368,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         int _duration;
 
-        StatusEffectType type;
+        /// <summary> The target of the status Effect (a.k.a. this unit) </summary>
+        public Humanoid Target { get; set; }
+
+        /// <summary> Where the status effect came from. </summary>
+        public Humanoid Source { get; set; }
+
+
+        public StatusEffectType Type { get; set; }
         int Duration { get { return _duration; } }
 
-        public StatusEffect(StatusEffectType type, int duration)
+        public StatusEffect(StatusEffectType type, int duration, Humanoid source, Humanoid target)
         {
-            this.type = type;
+            this.Type = type;
             _duration = duration;
+            this.Target = target;
+            this.Source = source;
         }
 
         public bool ReduceDuration()
@@ -353,11 +393,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             if (_duration == 0) { return true; }
 
             return false;
-        }
-
-        public StatusEffectType GetEffectType()
-        {
-            return type;
         }
     }
 }

@@ -124,6 +124,11 @@ public abstract class Player : Humanoid, IPlayer
 
     }
 
+    protected void StartAbilityOneCD()
+    {
+        remainingAbility1CD = Ability1Cooldown;
+    }
+
     public void FindActionRanges()
     {
         AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true, AttackShape);
