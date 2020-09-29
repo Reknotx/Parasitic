@@ -13597,6 +13597,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 885885196825797201, guid: a8d2d972ba40cbf4ba64a763007949f9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.034
+      objectReference: {fileID: 0}
     - target: {fileID: 6127344535698739217, guid: a8d2d972ba40cbf4ba64a763007949f9,
         type: 3}
       propertyPath: m_Name
@@ -14817,7 +14822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   occupied: 0
   movementTile: 0
-  blocksLOS: 1
+  blocksLOS: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22707,7 +22712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   occupied: 0
   movementTile: 0
-  blocksLOS: 1
+  blocksLOS: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
