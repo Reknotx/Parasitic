@@ -71,7 +71,7 @@ public class Upgrades : MonoBehaviour
         unlockedKnightAbilities = new List<Abilities>();
         unlockedArcherAbilities = new List<Abilities>();
 
-        LoadUpgrades();
+       // LoadUpgrades();
         DisplayPoints();
         SetButtonStates();
     }
@@ -170,7 +170,7 @@ public class Upgrades : MonoBehaviour
                     default:
                         break;
                 }
-                SaveUpgrades();
+                //SaveUpgrades();
                 DisplayPoints();
                 SetButtonStates();
             }
