@@ -41,9 +41,7 @@ public class Mage : Player
 
         CreateAttackUpStatusEffect(this, this);
 
-        ActionRange.Instance.HideBoarder();
-
-
+        ActionRange.Instance.ActionDeselected(false);
 
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
 

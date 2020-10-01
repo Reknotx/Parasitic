@@ -214,7 +214,7 @@ public class CombatSystem : MonoBehaviour
     public void NormalAttack()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
-        ActionRange.Instance.AcionSelected();
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(NormalAttackCR());
@@ -225,7 +225,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityOne()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
-        ActionRange.Instance.AcionSelected();
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityOneCR());
@@ -236,7 +236,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityTwo()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
-        ActionRange.Instance.AcionSelected();
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityTwoCR());

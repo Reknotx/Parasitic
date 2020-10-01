@@ -106,23 +106,22 @@ public class ActionRange : MonoBehaviour
     }
 
     /// <summary> Action clicked </summary>
-    public void ActionSelected(bool turnOver = true)
+    public void ActionSelected()
     {
         actionSelected = true;
         selectedRange = tempRange;
         selectedColor = tempColor;
+    }
+
+    /// <summary> Current range is no longer selected - Hide range </summary>
+    public void ActionDeselected(bool turnOver = true)
+    {
+        actionSelected = false;
+        gameObject.SetActive(false);
         if (turnOver)
         {
             movementActive = false;
         }
-    }
-
-    /// <summary> Current range is no longer selected - Hide range </summary>
-    public void ActionDeselected()
-    {
-        actionSelected = false;
-        gameObject.SetActive(false);
-        movementActive = false;
     }
 
     /// <summary> Hide temperary range selection </summary>
