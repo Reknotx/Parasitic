@@ -39,7 +39,7 @@ public class Mage : Player
     {
         Debug.Log("Mage Ability Two");
 
-        CreateAttackUpStatusEffect();
+        CreateAttackUpStatusEffect(this, this);
     }
 
     

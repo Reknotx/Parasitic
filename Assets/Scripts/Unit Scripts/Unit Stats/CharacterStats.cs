@@ -9,6 +9,6 @@ public class CharacterStats : ScriptableObject
     public int BaseDefense;
     public int Movement;
 
-    [Range(0.0f, .4f)]
+    [Range(0.0f, 0.4f)]
     public float Dexterity;
 }

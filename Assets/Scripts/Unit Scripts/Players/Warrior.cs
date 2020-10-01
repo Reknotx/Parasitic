@@ -45,6 +45,8 @@ public class Warrior : Player
     public override void AbilityTwo(Action callback)
     {
         Debug.Log("Warrior Ability Two");
+
+        StartCoroutine(AbilityTwoCR(callback));
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -97,7 +99,7 @@ public class Warrior : Player
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.CreateAttackDownStatusEffect();
+            enemy.CreateAttackDownStatusEffect(this, enemy);
         }
 
         yield return null;
@@ -132,8 +134,8 @@ public class Warrior : Player
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.ForceTarget(this);
-            enemy.CreateTauntedStatusEffect();
+            //enemy.ForceTarget(this);
+            enemy.CreateTauntedStatusEffect(this, enemy);
         }
 
         yield return null;
