@@ -19,6 +19,7 @@ public class Archer : Player
     {
         Debug.Log("Archer Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        StartCoroutine(NormalAttackCR(callback));
 
     }
 

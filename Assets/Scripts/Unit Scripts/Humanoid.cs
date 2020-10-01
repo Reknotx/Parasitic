@@ -347,6 +347,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         removeList.Clear();
     }
 
+    /// <summary>
+    /// Creates a taunted status effect on this unit.
+    /// </summary>
+    /// <param name="source">The source that caused the status effect.</param>
+    /// <param name="target">The target of the status effect.</param>
+    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
     public void CreateTauntedStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
         StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 
@@ -356,6 +362,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         AddEffectToList(temp);
     }
 
+    /// <summary>
+    /// Creates a attack up status effect on this unit.
+    /// </summary>
+    /// <param name="source">The source that caused the status effect.</param>
+    /// <param name="target">The target of the status effect.</param>
+    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
     public void CreateAttackUpStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
         StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 
@@ -365,6 +377,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         AddEffectToList(temp);
     }
 
+    /// <summary>
+    /// Creates a attack down status effect on this unit.
+    /// </summary>
+    /// <param name="source">The source that caused the status effect.</param>
+    /// <param name="target">The target of the status effect.</param>
+    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
     public void CreateAttackDownStatusEffect(Humanoid source, Humanoid target, int duration = 3)
     {
         AttackStat = AttackStat / 2;
@@ -397,6 +415,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         return statusEffects.Count;
     }
 
+    /// <summary>
+    /// Returns a reference to the unit that caused this status effect.
+    /// </summary>
+    /// <param name="type">The type of status effect we wish to look for.</param>
+    /// <returns></returns>
     public Humanoid GetSourceOfStatusEffect(StatusEffect.StatusEffectType type)
     {
         foreach (StatusEffect effect in statusEffects)
@@ -408,6 +431,24 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Searches through the list of status effects to see if this unit has a status
+    /// effect of a certain type on them currently.
+    /// </summary>
+    /// <param name="type">The type of status effect to search for.</param>
+    /// <returns>True if that type of status effect is currently active, false otherwise.</returns>
+    protected bool CheckForEffectOfType(StatusEffect.StatusEffectType type)
+    {
+        if (statusEffects.Count == 0) return false;
+
+        foreach (StatusEffect effect in statusEffects)
+        {
+            if (effect.Type == type) return true;
+        }
+
+        return false;
     }
 
 

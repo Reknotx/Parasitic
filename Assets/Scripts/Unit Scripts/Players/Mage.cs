@@ -21,6 +21,7 @@ public class Mage : Player
     {
         Debug.Log("Mage Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        StartCoroutine(NormalAttackCR(callback));
     }
 
     /// <summary>
@@ -42,21 +43,22 @@ public class Mage : Player
         CreateAttackUpStatusEffect(this, this);
     }
 
-    
-
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-
         Debug.Log("Select a target for the mage's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
+        ActionRange.Instance.ActionDeselected();
+
+        int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat : 0;
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + damageModifier))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
