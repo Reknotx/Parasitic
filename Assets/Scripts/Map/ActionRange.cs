@@ -106,12 +106,15 @@ public class ActionRange : MonoBehaviour
     }
 
     /// <summary> Action clicked </summary>
-    public void AcionSelected()
+    public void ActionSelected(bool turnOver = true)
     {
         actionSelected = true;
         selectedRange = tempRange;
         selectedColor = tempColor;
-        movementActive = false;
+        if (turnOver)
+        {
+            movementActive = false;
+        }
     }
 
     /// <summary> Current range is no longer selected - Hide range </summary>
