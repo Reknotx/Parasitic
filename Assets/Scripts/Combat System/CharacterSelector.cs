@@ -13,8 +13,17 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
+
+    public enum TargettingType
+    {
+        TargetPlayers,
+        TargetEnemies
+    }
+
     
     public static CharacterSelector Instance;
+
+    [HideInInspector] public TargettingType targettingType;
 
     //layermask only hits player and grid layers
     int layermask = ((1 << 8) | (1 << 9));
@@ -50,6 +59,9 @@ public class CharacterSelector : MonoBehaviour
     LineRenderer lineRenderer; 
     LineRenderer boarderRenderer;
 
+    /// <summary> Player unit is currently moving in the scene</summary>
+    [HideInInspector] public bool unitMoving = false;
+
     /// <summary> When true a player can still move after they have already moved </summary>
     public bool debugKeepMoving = false;
 
@@ -72,6 +84,10 @@ public class CharacterSelector : MonoBehaviour
     {
         if (CombatSystem.Instance.activeUnits == ActiveUnits.Enemies) return;
 
+        if (CombatSystem.Instance.state == BattleState.PerformingAction) return;
+
+        if (CombatSystem.Instance.state == BattleState.Won || CombatSystem.Instance.state == BattleState.Lost) return;
+
         RaycastHit info = new RaycastHit();
 
         //Ryan's Implementation
@@ -80,21 +96,29 @@ public class CharacterSelector : MonoBehaviour
         if (CombatSystem.Instance.state != BattleState.Targetting && Physics.Raycast(ray, out info, 100f, layermask))
         {
             Transform objectHit = info.transform;
-            if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player"))
+            if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player") && !unitMoving)
             {
                 Player playerObj = objectHit.gameObject.GetComponent<Player>();
 
-                if (playerObj != SelectedPlayerUnit)
+                if (playerObj != SelectedPlayerUnit && !playerObj.HasAttacked)
                 {
                     if (SelectedPlayerUnit != null) { SelectedPlayerUnit.UnitDeselected(); }
                     SelectedUnitObj = playerObj.gameObject;
                     SelectedPlayerUnit = playerObj;
                     SelectedPlayerUnit.UnitSelected();
-                    MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
-                    BoarderLine.SetActive(true);
+                    BoarderLine.SetActive(false);
+                    if (SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+                    {
+                        SelectedPlayerUnit.FindMovementRange();
+                        MapGrid.Instance.DrawBoarder(SelectedPlayerUnit.TileRange, ref boarderRenderer);
+                        BoarderLine.SetActive(true);
+                    }
+                    //Make sure previous action range is no longer displayed
+                    ActionRange.Instance.ActionDeselected();
+                    SelectedPlayerUnit.FindActionRanges();
                     print("Selected Player Unit");
                 }
-                else if (playerObj.gameObject == SelectedPlayerUnit.gameObject)
+                else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                 {
                     print("Deselecting the already selected unit.");
                     SelectedPlayerUnit.UnitDeselected();
@@ -103,7 +127,7 @@ public class CharacterSelector : MonoBehaviour
                     BoarderLine.SetActive(false);
                 }
             }
-            else if (SelectedPlayerUnit && SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
+            else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
             {
                 //Selected player unit can move this turn.
 
@@ -134,9 +158,14 @@ public class CharacterSelector : MonoBehaviour
                     HidePath();
                 }
             }
-            
+
         }
-        else if (CombatSystem.Instance.state == BattleState.Targetting && Physics.Raycast(ray, out info, 100f, enemyLayerMask))
+        else if (CombatSystem.Instance.state == BattleState.Targetting &&
+            ( (targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask) )
+            || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask) )
+            )
+            
+            )
         {
             Transform objectHit = info.transform;
             if (SelectedPlayerUnit && SelectedPlayerUnit.HasAttacked == false)
@@ -146,7 +175,8 @@ public class CharacterSelector : MonoBehaviour
                 {
                     Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
 
-                    bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
+                    //bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
+                    bool[,] tempRange = SelectedPlayerUnit.AttackTileRange;
 
                     if (!tempRange[(int)tempE.currentTile.gridPosition.x, (int)tempE.currentTile.gridPosition.y])
                     {
@@ -162,22 +192,6 @@ public class CharacterSelector : MonoBehaviour
                         SelectedTargetUnit = tempE;
                         return; 
                     }
-
-                    //if (Input.GetMouseButtonDown(0))
-                    //{
-                    //    //We are about to perform an attack on an enemy game object.
-                    //    List<Tile> neighbors = MapGrid.Instance.GetNeighbors(SelectedPlayerUnit.currentTile);
-
-                    //    foreach (Tile tile in neighbors)
-                    //    {
-                    //        if (tile.occupied && tile.occupant == SelectedTargetUnit)
-                    //        {
-                    //            //((IPlayer)SelectedPlayerUnit).NormalAttack(SelectedEnemyUnit);
-                    //            CombatSystem.Instance.SetTarget(SelectedTargetUnit);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }
@@ -187,26 +201,34 @@ public class CharacterSelector : MonoBehaviour
         }
 
 
-        void DrawPath()
-        {
-            List<Vector3> points = new List<Vector3>();
-            points.Add(new Vector3(SelectedPlayerUnit.transform.position.x,pathHeight, SelectedPlayerUnit.transform.position.z));
-            foreach (Tile tile in path){
-                points.Add(new Vector3(tile.transform.position.x,pathHeight, tile.transform.position.z));
-            }
-            lineRenderer.positionCount = points.Count;
-            lineRenderer.SetPositions(points.ToArray());
-            EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, 0.25f, selectedTile.transform.position.z);
-            PathLine.SetActive(true);
-            EndPoint.SetActive(true);
-        }
+        
 
-        void HidePath()
-        {
-            selectedTile = null;
-            PathLine.SetActive(false);
-            EndPoint.SetActive(false);
-        }
+    }
 
+    void DrawPath()
+    {
+        List<Vector3> points = new List<Vector3>();
+        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, pathHeight, SelectedPlayerUnit.transform.position.z));
+        foreach (Tile tile in path)
+        {
+            points.Add(new Vector3(tile.transform.position.x, pathHeight, tile.transform.position.z));
+        }
+        lineRenderer.positionCount = points.Count;
+        lineRenderer.SetPositions(points.ToArray());
+        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, 0.25f, selectedTile.transform.position.z);
+        PathLine.SetActive(true);
+        EndPoint.SetActive(true);
+    }
+
+    public void HidePath()
+    {
+        selectedTile = null;
+        PathLine.SetActive(false);
+        EndPoint.SetActive(false);
+    }
+
+    public void SetTargettingType(TargettingType type)
+    {
+        targettingType = type;
     }
 }

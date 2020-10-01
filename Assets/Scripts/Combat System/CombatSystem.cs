@@ -63,7 +63,17 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The target of combat. </summary>
     private Humanoid target;
 
+    [Header("The canvas that is displayed when you have met the win/lose condition.")]
+    /// <summary> The canvas that is displayed when the game has been won.</summary>
+    public GameObject endCanvas;
 
+    [Space]
+
+    [Header("The text that tells you whether you win or lose.")]
+    public Text endGameText;
+
+    public Text enemiesAliveText;
+    
     //public GameObject turnSwitch;
 
     /// <summary> The text stating which side is active. </summary>
@@ -90,6 +100,7 @@ public class CombatSystem : MonoBehaviour
         }
         Instance = this;
         SetupBattle();
+        SetEnemyCountText();
     }
 
     /// <summary>
@@ -108,7 +119,8 @@ public class CombatSystem : MonoBehaviour
 
         foreach (Enemy enemy in tempE)
         {
-            enemiesToGo.Add(enemy);
+
+            if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
         }
 
@@ -116,6 +128,8 @@ public class CombatSystem : MonoBehaviour
 
         SetBattleState(BattleState.Start);
         SetActiveUnits(ActiveUnits.Players);
+
+        if (endCanvas.activeSelf) endCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -143,7 +157,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (tile.occupied && tile.occupant is Player)
             {
-                tile.occupant.TakeDamage(enemiesToGo[index].BaseAttack);
+                tile.occupant.TakeDamage(enemiesToGo[index].AttackStat);
                 break;
             }
         }
@@ -184,16 +198,14 @@ public class CombatSystem : MonoBehaviour
     public void SetTarget(Humanoid selection)
     {
         if (selection == player)
-        {
+        {   
             Debug.Log("Can't select yourself for attack.");
             return;
         }
         target = selection;
     }
 
-    /// <summary>
-    /// Executes the coroutine for normal attack of player.
-    /// </summary>
+    /// <summary> Executes the coroutine for normal attack of player. </summary>
     public void NormalAttack()
     {
         //((IPlayer)selectedPlayer).NormalAttack(target);
@@ -206,12 +218,10 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(NormalAttackCR());
-        StartCoroutine(ProcessAttack(Attack.NormalAttack));
+        ProcessAttack(Attack.NormalAttack);
     }
 
-    /// <summary>
-    /// The first ability of the player.
-    /// </summary>
+    /// <summary> The first ability of the player. </summary>
     public void AbilityOne()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
@@ -219,12 +229,10 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityOneCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityOne));
+        ProcessAttack(Attack.AbilityOne);
     }
 
-    /// <summary>
-    /// The second ability of the player.
-    /// </summary>
+    /// <summary> The second ability of the player. </summary>
     public void AbilityTwo()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
@@ -232,12 +240,20 @@ public class CombatSystem : MonoBehaviour
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityTwoCR());
-        StartCoroutine(ProcessAttack(Attack.AbilityTwo));
+        ProcessAttack(Attack.AbilityTwo);
     }
 
-    /// <summary>
-    /// Currently a hard pass which cancels all of the player's actions.
-    /// </summary>
+    /// <summary> Allows the player to defend this turn. </summary>
+    public void Defend()
+    {
+        if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+
+        CharacterSelector.Instance.SelectedPlayerUnit.Defend();
+
+        AttackComplete();
+    }
+
+    /// <summary> Currently a hard pass which cancels all of the player's actions. </summary>
     public void Pass()
     {
         if (player == null) return;
@@ -248,9 +264,7 @@ public class CombatSystem : MonoBehaviour
         EndUnitTurn(player);
     }
 
-    /// <summary>
-    /// Cancles the current action we have selected.
-    /// </summary>
+    /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel()
     {
         player = null;
@@ -258,30 +272,54 @@ public class CombatSystem : MonoBehaviour
         SetBattleState(BattleState.Start);
     }
 
-    /// <summary>
+    /// <summary> 
     /// Ends the turn for the current unit. Removing them from the list.
     /// </summary>
     /// <param name="unit">The unit whose turn is over.</param>
     private void EndUnitTurn(Humanoid unit)
     {
+        //Sets both HasAttacked and HasMoved to true just to make
+        //sure that nothing is missed.
+        unit.HasAttacked = true;
+        unit.HasMoved = true;
 
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
-            player.GetComponent<MeshRenderer>().material.color = Color.gray;
-
+            //Make sure action range is no longer displayed
+            ActionRange.Instance.ActionDeselected();
+            //Make sure movement range is no longer displayed
+            CharacterSelector.Instance.BoarderLine.SetActive(false);
+            //Deactivate combat buttons
+            DeactivateCombatButtons();
+           // player.GetComponent<MeshRenderer>().material.color = Color.gray;
+            player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
-                StartCoroutine(EnemyTurn());
-                activeSideText.text = "Enemy Turn";
+                if (enemiesToGo.Count > 0)
+                {
+                    StartCoroutine(EnemyTurn());
+                    SetActiveUnits(ActiveUnits.Enemies);
+                    activeSideText.text = "Enemy Turn";
+                }
+                else
+                {
+                    NewRound();
+                }
             }
-
         }
         else
         {
+            //(Enemy)unit.
+
             enemiesToGo.Remove((Enemy)unit);
 
-            if (enemiesToGo.Count == 0) { StartCoroutine(TurnSwitchCR()); }
+            if (enemiesToGo.Count == 0)
+            {
+                //StartCoroutine(TurnSwitchCR());
+                //StopCoroutine(EnemyTurn());
+                //NewRound();
+            }
         }
 
         player = null;
@@ -300,21 +338,32 @@ public class CombatSystem : MonoBehaviour
             if (unit is Player)
             {
                 playersToGo.Add((Player)unit);
-                unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
-            else if (unit is Enemy) enemiesToGo.Add((Enemy)unit);
+            else if (unit is Enemy && ((Enemy)unit).Revealed == true)
+            {
+                enemiesToGo.Add((Enemy)unit);
+            }
 
+            unit.DefendState = DefendingState.NotDefending;
             unit.HasMoved = false;
             unit.HasAttacked = false;
         }
+
+        UpdateTimers();
 
         SetActiveUnits(ActiveUnits.Players);
 
         activeSideText.text = "Player's turn";
     }
 
-    IEnumerator ProcessAttack(Attack type)
+    /// <summary> Executes the attack type that we have passed in. </summary>
+    /// <param name="type">The attack of the selected player to activate. </param>
+    void ProcessAttack(Attack type)
     {
+        //SetBattleState(BattleState.PerformingAction);
+
         switch (type)
         {
             case Attack.NormalAttack:
@@ -322,31 +371,38 @@ public class CombatSystem : MonoBehaviour
                 break;
 
             case Attack.AbilityOne:
-                ((IPlayer)player).AbilityOne(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityOne(AttackComplete);
                 break;
 
             case Attack.AbilityTwo:
-                ((IPlayer)player).AbilityTwo(AttackComplete);
+                ((IPlayer)CharacterSelector.Instance.SelectedPlayerUnit).AbilityTwo(AttackComplete);
                 break;
 
             default:
                 break;
         }
-
-        yield return null;
     }
 
+    /// <summary>
+    /// Called when the attack or ability is completed.
+    /// Set's the battle state to idle.
+    /// </summary>
+    /// This is performed through an Action callback
     public void AttackComplete()
     {
-        Debug.Log("Hello from attack complete!");
-
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
+        SetBattleState(BattleState.Idle);
+
     }
 
+    /// <summary>
+    /// Switches the turn after a few seconds. Is this in though(?)
+    /// </summary>
+    /// <returns>Whatever a coroutine returns</returns>
     IEnumerator TurnSwitchCR()
     {
         //turnSwitch.SetActive(true);
@@ -356,17 +412,34 @@ public class CombatSystem : MonoBehaviour
         NewRound();
     }
 
+    /// <summary>
+    /// Executes the logic for the enemies turn.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count != 0)
+        while (enemiesToGo.Count > 0)
         {
             int index = Random.Range(0, enemiesToGo.Count);
 
+            if (enemiesToGo[index].Revealed == false)
+            {
+                enemiesToGo.Remove(enemiesToGo[index]);
+                continue;
+            }
+
             Enemy tempE = enemiesToGo[index];
 
-            tempE.Move(tempE.FindNearestPlayer());
+            if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+            {
+                tempE.Move(tempE.TauntedPath());
+            }
+            else
+            {
+                tempE.Move(tempE.FindNearestPlayer());
+            }
 
             yield return new WaitUntil(() => tempE.HasMoved == true);
 
@@ -374,10 +447,15 @@ public class CombatSystem : MonoBehaviour
             {
                 tempE.Attack();
             }
-
+            else
+            {
+                tempE.Defend();
+            }
 
             EndUnitTurn(enemiesToGo[index]);
         }
+
+        NewRound();
     }
 
     /// <summary>
@@ -393,13 +471,188 @@ public class CombatSystem : MonoBehaviour
         return false;
     }
 
-    public void ActivateCombatButtons()
+    /// <summary>
+    /// Kills the unit in game and removes it from system. Also checks the win condition
+    /// and ends the game if it is met.
+    /// </summary>
+    /// <param name="unit">The unit who's health is at or below 0.</param>
+    public void KillUnit(Humanoid unit)
     {
-        foreach (Button button in combatButtons) { button.interactable = true; }
+        unitsAlive.Remove(unit);
+
+        SetEnemyCountText();
+
+        unit.currentTile.occupant = null;
+        unit.currentTile.occupied = false;
+
+        if (unit is Player)
+        {
+            playersToGo.Remove((Player)unit);
+            if (CheckLoseCondition()) GameLost();
+        }
+        else
+        {
+            enemiesToGo.Remove((Enemy)unit);
+            if (CheckWinCondition()) GameWon();
+        }
+
+
+        Destroy(unit.gameObject);
+
     }
 
+    /// <summary>
+    /// Sets enemiesAliveText
+    /// </summary>
+    /// Author: Jeremy Casada
+    public void SetEnemyCountText()
+    {
+        int count = 0;
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy)
+            {
+                count++;
+            }
+        }
+        enemiesAliveText.text = "Enemies Left: " + count;
+    }
+
+    /// <summary> Checks the win condition to see if it's met. </summary>
+    /// <returns>True if win condition met, false otherwise.</returns>
+    private bool CheckWinCondition()
+    {
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Enemy) return false;
+        }
+
+        return true;
+    }
+
+    /// <summary> Checks the lose condition to see if it's met. </summary>
+    /// <returns>True if lose condition met, false otherwise. </returns>
+    private bool CheckLoseCondition()
+    {
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if (unit is Player) return false;
+        }
+
+        return true;
+    }
+
+    /// <summary> Activate the win screen canvas here when the win condition is met. </summary>
+    private void GameWon()
+    {
+        SetBattleState(BattleState.Won);
+
+        endGameText.text = "You Win!";
+
+        endCanvas.SetActive(true);
+    }
+
+    /// <summary> Active the end screen canvas and change the text to You Lose! when the game is lost. </summary>
+    private void GameLost()
+    {
+        SetBattleState(BattleState.Lost);
+
+        endGameText.text = "You Lose!";
+
+        endCanvas.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Activates the combat buttons.
+    /// </summary>
+    public void ActivateCombatButtons()
+    {
+        Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+
+        foreach (Button button in combatButtons)
+        {
+            button.interactable = true;
+
+            if (button.gameObject.name == "Ability One")
+            {
+                button.GetComponentInChildren<Text>().text = tempP.Ability1Name;
+
+                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+            }
+            else if (button.gameObject.name == "Ability Two")
+            {
+                button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+
+                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// Deactivates the combat buttons.
+    /// </summary>
     public void DeactivateCombatButtons()
     {
         foreach (Button button in combatButtons) { button.interactable = false; }
+    }
+
+    /// <summary> Adds a revealed enemy to the turn system. </summary>
+    /// <param name="enemy">The enemy to add.</param>
+    public void SubscribeEnemy(Enemy enemy)
+    {
+        enemiesToGo.Add(enemy);
+    }
+
+    public List<Humanoid> alteredUnits = new List<Humanoid>();
+
+    /// <summary>
+    /// Subscribes a unit that has been buffed or debuffed to the system.
+    /// After every round these units will have their counters updated.
+    /// </summary>
+    /// <param name="subject">The unit that is altered.</param>
+    public void SubscribeAlteredUnit(Humanoid subject)
+    {
+        alteredUnits.Add(subject);
+    }
+
+    /// <summary>
+    /// Unsubscribes the altered unit when their (de)buff timer has run out.
+    /// </summary>
+    /// <param name="subject">The unit that was previously altered.</param>
+    public void UnsubscribeAlteredUnit(Humanoid subject)
+    {
+        removeList.Add(subject);
+    }
+
+    private List<Humanoid> removeList = new List<Humanoid>();
+
+
+    /// <summary>
+    /// Updates the list of altered units.
+    /// </summary>
+    private void UpdateTimers()
+    {
+        removeList = new List<Humanoid>();
+
+        foreach (Humanoid unit in alteredUnits)
+        {
+            unit.AdvanceTimer();
+        }
+
+
+        foreach (Humanoid unit in removeList)
+        {
+            unit.ResetStats();
+            alteredUnits.Remove(unit);
+        }
+
+        removeList.Clear();
+    }
+
+    private void SetAbilityOneButtonState(bool activeState)
+    {
+        
     }
 }

@@ -9,16 +9,46 @@ using UnityEngine;
 
 public class Defog : MonoBehaviour
 {
+
     [Header("FogObjects to be deactivated")]
     public GameObject[] fogObjects = new GameObject[1];
 
     [Header("Enemies and Other Objects to Reveal With this Trigger")]
     public GameObject[] objectsToReveal = new GameObject[1];
 
+    [Header("Tag of Player, Make sure to Spell correctly")]
+    public string playerTag = "";
+
+
+    private int[] _defaultLayers;
+
+    private void Awake()
+    {
+        _defaultLayers = new int[objectsToReveal.Length];
+        for(int index = 0; index < objectsToReveal.Length; index++)
+        {
+            _defaultLayers[index] = objectsToReveal[index].layer;
+
+            objectsToReveal[index].layer = 14;
+            foreach (Transform child in objectsToReveal[index].transform)
+            {
+                child.gameObject.layer = 14;
+            }
+
+            if (objectsToReveal[index].GetComponent<Enemy>() != null)
+            {
+                objectsToReveal[index].GetComponent<Enemy>().Revealed = false;
+            }
+            
+        }
+
+        
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "playerUnit")
+        if(other.tag == playerTag)
         {
             HideFog();
             ChangeLayers();
@@ -32,9 +62,18 @@ public class Defog : MonoBehaviour
     {
         if (objectsToReveal[0] != null)
         {
-            foreach (GameObject objectToReveal in objectsToReveal)
+            for(int index = 0; index < objectsToReveal.Length; index++)
             {
-                objectToReveal.layer = 0;
+                objectsToReveal[index].layer = _defaultLayers[index];
+                foreach (Transform child in objectsToReveal[index].transform)
+                {
+                    child.gameObject.layer = _defaultLayers[index];
+                }
+
+                if (objectsToReveal[index].GetComponent<Enemy>() != null)
+                {
+                    objectsToReveal[index].GetComponent<Enemy>().OnFogLifted();
+                }
             }
         }
         
@@ -45,10 +84,12 @@ public class Defog : MonoBehaviour
     /// </summary>
     private void HideFog()
     {
-
-        foreach(GameObject fogObjects in fogObjects)
+        if(fogObjects[0] != null)
         {
-            fogObjects.SetActive(false);
+            foreach (GameObject fogObjects in fogObjects)
+            {
+                fogObjects.SetActive(false);
+            }
         }
     }
 }

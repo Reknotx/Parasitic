@@ -16,9 +16,9 @@ public class Spiker : Enemy
         base.Defend();
     }
 
-    public override void Dodge()
-    {
-        Debug.Log("Spiker Dodge");
-        base.Dodge();
-    }
+    //public override void Dodge()
+    //{
+    //    Debug.Log("Spiker Dodge");
+    //    base.Dodge();
+    //}
 }
