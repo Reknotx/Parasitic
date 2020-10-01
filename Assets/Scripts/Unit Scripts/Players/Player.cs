@@ -46,15 +46,31 @@ public abstract class Player : Humanoid, IPlayer
     public int Ability2Cooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
-    int remainingAbility1CD;
+    int _remainingAbility1CD;
 
     /// <summary> The remaining cooldown on ability two.  </summary>
-    int remainingAbility2CD;
+    int _remainingAbility2CD;
+
+    [Space]
+    /// <summary> The name of the player's first ability.</summary>
+    [Header("The name of the player's first ability.")]
+    public string Ability1Name;
+
+    [Space]
+    /// <summary> The name of the player's second ability.</summary>
+    [Header("The name of the player's second ability.")]
+    public string Ability2Name;
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
     [HideInInspector] public bool[,] Ability2TileRange { get; set; }
+
+    /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
+    public int RemainingAbility1CD { get { return _remainingAbility1CD; } }
+
+    /// <summary> Public property to get the remaining cooldown of ability2. </summary>
+    public int RemainingAbility2CD { get { return _remainingAbility2CD; } }
 
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
@@ -101,10 +117,13 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public void Defend()
     {
-
-
+        print("Defending this round.");
+        DefendState = DefendingState.Defending;
     }
 
+    /// <summary>
+    /// Allows the unit to pass there turn.
+    /// </summary>
     public void Pass()
     {
         HasAttacked = true;
@@ -114,14 +133,22 @@ public abstract class Player : Humanoid, IPlayer
         State = HumanoidState.Done;
     }
 
+    /// <summary>
+    /// Override of advance timer that also reduces the cooldown on abilities.
+    /// </summary>
     public override void AdvanceTimer()
     {
         base.AdvanceTimer();
 
-        if (remainingAbility1CD > 0) remainingAbility1CD--;
+        if (_remainingAbility1CD > 0) _remainingAbility1CD--;
 
-        if (remainingAbility2CD > 0) remainingAbility2CD--;
+        if (_remainingAbility2CD > 0) _remainingAbility2CD--;
 
+    }
+
+    protected void StartAbilityOneCD()
+    {
+        _remainingAbility1CD = Ability1Cooldown;
     }
 
     public void FindActionRanges()
