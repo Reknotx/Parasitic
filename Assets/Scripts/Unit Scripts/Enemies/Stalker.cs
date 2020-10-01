@@ -12,10 +12,11 @@ public class Stalker : Enemy
     public override void Defend()
     {
         Debug.Log("Stalker Defend");
+        base.Defend();
     }
 
-    public override void Dodge()
-    {
-        Debug.Log("Stalker Dodge");
-    }
+    //public override void Dodge()
+    //{
+    //    Debug.Log("Stalker Dodge");
+    //}
 }

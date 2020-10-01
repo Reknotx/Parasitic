@@ -21,8 +21,13 @@ public enum HumanoidState
     Moving,
     Targetting,
     Attacking,
-    Defending,
     Done
+}
+
+public enum DefendingState
+{
+    NotDefending,
+    Defending,
 }
 
 /// <summary>
@@ -100,19 +105,31 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     protected List<StatusEffect> statusEffects = new List<StatusEffect>();
 
+    [Space]
+    [Header("The text component representing this unit's health.")]
+    /// <summary> The text component representing this unit's Health. </summary>
     public Text healthText;
+
+    [Space]
+    [Header("The text component representing how much damage was dealt to this unit.")]
+    /// <summary> The text component representing how much damage was dealt to this unit. </summary>
     public Text damageText;
 
+    [Space]
+    [Header("The graphical slider representing our health bar.")]
+    /// <summary> The graphical slider representing our health bar. </summary>
     public Slider healthBar;
 
     /// <summary> time it takes to switch directions </summary>
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    /// <summary>
-    /// The state of the humanoid in combat.
-    /// </summary>
+    /// <summary> The state of the humanoid in combat. </summary>
     public HumanoidState State { get; set; }
+
+
+    /// <summary> States whether or not this unit is defending this round. </summary>
+    public DefendingState DefendState { get; set; }
     
     public virtual void Start()
     {
@@ -136,6 +153,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         currentTile.occupied = true;
 
         State = HumanoidState.Idle;
+        DefendState = DefendingState.NotDefending;
         currentTile.occupant = this;
         TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
 
@@ -158,6 +176,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
     }
 
+
+    /// <summary>
+    /// Movement coroutine that moves the unit along the grid.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     IEnumerator MoveCR(List<Tile> path)
     {
         Vector3 p0;
@@ -234,9 +258,29 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     {
         if (this == null) return false;
 
-        Health -= damage;
+        int damageDealt = damage;
+
+        //If defending apply defense stat reduction.
+        if (DefendState == DefendingState.Defending)
+        {
+            print("Target unit was defending this round.");
+            damageDealt -= DefenseStat;
+            if (damageDealt <= 0) damageDealt = 0;
+        }
+        else //See if we can dodge the attack.
+        {
+            float chance = Random.Range(0.0f, 1.0f);
+
+            if (chance <= DexterityStat)
+            {
+                //Then dodge the attack.
+                damageDealt = 0;
+            }
+        }
         
-        StartCoroutine(ShowDamage(damage));
+        Health -= damageDealt;
+        
+        StartCoroutine(ShowDamage(damageDealt));
         healthText.text = Health + "/" + _maxHealth;
         //Update the image fill
         
@@ -244,6 +288,16 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         healthBar.value = (float)Health / (float) _maxHealth;
 
         return Health <= 0 ? true : false;
+    }
+
+    /// <summary>
+    /// When the incoming attack is dodged correctly we will activate the animation
+    /// for this particular unit here.
+    /// </summary>
+    private void Dodge()
+    {
+        // Activate the dodging animation
+    
     }
 
     public void FindMovementRange()

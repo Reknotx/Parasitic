@@ -16,9 +16,9 @@ public class Larva : Enemy
         base.Defend();
     }
 
-    public override void Dodge()
-    {
-        Debug.Log("Larva Dodge");
-        base.Dodge();
-    }
+    //public override void Dodge()
+    //{
+    //    Debug.Log("Larva Dodge");
+    //    base.Dodge();
+    //}
 }

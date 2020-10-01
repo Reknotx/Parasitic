@@ -19,13 +19,14 @@ public abstract class Enemy : Humanoid, IEnemy
 
     public virtual void Defend()
     {
-
+        DefendState = DefendingState.Defending;
     }
 
-    public virtual void Dodge()
-    {
+    //public virtual void Dodge()
+    //{
+    //    //Activate the dodge animation
 
-    }
+    //}
 
     /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;

@@ -16,9 +16,9 @@ public class Shambler : Enemy
         base.Defend();
     }
 
-    public override void Dodge()
-    {
-        Debug.Log("Shambler Dodge");
-        base.Dodge();
-    }
+    //public override void Dodge()
+    //{
+    //    Debug.Log("Shambler Dodge");
+    //    base.Dodge();
+    //}
 }

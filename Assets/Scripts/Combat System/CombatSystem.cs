@@ -243,6 +243,16 @@ public class CombatSystem : MonoBehaviour
         ProcessAttack(Attack.AbilityTwo);
     }
 
+    /// <summary> Allows the player to defend this turn. </summary>
+    public void Defend()
+    {
+        if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+
+        CharacterSelector.Instance.SelectedPlayerUnit.Defend();
+
+        AttackComplete();
+    }
+
     /// <summary> Currently a hard pass which cancels all of the player's actions. </summary>
     public void Pass()
     {
@@ -336,6 +346,7 @@ public class CombatSystem : MonoBehaviour
                 enemiesToGo.Add((Enemy)unit);
             }
 
+            unit.DefendState = DefendingState.NotDefending;
             unit.HasMoved = false;
             unit.HasAttacked = false;
         }
@@ -376,6 +387,7 @@ public class CombatSystem : MonoBehaviour
     /// Called when the attack or ability is completed.
     /// Set's the battle state to idle.
     /// </summary>
+    /// This is performed through an Action callback
     public void AttackComplete()
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
@@ -540,7 +552,7 @@ public class CombatSystem : MonoBehaviour
         endCanvas.SetActive(true);
     }
 
-
+    /// <summary> Active the end screen canvas and change the text to You Lose! when the game is lost. </summary>
     private void GameLost()
     {
         SetBattleState(BattleState.Lost);
@@ -556,11 +568,25 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void ActivateCombatButtons()
     {
+        Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+
         foreach (Button button in combatButtons)
         {
-            //if ()
-
             button.interactable = true;
+
+            if (button.gameObject.name == "Ability One")
+            {
+                button.GetComponentInChildren<Text>().text = tempP.Ability1Name;
+
+                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+            }
+            else if (button.gameObject.name == "Ability Two")
+            {
+                button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+
+                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+            }
+
         }
     }
 
