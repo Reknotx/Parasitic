@@ -24,11 +24,13 @@ public class Archer : Player
     }
 
     /// <summary>
-    /// Triggers the archer's first ability.
+    /// Triggers the archer's first ability which heals players.
     /// </summary>
     public override void AbilityOne(Action callback)
     {
         Debug.Log("Archer Ability One");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
+        StartCoroutine(AbilityOneCR(callback));
     }
 
     /// <summary>
@@ -41,8 +43,6 @@ public class Archer : Player
 
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-        Debug.Log("Select a target for the archer's normal attack.");
-
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
         ActionRange.Instance.ActionDeselected();
@@ -63,6 +63,7 @@ public class Archer : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
         ActionRange.Instance.ActionDeselected();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
@@ -71,6 +72,8 @@ public class Archer : Player
 
             target.Health += Mathf.FloorToInt(target.MaxHealth * 0.2f);
         }
+
+        StartAbilityOneCD();
 
         callback();
     }

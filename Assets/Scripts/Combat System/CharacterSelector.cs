@@ -20,7 +20,6 @@ public class CharacterSelector : MonoBehaviour
         TargetEnemies
     }
 
-    
     public static CharacterSelector Instance;
 
     [HideInInspector] public TargettingType targettingType;

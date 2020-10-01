@@ -5,7 +5,6 @@
  * Brief: Humanoid base class file.
  */
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +23,9 @@ public enum HumanoidState
     Done
 }
 
+/// <summary>
+/// Enum representing if the unit is defending this round.
+/// </summary>
 public enum DefendingState
 {
     NotDefending,

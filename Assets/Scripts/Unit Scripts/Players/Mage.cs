@@ -30,7 +30,6 @@ public class Mage : Player
     public override void AbilityOne(Action callback)
     {
         Debug.Log("Mage Ability One");
-
     }
 
     /// <summary>
@@ -41,6 +40,16 @@ public class Mage : Player
         Debug.Log("Mage Ability Two");
 
         CreateAttackUpStatusEffect(this, this);
+
+        ActionRange.Instance.HideBoarder();
+
+
+
+        CombatSystem.Instance.SetAbilityTwoButtonState(false);
+
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
+
+        StartAbilityTwoCD();
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -51,7 +60,7 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
-        int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat : 0;
+        int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -66,6 +75,11 @@ public class Mage : Player
         callback();
     }
 
+    /// <summary>
+    /// AOE
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <returns></returns>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
