@@ -23,6 +23,7 @@ public class Tile : MonoBehaviour
 
     public TileEffect tileEffect = TileEffect.None;
     public float effectMagnitude = 0;
+    int effectCooldown;
 
     //used for pathfinding
     [HideInInspector]

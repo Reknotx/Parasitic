@@ -51,7 +51,7 @@ public class Archer : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
