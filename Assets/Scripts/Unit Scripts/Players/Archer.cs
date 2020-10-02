@@ -12,6 +12,8 @@ using UnityEngine;
 
 public class Archer : Player
 {
+    private bool hasTrueDamage = false;
+
     /// <summary>
     /// Triggers the normal attack of the archer.
     /// </summary>
@@ -39,6 +41,9 @@ public class Archer : Player
     public override void AbilityTwo(Action callback)
     {
         Debug.Log("Archer Ability Two");
+        hasTrueDamage = true;
+        ActionRange.Instance.ActionDeselected(false);
+        StartAbilityTwoCD();
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -52,10 +57,12 @@ public class Archer : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
+
+        hasTrueDamage = false;
 
         callback();
     }
@@ -70,7 +77,7 @@ public class Archer : Player
         {
             Player target = (Player) CharacterSelector.Instance.SelectedTargetUnit;
 
-            target.Health += Mathf.FloorToInt(target.MaxHealth * 0.2f);
+            target.Heal();
         }
 
         StartAbilityOneCD();

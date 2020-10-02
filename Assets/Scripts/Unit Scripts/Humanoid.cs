@@ -50,7 +50,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public int AttackRange { get; set; } 
 
     /// <summary> The max health of this unit. </summary>
-    private int _maxHealth;
+    protected int _maxHealth;
 
     /// <summary> Health of the unit. </summary>
     public int Health { get; set; }
@@ -256,27 +256,30 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
      * 
      * <returns>True if unit is dead, false otherwise.</returns>
      */
-    public bool TakeDamage(int damage)
+    public bool TakeDamage(int damage, bool trueDamage = false)
     {
         if (this == null) return false;
 
         int damageDealt = damage;
 
         //If defending apply defense stat reduction.
-        if (DefendState == DefendingState.Defending)
+        if (trueDamage == false)
         {
-            print("Target unit was defending this round.");
-            damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
-            if (damageDealt <= 0) damageDealt = 0;
-        }
-        else //See if we can dodge the attack.
-        {
-            float chance = Random.Range(0.0f, 1.0f);
-
-            if (chance <= DexterityStat + currentTile.TileBoost(TileEffect.Dodge))
+            if (DefendState == DefendingState.Defending)
             {
-                //Then dodge the attack.
-                damageDealt = 0;
+                print("Target unit was defending this round.");
+                damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
+                if (damageDealt <= 0) damageDealt = 0;
+            }
+            else //See if we can dodge the attack.
+            {
+                float chance = Random.Range(0.0f, 1.0f);
+
+                if (chance <= DexterityStat + currentTile.TileBoost(TileEffect.Dodge))
+                {
+                    //Then dodge the attack.
+                    damageDealt = 0;
+                }
             }
         }
         
