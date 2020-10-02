@@ -168,4 +168,15 @@ public abstract class Player : Humanoid, IPlayer
         Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
         //print("Ranges found");
     }
+
+    public void Heal()
+    {
+        Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+
+        if (Health > MaxHealth) Health = MaxHealth;
+
+        healthText.text = Health + "/" + _maxHealth;
+
+        healthBar.value = (float)Health / (float)_maxHealth;
+    }
 }
