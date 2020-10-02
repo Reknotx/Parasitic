@@ -67,6 +67,16 @@ public class ActionRange : MonoBehaviour
 
     }
 
+    public void BoarderFromRange(bool[,] range)
+    {
+        Color c;
+        if (actionSelected)
+            c = selectedColor;
+        else
+            c = tempColor;
+        SetBoarder(range, c);
+            
+    }
     /// <summary> Make ability1 range appear </summary>
     public void Ability1()
     {
