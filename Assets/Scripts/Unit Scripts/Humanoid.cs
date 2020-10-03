@@ -132,6 +132,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary> States whether or not this unit is defending this round. </summary>
     public DefendingState DefendState { get; set; }
+
+    public AudioClip attackSoundEffect;
+    public AudioClip damagedSoundEffect;
+
+    public AudioSource audioSource;
     
     public virtual void Start()
     {
@@ -327,6 +332,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         damageText.text = damage.ToString();
         yield return new WaitForSecondsRealtime(1.5f);
         damageText.text = "";
+    }
+
+    /// <summary> Plays the attacking sound effect for this unit. </summary>
+    protected void PlayAttackSoundEffect()
+    {
+        audioSource.clip = attackSoundEffect;
+
+        audioSource.Play();
+    }
+
+    /// <summary> Plays the damaged sound effect for this unit when they take damage. </summary>
+    protected void PlayDamagedSoundEffect()
+    {
+        audioSource.clip = damagedSoundEffect;
+
+        audioSource.Play();
     }
 
     /// <summary>
