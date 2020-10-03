@@ -14,7 +14,7 @@ public abstract class Enemy : Humanoid, IEnemy
 {
     public virtual void Attack()
     {
-        if (_currTarget.TakeDamage(base.AttackStat)) CombatSystem.Instance.KillUnit(_currTarget);
+        if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
     public virtual void Defend()
@@ -59,64 +59,7 @@ public abstract class Enemy : Humanoid, IEnemy
                 shortestDist = tempDist;
             }
         }
-
-
         List<Tile> path = ObtainPathToTarget(targetPlayer);
-
-        //Tile target = targetPlayer.currentTile;
-        //List<Tile> path = new List<Tile>();
-        //List<Tile> tempPath = MapGrid.Instance.FindPath(currentTile, target, false, true);
-
-        ////Debug.Log(currentTile);
-        ////Debug.Log(tempPath.ToString());
-        //if (tempPath == null)
-        //{
-        //    tempPath = MapGrid.Instance.FindPath(currentTile, target, true, true);
-        //    if (tempPath == null)
-        //    {
-        //        //find a different target
-        //        for (int index = 0; index < activePlayers.Length; index++)
-        //        {
-        //            if (activePlayers[index] == targetPlayer)
-        //            {
-        //                activePlayers[index] = null;
-        //                break;
-        //            }
-        //        }
-        //        //Examine what is the second closest player
-        //        foreach (Player player in activePlayers)
-        //        {
-        //            if (player == null) continue;
-
-        //            float tempDist = Vector3.Distance(this.transform.position, player.transform.position);
-
-        //            if (shortestDist == 0f || tempDist < shortestDist)
-        //            {
-        //                targetPlayer = player;
-        //                shortestDist = tempDist;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //truncate (remove tiles from path until we are no longer blocked.)
-        //        foreach(Tile tile in tempPath)
-        //        {
-        //            if (tile.occupied) break;
-        //            path.Add(tile);
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    path = tempPath;
-
-        //    path.RemoveAt(path.Count - 1);
-        //}
-
-        //int movementDist = Mathf.Min(MovementStat, path.Count);
-        ////truncate path to movement range
-        //path.RemoveRange(movementDist, path.Count - movementDist);
         _currTarget = targetPlayer;
         return path;
     }
@@ -218,7 +161,6 @@ public abstract class Enemy : Humanoid, IEnemy
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Player> players = new List<Player>();
 
-
         for (int i = 0; i < neighbors.GetLength(0); i++)
         {
             for (int j = 0; j < neighbors.GetLength(1); j++)
@@ -241,7 +183,9 @@ public abstract class Enemy : Humanoid, IEnemy
         return false;
     }
 
-
+    /// <summary>
+    /// Adds the enemy to the combat system when they are revealed.
+    /// </summary>
     public void OnFogLifted()
     {
         Revealed = true;

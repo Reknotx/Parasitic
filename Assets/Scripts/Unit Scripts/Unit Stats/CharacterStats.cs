@@ -8,7 +8,9 @@ public class CharacterStats : ScriptableObject
     public int BaseAttack;
     public int BaseDefense;
     public int Movement;
+    public int XPDropOnDeath;
 
     [Range(0.0f, 0.4f)]
     public float Dexterity;
+
 }

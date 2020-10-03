@@ -73,6 +73,11 @@ public class CombatSystem : MonoBehaviour
     public Text endGameText;
 
     public Text enemiesAliveText;
+
+    /// <summary>  </summary>
+    public Text roundCounterText;
+
+    private int _roundCounter = 1;
     
     //public GameObject turnSwitch;
 
@@ -208,13 +213,8 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Executes the coroutine for normal attack of player. </summary>
     public void NormalAttack()
     {
-        //((IPlayer)selectedPlayer).NormalAttack(target);
-        //if (player == null) return;
-        //StopAllCoroutines();
-        //SetState(BattleState.Targetting);
-        //StartCoroutine(NormalAttackCR());
-
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(NormalAttackCR());
@@ -225,7 +225,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityOne()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
-
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityOneCR());
@@ -236,7 +236,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityTwo()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
-
+        ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
         //StartCoroutine(AbilityTwoCR());
@@ -356,6 +356,8 @@ public class CombatSystem : MonoBehaviour
         SetActiveUnits(ActiveUnits.Players);
 
         activeSideText.text = "Player's turn";
+
+        _roundCounter++;
     }
 
     /// <summary> Executes the attack type that we have passed in. </summary>
@@ -578,13 +580,17 @@ public class CombatSystem : MonoBehaviour
             {
                 button.GetComponentInChildren<Text>().text = tempP.Ability1Name;
 
-                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+                print("Ability one CD: " + tempP.RemainingAbilityOneCD);
+
+                if (tempP.RemainingAbilityOneCD > 0) button.interactable = false;
             }
             else if (button.gameObject.name == "Ability Two")
             {
                 button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
 
-                if (tempP.RemainingAbility1CD > 0) button.interactable = false;
+                print("Ability two CD: " + tempP.RemainingAbilityTwoCD);
+
+                if (tempP.RemainingAbilityTwoCD > 0) button.interactable = false;
             }
 
         }
@@ -651,8 +657,23 @@ public class CombatSystem : MonoBehaviour
         removeList.Clear();
     }
 
-    private void SetAbilityOneButtonState(bool activeState)
+    /// <summary>
+    /// Called to set the ability to uninteractable.
+    /// Used for abilities that don't take up one of your actions.
+    /// </summary>
+    /// <param name="activeState">Indicates if we want it on (true) or off (false).</param>
+    public void SetAbilityOneButtonState(bool activeState)
     {
-        
+        GameObject.Find("Ability One").GetComponent<Button>().interactable = activeState;
+    }
+
+    /// <summary>
+    /// Called to set the ability to uninteractable.
+    /// Used for abilities that don't take up one of your actions.
+    /// </summary>
+    /// <param name="activeState">Indicates if we want it on (true) or off (false).</param>
+    public void SetAbilityTwoButtonState(bool activeState)
+    {
+        GameObject.Find("Ability Two").GetComponent<Button>().interactable = activeState;
     }
 }
