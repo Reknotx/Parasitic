@@ -45,6 +45,8 @@ public class Warrior : Player
     public override void AbilityTwo(Action callback)
     {
         Debug.Log("Warrior Ability Two");
+
+        StartCoroutine(AbilityTwoCR(callback));
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -60,7 +62,7 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
@@ -97,10 +99,12 @@ public class Warrior : Player
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.CreateAttackDownStatusEffect();
+            enemy.CreateAttackDownStatusEffect(this, enemy);
         }
 
         yield return null;
+
+        StartAbilityOneCD();
 
         callback();
     }
@@ -132,29 +136,14 @@ public class Warrior : Player
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.ForceTarget(this);
-            enemy.CreateTauntedStatusEffect();
+            //enemy.ForceTarget(this);
+            enemy.CreateTauntedStatusEffect(this, enemy);
         }
 
         yield return null;
 
+        StartAbilityTwoCD();
+
         callback();
     }
-
-    //IEnumerator NormalAttackCR()
-    //{
-    //    Debug.Log("Select target for normal attack.");
-    //    yield return new WaitUntil(() => target != null);
-    //    Debug.Log("Attacking " + target.gameObject.name);
-
-    //    if (target == player) yield break;
-
-    //    //if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
-
-    //    ((IPlayer)player).NormalAttack(target);
-
-    //    EndUnitTurn(player);
-
-    //    yield return false;
-    //}
 }

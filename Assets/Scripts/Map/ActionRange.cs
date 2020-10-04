@@ -67,6 +67,16 @@ public class ActionRange : MonoBehaviour
 
     }
 
+    public void BoarderFromRange(bool[,] range)
+    {
+        Color c;
+        if (actionSelected)
+            c = selectedColor;
+        else
+            c = tempColor;
+        SetBoarder(range, c);
+            
+    }
     /// <summary> Make ability1 range appear </summary>
     public void Ability1()
     {
@@ -106,20 +116,22 @@ public class ActionRange : MonoBehaviour
     }
 
     /// <summary> Action clicked </summary>
-    public void AcionSelected()
+    public void ActionSelected()
     {
         actionSelected = true;
         selectedRange = tempRange;
         selectedColor = tempColor;
-        movementActive = false;
     }
 
     /// <summary> Current range is no longer selected - Hide range </summary>
-    public void ActionDeselected()
+    public void ActionDeselected(bool turnOver = true)
     {
         actionSelected = false;
         gameObject.SetActive(false);
-        movementActive = false;
+        if (turnOver)
+        {
+            movementActive = false;
+        }
     }
 
     /// <summary> Hide temperary range selection </summary>

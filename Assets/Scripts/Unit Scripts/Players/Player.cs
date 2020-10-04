@@ -22,7 +22,6 @@ public abstract class Player : Humanoid, IPlayer
         AbilityTwo
     }
 
-
     bool selected = false;
      public Material defaultMat;
     /// <summary> The material for the player when they are selected. </summary>
@@ -46,15 +45,31 @@ public abstract class Player : Humanoid, IPlayer
     public int Ability2Cooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
-    int remainingAbility1CD;
+    int _remainingAbilityOneCD;
 
     /// <summary> The remaining cooldown on ability two.  </summary>
-    int remainingAbility2CD;
+    int _remainingAbilityTwoCD;
+
+    [Space]
+    /// <summary> The name of the player's first ability.</summary>
+    [Header("The name of the player's first ability.")]
+    public string Ability1Name;
+
+    [Space]
+    /// <summary> The name of the player's second ability.</summary>
+    [Header("The name of the player's second ability.")]
+    public string Ability2Name;
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
     [HideInInspector] public bool[,] Ability2TileRange { get; set; }
+
+    /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
+    public int RemainingAbilityOneCD { get { return _remainingAbilityOneCD; } }
+
+    /// <summary> Public property to get the remaining cooldown of ability2. </summary>
+    public int RemainingAbilityTwoCD { get { return _remainingAbilityTwoCD; } }
 
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
@@ -101,10 +116,13 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public void Defend()
     {
-
-
+        print("Defending this round.");
+        DefendState = DefendingState.Defending;
     }
 
+    /// <summary>
+    /// Allows the unit to pass there turn.
+    /// </summary>
     public void Pass()
     {
         HasAttacked = true;
@@ -114,21 +132,51 @@ public abstract class Player : Humanoid, IPlayer
         State = HumanoidState.Done;
     }
 
+    /// <summary>
+    /// Override of advance timer that also reduces the cooldown on abilities.
+    /// </summary>
     public override void AdvanceTimer()
     {
         base.AdvanceTimer();
 
-        if (remainingAbility1CD > 0) remainingAbility1CD--;
+        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
-        if (remainingAbility2CD > 0) remainingAbility2CD--;
+        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
 
+    }
+
+    /// <summary>
+    /// Starts the cooldown of this unit's first ability.
+    /// </summary>
+    protected void StartAbilityOneCD()
+    {
+        _remainingAbilityOneCD = Ability1Cooldown;
+    }
+
+    /// <summary>
+    /// Starts the cooldown of this unit's second ability.
+    /// </summary>
+    protected void StartAbilityTwoCD()
+    {
+        _remainingAbilityTwoCD = Ability2Cooldown;
     }
 
     public void FindActionRanges()
     {
-        AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+        AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true, AttackShape);
         Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
         //print("Ranges found");
+    }
+
+    public void Heal()
+    {
+        Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+
+        if (Health > MaxHealth) Health = MaxHealth;
+
+        healthText.text = Health + "/" + _maxHealth;
+
+        healthBar.value = (float)Health / (float)_maxHealth;
     }
 }

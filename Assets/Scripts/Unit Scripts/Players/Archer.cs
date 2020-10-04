@@ -12,6 +12,8 @@ using UnityEngine;
 
 public class Archer : Player
 {
+    private bool hasTrueDamage = false;
+
     /// <summary>
     /// Triggers the normal attack of the archer.
     /// </summary>
@@ -19,15 +21,18 @@ public class Archer : Player
     {
         Debug.Log("Archer Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        StartCoroutine(NormalAttackCR(callback));
 
     }
 
     /// <summary>
-    /// Triggers the archer's first ability.
+    /// Triggers the archer's first ability which heals players.
     /// </summary>
     public override void AbilityOne(Action callback)
     {
         Debug.Log("Archer Ability One");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
+        StartCoroutine(AbilityOneCR(callback));
     }
 
     /// <summary>
@@ -36,12 +41,13 @@ public class Archer : Player
     public override void AbilityTwo(Action callback)
     {
         Debug.Log("Archer Ability Two");
+        hasTrueDamage = true;
+        ActionRange.Instance.ActionDeselected(false);
+        StartAbilityTwoCD();
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-        Debug.Log("Select a target for the archer's normal attack.");
-
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
         ActionRange.Instance.ActionDeselected();
@@ -51,10 +57,12 @@ public class Archer : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
         }
+
+        hasTrueDamage = false;
 
         callback();
     }
@@ -62,14 +70,17 @@ public class Archer : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
         ActionRange.Instance.ActionDeselected();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
             Player target = (Player) CharacterSelector.Instance.SelectedTargetUnit;
 
-            target.Health += Mathf.FloorToInt(target.MaxHealth * 0.2f);
+            target.Heal();
         }
+
+        StartAbilityOneCD();
 
         callback();
     }

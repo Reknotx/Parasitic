@@ -20,7 +20,6 @@ public class CharacterSelector : MonoBehaviour
         TargetEnemies
     }
 
-    
     public static CharacterSelector Instance;
 
     [HideInInspector] public TargettingType targettingType;
@@ -182,7 +181,6 @@ public class CharacterSelector : MonoBehaviour
                     {
                         //If the tile at position in grid is false, meaning not in our range, then return
                         //and cancel the rest of the execution.
-                        Debug.Log("Enemy not in range.");
                         return;
                     }
 

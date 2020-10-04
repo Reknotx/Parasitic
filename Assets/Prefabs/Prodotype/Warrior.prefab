@@ -844,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354a65e239ab4724c92bce8d5fa69696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackShape: 2
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
   RemainingActions: 2
@@ -853,10 +854,12 @@ MonoBehaviour:
   healthBar: {fileID: 3149463300756784575}
   defaultMat: {fileID: 0}
   selectedMat: {fileID: 2100000, guid: 2a3d23bea6773534683deb31827aa0af, type: 2}
-  Ability1Range: 0
-  Ability2Range: 0
-  Ability1Cooldown: 0
-  Ability2Cooldown: 0
+  Ability1Range: 3
+  Ability2Range: 3
+  Ability1Cooldown: 3
+  Ability2Cooldown: 3
+  Ability1Name: Damage Reduc
+  Ability2Name: Taunt
 --- !u!54 &8181069625044875816
 Rigidbody:
   m_ObjectHideFlags: 0
