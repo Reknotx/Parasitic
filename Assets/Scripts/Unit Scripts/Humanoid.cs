@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// Enum representing the unit's current state in the system.
@@ -53,7 +54,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected int _maxHealth;
 
     /// <summary> Health of the unit. </summary>
-    public int Health { get; set; }
+    int _health;
+    
+    /// <summary> Health properties. Sets health UI</summary>
+    public int Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = Mathf.Clamp(value, 0, _maxHealth);
+            if(healthText)
+                healthText.text = _health + "/" + _maxHealth;
+            //Update the image fill
+            if(healthBar)
+                healthBar.value = (float)_health / (float)_maxHealth;
+        }
+    }
 
     public int MaxHealth { get { return _maxHealth; } }
 
@@ -140,21 +156,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     
     public virtual void Start()
     {
-        Health = _baseStats.Health;
+        _maxHealth = _baseStats.Health;
         AttackStat = _baseStats.BaseAttack;
         DefenseStat = _baseStats.BaseDefense;
         MovementStat = _baseStats.Movement;
         DexterityStat = _baseStats.Dexterity;
         AttackRange = _baseStats.AttackRange;
-        _maxHealth = Health;
-
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
-        if(healthText)
+        Health = _maxHealth;
+
+        
+        /*if(healthText)
         healthText.text = Health + "/" + _maxHealth;
 
         if(healthBar)
-        healthBar.value = 1f;
+        healthBar.value = 1f;*/
 
         currentTile = MapGrid.Instance.TileFromPosition(transform.position);
         currentTile.occupied = true;
@@ -244,6 +261,18 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
+        HealingTileCheck();
+    }
+
+    void HealingTileCheck()
+    {
+        if (this is Player && currentTile.tileEffect == TileEffect.Healing && currentTile.remainingCooldown <= 0)
+        {
+            Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
+            print("Healing Tile used");
+            currentTile.StartCooldown();
+            CombatSystem.Instance.coolingTiles.Add(currentTile);
+        }
     }
 
     protected void LookInDirection(Vector3 direction)
@@ -291,11 +320,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Health -= damageDealt;
         
         StartCoroutine(ShowDamage(damageDealt));
-        healthText.text = Health + "/" + _maxHealth;
-        //Update the image fill
         
-
-        healthBar.value = (float)Health / (float) _maxHealth;
 
         return Health <= 0 ? true : false;
     }
