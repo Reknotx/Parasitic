@@ -82,8 +82,8 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
 
-    public AudioClip abilityOneSoundEffect;
-    public AudioClip abilityTwoSoundEffect;
+    [HideInInspector] public AudioClip abilityOneSoundEffect;
+    [HideInInspector] public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
@@ -192,10 +192,10 @@ public abstract class Player : Humanoid, IPlayer
     {
         Health += Mathf.FloorToInt(MaxHealth * 0.2f);
 
-        if (Health > MaxHealth) Health = MaxHealth;
+        //    if (Health > MaxHealth) Health = MaxHealth;
 
-        healthText.text = Health + "/" + _maxHealth;
+        //    healthText.text = Health + "/" + _maxHealth;
 
-        healthBar.value = (float)Health / (float)_maxHealth;
+        //    healthBar.value = (float)Health / (float)_maxHealth;
     }
 }

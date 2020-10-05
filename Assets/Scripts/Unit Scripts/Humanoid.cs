@@ -149,10 +149,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> States whether or not this unit is defending this round. </summary>
     public DefendingState DefendState { get; set; }
 
-    public AudioClip attackSoundEffect;
-    public AudioClip damagedSoundEffect;
+    [HideInInspector] public AudioClip attackSoundEffect;
+    [HideInInspector] public AudioClip damagedSoundEffect;
 
-    public AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
     
     public virtual void Start()
     {
@@ -206,7 +206,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    IEnumerator MoveCR(List<Tile> path)
+    protected IEnumerator MoveCR(List<Tile> path)
     {
         Vector3 p0;
         Vector3 p1;
