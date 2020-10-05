@@ -129,8 +129,6 @@ public class Mage : Player
             Upgrades.Instance.MageXp += 50;
         }
 
-        StartAbilityOneCD();
-
         callback();
     }
 

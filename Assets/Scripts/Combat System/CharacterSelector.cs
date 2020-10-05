@@ -160,17 +160,17 @@ public class CharacterSelector : MonoBehaviour
 
         }
         else if (CombatSystem.Instance.state == BattleState.Targetting &&
-                    ( 
-                        (targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask) )
-                        || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask) )
-                    )
-                )
+            ( (targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask) )
+            || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask) )
+            )
+            
+            )
         {
             Transform objectHit = info.transform;
             if (SelectedPlayerUnit && SelectedPlayerUnit.HasAttacked == false)
             {
                 //Player unit has moved and can now attack.
-                if (targettingType == TargettingType.TargetEnemies && objectHit.gameObject.GetComponent<Humanoid>() is Enemy)
+                if (objectHit.gameObject.GetComponent<Humanoid>() is Enemy)
                 {
                     Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
 
@@ -189,27 +189,6 @@ public class CharacterSelector : MonoBehaviour
                     {
                         SelectedTargetUnit = tempE;
                         return; 
-                    }
-                }
-                else if (targettingType == TargettingType.TargetPlayers && objectHit.gameObject.GetComponent<Humanoid>() is Player)
-                {
-                    Humanoid tempP = objectHit.gameObject.GetComponent<Player>();
-
-                    //bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
-                    bool[,] tempRange = SelectedPlayerUnit.AttackTileRange;
-
-                    if (!tempRange[(int)tempP.currentTile.gridPosition.x, (int)tempP.currentTile.gridPosition.y])
-                    {
-                        //If the tile at position in grid is false, meaning not in our range, then return
-                        //and cancel the rest of the execution.
-                        return;
-                    }
-
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        SelectedTargetUnit = tempP;
-                        return;
                     }
                 }
             }

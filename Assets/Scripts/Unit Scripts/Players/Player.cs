@@ -86,9 +86,6 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
 
-    public AudioClip abilityOneSoundEffect;
-    public AudioClip abilityTwoSoundEffect;
-
     public override void Start()
     {
         defaultMat = GetComponent<MeshRenderer>().material;
@@ -166,22 +163,6 @@ public abstract class Player : Humanoid, IPlayer
     protected void StartAbilityTwoCD()
     {
         _remainingAbilityTwoCD = Ability2Cooldown;
-    }
-
-    /// <summary> Play's the sound effect for this player's first ability. </summary>
-    protected void PlayAbilityOneSoundEffect()
-    {
-        audioSource.clip = abilityOneSoundEffect;
-
-        audioSource.Play();
-    }
-
-    /// <summary> Play's the sound effect for this player's second ability. </summary>
-    protected void PlayAbilityTwoSoundEffect()
-    {
-        audioSource.clip = abilityTwoSoundEffect;
-
-        audioSource.Play();
     }
 
     public void FindActionRanges()

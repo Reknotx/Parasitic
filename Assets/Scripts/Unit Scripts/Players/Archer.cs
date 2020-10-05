@@ -68,11 +68,6 @@ public class Archer : Player
         callback();
     }
 
-    /// <summary>
-    /// Heals the player
-    /// </summary>
-    /// <param name="callback"></param>
-    /// <returns></returns>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
