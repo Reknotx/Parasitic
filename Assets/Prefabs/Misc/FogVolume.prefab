@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8531504825391070291}
-  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 104.50001, y: -32.98488, z: -18.87246}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
+  m_LocalPosition: {x: -27.44, y: -17.11, z: 14.17}
+  m_LocalScale: {x: 2.2233877, y: 1, z: 9}
   m_Children: []
   m_Father: {fileID: 8531504825834069813}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8531504825391070290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 69.49086, y: 13.086601, z: 18.543823}
-  m_Center: {x: 1.23732, y: 6.0433006, z: -3.2793884}
+  m_Size: {x: -17.01, y: 3.9, z: 3.92}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8531504825391070292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogObjects:
   - {fileID: 8531504825978481777}
-  objectsToReveal: []
+  - {fileID: 8531504825391070291}
+  objectsToReveal:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerTag: Player
 --- !u!1 &8531504825834069810
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 8531504825834069810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -203.6, y: 37.084877, z: -84.12754}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.24132, y: 0.24132, z: 0.24132}
   m_Children:
   - {fileID: 8531504825391070293}
   - {fileID: 8531504825978481781}
@@ -119,8 +127,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8531504825978481777}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.399994, y: 30.715126, z: 8.827538}
-  m_LocalScale: {x: 328.60675, y: 20.816, z: 405.57892}
+  m_LocalPosition: {x: -27.61, y: -12.8, z: 14.15}
+  m_LocalScale: {x: 40, y: 7, z: 37.048}
   m_Children: []
   m_Father: {fileID: 8531504825834069813}
   m_RootOrder: 1
@@ -181,7 +189,7 @@ BoxCollider:
   m_GameObject: {fileID: 8531504825978481777}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
