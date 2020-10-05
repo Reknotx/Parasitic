@@ -72,6 +72,7 @@ public class Mage : Player
         else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+            Upgrades.Instance.MageXp += 50;
         }
 
         callback();
@@ -125,6 +126,7 @@ public class Mage : Player
         foreach (Enemy enemy in killList)
         {
             CombatSystem.Instance.KillUnit(enemy);
+            Upgrades.Instance.MageXp += 50;
         }
 
         callback();

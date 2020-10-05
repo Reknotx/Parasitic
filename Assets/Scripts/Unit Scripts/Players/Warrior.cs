@@ -65,6 +65,7 @@ public class Warrior : Player
         else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+            Upgrades.Instance.KnightXp += 50;
         }
 
         callback();

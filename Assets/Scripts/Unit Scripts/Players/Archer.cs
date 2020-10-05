@@ -60,6 +60,7 @@ public class Archer : Player
         else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+            Upgrades.Instance.ArcherXp += 50;
         }
 
         hasTrueDamage = false;
