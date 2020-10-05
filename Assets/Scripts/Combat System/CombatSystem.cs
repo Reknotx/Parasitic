@@ -75,6 +75,8 @@ public class CombatSystem : MonoBehaviour
 
     public Text enemiesAliveText;
 
+    public Image abilityInfo;
+
     /// <summary>  </summary>
     public Text roundCounterText;
 
@@ -111,6 +113,13 @@ public class CombatSystem : MonoBehaviour
         SetEnemyCountText();
     }
 
+    private void Update()
+    {
+        if(abilityInfo.gameObject.activeInHierarchy)
+        {
+            abilityInfo.rectTransform.position = Input.mousePosition;
+        }
+    }
     /// <summary>
     /// Sets up the map and necessary information.
     /// </summary>
@@ -531,6 +540,35 @@ public class CombatSystem : MonoBehaviour
         enemiesAliveText.text = "Enemies Left: " + count;
     }
 
+    public void SetAbilityInfo(Button button)
+    {
+        Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+        if (tempP)
+        {
+            if (button.gameObject.name == "Normal Attack")
+            {
+                abilityInfo.sprite = tempP.NormalAttackInfo;
+            }
+            else if (button.gameObject.name == "Ability One")
+            {
+                abilityInfo.sprite = tempP.Ability1Info;
+            }
+            else if (button.gameObject.name == "Ability Two")
+            {
+                abilityInfo.sprite = tempP.Ability2Info;
+            }
+            abilityInfo.gameObject.SetActive(true);
+        }
+        
+        
+    }
+
+
+    public void HideAbilityInfo()
+    {
+        abilityInfo.gameObject.SetActive(false);
+    }
+
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>
     private bool CheckWinCondition()
@@ -587,9 +625,22 @@ public class CombatSystem : MonoBehaviour
         {
             button.interactable = true;
 
-            if (button.gameObject.name == "Ability One")
+            if (button.gameObject.name == "Normal Attack")
             {
-                button.GetComponentInChildren<Text>().text = tempP.Ability1Name;
+                button.GetComponent<Image>().sprite = tempP.NormalAttackSpriteDefault;
+                SpriteState st;
+                st.highlightedSprite = tempP.NormalAttackSpriteHover;
+                st.pressedSprite = tempP.NormalAttackSpriteClick;
+                button.spriteState = st;
+            }
+            else if (button.gameObject.name == "Ability One")
+            {
+
+                button.GetComponent<Image>().sprite = tempP.Ability1SpriteDefault;
+                SpriteState st;
+                st.highlightedSprite = tempP.Ability1SpriteHover;
+                st.pressedSprite = tempP.Ability1SpriteClick;
+                button.spriteState = st;
 
                 print("Ability one CD: " + tempP.RemainingAbilityOneCD);
 
@@ -597,7 +648,12 @@ public class CombatSystem : MonoBehaviour
             }
             else if (button.gameObject.name == "Ability Two")
             {
-                button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+                // button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+                button.GetComponent<Image>().sprite = tempP.Ability2SpriteDefault;
+                SpriteState st;
+                st.highlightedSprite = tempP.Ability2SpriteHover;
+                st.pressedSprite = tempP.Ability2SpriteClick;
+                button.spriteState = st;
 
                 print("Ability two CD: " + tempP.RemainingAbilityTwoCD);
 

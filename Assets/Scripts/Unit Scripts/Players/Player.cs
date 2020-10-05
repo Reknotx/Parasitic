@@ -51,14 +51,18 @@ public abstract class Player : Humanoid, IPlayer
     int _remainingAbilityTwoCD;
 
     [Space]
+    /// <summary> The name of the player's second ability.</summary>
+    public Sprite NormalAttackSpriteDefault, NormalAttackSpriteHover, NormalAttackSpriteClick, NormalAttackInfo;
+
+    [Space]
     /// <summary> The name of the player's first ability.</summary>
-    [Header("The name of the player's first ability.")]
-    public string Ability1Name;
+    public Sprite Ability1SpriteDefault, Ability1SpriteHover, Ability1SpriteClick, Ability1Info;
 
     [Space]
     /// <summary> The name of the player's second ability.</summary>
-    [Header("The name of the player's second ability.")]
-    public string Ability2Name;
+    public Sprite Ability2SpriteDefault, Ability2SpriteHover, Ability2SpriteClick, Ability2Info;
+
+    
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
