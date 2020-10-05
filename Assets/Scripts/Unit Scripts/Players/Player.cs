@@ -50,19 +50,17 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> The remaining cooldown on ability two.  </summary>
     int _remainingAbilityTwoCD;
 
-    [Space]
-    /// <summary> The name of the player's second ability.</summary>
-    public Sprite NormalAttackSpriteDefault, NormalAttackSpriteHover, NormalAttackSpriteClick, NormalAttackInfo;
+    [Space(5)]
+    /// <summary> The sprites of the player's normal attack.</summary>
+    public Sprite[] NormalAttackSprites = new Sprite[4];
+    [Space(5)]
+    /// <summary> The sprites of the player's first ability.</summary>
+    public Sprite[] Ability1Sprites = new Sprite[4];
+    [Space(5)]
+    /// <summary> The sprites of the player's second ability.</summary>
+    public Sprite[] Ability2Sprites = new Sprite[4];
 
-    [Space]
-    /// <summary> The name of the player's first ability.</summary>
-    public Sprite Ability1SpriteDefault, Ability1SpriteHover, Ability1SpriteClick, Ability1Info;
 
-    [Space]
-    /// <summary> The name of the player's second ability.</summary>
-    public Sprite Ability2SpriteDefault, Ability2SpriteHover, Ability2SpriteClick, Ability2Info;
-
-    
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
@@ -86,6 +84,7 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
 
+    [Space]
     public AudioClip abilityOneSoundEffect;
     public AudioClip abilityTwoSoundEffect;
 

@@ -540,6 +540,11 @@ public class CombatSystem : MonoBehaviour
         enemiesAliveText.text = "Enemies Left: " + count;
     }
 
+    /// <summary>
+    /// Sets Sprite for Ability Info Popup Window Based on name of "button"
+    /// </summary>
+    /// <param name="button">Button to check</param>
+    /// Author: Jeremy Casada
     public void SetAbilityInfo(Button button)
     {
         Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
@@ -547,15 +552,15 @@ public class CombatSystem : MonoBehaviour
         {
             if (button.gameObject.name == "Normal Attack")
             {
-                abilityInfo.sprite = tempP.NormalAttackInfo;
+                abilityInfo.sprite = tempP.NormalAttackSprites[3];
             }
             else if (button.gameObject.name == "Ability One")
             {
-                abilityInfo.sprite = tempP.Ability1Info;
+                abilityInfo.sprite = tempP.Ability1Sprites[3];
             }
             else if (button.gameObject.name == "Ability Two")
             {
-                abilityInfo.sprite = tempP.Ability2Info;
+                abilityInfo.sprite = tempP.Ability2Sprites[3];
             }
             abilityInfo.gameObject.SetActive(true);
         }
@@ -563,7 +568,10 @@ public class CombatSystem : MonoBehaviour
         
     }
 
-
+    /// <summary>
+    /// Hides Ability Info Popup
+    /// </summary>
+    /// Author: Jeremy Casada
     public void HideAbilityInfo()
     {
         abilityInfo.gameObject.SetActive(false);
@@ -627,19 +635,19 @@ public class CombatSystem : MonoBehaviour
 
             if (button.gameObject.name == "Normal Attack")
             {
-                button.GetComponent<Image>().sprite = tempP.NormalAttackSpriteDefault;
+                button.GetComponent<Image>().sprite = tempP.NormalAttackSprites[0];
                 SpriteState st;
-                st.highlightedSprite = tempP.NormalAttackSpriteHover;
-                st.pressedSprite = tempP.NormalAttackSpriteClick;
+                st.highlightedSprite = tempP.NormalAttackSprites[1];
+                st.pressedSprite = tempP.NormalAttackSprites[2];
                 button.spriteState = st;
             }
             else if (button.gameObject.name == "Ability One")
             {
 
-                button.GetComponent<Image>().sprite = tempP.Ability1SpriteDefault;
+                button.GetComponent<Image>().sprite = tempP.Ability1Sprites[0];
                 SpriteState st;
-                st.highlightedSprite = tempP.Ability1SpriteHover;
-                st.pressedSprite = tempP.Ability1SpriteClick;
+                st.highlightedSprite = tempP.Ability1Sprites[1];
+                st.pressedSprite = tempP.Ability1Sprites[2];
                 button.spriteState = st;
 
                 print("Ability one CD: " + tempP.RemainingAbilityOneCD);
@@ -649,10 +657,10 @@ public class CombatSystem : MonoBehaviour
             else if (button.gameObject.name == "Ability Two")
             {
                 // button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
-                button.GetComponent<Image>().sprite = tempP.Ability2SpriteDefault;
+                button.GetComponent<Image>().sprite = tempP.Ability2Sprites[0];
                 SpriteState st;
-                st.highlightedSprite = tempP.Ability2SpriteHover;
-                st.pressedSprite = tempP.Ability2SpriteClick;
+                st.highlightedSprite = tempP.Ability2Sprites[1];
+                st.pressedSprite = tempP.Ability2Sprites[2];
                 button.spriteState = st;
 
                 print("Ability two CD: " + tempP.RemainingAbilityTwoCD);
