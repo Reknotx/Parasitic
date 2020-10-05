@@ -341,6 +341,7 @@ public class CombatSystem : MonoBehaviour
             if (unit is Player)
             {
                 playersToGo.Add((Player)unit);
+                unit.DefendState = DefendingState.NotDefending;
                 //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
                 unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
@@ -348,8 +349,6 @@ public class CombatSystem : MonoBehaviour
             {
                 enemiesToGo.Add((Enemy)unit);
             }
-
-            unit.DefendState = DefendingState.NotDefending;
             unit.HasMoved = false;
             unit.HasAttacked = false;
         }
@@ -439,6 +438,7 @@ public class CombatSystem : MonoBehaviour
 
             if (enemiesToGo[index].Revealed == false)
             {
+                enemiesToGo[index].DefendState = DefendingState.NotDefending;
                 enemiesToGo.Remove(enemiesToGo[index]);
                 continue;
             }
