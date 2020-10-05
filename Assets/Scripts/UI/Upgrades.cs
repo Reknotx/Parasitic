@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/// AUTHOR: Jeremy Casada
+/// DATE: 10/4/2020
+///
+///Controls the Upgrades / Skill Points of the Player Units
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +11,9 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-
+/// <summary>
+/// Enum used for list of unlocked abilities
+/// </summary>
 public enum Abilities
 {
     none,
@@ -25,7 +31,7 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
 
-    public GameObject upgradeWindow;
+    public GameObject upgradeWindow;    
     public GameObject infoWindow;
     public GameObject notification;
 
@@ -44,6 +50,9 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
+    /// <summary>
+    /// Experience System Vars
+    /// </summary>
     #region EXP
     public Slider mageXpBar;
     public Slider knightXpBar;
@@ -112,6 +121,9 @@ public class Upgrades : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// Skill Point System Vars
+    /// </summary>
     #region Skill Points
     public int _magePoints;
     public int _knightPoints;
@@ -163,16 +175,20 @@ public class Upgrades : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Gets Components of Info Hover Window
         Text[] info = infoWindow.GetComponentsInChildren<Text>();
         infoTitleText = info[0];
         infoText = info[1];
 
+        //Gets Text for Notification Bubble
         notificationText = notification.GetComponentInChildren<Text>();
 
+        //Get Text Components for each of the XP Bars
         _mageXpText = mageXpBar.GetComponentInChildren<Text>();
         _knightXpText = knightXpBar.GetComponentInChildren<Text>();
         _archerXpText = archerXpBar.GetComponentInChildren<Text>();
 
+        //Get references to each upgrade button and add UnlockAbility Function to OnClick()
         upgradeButtons = new List<UpgradeButton>(GetComponentsInChildren<UpgradeButton>(true));
         foreach(UpgradeButton upgradeButton in upgradeButtons)
         {
@@ -194,6 +210,7 @@ public class Upgrades : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Makes Info Window Follow Mouse While Active
         if(infoWindow.activeInHierarchy)
         {
             infoWindow.transform.position = Input.mousePosition;
@@ -247,6 +264,14 @@ public class Upgrades : MonoBehaviour
 
 
     #region Ability Unlocking
+
+    /// <summary>
+    /// Attemps to Unlock Ability Based on input requirements
+    /// </summary>
+    /// <param name="unit"> Enumerator Describing Unit Type</param>
+    /// <param name="ability">Enumerator Describing Ability Type to Attempt Unlock</param>
+    /// <param name="abilityRequirement">Required Ability Type to Unlock Desired "ability"</param>
+    /// <param name="pointRequirement">Required Number of points to unlock "ability"</param>
     public void UnlockAbility(UnitToUpgrade unit, Abilities ability, Abilities abilityRequirement, int pointRequirement)
     {
         Debug.Log(ability);
@@ -290,7 +315,6 @@ public class Upgrades : MonoBehaviour
                         break;
                 }
                 //SaveUpgrades();
-                DisplayPoints();
                 SetButtonStates();
             }
             else
@@ -302,7 +326,12 @@ public class Upgrades : MonoBehaviour
 
     }
 
-    
+    /// <summary>
+    /// Checks if Ability is Unlockable
+    /// </summary>
+    /// <param name="ability"> Enumerator Describing Ability to Check for</param>
+    /// <param name="unit"> Enumerator Describing Unit Type </param>
+    /// <returns></returns>
     public bool IsAbilityUnlocked(Abilities ability, UnitToUpgrade unit)
     {
         bool result = false;
@@ -337,6 +366,9 @@ public class Upgrades : MonoBehaviour
 
     #region UI Functions
 
+    /// <summary>
+    /// Used to Set UI for EXP and Points in Start
+    /// </summary>
     public void DisplayPoints()
     {
         MagePoints = MagePoints;
@@ -348,6 +380,9 @@ public class Upgrades : MonoBehaviour
         ArcherXp = ArcherXp;
     }
 
+    /// <summary>
+    /// Sets Color of Upgrade Button to Green if already Unlocked
+    /// </summary>
     public void SetButtonStates()
     {
         foreach(UpgradeButton upgradeButton in upgradeButtons)
@@ -360,28 +395,43 @@ public class Upgrades : MonoBehaviour
     }
 
     
-
+    /// <summary>
+    /// Sets Description of Info window
+    /// </summary>
+    /// <param name="info"></param>
     public void SetInfoText(string info)
     {
         infoText.text = info;
     }
     
+    /// <summary>
+    /// Sets Title of Info Window
+    /// </summary>
+    /// <param name="title"></param>
     public void SetTitleText(string title)
     {
         infoTitleText.text = title;
     }
 
+    /// <summary>
+    /// Activates Info Window
+    /// </summary>
     public void DisplayInfo()
     {
-        
         infoWindow.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides Info Window
+    /// </summary>
     public void HideInfo()
     {
         infoWindow.SetActive(false);
     }
 
+    /// <summary>
+    /// Toggles the Upgrade Menu and Clears Notification
+    /// </summary>
     public void ToggleUpgradeMenu()
     {
         if(upgradeWindow.activeInHierarchy)
@@ -397,6 +447,11 @@ public class Upgrades : MonoBehaviour
         ClearUpgradeNotification();
     }
 
+    /// <summary>
+    /// Used to Temporarily Display Message in info window
+    /// </summary>
+    /// <param name="message">message to display</param>
+    /// <returns></returns>
     public IEnumerator CantUnlockMessage(string message)
     {
         string temp = infoText.text;
@@ -408,6 +463,7 @@ public class Upgrades : MonoBehaviour
         }
         
     }
+
 
     private void ShowUpgradeNotification()
     {
