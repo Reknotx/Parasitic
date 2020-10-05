@@ -467,8 +467,13 @@ public class Upgrades : MonoBehaviour
 
     private void ShowUpgradeNotification()
     {
-        notification.SetActive(true);
-        notificationText.text = (MagePoints + KnightPoints + ArcherPoints) + "";
+        
+        if((MagePoints + KnightPoints + ArcherPoints) > 0)
+        {
+            notification.SetActive(true);
+            notificationText.text = (MagePoints + KnightPoints + ArcherPoints) + "";
+        }
+        
     }
 
     private void ClearUpgradeNotification()
