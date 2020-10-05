@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// Enum for the various states of combat we can be in.
@@ -95,6 +96,8 @@ public class CombatSystem : MonoBehaviour
 
     /// <summary> The list of buttons used for combat when a player is selected. </summary>
     public List<Button> combatButtons = new List<Button>();
+
+    public List<Tile> coolingTiles = new List<Tile>();
 
     void Start()
     {
@@ -349,6 +352,14 @@ public class CombatSystem : MonoBehaviour
             unit.DefendState = DefendingState.NotDefending;
             unit.HasMoved = false;
             unit.HasAttacked = false;
+        }
+        //increment tile cooldown
+        for(int tile = coolingTiles.Count - 1; tile >= 0; tile--)
+        {
+            if (coolingTiles[tile].NewRound())
+            {
+                coolingTiles.Remove(coolingTiles[tile]);
+            }
         }
 
         UpdateTimers();

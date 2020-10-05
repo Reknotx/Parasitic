@@ -23,7 +23,8 @@ public class Tile : MonoBehaviour
 
     public TileEffect tileEffect = TileEffect.None;
     public float effectMagnitude = 0;
-    int effectCooldown;
+    public int effectCooldown = 10;
+    public int remainingCooldown = 0;
 
     //used for pathfinding
     [HideInInspector]
@@ -84,13 +85,29 @@ public class Tile : MonoBehaviour
             {
                 Gizmos.color = Color.white;
             }
-            else if (tileEffect == TileEffect.Healing)
+            else if (tileEffect == TileEffect.Healing && remainingCooldown == 0)
             {
                 Gizmos.color = Color.magenta;
             }
         }
         if (drawTileGizmo)
             Gizmos.DrawSphere(transform.position + Vector3.up*gizmoHeight, 0.2f);
+    }
+
+    public void StartCooldown()
+    {
+        remainingCooldown = effectCooldown;
+    }
+
+    public bool NewRound()
+    {
+        remainingCooldown--;
+        print("cooling");
+        if(remainingCooldown == 0)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
