@@ -127,6 +127,8 @@ public class Mage : Player
             CombatSystem.Instance.KillUnit(enemy);
         }
 
+        StartAbilityOneCD();
+
         callback();
     }
 
