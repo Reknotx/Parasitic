@@ -349,6 +349,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (unit is Player)
             {
+                ((Player)unit).CoolDown(); //bandaid
                 playersToGo.Add((Player)unit);
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -440,7 +441,7 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count > 0 && state != BattleState.Won && state != BattleState.Lost)
+        while (enemiesToGo.Count > 0)
         {
             int index = Random.Range(0, enemiesToGo.Count);
 

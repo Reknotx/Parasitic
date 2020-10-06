@@ -150,6 +150,15 @@ public abstract class Player : Humanoid, IPlayer
         if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
 
     }
+    /// <summary>
+    /// Bandaid Fix
+    /// </summary>
+    public void CoolDown()
+    {
+        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
+
+        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
+    }
 
     /// <summary>
     /// Starts the cooldown of this unit's first ability.
