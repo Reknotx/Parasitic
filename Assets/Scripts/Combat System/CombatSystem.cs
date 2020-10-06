@@ -436,7 +436,6 @@ public class CombatSystem : MonoBehaviour
     /// <summary>
     /// Executes the logic for the enemies turn.
     /// </summary>
-    /// <returns></returns>
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
@@ -628,6 +627,7 @@ public class CombatSystem : MonoBehaviour
     public void ActivateCombatButtons()
     {
         Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+        UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
 
         foreach (Button button in combatButtons)
         {
@@ -650,9 +650,13 @@ public class CombatSystem : MonoBehaviour
                 st.pressedSprite = tempP.Ability1Sprites[2];
                 button.spriteState = st;
 
-                print("Ability one CD: " + tempP.RemainingAbilityOneCD);
+                print(tempP.name +  " ability one CD: " + tempP.RemainingAbilityOneCD);
 
-                if (tempP.RemainingAbilityOneCD > 0) button.interactable = false;
+                if (tempP.RemainingAbilityOneCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
+                {
+                    print(tempP.name + " ability One not unlocked");
+                    button.interactable = false;
+                }
             }
             else if (button.gameObject.name == "Ability Two")
             {
@@ -663,9 +667,9 @@ public class CombatSystem : MonoBehaviour
                 st.pressedSprite = tempP.Ability2Sprites[2];
                 button.spriteState = st;
 
-                print("Ability two CD: " + tempP.RemainingAbilityTwoCD);
+                print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
 
-                if (tempP.RemainingAbilityTwoCD > 0) button.interactable = false;
+                if (tempP.RemainingAbilityTwoCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType)) button.interactable = false;
             }
 
         }

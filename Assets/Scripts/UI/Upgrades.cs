@@ -362,6 +362,36 @@ public class Upgrades : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Looks to the character selected and evaluates the type of character we
+    /// have selected.
+    /// </summary>
+    /// <returns>A UnitToUpgrade enum value representing the player we have selected</returns>
+    /// Author: Chase O'Connor
+    /// Date: 10/5/2020
+    public UnitToUpgrade GetUnitType()
+    {
+        UnitToUpgrade unitType = UnitToUpgrade.knight;
+
+        if (CharacterSelector.Instance.SelectedPlayerUnit != null)
+        {
+            if (CharacterSelector.Instance.SelectedPlayerUnit is Warrior)
+            {
+                unitType = UnitToUpgrade.knight;
+            }
+            else if (CharacterSelector.Instance.SelectedPlayerUnit is Archer)
+            {
+                unitType = UnitToUpgrade.archer;
+            }
+            else
+            {
+                unitType = UnitToUpgrade.mage;
+            }
+        }
+
+        return unitType;
+    }
+
     #endregion
 
     #region UI Functions
