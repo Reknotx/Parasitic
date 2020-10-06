@@ -67,14 +67,29 @@ public class ActionRange : MonoBehaviour
 
     }
 
+    public void BoarderFromRange(bool[,] range)
+    {
+        Color c;
+        if (actionSelected)
+            c = selectedColor;
+        else
+            c = tempColor;
+        SetBoarder(range, c);
+            
+    }
     /// <summary> Make ability1 range appear </summary>
     public void Ability1()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
-            tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability1TileRange;
-            tempColor = AbilityColor;
-            SetBoarder(tempRange,tempColor);
+            UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
+            {
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability1TileRange;
+                tempColor = AbilityColor;
+                SetBoarder(tempRange,tempColor);
+            }
         }
     }
 
@@ -83,9 +98,14 @@ public class ActionRange : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
-            tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability2TileRange;
-            tempColor = Ability2Color;
-            SetBoarder(tempRange,tempColor);
+            UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+            {
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability2TileRange;
+                tempColor = Ability2Color;
+                SetBoarder(tempRange,tempColor);
+            }
         }
     }
 
@@ -106,20 +126,22 @@ public class ActionRange : MonoBehaviour
     }
 
     /// <summary> Action clicked </summary>
-    public void AcionSelected()
+    public void ActionSelected()
     {
         actionSelected = true;
         selectedRange = tempRange;
         selectedColor = tempColor;
-        movementActive = false;
     }
 
     /// <summary> Current range is no longer selected - Hide range </summary>
-    public void ActionDeselected()
+    public void ActionDeselected(bool turnOver = true)
     {
         actionSelected = false;
         gameObject.SetActive(false);
-        movementActive = false;
+        if (turnOver)
+        {
+            movementActive = false;
+        }
     }
 
     /// <summary> Hide temperary range selection </summary>

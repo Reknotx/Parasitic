@@ -62,9 +62,10 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat))
+        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+            Upgrades.Instance.KnightXp += 50;
         }
 
         callback();
@@ -104,6 +105,8 @@ public class Warrior : Player
 
         yield return null;
 
+        StartAbilityOneCD();
+
         callback();
     }
 
@@ -140,23 +143,8 @@ public class Warrior : Player
 
         yield return null;
 
+        StartAbilityTwoCD();
+
         callback();
     }
-
-    //IEnumerator NormalAttackCR()
-    //{
-    //    Debug.Log("Select target for normal attack.");
-    //    yield return new WaitUntil(() => target != null);
-    //    Debug.Log("Attacking " + target.gameObject.name);
-
-    //    if (target == player) yield break;
-
-    //    //if(target.TakeDamage(((IStatistics)player).BaseAttack)) { Destroy(target.gameObject); }
-
-    //    ((IPlayer)player).NormalAttack(target);
-
-    //    EndUnitTurn(player);
-
-    //    yield return false;
-    //}
 }

@@ -167,6 +167,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -218,6 +222,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -269,6 +277,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -320,6 +332,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -371,6 +387,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -552,6 +572,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -603,6 +627,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -654,6 +682,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -705,6 +737,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -756,6 +792,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -899,6 +939,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -950,6 +994,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1001,11 +1049,27 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
+--- !u!114 &109489546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6555679141455409905, guid: 4e62eb87741b8354ba8c781097e5602d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1721372373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a697f086d1fcf449b21e44294a9afeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &111871650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,6 +1116,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1181,6 +1249,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1241,7 +1313,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -1311,6 +1383,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1362,6 +1438,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1413,6 +1493,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1464,6 +1548,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1559,7 +1647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &181698246
 GameObject:
@@ -1607,6 +1695,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1708,6 +1800,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1768,7 +1864,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -1789,6 +1885,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Larva (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418742, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381c8d9a828662e40bf8916758d7be78, type: 3}
@@ -1838,6 +1939,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1889,6 +1994,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1940,6 +2049,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1991,6 +2104,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2042,6 +2159,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2093,6 +2214,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2236,6 +2361,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2287,6 +2416,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2338,6 +2471,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2389,6 +2526,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2440,6 +2581,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2491,6 +2636,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2542,6 +2691,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2593,6 +2746,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2656,6 +2813,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2707,11 +2868,139 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
+--- !u!1001 &422935340
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341625, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046010341637, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_Name
+      value: UpgradeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150243046852234677, guid: 2091341c345dcb542be74110f93e9e0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.099976
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2091341c345dcb542be74110f93e9e0e, type: 3}
 --- !u!1 &432389844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2758,6 +3047,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2809,6 +3102,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2860,6 +3157,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2911,6 +3212,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2962,6 +3267,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3013,6 +3322,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3064,6 +3377,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3115,6 +3432,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3166,6 +3487,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3217,6 +3542,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3268,6 +3597,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3319,6 +3652,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3370,6 +3707,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3421,6 +3762,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3472,6 +3817,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3523,6 +3872,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3574,6 +3927,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3625,6 +3982,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3676,6 +4037,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3727,6 +4092,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3778,6 +4147,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3829,6 +4202,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3880,6 +4257,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3981,6 +4362,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4032,6 +4417,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4083,6 +4472,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4134,6 +4527,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4185,6 +4582,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4236,6 +4637,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4287,95 +4692,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
---- !u!1001 &697658981
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2406582231655661398, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2406582231655661398, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3149463300756784575, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827327, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_Name
-      value: Warrior (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3583efe7adee71641bded4fee3cd6591, type: 3}
 --- !u!1 &705116377
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,6 +4747,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4473,6 +4802,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4524,6 +4857,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4581,6 +4918,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4632,6 +4973,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4683,6 +5028,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4734,6 +5083,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4785,6 +5138,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4836,6 +5193,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4887,6 +5248,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5068,6 +5433,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5125,6 +5494,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5176,6 +5549,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5227,6 +5604,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5278,6 +5659,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5329,6 +5714,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5380,6 +5769,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5431,6 +5824,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5482,6 +5879,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5533,6 +5934,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5584,6 +5989,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5641,6 +6050,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5692,6 +6105,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5743,6 +6160,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5794,6 +6215,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5845,6 +6270,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5896,6 +6325,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5947,6 +6380,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5998,6 +6435,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6049,6 +6490,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6100,6 +6545,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6151,6 +6600,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6208,6 +6661,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6259,6 +6716,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6310,6 +6771,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6361,6 +6826,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6412,6 +6881,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6463,6 +6936,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6514,6 +6991,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6643,6 +7124,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6694,6 +7179,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6745,6 +7234,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6796,6 +7289,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6847,6 +7344,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6898,6 +7399,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6949,6 +7454,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7000,6 +7509,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7051,6 +7564,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7102,6 +7619,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7153,6 +7674,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7204,6 +7729,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7255,6 +7784,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7306,6 +7839,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7363,6 +7900,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7395,28 +7936,6 @@ MonoBehaviour:
   pathHeight: 0.3
   unitMoving: 0
   debugKeepMoving: 0
---- !u!1 &1297275305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7634975540100827327, guid: 3583efe7adee71641bded4fee3cd6591,
-    type: 3}
-  m_PrefabInstance: {fileID: 697658981}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1297275306
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297275305}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1302163776
 GameObject:
   m_ObjectHideFlags: 0
@@ -7463,6 +7982,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7514,6 +8037,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7565,6 +8092,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7616,6 +8147,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7667,6 +8202,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7768,6 +8307,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7819,6 +8362,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7870,6 +8417,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8090,6 +8641,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8141,6 +8696,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8192,6 +8751,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8243,6 +8806,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8294,6 +8861,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8345,6 +8916,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8396,6 +8971,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8453,6 +9032,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8504,6 +9087,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8555,6 +9142,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8606,6 +9197,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8657,6 +9252,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8726,7 +9325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1515285805
 GameObject:
@@ -8774,6 +9373,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8825,6 +9428,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8876,6 +9483,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8927,6 +9538,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8978,6 +9593,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9107,6 +9726,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9158,6 +9781,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9209,6 +9836,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9260,6 +9891,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9311,6 +9946,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9362,6 +10001,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9413,6 +10056,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9448,7 +10095,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.5
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -9473,7 +10120,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -9494,6 +10141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Larva (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418742, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381c8d9a828662e40bf8916758d7be78, type: 3}
@@ -9543,6 +10195,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9594,6 +10250,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9651,6 +10311,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9702,6 +10366,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9753,6 +10421,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9813,7 +10485,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -9883,6 +10555,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9934,6 +10610,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9985,6 +10665,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10036,6 +10720,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10087,6 +10775,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10138,6 +10830,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10189,6 +10885,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10370,6 +11070,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10382,6 +11086,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3271081643497045667, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16.099976
+      objectReference: {fileID: 0}
     - target: {fileID: 6555679141455409904, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
       propertyPath: m_Name
@@ -10425,7 +11134,7 @@ PrefabInstance:
     - target: {fileID: 6555679141455409906, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6555679141455409906, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
@@ -10435,7 +11144,7 @@ PrefabInstance:
     - target: {fileID: 6555679141455409906, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6555679141455409906, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
@@ -10457,9 +11166,44 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 109489546}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AbilityTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 109489546}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: AbilityTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449305327347600568, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8449305327506919136, guid: 4e62eb87741b8354ba8c781097e5602d,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449305327506919166, guid: 4e62eb87741b8354ba8c781097e5602d,
+        type: 3}
+      propertyPath: m_Interactable
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10510,6 +11254,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10561,6 +11309,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10690,6 +11442,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10741,6 +11497,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10792,6 +11552,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10843,6 +11607,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10894,6 +11662,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10945,6 +11717,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11205,7 +11981,7 @@ RectTransform:
   m_Children:
   - {fileID: 1100717418}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11258,6 +12034,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11387,6 +12167,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11438,6 +12222,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11489,6 +12277,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11540,6 +12332,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11641,6 +12437,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11692,6 +12492,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12027,6 +12831,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12078,6 +12886,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12129,11 +12941,99 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
+--- !u!1001 &1930650119
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2921815107781369828, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921815107781369828, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418742, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_Name
+      value: Larva (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925792248520418742, guid: 381c8d9a828662e40bf8916758d7be78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 381c8d9a828662e40bf8916758d7be78, type: 3}
 --- !u!1 &1933292856
 GameObject:
   m_ObjectHideFlags: 0
@@ -12180,6 +13080,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12231,6 +13135,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12282,6 +13190,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12333,6 +13245,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12384,6 +13300,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12435,6 +13355,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12486,6 +13410,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12537,6 +13465,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12588,6 +13520,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12639,6 +13575,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12854,6 +13794,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12905,6 +13849,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12956,6 +13904,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13007,6 +13959,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13108,6 +14064,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13159,6 +14119,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13210,6 +14174,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13261,6 +14229,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13312,6 +14284,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13363,6 +14339,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13423,7 +14403,7 @@ PrefabInstance:
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6925792248520418738, guid: 381c8d9a828662e40bf8916758d7be78,
         type: 3}
@@ -13447,758 +14427,253 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381c8d9a828662e40bf8916758d7be78, type: 3}
---- !u!4 &396763720431412442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065741420689882720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.591805, z: 0}
-  m_LocalScale: {x: 1, y: 0.5918049, z: 1}
-  m_Children:
-  - {fileID: 6828134477082966229}
-  - {fileID: 8126715741786554186}
-  m_Father: {fileID: 3001106560814252371}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!222 &867973005188163917
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5434932205394707860}
-  m_CullTransparentMesh: 0
---- !u!1 &1065741420689882720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 396763720431412442}
-  m_Layer: 0
-  m_Name: Mage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1224040023430279790
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1630591340834682202}
-  - component: {fileID: 5336035316139695073}
-  - component: {fileID: 8370334156667029785}
-  m_Layer: 0
-  m_Name: Hood
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1437731687615188156
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6828134477082966229}
-  - component: {fileID: 3066637172608262824}
-  - component: {fileID: 8222563876833296074}
-  m_Layer: 0
-  m_Name: BaseModel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1569709699749563301
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4531195257245207874}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00002810187, y: 0.83454466, z: -0.010747978}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8126715741786554186}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1630591340834682202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224040023430279790}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.6484761, z: 0.0153008625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8126715741786554186}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1764318929024987800
+--- !u!1001 &958348088798871410
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2406582231655661398, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2406582231655661398, guid: 3583efe7adee71641bded4fee3cd6591,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 6.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827323, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7634975540100827327, guid: 3583efe7adee71641bded4fee3cd6591,
+    - target: {fileID: 2660129872426991141, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
+        type: 3}
+      propertyPath: m_Name
+      value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660129872426991146, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
+        type: 3}
+      propertyPath: selectedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a3d23bea6773534683deb31827aa0af, type: 2}
+    - target: {fileID: 7817028500282526156, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817028500282526156, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76ef630a4bdf23e468ee3a9427e6a06f, type: 3}
+--- !u!1001 &1308270443603752129
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1308270442393371768, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442393371768, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563214, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: selectedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a3d23bea6773534683deb31827aa0af, type: 2}
+    - target: {fileID: 1308270442748563215, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_Name
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aea0077ce2de5f54b9fa4cf1a133bc92, type: 3}
+--- !u!1001 &1704556252702755554
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3368190717386475308, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368190717386475308, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363160660438249669, guid: 00005a76cab52ea4f83e944de9dc5a44,
         type: 3}
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3583efe7adee71641bded4fee3cd6591, type: 3}
---- !u!33 &1911532401339913476
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6748919269811199039}
-  m_Mesh: {fileID: 779739500990683203, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!33 &1957636922964931044
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4531195257245207874}
-  m_Mesh: {fileID: -6896512580399701304, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!1 &2316457672394391151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2450696519667700946}
-  - component: {fileID: 7775420114904599639}
-  m_Layer: 5
-  m_Name: Slider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2450038483409388144
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4337357723889703675}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -2.1684042e-20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8126715741786554186}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &2450696519667700946
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2316457672394391151}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4079138939471805076}
-  - {fileID: 6577405336262427157}
-  m_Father: {fileID: 8334606232110100028}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 80, y: 20}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!33 &2647527330884663253
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3023190735366618529}
-  m_Mesh: {fileID: -66333826979096818, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!114 &2819075248107890559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079963703210735624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.288177, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &3001106560790515804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3001106560790515805}
-  - component: {fileID: 3001106560790515807}
-  - component: {fileID: 3001106560790515806}
-  m_Layer: 5
-  m_Name: DamageText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3001106560790515805
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560790515804}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2999878}
-  m_LocalScale: {x: 0.0885537, y: 0.088553704, z: 0.088553704}
-  m_Children: []
-  m_Father: {fileID: 8334606232110100028}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.10001831, y: 10.999994}
-  m_SizeDelta: {x: 75.08, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3001106560790515806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560790515804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 110
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 110
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: 
---- !u!222 &3001106560790515807
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560790515804}
-  m_CullTransparentMesh: 0
---- !u!33 &3001106560814252370
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &3001106560814252371
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.47, y: 1, z: 2.5}
-  m_LocalScale: {x: 1, y: 1.6897459, z: 1}
-  m_Children:
-  - {fileID: 396763720431412442}
-  - {fileID: 8334606232110100028}
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3001106560814252372
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.2774198, z: 1}
-  m_Center: {x: 0, y: -0.36129215, z: 0}
---- !u!23 &3001106560814252373
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 8b385aac60d4fc340838c0ca300b4c78, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!1 &3001106560814252375
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3001106560814252371}
-  - component: {fileID: 3001106560814252370}
-  - component: {fileID: 3001106560814252373}
-  - component: {fileID: 3001106560814252372}
-  - component: {fileID: 3001106560814252377}
-  - component: {fileID: 3001106560814252376}
-  m_Layer: 8
-  m_Name: Mage
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &3001106560814252376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1288f9e6e5bb5af4a8e6bb8e0907f51f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackShape: 1
-  currentTile: {fileID: 0}
-  tileCrossTime: 0.3
-  RemainingActions: 2
-  _baseStats: {fileID: 0}
-  healthText: {fileID: 8334606233170347250}
-  damageText: {fileID: 3001106560790515806}
-  healthBar: {fileID: 7775420114904599639}
-  defaultMat: {fileID: 0}
-  selectedMat: {fileID: 0}
-  Ability1Range: 0
-  Ability2Range: 0
-  Ability1Cooldown: 3
-  Ability2Cooldown: 3
-  Ability1Name: Fire Blast
-  Ability2Name: Buff
---- !u!54 &3001106560814252377
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001106560814252375}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!1 &3023190735366618529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9029503498361958141}
-  - component: {fileID: 2647527330884663253}
-  - component: {fileID: 4555847079057772529}
-  m_Layer: 0
-  m_Name: Book
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!33 &3066637172608262824
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437731687615188156}
-  m_Mesh: {fileID: -4943316010187642368, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!1 &3079963703210735624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7005092499214972606}
-  - component: {fileID: 6679506134328519858}
-  - component: {fileID: 2819075248107890559}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &3659201497720945042
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6748919269811199039}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!1 &3912870153504470477
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6577405336262427157}
-  m_Layer: 5
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4079138939471805076
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5434932205394707860}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2450696519667700946}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &4337357723889703675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2450038483409388144}
-  - component: {fileID: 8017763573946144825}
-  - component: {fileID: 7843063261833015752}
-  m_Layer: 0
-  m_Name: Boots
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &4531195257245207874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1569709699749563301}
-  - component: {fileID: 1957636922964931044}
-  - component: {fileID: 7998636714350737344}
-  m_Layer: 0
-  m_Name: Robe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &4555847079057772529
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3023190735366618529}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!114 &4792425127718814369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606232110099968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ebe58d8b7d29147822cf941e4ad2ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &5083006442894301679
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6748919269811199039}
-  m_LocalRotation: {x: -0.25660482, y: -0.033782665, z: -0.12607862, w: 0.9576622}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8126715741786554186}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5336035316139695073
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224040023430279790}
-  m_Mesh: {fileID: -3137129725661375301, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!1 &5434932205394707860
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4079138939471805076}
-  - component: {fileID: 867973005188163917}
-  - component: {fileID: 6157702017103236888}
-  m_Layer: 5
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_SourcePrefab: {fileID: 100100000, guid: 00005a76cab52ea4f83e944de9dc5a44, type: 3}
 --- !u!1001 &6127344535123748814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14249,7 +14724,7 @@ PrefabInstance:
     - target: {fileID: 6127344535698739246, guid: a8d2d972ba40cbf4ba64a763007949f9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6127344535698739246, guid: a8d2d972ba40cbf4ba64a763007949f9,
         type: 3}
@@ -14268,308 +14743,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8d2d972ba40cbf4ba64a763007949f9, type: 3}
---- !u!114 &6157702017103236888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5434932205394707860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!224 &6577405336262427157
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3912870153504470477}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7005092499214972606}
-  m_Father: {fileID: 2450696519667700946}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10.000001, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6679506134328519858
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079963703210735624}
-  m_CullTransparentMesh: 0
---- !u!1 &6748919269811199039
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5083006442894301679}
-  - component: {fileID: 1911532401339913476}
-  - component: {fileID: 3659201497720945042}
-  m_Layer: 0
-  m_Name: Staff
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6828134477082966229
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437731687615188156}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -2.1684042e-20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 396763720431412442}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &7005092499214972606
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079963703210735624}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6577405336262427157}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7775420114904599639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2316457672394391151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 0
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 7005092499214972606}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!23 &7843063261833015752
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4337357723889703675}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!23 &7998636714350737344
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4531195257245207874}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &8017763573946144825
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4337357723889703675}
-  m_Mesh: {fileID: -2785905844601245878, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
---- !u!4 &8126715741786554186
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8882554288851578272}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 9029503498361958141}
-  - {fileID: 2450038483409388144}
-  - {fileID: 1630591340834682202}
-  - {fileID: 1569709699749563301}
-  - {fileID: 5083006442894301679}
-  m_Father: {fileID: 396763720431412442}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &8222563876833296074
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437731687615188156}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!114 &8319176649623718083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14585,6 +14758,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14636,6 +14813,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14687,6 +14868,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14738,6 +14923,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14789,6 +14978,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14840,6 +15033,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14891,6 +15088,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14992,6 +15193,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15043,6 +15248,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15094,6 +15303,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15145,6 +15358,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15196,6 +15413,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15247,6 +15468,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15298,6 +15523,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15349,6 +15578,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15400,6 +15633,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15451,6 +15688,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15504,7 +15745,7 @@ Transform:
   - {fileID: 8319176650501167163}
   - {fileID: 8319176651121462025}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8319176649830313993
 MonoBehaviour:
@@ -15521,6 +15762,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15622,6 +15867,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15673,6 +15922,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15724,6 +15977,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15775,6 +16032,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15826,6 +16087,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15877,6 +16142,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15928,6 +16197,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15979,6 +16252,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16030,6 +16307,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16081,6 +16362,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16182,6 +16467,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16233,6 +16522,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16284,6 +16577,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16335,6 +16632,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16386,6 +16687,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16437,6 +16742,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16538,6 +16847,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16589,6 +16902,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16671,6 +16988,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16691,6 +17012,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16792,6 +17117,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16843,6 +17172,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16894,6 +17227,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16945,6 +17282,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16996,6 +17337,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17047,6 +17392,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17098,6 +17447,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17149,6 +17502,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17200,6 +17557,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17251,6 +17612,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17302,6 +17667,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17353,6 +17722,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17532,6 +17905,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17583,6 +17960,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17634,6 +18015,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17685,6 +18070,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17736,6 +18125,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17787,6 +18180,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17838,6 +18235,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17889,6 +18290,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17940,6 +18345,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17991,6 +18400,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18042,6 +18455,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18093,6 +18510,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18144,6 +18565,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18195,6 +18620,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18296,6 +18725,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18347,6 +18780,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18398,6 +18835,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18499,6 +18940,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18600,6 +19045,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18651,6 +19100,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18702,6 +19155,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18753,6 +19210,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18804,6 +19265,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18855,6 +19320,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18906,6 +19375,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18957,6 +19430,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19008,6 +19485,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19059,6 +19540,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19110,6 +19595,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19161,6 +19650,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19212,6 +19705,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19263,6 +19760,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19408,6 +19909,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19459,6 +19964,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19510,6 +20019,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19561,6 +20074,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19612,6 +20129,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19663,6 +20184,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19714,6 +20239,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19765,6 +20294,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19816,6 +20349,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19867,6 +20404,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19918,6 +20459,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19969,6 +20514,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20020,6 +20569,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20071,6 +20624,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20122,6 +20679,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20223,6 +20784,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20324,6 +20889,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20375,6 +20944,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20426,6 +20999,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20477,6 +21054,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20528,6 +21109,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20579,6 +21164,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20630,6 +21219,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20681,6 +21274,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20732,6 +21329,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20783,6 +21384,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20834,6 +21439,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20885,6 +21494,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20936,6 +21549,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20987,6 +21604,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21038,6 +21659,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21089,6 +21714,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21140,6 +21769,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21191,6 +21824,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21242,6 +21879,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21293,6 +21934,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21344,6 +21989,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21395,6 +22044,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21446,6 +22099,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21497,6 +22154,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21548,6 +22209,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21685,6 +22350,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21705,6 +22374,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21756,6 +22429,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21807,6 +22484,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21858,6 +22539,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21909,6 +22594,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21960,6 +22649,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22011,6 +22704,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22062,6 +22759,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22113,6 +22814,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22164,6 +22869,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22215,6 +22924,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22266,6 +22979,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22317,6 +23034,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22368,6 +23089,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22419,6 +23144,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22520,6 +23249,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22571,6 +23304,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22639,6 +23376,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22801,6 +23542,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22902,6 +23647,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22953,6 +23702,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23004,6 +23757,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23055,6 +23812,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23106,6 +23867,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23157,6 +23922,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23208,6 +23977,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23259,6 +24032,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23310,6 +24087,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23361,6 +24142,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23462,6 +24247,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23563,6 +24352,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23614,6 +24407,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23665,6 +24462,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23716,6 +24517,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23767,6 +24572,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23818,6 +24627,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23869,6 +24682,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23937,6 +24754,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23971,6 +24792,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24022,6 +24847,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24073,6 +24902,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24124,6 +24957,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24175,6 +25012,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24226,6 +25067,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24277,6 +25122,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24328,6 +25177,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24379,6 +25232,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24461,6 +25318,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24531,6 +25392,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24613,6 +25478,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24633,6 +25502,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24684,6 +25557,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24735,6 +25612,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24786,6 +25667,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24837,6 +25722,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24888,6 +25777,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24939,6 +25832,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24990,6 +25887,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25041,6 +25942,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25092,6 +25997,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25143,6 +26052,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25194,6 +26107,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25245,6 +26162,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25296,6 +26217,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25441,6 +26366,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25492,6 +26421,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25543,6 +26476,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25594,6 +26531,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25645,6 +26586,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25696,6 +26641,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25747,6 +26696,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25798,6 +26751,10 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  tileEffect: 0
+  effectMagnitude: 0
+  effectCooldown: 10
+  remainingCooldown: 0
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25834,252 +26791,3 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &8334606232110099968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8334606232110100028}
-  - component: {fileID: 8334606232110100029}
-  - component: {fileID: 8334606232110099970}
-  - component: {fileID: 8334606232110099971}
-  - component: {fileID: 4792425127718814369}
-  m_Layer: 5
-  m_Name: HealthCanvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &8334606232110099970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606232110099968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!114 &8334606232110099971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606232110099968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!224 &8334606232110100028
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606232110099968}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.008}
-  m_LocalScale: {x: -0.03909421, y: 0.023136143, z: 0.039094206}
-  m_Children:
-  - {fileID: 2450696519667700946}
-  - {fileID: 3001106560790515805}
-  - {fileID: 8334606233170347251}
-  m_Father: {fileID: 3001106560814252371}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.05, y: 0.703}
-  m_SizeDelta: {x: 80, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &8334606232110100029
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606232110099968}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!222 &8334606233170347245
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606233170347248}
-  m_CullTransparentMesh: 0
---- !u!1 &8334606233170347248
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8334606233170347251}
-  - component: {fileID: 8334606233170347245}
-  - component: {fileID: 8334606233170347250}
-  m_Layer: 5
-  m_Name: HealthText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &8334606233170347250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606233170347248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 100
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: 0/0
---- !u!224 &8334606233170347251
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8334606233170347248}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2999878}
-  m_LocalScale: {x: 0.0885537, y: 0.088553704, z: 0.088553704}
-  m_Children: []
-  m_Father: {fileID: 8334606232110100028}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.10001831, y: -0}
-  m_SizeDelta: {x: 75.08, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!23 &8370334156667029785
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224040023430279790}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5561349426305759274, guid: 6d172b45779081c42ae0af00b030e233, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!1 &8882554288851578272
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8126715741786554186}
-  m_Layer: 0
-  m_Name: Mage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9029503498361958141
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3023190735366618529}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.8341218, z: 0.29021838}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8126715741786554186}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

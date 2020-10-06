@@ -22,7 +22,6 @@ public abstract class Player : Humanoid, IPlayer
         AbilityTwo
     }
 
-
     bool selected = false;
      public Material defaultMat;
     /// <summary> The material for the player when they are selected. </summary>
@@ -46,20 +45,22 @@ public abstract class Player : Humanoid, IPlayer
     public int Ability2Cooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
-    int _remainingAbility1CD;
+    int _remainingAbilityOneCD;
 
     /// <summary> The remaining cooldown on ability two.  </summary>
-    int _remainingAbility2CD;
+    int _remainingAbilityTwoCD;
 
-    [Space]
-    /// <summary> The name of the player's first ability.</summary>
-    [Header("The name of the player's first ability.")]
-    public string Ability1Name;
+    [Space(5)]
+    /// <summary> The sprites of the player's normal attack.</summary>
+    public Sprite[] NormalAttackSprites = new Sprite[5];
+    [Space(5)]
+    /// <summary> The sprites of the player's first ability.</summary>
+    public Sprite[] Ability1Sprites = new Sprite[5];
+    [Space(5)]
+    /// <summary> The sprites of the player's second ability.</summary>
+    public Sprite[] Ability2Sprites = new Sprite[5];
 
-    [Space]
-    /// <summary> The name of the player's second ability.</summary>
-    [Header("The name of the player's second ability.")]
-    public string Ability2Name;
+
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
@@ -67,10 +68,10 @@ public abstract class Player : Humanoid, IPlayer
     [HideInInspector] public bool[,] Ability2TileRange { get; set; }
 
     /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
-    public int RemainingAbility1CD { get { return _remainingAbility1CD; } }
+    public int RemainingAbilityOneCD { get { return _remainingAbilityOneCD; } }
 
     /// <summary> Public property to get the remaining cooldown of ability2. </summary>
-    public int RemainingAbility2CD { get { return _remainingAbility2CD; } }
+    public int RemainingAbilityTwoCD { get { return _remainingAbilityTwoCD; } }
 
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
@@ -82,6 +83,10 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator NormalAttackCR(Action callback);
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
+
+    [Space]
+    public AudioClip abilityOneSoundEffect;
+    public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
@@ -138,17 +143,63 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public override void AdvanceTimer()
     {
+
+        if (_remainingAbilityOneCD > 0)
+        {
+            _remainingAbilityOneCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
+
+        if (_remainingAbilityTwoCD > 0)
+        {
+            _remainingAbilityTwoCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
+
         base.AdvanceTimer();
+    }
+    /// <summary>
+    /// Bandaid Fix
+    /// </summary>
+    public void CoolDown()
+    {
+        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
-        if (_remainingAbility1CD > 0) _remainingAbility1CD--;
-
-        if (_remainingAbility2CD > 0) _remainingAbility2CD--;
-
+        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
     }
 
+    /// <summary>
+    /// Starts the cooldown of this unit's first ability.
+    /// </summary>
     protected void StartAbilityOneCD()
     {
-        _remainingAbility1CD = Ability1Cooldown;
+        _remainingAbilityOneCD = Ability1Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
+    }
+
+    /// <summary>
+    /// Starts the cooldown of this unit's second ability.
+    /// </summary>
+    protected void StartAbilityTwoCD()
+    {
+        _remainingAbilityTwoCD = Ability2Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
+    }
+
+    /// <summary> Play's the sound effect for this player's first ability. </summary>
+    protected void PlayAbilityOneSoundEffect()
+    {
+        audioSource.clip = abilityOneSoundEffect;
+
+        audioSource.Play();
+    }
+
+    /// <summary> Play's the sound effect for this player's second ability. </summary>
+    protected void PlayAbilityTwoSoundEffect()
+    {
+        audioSource.clip = abilityTwoSoundEffect;
+
+        audioSource.Play();
     }
 
     public void FindActionRanges()
@@ -157,5 +208,16 @@ public abstract class Player : Humanoid, IPlayer
         Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
         Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
         //print("Ranges found");
+    }
+
+    public void Heal()
+    {
+        Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+
+        if (Health > MaxHealth) Health = MaxHealth;
+
+        healthText.text = Health + "/" + _maxHealth;
+
+        healthBar.value = (float)Health / (float)_maxHealth;
     }
 }
