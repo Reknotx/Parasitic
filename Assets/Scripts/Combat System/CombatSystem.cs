@@ -111,7 +111,7 @@ public class CombatSystem : MonoBehaviour
         Instance = this;
         SetupBattle();
         SetEnemyCountText();
-        //roundCounterText.text = "Round: " + _roundCounter;
+        roundCounterText.text = "Round: " + _roundCounter;
     }
 
     private void Update()
