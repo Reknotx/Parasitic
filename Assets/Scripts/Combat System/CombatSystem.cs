@@ -81,7 +81,7 @@ public class CombatSystem : MonoBehaviour
     public Text roundCounterText;
 
     private int _roundCounter = 1;
-    
+
     //public GameObject turnSwitch;
 
     /// <summary> The text stating which side is active. </summary>
@@ -115,7 +115,7 @@ public class CombatSystem : MonoBehaviour
 
     private void Update()
     {
-        if(abilityInfo.gameObject.activeInHierarchy)
+        if (abilityInfo.gameObject.activeInHierarchy)
         {
             abilityInfo.rectTransform.position = Input.mousePosition;
         }
@@ -168,7 +168,7 @@ public class CombatSystem : MonoBehaviour
     {
         int index = Random.Range(0, enemiesToGo.Count);
 
-        List<Tile> temp =  MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
+        List<Tile> temp = MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
 
         foreach (Tile tile in temp)
         {
@@ -215,7 +215,7 @@ public class CombatSystem : MonoBehaviour
     public void SetTarget(Humanoid selection)
     {
         if (selection == player)
-        {   
+        {
             Debug.Log("Can't select yourself for attack.");
             return;
         }
@@ -304,7 +304,7 @@ public class CombatSystem : MonoBehaviour
             CharacterSelector.Instance.BoarderLine.SetActive(false);
             //Deactivate combat buttons
             DeactivateCombatButtons();
-           // player.GetComponent<MeshRenderer>().material.color = Color.gray;
+            // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
@@ -336,7 +336,7 @@ public class CombatSystem : MonoBehaviour
 
         player = null;
         target = null;
-        
+
         unit.State = HumanoidState.Done;
     }
 
@@ -362,7 +362,7 @@ public class CombatSystem : MonoBehaviour
             unit.HasAttacked = false;
         }
         //increment tile cooldown
-        for(int tile = coolingTiles.Count - 1; tile >= 0; tile--)
+        for (int tile = coolingTiles.Count - 1; tile >= 0; tile--)
         {
             if (coolingTiles[tile].NewRound())
             {
@@ -453,6 +453,7 @@ public class CombatSystem : MonoBehaviour
 
             Enemy tempE = enemiesToGo[index];
 
+            //if (tempE.CheckIfInRangeOfTarget())
             if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
             {
                 tempE.Move(tempE.TauntedPath());
@@ -563,8 +564,8 @@ public class CombatSystem : MonoBehaviour
             }
             abilityInfo.gameObject.SetActive(true);
         }
-        
-        
+
+
     }
 
     /// <summary>
@@ -650,7 +651,7 @@ public class CombatSystem : MonoBehaviour
                 st.pressedSprite = tempP.Ability1Sprites[2];
                 button.spriteState = st;
 
-                print(tempP.name +  " ability one CD: " + tempP.RemainingAbilityOneCD);
+                print(tempP.name + " ability one CD: " + tempP.RemainingAbilityOneCD);
 
                 if (tempP.RemainingAbilityOneCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
                 {
