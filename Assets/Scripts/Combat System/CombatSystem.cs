@@ -87,6 +87,9 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The text stating which side is active. </summary>
     public Text activeSideText;
 
+    public Text abilityOneCDText;
+    public Text abilityTwoCDText;
+
     /// <summary> The list of player's that have yet to go this round. </summary>
     private List<Player> playersToGo = new List<Player>();
 
@@ -417,12 +420,12 @@ public class CombatSystem : MonoBehaviour
     public void AttackComplete()
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
-
+        CharacterSelector.Instance.SetLastSelected();
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
         SetBattleState(BattleState.Idle);
-
+        SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
     }
 
     /// <summary>
@@ -506,6 +509,7 @@ public class CombatSystem : MonoBehaviour
     public void KillUnit(Humanoid unit)
     {
         unitsAlive.Remove(unit);
+        UnsubscribeTimerUnit(unit);
 
         SetEnemyCountText();
 
@@ -580,6 +584,37 @@ public class CombatSystem : MonoBehaviour
     public void HideAbilityInfo()
     {
         abilityInfo.gameObject.SetActive(false);
+    }
+
+    public void SetCoolDownText(Player player)
+    {
+        if(CharacterSelector.Instance.SelectedPlayerUnit == player || (CharacterSelector.Instance.SelectedPlayerUnit == null && CharacterSelector.Instance.LastSelectedPlayerUnit == player))
+        {
+            if(player.RemainingAbilityOneCD > 0)
+            {
+                abilityOneCDText.text = player.RemainingAbilityOneCD.ToString();
+                abilityOneCDText.transform.parent.gameObject.SetActive(true);
+            }
+            else 
+            {
+                abilityOneCDText.transform.parent.gameObject.SetActive(false);
+            }
+
+
+            if (player.RemainingAbilityTwoCD > 0 )
+            {
+                abilityTwoCDText.text = player.RemainingAbilityTwoCD.ToString();
+                abilityTwoCDText.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                abilityTwoCDText.transform.parent.gameObject.SetActive(false);
+            }
+        }
+
+
+
+        
     }
 
     /// <summary> Checks the win condition to see if it's met. </summary>
@@ -660,11 +695,17 @@ public class CombatSystem : MonoBehaviour
 
                 print(tempP.name + " ability one CD: " + tempP.RemainingAbilityOneCD);
 
+                
                 if (tempP.RemainingAbilityOneCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
                 {
-                    print(tempP.name + " ability One not unlocked");
+                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                    {
+                        print(tempP.name + " ability One not unlocked");
+                    }
+
                     button.interactable = false;
                 }
+
             }
             else if (button.gameObject.name == "Ability Two")
             {
@@ -678,9 +719,18 @@ public class CombatSystem : MonoBehaviour
 
                 print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
 
-                if (tempP.RemainingAbilityTwoCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType)) button.interactable = false;
-            }
+                
+                if (tempP.RemainingAbilityTwoCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                {
+                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                    {
+                        print(tempP.name + " ability Two not unlocked");
+                    }
 
+                    button.interactable = false;
+                }
+
+            }
         }
     }
 
@@ -709,7 +759,11 @@ public class CombatSystem : MonoBehaviour
     public void SubscribeTimerUnit(Humanoid subject)
     {
         if (timerUnits == null) { timerUnits = new List<Humanoid>(); }
-        timerUnits.Add(subject);
+        if(!timerUnits.Contains(subject))
+        {
+            timerUnits.Add(subject);
+        }
+        
     }
 
     /// <summary>

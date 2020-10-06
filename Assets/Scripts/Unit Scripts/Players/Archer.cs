@@ -44,6 +44,7 @@ public class Archer : Player
         hasTrueDamage = true;
         ActionRange.Instance.ActionDeselected(false);
         StartAbilityTwoCD();
+        CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)

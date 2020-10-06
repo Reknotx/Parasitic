@@ -144,9 +144,17 @@ public abstract class Player : Humanoid, IPlayer
     public override void AdvanceTimer()
     {
 
-        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
+        if (_remainingAbilityOneCD > 0)
+        {
+            _remainingAbilityOneCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
 
-        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
+        if (_remainingAbilityTwoCD > 0)
+        {
+            _remainingAbilityTwoCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
 
         base.AdvanceTimer();
     }
@@ -166,6 +174,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void StartAbilityOneCD()
     {
         _remainingAbilityOneCD = Ability1Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
     }
 
     /// <summary>
@@ -174,6 +183,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void StartAbilityTwoCD()
     {
         _remainingAbilityTwoCD = Ability2Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
     }
 
     /// <summary> Play's the sound effect for this player's first ability. </summary>

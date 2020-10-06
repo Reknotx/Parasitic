@@ -285,7 +285,7 @@ public class Upgrades : MonoBehaviour
                         if (MagePoints >= pointRequirement)
                         {
                             unlockedMageAbilities.Add(ability);
-                            SetAbilityButtonState(ability);
+                            SetAbilityButtonState(ability, unit);
                             MagePoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -296,7 +296,7 @@ public class Upgrades : MonoBehaviour
                         if (KnightPoints >= pointRequirement)
                         {
                             unlockedKnightAbilities.Add(ability);
-                            SetAbilityButtonState(ability);
+                            SetAbilityButtonState(ability, unit);
                             KnightPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -307,7 +307,7 @@ public class Upgrades : MonoBehaviour
                         if (ArcherPoints >= pointRequirement)
                         {
                             unlockedArcherAbilities.Add(ability);
-                            SetAbilityButtonState(ability);
+                            SetAbilityButtonState(ability, unit);
                             ArcherPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -399,9 +399,9 @@ public class Upgrades : MonoBehaviour
     /// Sets states of ability button based on input ability
     /// </summary>
     /// <param name="ability">ability to set</param>
-    private void SetAbilityButtonState(Abilities ability)
+    private void SetAbilityButtonState(Abilities ability, UnitToUpgrade unitType)
     {
-        if(CharacterSelector.Instance.SelectedPlayerUnit != null)
+        if(CharacterSelector.Instance.SelectedPlayerUnit != null && GetUnitType() == unitType)
         {
             if (ability == Abilities.ability1)
             {

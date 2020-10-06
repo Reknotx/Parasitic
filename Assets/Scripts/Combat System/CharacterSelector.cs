@@ -31,6 +31,7 @@ public class CharacterSelector : MonoBehaviour
 
     /// <summary> The selected player unit. </summary>
     [HideInInspector] public Player SelectedPlayerUnit;
+    [HideInInspector] public Player LastSelectedPlayerUnit;
 
     /// <summary> The selected enemy unit. </summary>
     [HideInInspector] public Humanoid SelectedTargetUnit;
@@ -115,11 +116,20 @@ public class CharacterSelector : MonoBehaviour
 
                     if (playerObj != SelectedPlayerUnit && !playerObj.HasAttacked)
                     {
-                        if (SelectedPlayerUnit != null) { SelectedPlayerUnit.UnitDeselected(); }
+                        if (SelectedPlayerUnit != null)
+                        {
+                            SetLastSelected();
+                            SelectedPlayerUnit.UnitDeselected();
+                        }
                         SelectedUnitObj = playerObj.gameObject;
                         SelectedPlayerUnit = playerObj;
+                        if(LastSelectedPlayerUnit == null)
+                        {
+                            SetLastSelected();
+                        }
                         SelectedPlayerUnit.UnitSelected();
                         BoarderLine.SetActive(false);
+                        CombatSystem.Instance.SetCoolDownText(SelectedPlayerUnit);
                         if (SelectedPlayerUnit.HasMoved == false || debugKeepMoving)
                         {
                             SelectedPlayerUnit.FindMovementRange();
@@ -134,10 +144,12 @@ public class CharacterSelector : MonoBehaviour
                     else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                     {
                         print("Deselecting the already selected unit.");
+                        SetLastSelected();
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedUnitObj = null;
                         SelectedPlayerUnit = null;
                         BoarderLine.SetActive(false);
+                        CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
                     }
                 }
                 else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
@@ -159,11 +171,13 @@ public class CharacterSelector : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             SelectedPlayerUnit.Move(path);
+                            SetLastSelected();
                             SelectedPlayerUnit.UnitDeselected();
                             SelectedPlayerUnit = null;
                             selectedTile = null;
                             BoarderLine.SetActive(false);
                             HidePath();
+                            CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
                         }
                     }
                     else
@@ -263,5 +277,10 @@ public class CharacterSelector : MonoBehaviour
     public void SetTargettingType(TargettingType type)
     {
         targettingType = type;
+    }
+
+    public void SetLastSelected()
+    {
+        LastSelectedPlayerUnit = SelectedPlayerUnit;
     }
 }
