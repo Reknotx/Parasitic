@@ -111,6 +111,7 @@ public class CombatSystem : MonoBehaviour
         Instance = this;
         SetupBattle();
         SetEnemyCountText();
+        roundCounterText.text = "Round: " + _roundCounter;
     }
 
     private void Update()
@@ -378,6 +379,7 @@ public class CombatSystem : MonoBehaviour
         activeSideText.text = "Player's turn";
 
         _roundCounter++;
+        roundCounterText.text = "Round: " + _roundCounter;
     }
 
     /// <summary> Executes the attack type that we have passed in. </summary>
