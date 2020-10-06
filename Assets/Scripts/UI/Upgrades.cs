@@ -31,7 +31,7 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
 
-    public GameObject upgradeWindow;    
+    public GameObject upgradeWindow;
     public GameObject infoWindow;
     public GameObject notification;
 
@@ -75,7 +75,7 @@ public class Upgrades : MonoBehaviour
         set
         {
             _mageXp = value;
-            if(_mageXp >= 100)
+            if (_mageXp >= 100)
             {
                 _mageXp -= 100;
                 MagePoints++;
@@ -142,7 +142,7 @@ public class Upgrades : MonoBehaviour
 
     public int KnightPoints
     {
-        get{return _knightPoints;}
+        get { return _knightPoints; }
         set
         {
             _knightPoints = value;
@@ -152,7 +152,7 @@ public class Upgrades : MonoBehaviour
 
     public int ArcherPoints
     {
-        get{return _archerPoints;}
+        get { return _archerPoints; }
         set
         {
             _archerPoints = value;
@@ -190,7 +190,7 @@ public class Upgrades : MonoBehaviour
 
         //Get references to each upgrade button and add UnlockAbility Function to OnClick()
         upgradeButtons = new List<UpgradeButton>(GetComponentsInChildren<UpgradeButton>(true));
-        foreach(UpgradeButton upgradeButton in upgradeButtons)
+        foreach (UpgradeButton upgradeButton in upgradeButtons)
         {
             upgradeButton.GetComponent<Button>().onClick.AddListener(() => UnlockAbility(upgradeButton.unitToUpgrade, upgradeButton.abilityToUnlock, upgradeButton.requiredAbility, upgradeButton.pointRequirement));
         }
@@ -199,19 +199,19 @@ public class Upgrades : MonoBehaviour
         unlockedKnightAbilities = new List<Abilities>();
         unlockedArcherAbilities = new List<Abilities>();
 
-       
+
         DisplayPoints();
         SetButtonStates();
         ShowUpgradeNotification();
     }
 
-   
+
 
     // Update is called once per frame
     void Update()
     {
         //Makes Info Window Follow Mouse While Active
-        if(infoWindow.activeInHierarchy)
+        if (infoWindow.activeInHierarchy)
         {
             infoWindow.transform.position = Input.mousePosition;
         }
@@ -275,9 +275,9 @@ public class Upgrades : MonoBehaviour
     public void UnlockAbility(UnitToUpgrade unit, Abilities ability, Abilities abilityRequirement, int pointRequirement)
     {
         Debug.Log(ability);
-        if(ability != Abilities.none && !IsAbilityUnlocked(ability, unit))
+        if (ability != Abilities.none && !IsAbilityUnlocked(ability, unit))
         {
-            if(IsAbilityUnlocked(abilityRequirement, unit))
+            if (IsAbilityUnlocked(abilityRequirement, unit))
             {
                 switch (unit)
                 {
@@ -285,6 +285,7 @@ public class Upgrades : MonoBehaviour
                         if (MagePoints >= pointRequirement)
                         {
                             unlockedMageAbilities.Add(ability);
+                            SetAbilityButtonState(ability);
                             MagePoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -295,6 +296,7 @@ public class Upgrades : MonoBehaviour
                         if (KnightPoints >= pointRequirement)
                         {
                             unlockedKnightAbilities.Add(ability);
+                            SetAbilityButtonState(ability);
                             KnightPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -305,6 +307,7 @@ public class Upgrades : MonoBehaviour
                         if (ArcherPoints >= pointRequirement)
                         {
                             unlockedArcherAbilities.Add(ability);
+                            SetAbilityButtonState(ability);
                             ArcherPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
                         }
@@ -321,7 +324,7 @@ public class Upgrades : MonoBehaviour
             {
                 StartCoroutine(CantUnlockMessage("Must Unlock Ability First"));
             }
-            
+
         }
 
     }
@@ -336,7 +339,7 @@ public class Upgrades : MonoBehaviour
     {
         bool result = false;
 
-        if(ability != Abilities.none)
+        if (ability != Abilities.none)
         {
             switch (unit)
             {
@@ -392,6 +395,24 @@ public class Upgrades : MonoBehaviour
         return unitType;
     }
 
+    /// <summary>
+    /// Sets states of ability button based on input ability
+    /// </summary>
+    /// <param name="ability">ability to set</param>
+    private void SetAbilityButtonState(Abilities ability)
+    {
+        if (ability == Abilities.ability1)
+        {
+
+            CombatSystem.Instance.SetAbilityOneButtonState(true);
+
+        }
+        else if(ability == Abilities.ability2)
+        {
+            CombatSystem.Instance.SetAbilityTwoButtonState(true);
+        }
+    }
+
     #endregion
 
     #region UI Functions
@@ -415,16 +436,16 @@ public class Upgrades : MonoBehaviour
     /// </summary>
     public void SetButtonStates()
     {
-        foreach(UpgradeButton upgradeButton in upgradeButtons)
+        foreach (UpgradeButton upgradeButton in upgradeButtons)
         {
-            if(IsAbilityUnlocked(upgradeButton.abilityToUnlock, upgradeButton.unitToUpgrade))
+            if (IsAbilityUnlocked(upgradeButton.abilityToUnlock, upgradeButton.unitToUpgrade))
             {
                 upgradeButton.GetComponent<Image>().color = Color.green;
             }
         }
     }
 
-    
+
     /// <summary>
     /// Sets Description of Info window
     /// </summary>
@@ -433,7 +454,7 @@ public class Upgrades : MonoBehaviour
     {
         infoText.text = info;
     }
-    
+
     /// <summary>
     /// Sets Title of Info Window
     /// </summary>
@@ -464,13 +485,14 @@ public class Upgrades : MonoBehaviour
     /// </summary>
     public void ToggleUpgradeMenu()
     {
-        if(upgradeWindow.activeInHierarchy)
+        if (upgradeWindow.activeInHierarchy)
         {
             upgradeWindow.SetActive(false);
         }
         else
         {
             upgradeWindow.SetActive(true);
+            DisplayPoints();
             SetButtonStates();
         }
 
@@ -487,23 +509,23 @@ public class Upgrades : MonoBehaviour
         string temp = infoText.text;
         infoText.text = message;
         yield return new WaitForSeconds(1f);
-        if(infoText.text == message)
+        if (infoText.text == message)
         {
             infoText.text = temp;
         }
-        
+
     }
 
 
     private void ShowUpgradeNotification()
     {
-        
-        if((MagePoints + KnightPoints + ArcherPoints) > 0)
+
+        if ((MagePoints + KnightPoints + ArcherPoints) > 0)
         {
             notification.SetActive(true);
             notificationText.text = (MagePoints + KnightPoints + ArcherPoints) + "";
         }
-        
+
     }
 
     private void ClearUpgradeNotification()
@@ -526,18 +548,18 @@ public class UpgradeSave
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
-   // public UpgradeSave()
-   // {
-   //     unlockedMageAbilities = new List<Abilities>();
-   //     unlockedKnightAbilities = new List<Abilities>();
-   //     unlockedArcherAbilities = new List<Abilities>();
-   //
-   //     mageSkillPoints = 0;
-   //     knightSkillPoints = 0;
-   //     archerSkillPoints = 0;
-   // }
+    // public UpgradeSave()
+    // {
+    //     unlockedMageAbilities = new List<Abilities>();
+    //     unlockedKnightAbilities = new List<Abilities>();
+    //     unlockedArcherAbilities = new List<Abilities>();
+    //
+    //     mageSkillPoints = 0;
+    //     knightSkillPoints = 0;
+    //     archerSkillPoints = 0;
+    // }
 
-    
 
-    
+
+
 }

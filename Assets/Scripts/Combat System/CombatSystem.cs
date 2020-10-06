@@ -551,15 +551,15 @@ public class CombatSystem : MonoBehaviour
         {
             if (button.gameObject.name == "Normal Attack")
             {
-                abilityInfo.sprite = tempP.NormalAttackSprites[3];
+                abilityInfo.sprite = tempP.NormalAttackSprites[4];
             }
             else if (button.gameObject.name == "Ability One")
             {
-                abilityInfo.sprite = tempP.Ability1Sprites[3];
+                abilityInfo.sprite = tempP.Ability1Sprites[4];
             }
             else if (button.gameObject.name == "Ability Two")
             {
-                abilityInfo.sprite = tempP.Ability2Sprites[3];
+                abilityInfo.sprite = tempP.Ability2Sprites[4];
             }
             abilityInfo.gameObject.SetActive(true);
         }
@@ -639,6 +639,7 @@ public class CombatSystem : MonoBehaviour
                 SpriteState st;
                 st.highlightedSprite = tempP.NormalAttackSprites[1];
                 st.pressedSprite = tempP.NormalAttackSprites[2];
+                st.disabledSprite = tempP.NormalAttackSprites[3];
                 button.spriteState = st;
             }
             else if (button.gameObject.name == "Ability One")
@@ -648,6 +649,7 @@ public class CombatSystem : MonoBehaviour
                 SpriteState st;
                 st.highlightedSprite = tempP.Ability1Sprites[1];
                 st.pressedSprite = tempP.Ability1Sprites[2];
+                st.disabledSprite = tempP.Ability1Sprites[3];
                 button.spriteState = st;
 
                 print(tempP.name +  " ability one CD: " + tempP.RemainingAbilityOneCD);
@@ -665,6 +667,7 @@ public class CombatSystem : MonoBehaviour
                 SpriteState st;
                 st.highlightedSprite = tempP.Ability2Sprites[1];
                 st.pressedSprite = tempP.Ability2Sprites[2];
+                st.disabledSprite = tempP.Ability2Sprites[3];
                 button.spriteState = st;
 
                 print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
