@@ -52,13 +52,13 @@ public abstract class Player : Humanoid, IPlayer
 
     [Space(5)]
     /// <summary> The sprites of the player's normal attack.</summary>
-    public Sprite[] NormalAttackSprites = new Sprite[4];
+    public Sprite[] NormalAttackSprites = new Sprite[5];
     [Space(5)]
     /// <summary> The sprites of the player's first ability.</summary>
-    public Sprite[] Ability1Sprites = new Sprite[4];
+    public Sprite[] Ability1Sprites = new Sprite[5];
     [Space(5)]
     /// <summary> The sprites of the player's second ability.</summary>
-    public Sprite[] Ability2Sprites = new Sprite[4];
+    public Sprite[] Ability2Sprites = new Sprite[5];
 
 
     
