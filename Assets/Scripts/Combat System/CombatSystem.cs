@@ -21,7 +21,8 @@ public enum BattleState
     PerformingAction,
     Targetting,
     Won,
-    Lost
+    Lost,
+    Transitioning
 }
 
 /// <summary>
@@ -752,7 +753,7 @@ public class CombatSystem : MonoBehaviour
     /// <param name="enemy">The enemy to add.</param>
     public void SubscribeEnemy(Enemy enemy)
     {
-        enemiesToGo.Add(enemy);
+        if (!enemiesToGo.Contains(enemy)) enemiesToGo.Add(enemy);
     }
 
     public List<Humanoid> timerUnits = new List<Humanoid>();
@@ -824,5 +825,66 @@ public class CombatSystem : MonoBehaviour
     public void SetAbilityTwoButtonState(bool activeState)
     {
         GameObject.Find("Ability Two").GetComponent<Button>().interactable = activeState;
+    }
+
+
+    public void SceneTransition()
+    {
+        /*  Notes
+         * 1. Screen needs to fade to black after game has been won.
+         * 2. All the player characters need to be transferred to the new map.
+         * 3. After transition complete the systems needs to be updated for the new
+         * map
+         * 4. Timer list needs to contain only the players and enemies that are on this
+         * current map. So list needs to be cleared and refilled with the references.
+         * 5.Screen needs to fade back in to allow the player to see the new level.
+         */
+
+        /*  Questions
+         * 1. Perhaps have a reference to the currently active level in the game within
+         * the combat system to find the spawning points?
+         * 
+         * 
+         */
+
+    }
+
+    IEnumerator SceneTransitionCR()
+    {
+        SetBattleState(BattleState.Transitioning);
+
+        float t = 0f;
+        float transitionRate = 0.5f;
+
+        //Forces the transition screen to fade into existence
+        while(true)
+        {
+            float opacity = Mathf.Lerp(0f, 1f, t);
+
+            //Set the alpha value of the black screen to opacity.
+
+            t += transitionRate * Time.deltaTime;
+
+            Mathf.Clamp(t, 0f, 1f);
+
+
+            if (opacity == 1f)
+            {
+                break;
+            }
+        }
+
+        //Transition the players to the new map.
+        Player[] players = FindObjectsOfType<Player>();
+
+
+        foreach (Player player in players)
+        {
+            
+        }
+
+        yield return null;
+
+        SetBattleState(BattleState.Idle);
     }
 }
