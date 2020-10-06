@@ -440,7 +440,7 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count > 0)
+        while (enemiesToGo.Count > 0 && state != BattleState.Won && state != BattleState.Lost)
         {
             int index = Random.Range(0, enemiesToGo.Count);
 
