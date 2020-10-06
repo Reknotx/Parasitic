@@ -448,7 +448,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     private void AddEffectToList(StatusEffect effect)
     {
         statusEffects.Add(effect);
-        CombatSystem.Instance.SubscribeAlteredUnit(this);
+        CombatSystem.Instance.SubscribeTimerUnit(this);
     }
 
     public void ResetStats()

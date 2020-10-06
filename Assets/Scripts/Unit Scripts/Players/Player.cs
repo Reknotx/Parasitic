@@ -143,12 +143,12 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public override void AdvanceTimer()
     {
-        base.AdvanceTimer();
 
         if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
         if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
 
+        base.AdvanceTimer();
     }
     /// <summary>
     /// Bandaid Fix

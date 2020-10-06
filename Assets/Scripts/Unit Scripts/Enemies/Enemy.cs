@@ -260,9 +260,9 @@ public abstract class Enemy : Humanoid, IEnemy
 
         removeList.Clear();
 
-        if (statusEffects.Count == 0)
-        {
-            CombatSystem.Instance.UnsubscribeAlteredUnit(this);
-        }
+        //if (statusEffects.Count == 0)
+        //{
+        //    CombatSystem.Instance.UnsubscribeTimerUnit(this);
+        //}
     }
 }

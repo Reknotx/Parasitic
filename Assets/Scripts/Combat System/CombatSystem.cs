@@ -111,7 +111,7 @@ public class CombatSystem : MonoBehaviour
         Instance = this;
         SetupBattle();
         SetEnemyCountText();
-        roundCounterText.text = "Round: " + _roundCounter;
+        //roundCounterText.text = "Round: " + _roundCounter;
     }
 
     private void Update()
@@ -133,6 +133,7 @@ public class CombatSystem : MonoBehaviour
         {
             playersToGo.Add(player);
             unitsAlive.Add(player);
+            SubscribeTimerUnit(player);
         }
 
         foreach (Enemy enemy in tempE)
@@ -140,6 +141,7 @@ public class CombatSystem : MonoBehaviour
 
             if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
+            SubscribeTimerUnit(enemy);
         }
 
         DeactivateCombatButtons();
@@ -350,7 +352,7 @@ public class CombatSystem : MonoBehaviour
         {
             if (unit is Player)
             {
-                ((Player)unit).CoolDown(); //bandaid
+                //((Player)unit).CoolDown(); //bandaid
                 playersToGo.Add((Player)unit);
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -697,23 +699,24 @@ public class CombatSystem : MonoBehaviour
         enemiesToGo.Add(enemy);
     }
 
-    public List<Humanoid> alteredUnits = new List<Humanoid>();
+    public List<Humanoid> timerUnits = new List<Humanoid>();
 
     /// <summary>
     /// Subscribes a unit that has been buffed or debuffed to the system.
     /// After every round these units will have their counters updated.
     /// </summary>
     /// <param name="subject">The unit that is altered.</param>
-    public void SubscribeAlteredUnit(Humanoid subject)
+    public void SubscribeTimerUnit(Humanoid subject)
     {
-        alteredUnits.Add(subject);
+        if (timerUnits == null) { timerUnits = new List<Humanoid>(); }
+        timerUnits.Add(subject);
     }
 
     /// <summary>
     /// Unsubscribes the altered unit when their (de)buff timer has run out.
     /// </summary>
     /// <param name="subject">The unit that was previously altered.</param>
-    public void UnsubscribeAlteredUnit(Humanoid subject)
+    public void UnsubscribeTimerUnit(Humanoid subject)
     {
         removeList.Add(subject);
     }
@@ -728,7 +731,7 @@ public class CombatSystem : MonoBehaviour
     {
         removeList = new List<Humanoid>();
 
-        foreach (Humanoid unit in alteredUnits)
+        foreach (Humanoid unit in timerUnits)
         {
             unit.AdvanceTimer();
         }
@@ -737,7 +740,7 @@ public class CombatSystem : MonoBehaviour
         foreach (Humanoid unit in removeList)
         {
             unit.ResetStats();
-            alteredUnits.Remove(unit);
+            timerUnits.Remove(unit);
         }
 
         removeList.Clear();
