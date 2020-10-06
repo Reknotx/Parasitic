@@ -586,6 +586,12 @@ public class CombatSystem : MonoBehaviour
         abilityInfo.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Sets the Cool Down Text on Each Ability Button
+    /// </summary>
+    /// <param name="player">player to compare to selected and last selected</param>
+    /// Author: Jeremy Casada
+    /// 10/6/20
     public void SetCoolDownText(Player player)
     {
         if(CharacterSelector.Instance.SelectedPlayerUnit == player || (CharacterSelector.Instance.SelectedPlayerUnit == null && CharacterSelector.Instance.LastSelectedPlayerUnit == player))

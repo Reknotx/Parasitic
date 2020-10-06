@@ -279,6 +279,11 @@ public class CharacterSelector : MonoBehaviour
         targettingType = type;
     }
 
+    /// <summary>
+    /// Sets the Last Selected Player to the Current Selected Player
+    /// </summary>
+    /// Author: Jeremy Casada
+    /// 10/6/20
     public void SetLastSelected()
     {
         LastSelectedPlayerUnit = SelectedPlayerUnit;
