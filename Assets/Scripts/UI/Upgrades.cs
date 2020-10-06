@@ -401,15 +401,18 @@ public class Upgrades : MonoBehaviour
     /// <param name="ability">ability to set</param>
     private void SetAbilityButtonState(Abilities ability)
     {
-        if (ability == Abilities.ability1)
+        if(CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
+            if (ability == Abilities.ability1)
+            {
 
-            CombatSystem.Instance.SetAbilityOneButtonState(true);
+                CombatSystem.Instance.SetAbilityOneButtonState(true);
 
-        }
-        else if(ability == Abilities.ability2)
-        {
-            CombatSystem.Instance.SetAbilityTwoButtonState(true);
+            }
+            else if (ability == Abilities.ability2)
+            {
+                CombatSystem.Instance.SetAbilityTwoButtonState(true);
+            }
         }
     }
 
