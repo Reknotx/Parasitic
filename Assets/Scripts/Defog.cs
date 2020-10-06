@@ -30,7 +30,7 @@ public class Defog : MonoBehaviour
             _defaultLayers[index] = objectsToReveal[index].layer;
 
             objectsToReveal[index].layer = 14;
-            foreach (Transform child in objectsToReveal[index].transform)
+            foreach (Transform child in objectsToReveal[index].GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = 14;
             }
@@ -65,7 +65,7 @@ public class Defog : MonoBehaviour
             for(int index = 0; index < objectsToReveal.Length; index++)
             {
                 objectsToReveal[index].layer = _defaultLayers[index];
-                foreach (Transform child in objectsToReveal[index].transform)
+                foreach (Transform child in objectsToReveal[index].GetComponentsInChildren<Transform>())
                 {
                     child.gameObject.layer = _defaultLayers[index];
                 }
