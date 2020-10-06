@@ -102,7 +102,7 @@ public class Tile : MonoBehaviour
     public bool NewRound()
     {
         remainingCooldown--;
-        print("cooling");
+
         if(remainingCooldown == 0)
         {
             return true;
