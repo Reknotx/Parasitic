@@ -37,6 +37,18 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
 
+    public override void Move(List<Tile> path)
+    {
+        if (CheckIfInRangeOfTarget() == false)
+        {
+            base.Move(path);
+        }
+        else
+        {
+            HasMoved = true;
+        }
+    }
+
     /// <summary>
     /// Runs a search on all of the active players to see which player is closer. Then
     /// will find the path to that player.
@@ -61,6 +73,7 @@ public abstract class Enemy : Humanoid, IEnemy
         }
         List<Tile> path = ObtainPathToTarget(targetPlayer);
         _currTarget = targetPlayer;
+        EnemyPath.Instance.DrawPath(path, this);
         return path;
     }
 
@@ -75,7 +88,7 @@ public abstract class Enemy : Humanoid, IEnemy
         if (tempH is Player)
         {
             _currTarget = (Player)tempH;
-            return ObtainPathToTarget((Player) tempH);
+            return ObtainPathToTarget((Player)tempH);
         }
 
         return null;
@@ -155,9 +168,10 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <returns>True if in range, false otherwise.</returns>
     public bool CheckIfInRangeOfTarget()
     {
+        if (_currTarget == null) return false;
 
         //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
-        bool [,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Player> players = new List<Player>();
 
@@ -167,7 +181,7 @@ public abstract class Enemy : Humanoid, IEnemy
             {
                 if (!neighbors[i, j]) continue;
 
-                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Player    )
+                if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Player)
                 {
                     if (!players.Contains((Player)(tempGrid[i, j].occupant)))
                         players.Add((Player)(tempGrid[i, j].occupant));
@@ -221,7 +235,7 @@ public abstract class Enemy : Humanoid, IEnemy
         {
             if (effect.ReduceDuration())
             {
-                removeList.Add(effect);        
+                removeList.Add(effect);
             }
         }
 
@@ -247,9 +261,9 @@ public abstract class Enemy : Humanoid, IEnemy
 
         removeList.Clear();
 
-        if (statusEffects.Count == 0)
-        {
-            CombatSystem.Instance.UnsubscribeAlteredUnit(this);
-        }
+        //if (statusEffects.Count == 0)
+        //{
+        //    CombatSystem.Instance.UnsubscribeTimerUnit(this);
+        //}
     }
 }

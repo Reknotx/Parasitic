@@ -50,15 +50,17 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> The remaining cooldown on ability two.  </summary>
     int _remainingAbilityTwoCD;
 
-    [Space]
-    /// <summary> The name of the player's first ability.</summary>
-    [Header("The name of the player's first ability.")]
-    public string Ability1Name;
+    [Space(5)]
+    /// <summary> The sprites of the player's normal attack.</summary>
+    public Sprite[] NormalAttackSprites = new Sprite[5];
+    [Space(5)]
+    /// <summary> The sprites of the player's first ability.</summary>
+    public Sprite[] Ability1Sprites = new Sprite[5];
+    [Space(5)]
+    /// <summary> The sprites of the player's second ability.</summary>
+    public Sprite[] Ability2Sprites = new Sprite[5];
 
-    [Space]
-    /// <summary> The name of the player's second ability.</summary>
-    [Header("The name of the player's second ability.")]
-    public string Ability2Name;
+
     
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] Ability1TileRange { get; set; }
@@ -81,6 +83,10 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator NormalAttackCR(Action callback);
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
+
+    [Space]
+    public AudioClip abilityOneSoundEffect;
+    public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
@@ -137,12 +143,29 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public override void AdvanceTimer()
     {
-        base.AdvanceTimer();
 
+        if (_remainingAbilityOneCD > 0)
+        {
+            _remainingAbilityOneCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
+
+        if (_remainingAbilityTwoCD > 0)
+        {
+            _remainingAbilityTwoCD--;
+            CombatSystem.Instance.SetCoolDownText(this);
+        }
+
+        base.AdvanceTimer();
+    }
+    /// <summary>
+    /// Bandaid Fix
+    /// </summary>
+    public void CoolDown()
+    {
         if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
         if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
-
     }
 
     /// <summary>
@@ -151,6 +174,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void StartAbilityOneCD()
     {
         _remainingAbilityOneCD = Ability1Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
     }
 
     /// <summary>
@@ -159,6 +183,23 @@ public abstract class Player : Humanoid, IPlayer
     protected void StartAbilityTwoCD()
     {
         _remainingAbilityTwoCD = Ability2Cooldown;
+        CombatSystem.Instance.SetCoolDownText(this);
+    }
+
+    /// <summary> Play's the sound effect for this player's first ability. </summary>
+    protected void PlayAbilityOneSoundEffect()
+    {
+        audioSource.clip = abilityOneSoundEffect;
+
+        audioSource.Play();
+    }
+
+    /// <summary> Play's the sound effect for this player's second ability. </summary>
+    protected void PlayAbilityTwoSoundEffect()
+    {
+        audioSource.clip = abilityTwoSoundEffect;
+
+        audioSource.Play();
     }
 
     public void FindActionRanges()

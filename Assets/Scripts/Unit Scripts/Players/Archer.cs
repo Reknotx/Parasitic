@@ -44,6 +44,7 @@ public class Archer : Player
         hasTrueDamage = true;
         ActionRange.Instance.ActionDeselected(false);
         StartAbilityTwoCD();
+        CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -60,6 +61,7 @@ public class Archer : Player
         else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
+            Upgrades.Instance.ArcherXp += 50;
         }
 
         hasTrueDamage = false;
@@ -67,6 +69,11 @@ public class Archer : Player
         callback();
     }
 
+    /// <summary>
+    /// Heals the player
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <returns></returns>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);

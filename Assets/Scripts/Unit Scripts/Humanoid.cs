@@ -148,6 +148,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary> States whether or not this unit is defending this round. </summary>
     public DefendingState DefendState { get; set; }
+
+    public AudioClip attackSoundEffect;
+    public AudioClip damagedSoundEffect;
+
+    public AudioSource audioSource;
     
     public virtual void Start()
     {
@@ -203,6 +208,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator MoveCR(List<Tile> path)
     {
+        List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
         Vector3 p01;
@@ -247,8 +253,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
+                if(this is Enemy)
+                {
+                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                }
+
                 yield return new WaitForFixedUpdate();
             }
+            untraveledPath.RemoveAt(0);
         }
         //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
@@ -257,6 +269,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
+        if (this is Enemy)
+        {
+            EnemyPath.Instance.HidePath();
+        }
     }
 
     void HealingTileCheck()
@@ -354,6 +370,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         damageText.text = "";
     }
 
+    /// <summary> Plays the attacking sound effect for this unit. </summary>
+    protected void PlayAttackSoundEffect()
+    {
+        audioSource.clip = attackSoundEffect;
+
+        audioSource.Play();
+    }
+
+    /// <summary> Plays the damaged sound effect for this unit when they take damage. </summary>
+    protected void PlayDamagedSoundEffect()
+    {
+        audioSource.clip = damagedSoundEffect;
+
+        audioSource.Play();
+    }
+
     /// <summary>
     /// Advances the timer on the unit's buff/debuff clock.
     /// </summary>
@@ -427,7 +459,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     private void AddEffectToList(StatusEffect effect)
     {
         statusEffects.Add(effect);
-        CombatSystem.Instance.SubscribeAlteredUnit(this);
+        CombatSystem.Instance.SubscribeTimerUnit(this);
     }
 
     public void ResetStats()
