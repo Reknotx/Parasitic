@@ -203,6 +203,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator MoveCR(List<Tile> path)
     {
+        List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
         Vector3 p01;
@@ -247,8 +248,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
+                if(this is Enemy)
+                {
+                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                }
+
                 yield return new WaitForFixedUpdate();
             }
+            untraveledPath.RemoveAt(0);
         }
         //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
         State = HumanoidState.Idle;
@@ -257,6 +264,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
+        if (this is Enemy)
+        {
+            EnemyPath.Instance.HidePath();
+        }
     }
 
     void HealingTileCheck()
