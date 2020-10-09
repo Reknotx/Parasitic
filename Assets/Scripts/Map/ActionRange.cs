@@ -82,9 +82,14 @@ public class ActionRange : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
-            tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability1TileRange;
-            tempColor = AbilityColor;
-            SetBoarder(tempRange,tempColor);
+            UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
+            {
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability1TileRange;
+                tempColor = AbilityColor;
+                SetBoarder(tempRange,tempColor);
+            }
         }
     }
 
@@ -93,9 +98,14 @@ public class ActionRange : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
-            tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability2TileRange;
-            tempColor = Ability2Color;
-            SetBoarder(tempRange,tempColor);
+            UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+            {
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability2TileRange;
+                tempColor = Ability2Color;
+                SetBoarder(tempRange,tempColor);
+            }
         }
     }
 

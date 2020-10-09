@@ -75,15 +75,20 @@ public class CombatSystem : MonoBehaviour
 
     public Text enemiesAliveText;
 
+    public Image abilityInfo;
+
     /// <summary>  </summary>
     public Text roundCounterText;
 
     private int _roundCounter = 1;
-    
+
     //public GameObject turnSwitch;
 
     /// <summary> The text stating which side is active. </summary>
     public Text activeSideText;
+
+    public Text abilityOneCDText;
+    public Text abilityTwoCDText;
 
     /// <summary> The list of player's that have yet to go this round. </summary>
     private List<Player> playersToGo = new List<Player>();
@@ -109,8 +114,16 @@ public class CombatSystem : MonoBehaviour
         Instance = this;
         SetupBattle();
         SetEnemyCountText();
+        roundCounterText.text = "Round: " + _roundCounter;
     }
 
+    private void Update()
+    {
+        if (abilityInfo.gameObject.activeInHierarchy)
+        {
+            abilityInfo.rectTransform.position = Input.mousePosition;
+        }
+    }
     /// <summary>
     /// Sets up the map and necessary information.
     /// </summary>
@@ -123,6 +136,7 @@ public class CombatSystem : MonoBehaviour
         {
             playersToGo.Add(player);
             unitsAlive.Add(player);
+            SubscribeTimerUnit(player);
         }
 
         foreach (Enemy enemy in tempE)
@@ -130,6 +144,7 @@ public class CombatSystem : MonoBehaviour
 
             if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
+            SubscribeTimerUnit(enemy);
         }
 
         DeactivateCombatButtons();
@@ -159,7 +174,7 @@ public class CombatSystem : MonoBehaviour
     {
         int index = Random.Range(0, enemiesToGo.Count);
 
-        List<Tile> temp =  MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
+        List<Tile> temp = MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
 
         foreach (Tile tile in temp)
         {
@@ -206,7 +221,7 @@ public class CombatSystem : MonoBehaviour
     public void SetTarget(Humanoid selection)
     {
         if (selection == player)
-        {   
+        {
             Debug.Log("Can't select yourself for attack.");
             return;
         }
@@ -295,7 +310,7 @@ public class CombatSystem : MonoBehaviour
             CharacterSelector.Instance.BoarderLine.SetActive(false);
             //Deactivate combat buttons
             DeactivateCombatButtons();
-           // player.GetComponent<MeshRenderer>().material.color = Color.gray;
+            // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
@@ -327,7 +342,7 @@ public class CombatSystem : MonoBehaviour
 
         player = null;
         target = null;
-        
+
         unit.State = HumanoidState.Done;
     }
 
@@ -340,7 +355,9 @@ public class CombatSystem : MonoBehaviour
         {
             if (unit is Player)
             {
+                //((Player)unit).CoolDown(); //bandaid
                 playersToGo.Add((Player)unit);
+                unit.DefendState = DefendingState.NotDefending;
                 //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
                 unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
@@ -348,13 +365,11 @@ public class CombatSystem : MonoBehaviour
             {
                 enemiesToGo.Add((Enemy)unit);
             }
-
-            unit.DefendState = DefendingState.NotDefending;
             unit.HasMoved = false;
             unit.HasAttacked = false;
         }
         //increment tile cooldown
-        for(int tile = coolingTiles.Count - 1; tile >= 0; tile--)
+        for (int tile = coolingTiles.Count - 1; tile >= 0; tile--)
         {
             if (coolingTiles[tile].NewRound())
             {
@@ -369,6 +384,7 @@ public class CombatSystem : MonoBehaviour
         activeSideText.text = "Player's turn";
 
         _roundCounter++;
+        roundCounterText.text = "Round: " + _roundCounter;
     }
 
     /// <summary> Executes the attack type that we have passed in. </summary>
@@ -404,12 +420,12 @@ public class CombatSystem : MonoBehaviour
     public void AttackComplete()
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
-
+        CharacterSelector.Instance.SetLastSelected();
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
         SetBattleState(BattleState.Idle);
-
+        SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
     }
 
     /// <summary>
@@ -428,7 +444,6 @@ public class CombatSystem : MonoBehaviour
     /// <summary>
     /// Executes the logic for the enemies turn.
     /// </summary>
-    /// <returns></returns>
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
@@ -439,12 +454,14 @@ public class CombatSystem : MonoBehaviour
 
             if (enemiesToGo[index].Revealed == false)
             {
+                enemiesToGo[index].DefendState = DefendingState.NotDefending;
                 enemiesToGo.Remove(enemiesToGo[index]);
                 continue;
             }
 
             Enemy tempE = enemiesToGo[index];
 
+            //if (tempE.CheckIfInRangeOfTarget())
             if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
             {
                 tempE.Move(tempE.TauntedPath());
@@ -492,6 +509,7 @@ public class CombatSystem : MonoBehaviour
     public void KillUnit(Humanoid unit)
     {
         unitsAlive.Remove(unit);
+        UnsubscribeTimerUnit(unit);
 
         SetEnemyCountText();
 
@@ -529,6 +547,80 @@ public class CombatSystem : MonoBehaviour
             }
         }
         enemiesAliveText.text = "Enemies Left: " + count;
+    }
+
+    /// <summary>
+    /// Sets Sprite for Ability Info Popup Window Based on name of "button"
+    /// </summary>
+    /// <param name="button">Button to check</param>
+    /// Author: Jeremy Casada
+    public void SetAbilityInfo(Button button)
+    {
+        Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+        if (tempP)
+        {
+            if (button.gameObject.name == "Normal Attack")
+            {
+                abilityInfo.sprite = tempP.NormalAttackSprites[4];
+            }
+            else if (button.gameObject.name == "Ability One")
+            {
+                abilityInfo.sprite = tempP.Ability1Sprites[4];
+            }
+            else if (button.gameObject.name == "Ability Two")
+            {
+                abilityInfo.sprite = tempP.Ability2Sprites[4];
+            }
+            abilityInfo.gameObject.SetActive(true);
+        }
+
+
+    }
+
+    /// <summary>
+    /// Hides Ability Info Popup
+    /// </summary>
+    /// Author: Jeremy Casada
+    public void HideAbilityInfo()
+    {
+        abilityInfo.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Sets the Cool Down Text on Each Ability Button
+    /// </summary>
+    /// <param name="player">player to compare to selected and last selected</param>
+    /// Author: Jeremy Casada
+    /// 10/6/20
+    public void SetCoolDownText(Player player)
+    {
+        if(CharacterSelector.Instance.SelectedPlayerUnit == player || (CharacterSelector.Instance.SelectedPlayerUnit == null && CharacterSelector.Instance.LastSelectedPlayerUnit == player))
+        {
+            if(player.RemainingAbilityOneCD > 0)
+            {
+                abilityOneCDText.text = player.RemainingAbilityOneCD.ToString();
+                abilityOneCDText.transform.parent.gameObject.SetActive(true);
+            }
+            else 
+            {
+                abilityOneCDText.transform.parent.gameObject.SetActive(false);
+            }
+
+
+            if (player.RemainingAbilityTwoCD > 0 )
+            {
+                abilityTwoCDText.text = player.RemainingAbilityTwoCD.ToString();
+                abilityTwoCDText.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                abilityTwoCDText.transform.parent.gameObject.SetActive(false);
+            }
+        }
+
+
+
+        
     }
 
     /// <summary> Checks the win condition to see if it's met. </summary>
@@ -582,28 +674,69 @@ public class CombatSystem : MonoBehaviour
     public void ActivateCombatButtons()
     {
         Player tempP = CharacterSelector.Instance.SelectedPlayerUnit;
+        UnitToUpgrade unitType = Upgrades.Instance.GetUnitType();
 
         foreach (Button button in combatButtons)
         {
             button.interactable = true;
 
-            if (button.gameObject.name == "Ability One")
+            if (button.gameObject.name == "Normal Attack")
             {
-                button.GetComponentInChildren<Text>().text = tempP.Ability1Name;
+                button.GetComponent<Image>().sprite = tempP.NormalAttackSprites[0];
+                SpriteState st;
+                st.highlightedSprite = tempP.NormalAttackSprites[1];
+                st.pressedSprite = tempP.NormalAttackSprites[2];
+                st.disabledSprite = tempP.NormalAttackSprites[3];
+                button.spriteState = st;
+            }
+            else if (button.gameObject.name == "Ability One")
+            {
 
-                print("Ability one CD: " + tempP.RemainingAbilityOneCD);
+                button.GetComponent<Image>().sprite = tempP.Ability1Sprites[0];
+                SpriteState st;
+                st.highlightedSprite = tempP.Ability1Sprites[1];
+                st.pressedSprite = tempP.Ability1Sprites[2];
+                st.disabledSprite = tempP.Ability1Sprites[3];
+                button.spriteState = st;
 
-                if (tempP.RemainingAbilityOneCD > 0) button.interactable = false;
+                print(tempP.name + " ability one CD: " + tempP.RemainingAbilityOneCD);
+
+                
+                if (tempP.RemainingAbilityOneCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
+                {
+                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                    {
+                        print(tempP.name + " ability One not unlocked");
+                    }
+
+                    button.interactable = false;
+                }
+
             }
             else if (button.gameObject.name == "Ability Two")
             {
-                button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+                // button.GetComponentInChildren<Text>().text = tempP.Ability2Name;
+                button.GetComponent<Image>().sprite = tempP.Ability2Sprites[0];
+                SpriteState st;
+                st.highlightedSprite = tempP.Ability2Sprites[1];
+                st.pressedSprite = tempP.Ability2Sprites[2];
+                st.disabledSprite = tempP.Ability2Sprites[3];
+                button.spriteState = st;
 
-                print("Ability two CD: " + tempP.RemainingAbilityTwoCD);
+                print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
 
-                if (tempP.RemainingAbilityTwoCD > 0) button.interactable = false;
+                
+                if (tempP.RemainingAbilityTwoCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                {
+                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                    {
+                        print(tempP.name + " ability Two not unlocked");
+                    }
+
+                    button.interactable = false;
+                }
+
             }
-
         }
     }
 
@@ -622,23 +755,28 @@ public class CombatSystem : MonoBehaviour
         enemiesToGo.Add(enemy);
     }
 
-    public List<Humanoid> alteredUnits = new List<Humanoid>();
+    public List<Humanoid> timerUnits = new List<Humanoid>();
 
     /// <summary>
     /// Subscribes a unit that has been buffed or debuffed to the system.
     /// After every round these units will have their counters updated.
     /// </summary>
     /// <param name="subject">The unit that is altered.</param>
-    public void SubscribeAlteredUnit(Humanoid subject)
+    public void SubscribeTimerUnit(Humanoid subject)
     {
-        alteredUnits.Add(subject);
+        if (timerUnits == null) { timerUnits = new List<Humanoid>(); }
+        if(!timerUnits.Contains(subject))
+        {
+            timerUnits.Add(subject);
+        }
+        
     }
 
     /// <summary>
     /// Unsubscribes the altered unit when their (de)buff timer has run out.
     /// </summary>
     /// <param name="subject">The unit that was previously altered.</param>
-    public void UnsubscribeAlteredUnit(Humanoid subject)
+    public void UnsubscribeTimerUnit(Humanoid subject)
     {
         removeList.Add(subject);
     }
@@ -653,7 +791,7 @@ public class CombatSystem : MonoBehaviour
     {
         removeList = new List<Humanoid>();
 
-        foreach (Humanoid unit in alteredUnits)
+        foreach (Humanoid unit in timerUnits)
         {
             unit.AdvanceTimer();
         }
@@ -662,7 +800,7 @@ public class CombatSystem : MonoBehaviour
         foreach (Humanoid unit in removeList)
         {
             unit.ResetStats();
-            alteredUnits.Remove(unit);
+            timerUnits.Remove(unit);
         }
 
         removeList.Clear();

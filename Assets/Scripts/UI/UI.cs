@@ -19,11 +19,22 @@ public class UI : MonoBehaviour
     public GameObject quitPrompt;
     public GameObject pauseBG;
 
-    
+    public static UI Instance;
 
     public bool _isPaused;
 
+    public bool PausedStatus { get { return _isPaused; } }
+
     private CombatSystem combatSystem;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -45,6 +56,8 @@ public class UI : MonoBehaviour
             }
         }
     }
+
+
 
     /// <summary>
     /// Pause Game
