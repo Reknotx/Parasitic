@@ -522,22 +522,20 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            Instantiate(blood, unit.transform.position, blood.transform.rotation);
+
             if (CheckLoseCondition()) GameLost();
         }
         else
         {
             enemiesToGo.Remove((Enemy)unit);
-            if (unit is Larva)
-            {
-                Instantiate(bloodAndGuts, unit.transform.position, blood.transform.rotation);
-            }
-            else
-            {
-                Instantiate(blood, unit.transform.position, blood.transform.rotation);
-            }
+            var emission = bloodAndGuts.emission;
 
-
-
+            if (unit is Larva) emission.rateOverTime = 20;
+            else emission.rateOverTime = 75;
+            
+            Instantiate(bloodAndGuts, unit.transform.position, bloodAndGuts.transform.rotation);
+            
             if (CheckWinCondition()) GameWon();
         }
 
