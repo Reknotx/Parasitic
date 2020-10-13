@@ -89,15 +89,16 @@ public class MapGrid : MonoBehaviour
         //if the position is outside the bounds of the map return null
         if (percentX < 0 || percentZ < 0 || percentX > 1 || percentZ > 1)
         {
-            return null;
+            //Debug.Log(percentX + " " + percentZ);
+            Mathf.Clamp01(percentX);
+            Mathf.Clamp01(percentZ);
         }
-        else
-        {
+        
             //print((columns - 1) * percentX);
             int posX = (int)((columns) * percentX);
             int posZ = (int)((rows) * percentZ);
             return grid[posX, posZ];
-        }
+        
     }
 
     //A* algorithm
