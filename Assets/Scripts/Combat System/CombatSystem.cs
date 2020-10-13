@@ -104,6 +104,9 @@ public class CombatSystem : MonoBehaviour
 
     public List<Tile> coolingTiles = new List<Tile>();
 
+    public ParticleSystem blood;
+    public ParticleSystem bloodAndGuts;
+
     void Start()
     {
         state = BattleState.Start;
@@ -519,15 +522,24 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            Instantiate(blood, unit.transform.position, blood.transform.rotation);
+
             if (CheckLoseCondition()) GameLost();
         }
         else
         {
             enemiesToGo.Remove((Enemy)unit);
+            var emission = bloodAndGuts.emission;
+
+            if (unit is Larva) emission.rateOverTime = 20;
+            else emission.rateOverTime = 75;
+            
+            Instantiate(bloodAndGuts, unit.transform.position, bloodAndGuts.transform.rotation);
+            
             if (CheckWinCondition()) GameWon();
         }
 
-
+        
         Destroy(unit.gameObject);
 
     }
