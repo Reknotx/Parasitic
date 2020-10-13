@@ -16,7 +16,7 @@ public class AudioSettings : MonoBehaviour
     private void Start()
     {
         LoadLevels();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
 
