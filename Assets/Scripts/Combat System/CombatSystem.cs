@@ -896,6 +896,8 @@ public class CombatSystem : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        float t = 1f;
+        float opacity = Mathf.Lerp(0f, 1f, t);
         yield return null;
     }
 
