@@ -73,7 +73,6 @@ public abstract class Enemy : Humanoid, IEnemy
         }
         List<Tile> path = ObtainPathToTarget(targetPlayer);
         _currTarget = targetPlayer;
-        EnemyPath.Instance.DrawPath(path, this);
         return path;
     }
 
