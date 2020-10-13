@@ -86,7 +86,7 @@ public class MapGrid : MonoBehaviour
         float gridHeight = tileSize * rows;
         float percentX = pos.x / gridWidth;
         float percentZ = pos.z / gridHeight;
-        //if the position is outside the bounds of the map return null
+        //if the position is outside the bounds of the map clam the result
         if (percentX < 0 || percentZ < 0 || percentX > 1 || percentZ > 1)
         {
             //Debug.Log(percentX + " " + percentZ);
@@ -94,10 +94,10 @@ public class MapGrid : MonoBehaviour
             Mathf.Clamp01(percentZ);
         }
         
-            //print((columns - 1) * percentX);
-            int posX = (int)((columns) * percentX);
-            int posZ = (int)((rows) * percentZ);
-            return grid[posX, posZ];
+        //print((columns - 1) * percentX);
+        int posX = (int)((columns) * percentX);
+        int posZ = (int)((rows) * percentZ);
+        return grid[posX, posZ];
         
     }
 
