@@ -283,6 +283,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             print("Healing Tile used");
             currentTile.StartCooldown();
             CombatSystem.Instance.coolingTiles.Add(currentTile);
+            if(Health <= 0)
+            {
+                CombatSystem.Instance.KillUnit(this);
+            }
         }
     }
 
