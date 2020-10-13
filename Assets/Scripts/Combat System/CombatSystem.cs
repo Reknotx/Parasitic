@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Enum for the various states of combat we can be in.
@@ -484,6 +485,8 @@ public class CombatSystem : MonoBehaviour
             }
 
             EndUnitTurn(enemiesToGo[index]);
+
+            yield return new WaitForSeconds(1.5f);
         }
 
         NewRound();
@@ -849,6 +852,9 @@ public class CombatSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Handles the transition from scene to scene.
+    /// </summary>
     IEnumerator SceneTransitionCR()
     {
         SetBattleState(BattleState.Transitioning);
@@ -865,7 +871,7 @@ public class CombatSystem : MonoBehaviour
 
             t += transitionRate * Time.deltaTime;
 
-            Mathf.Clamp(t, 0f, 1f);
+            Mathf.Clamp01(t);
 
 
             if (opacity == 1f)
@@ -886,5 +892,15 @@ public class CombatSystem : MonoBehaviour
         yield return null;
 
         SetBattleState(BattleState.Idle);
+    }
+
+    IEnumerator FadeIn()
+    {
+        yield return null;
+    }
+
+    IEnumerator FadeOut()
+    {
+        yield return null;
     }
 }

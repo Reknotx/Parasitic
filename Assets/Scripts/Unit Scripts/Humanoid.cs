@@ -354,7 +354,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator ShowDamage(int damage)
     {
-        damageText.text = damage.ToString();
+        if (damage == 0)
+        {
+            damageText.text = "Miss";
+        }
+        else
+        {
+            damageText.text = damage.ToString();
+        }
         yield return new WaitForSecondsRealtime(1.5f);
         damageText.text = "";
     }
