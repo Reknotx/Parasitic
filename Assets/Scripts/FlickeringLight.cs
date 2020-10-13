@@ -9,13 +9,13 @@ public class FlickeringLight : MonoBehaviour
 
     //min/max intensity
     public float minIntensity = 2f;
-    public float maxIntensity = 4f;
+    public float maxIntensity = 3.5f;
 
     float random;
 
     void Start()
     {
-        random = Random.Range(0.0f, 600.0f);
+        random = Random.Range(0.0f, 500.0f);
         light = GetComponent<Light>();
     }
 
