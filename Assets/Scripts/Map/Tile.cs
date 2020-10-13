@@ -89,6 +89,10 @@ public class Tile : MonoBehaviour
             {
                 Gizmos.color = Color.magenta;
             }
+            if (blocksLOS)
+            {
+                Gizmos.color = Color.black;
+            }
         }
         if (drawTileGizmo)
             Gizmos.DrawSphere(transform.position + Vector3.up*gizmoHeight, 0.2f);
