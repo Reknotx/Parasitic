@@ -158,6 +158,11 @@ public class CharacterSelector : MonoBehaviour
 
                     Tile lastTile = selectedTile;
                     selectedTile = MapGrid.Instance.TileFromPosition(info.point);
+                    if(selectedTile == null)
+                    {
+                        Debug.Log("this bitch empty");
+                        Debug.Log(info.point);
+                    }
                     //if the tile selected is a valid tile to move to find the path
                     if (selectedTile.movementTile && !selectedTile.occupied && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                     {
