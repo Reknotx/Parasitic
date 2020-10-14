@@ -50,8 +50,6 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
-
-
     /// <summary>
     /// Experience System Vars
     /// </summary>
@@ -216,11 +214,6 @@ public class Upgrades : MonoBehaviour
         if (infoWindow.activeInHierarchy)
         {
             infoWindow.transform.position = Input.mousePosition;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus)
-        {
-            ToggleUpgradeMenu();
         }
     }
 

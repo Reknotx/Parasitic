@@ -18,11 +18,10 @@ public class UI : MonoBehaviour
     public GameObject mainMenuPrompt;
     public GameObject quitPrompt;
     public GameObject pauseBG;
-    public GameObject howToPlay;
 
     public static UI Instance;
 
-    private bool _isPaused;
+    public bool _isPaused;
 
     public bool PausedStatus { get { return _isPaused; } }
 
@@ -40,8 +39,6 @@ public class UI : MonoBehaviour
     private void Start()
     {
         combatSystem = CombatSystem.Instance;
-        Time.timeScale = 0;
-        _isPaused = true;
     }
 
     // Update is called once per frame
@@ -105,7 +102,6 @@ public class UI : MonoBehaviour
         Hide(mainMenuPrompt);
         Hide(restartPrompt);
         Hide(optionMenu);
-        Hide(howToPlay);
     }
 
     /// <summary>

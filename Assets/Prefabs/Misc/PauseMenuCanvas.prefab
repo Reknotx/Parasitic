@@ -1415,7 +1415,7 @@ MonoBehaviour:
   mainMenuPrompt: {fileID: 8334304988710309839}
   quitPrompt: {fileID: 1193524092198037095}
   pauseBG: {fileID: 7792809861963230086}
-  howToPlay: {fileID: 5849410290725499380}
+  _isPaused: 0
 --- !u!1 &34118023297620323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2895,6 +2895,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 34118023204703809}
+        m_MethodName: Hide
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5849410290725499380}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
