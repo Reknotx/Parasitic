@@ -7,17 +7,24 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
 
+    private bool loading = false;
+
     // Update is called once per frame
     void Update()
     {
-        if (CombatSystem.Instance.state == BattleState.Won)
+        if (CombatSystem.Instance == null) return;
+
+        if (CombatSystem.Instance.state == BattleState.Won && loading == false)
         {
+            Debug.Log("Level Won");
             LoadNextLevel();
         }
     }
 
     public void LoadNextLevel()
     {
+        Debug.Log("In Load next Level");
+        loading = true;
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
@@ -25,6 +32,8 @@ public class LevelLoader : MonoBehaviour
     {
         //Play the animation
         transition.SetTrigger("FadeOut");
+
+        Debug.Log("Loading Level");
 
         //Wait
         yield return new WaitForSeconds(1);
