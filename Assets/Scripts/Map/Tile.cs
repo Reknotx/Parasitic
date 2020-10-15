@@ -10,7 +10,7 @@ public enum TileEffect
 public class Tile : MonoBehaviour
 {
     /// <summary> Unit is currently occupying space </summary>
-    /*[HideInInspector]*/ public bool occupied = false;
+    [HideInInspector] public bool occupied = false;
 
     /// <summary> Tile can be moved over </summary>
     public bool movementTile = true;
@@ -88,6 +88,10 @@ public class Tile : MonoBehaviour
             else if (tileEffect == TileEffect.Healing && remainingCooldown == 0)
             {
                 Gizmos.color = Color.magenta;
+            }
+            if (blocksLOS)
+            {
+                Gizmos.color = Color.black;
             }
         }
         if (drawTileGizmo)
