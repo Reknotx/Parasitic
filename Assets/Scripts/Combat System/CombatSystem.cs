@@ -427,7 +427,9 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
-        SetBattleState(BattleState.Idle);
+        if (state != BattleState.Won)
+            SetBattleState(BattleState.Idle);
+
         SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
     }
 
@@ -486,6 +488,8 @@ public class CombatSystem : MonoBehaviour
             }
 
             EndUnitTurn(enemiesToGo[index]);
+
+            yield return new WaitForSeconds(1.5f);
         }
 
         NewRound();

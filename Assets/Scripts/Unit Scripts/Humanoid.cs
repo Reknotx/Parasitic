@@ -216,8 +216,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Vector3 direction;
         foreach (Tile tile in path)
         {
-
-
             timeStart = Time.time;
             moving = true;
 
@@ -292,7 +290,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     protected void LookInDirection(Vector3 direction)
     {
-        
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -335,7 +332,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Health -= damageDealt;
         
         StartCoroutine(ShowDamage(damageDealt));
-        
 
         return Health <= 0 ? true : false;
     }
@@ -347,7 +343,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     private void Dodge()
     {
         // Activate the dodging animation
-    
     }
 
     public void FindMovementRange()
@@ -369,7 +364,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator ShowDamage(int damage)
     {
-        damageText.text = damage.ToString();
+        if (damage == 0)
+        {
+            damageText.text = "Miss";
+        }
+        else
+        {
+            damageText.text = damage.ToString();
+        }
         yield return new WaitForSecondsRealtime(1.5f);
         damageText.text = "";
     }
