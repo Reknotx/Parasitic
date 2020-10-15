@@ -6,10 +6,12 @@ public class TriggerSpawn : MonoBehaviour
 {
     Spawner spawner;
     Tile tile;
+    public Transform spawnPoint;
     private void Start()
     {
-        spawner = GetComponent<Spawner>();
-        tile = MapGrid.Instance.TileFromPosition(transform.position);
+       
+        spawner = transform.GetComponentInParent<Spawner>();
+        tile = MapGrid.Instance.TileFromPosition(spawnPoint.position);
     }
 
     private void OnTriggerEnter(Collider other)

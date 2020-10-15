@@ -12,8 +12,15 @@ public class Spawner : MonoBehaviour
     {
         if (currentSpawns < maxSpawns && !tile.occupied)
         {
-            Instantiate(spawnee, tile.transform.position + Vector3.up, Quaternion.identity);
+            GameObject spawnedObject = Instantiate(spawnee, tile.transform.position + Vector3.up * spawnee.transform.position.y, Quaternion.identity);
             currentSpawns++;
+            Enemy unit = spawnedObject.GetComponent<Enemy>();
+            if (unit)
+            {
+                CombatSystem.Instance.SubscribeEnemy(unit);
+                //ask chase about subscribe timer
+            }
+
         }
     }
 }
