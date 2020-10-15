@@ -40,7 +40,9 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
+        Screen.SetResolution((int)(Screen.currentResolution.width), (int)(Screen.currentResolution.height), true);
         LoadAudioLevels();
+        SetGraphics(PlayerPrefs.GetInt("Quality Level", 5));
         combatSystem = CombatSystem.Instance;
         Time.timeScale = 0;
         _isPaused = true;
@@ -154,7 +156,6 @@ public class UI : MonoBehaviour
     public void ShowMenu(GameObject menu)
     {
 
-        HideAll();
         menu.SetActive(true);
     }
 
@@ -167,12 +168,49 @@ public class UI : MonoBehaviour
         Application.OpenURL(url);
     }
 
-    #region AUDIO
-    public AudioMixer mixer;
-    public Slider master, music, sfx;
+    
 
-    [SerializeField]
-    private Text masterText, musicText, sfxText;
+    #region Options
+    public AudioMixer mixer;
+    public Slider master, music, sfx, qualitySlider;
+
+    
+    public Text masterText, musicText, sfxText, qualityText;
+
+    public void SetGraphics(float qualityIndex)
+    {
+        QualitySettings.SetQualityLevel((int)qualityIndex);
+        PlayerPrefs.SetInt("Quality Level", (int)qualityIndex);
+        qualityText.text = "Quality: " + QualitySettings.names[(int)qualityIndex];
+
+        if (qualitySlider.value != PlayerPrefs.GetInt("Quality Level"))
+        {
+            qualitySlider.value = PlayerPrefs.GetInt("Quality Level");
+        }
+    }
+
+    public void ToggleFullScreen()
+    {
+        //Debug.LogAssertion("(Previous) Width: " + Screen.width + "  " + "Height: " + Screen.height);
+        //Debug.LogAssertion("Ratio: " + (float)Screen.width / Screen.height);
+        if (Screen.fullScreen)
+        {
+            Screen.SetResolution((int)(Screen.width * 0.90), (int)(Screen.height * 0.90), false);
+        }
+        else
+        {
+            Screen.SetResolution((int)(Screen.currentResolution.width), (int)(Screen.currentResolution.height), true);
+        }
+        //StartCoroutine(DebugResolution());
+    }
+
+    IEnumerator DebugResolution()
+    {
+        yield return null;
+        yield return null;
+        Debug.LogAssertion("(Current) Width: " + Screen.width + "  " + "Height: " + Screen.height);
+        Debug.LogAssertion("Ratio: " + (float)Screen.width / Screen.height);
+    }
 
     public void SetMasterLevel(float sliderValue)
     {
