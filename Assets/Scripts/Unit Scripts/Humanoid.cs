@@ -253,7 +253,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
-                if(this is Enemy)
+                if (this is Enemy)
                 {
                     EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
                 }
@@ -283,6 +283,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             print("Healing Tile used");
             currentTile.StartCooldown();
             CombatSystem.Instance.coolingTiles.Add(currentTile);
+            if(Health <= 0)
+            {
+                CombatSystem.Instance.KillUnit(this);
+            }
         }
     }
 
