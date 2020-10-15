@@ -40,7 +40,7 @@ public class UI : MonoBehaviour
     private void Start()
     {
         combatSystem = CombatSystem.Instance;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         _isPaused = true;
     }
 
