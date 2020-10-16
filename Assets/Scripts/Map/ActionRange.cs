@@ -86,7 +86,7 @@ public class ActionRange : MonoBehaviour
 
             if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
             {
-                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability1TileRange;
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.AbilityOneTileRange;
                 tempColor = AbilityColor;
                 SetBoarder(tempRange,tempColor);
             }
@@ -102,7 +102,7 @@ public class ActionRange : MonoBehaviour
 
             if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
             {
-                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.Ability2TileRange;
+                tempRange = CharacterSelector.Instance.SelectedPlayerUnit.AbilityTwoTileRange;
                 tempColor = Ability2Color;
                 SetBoarder(tempRange,tempColor);
             }

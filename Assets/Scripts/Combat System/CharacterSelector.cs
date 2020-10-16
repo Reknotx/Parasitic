@@ -250,11 +250,6 @@ public class CharacterSelector : MonoBehaviour
                 HidePath();
             }
         }
-        
-
-
-        
-
     }
 
     void DrawPath()

@@ -295,6 +295,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             MagePoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Mage>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -306,6 +311,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             KnightPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Warrior>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -317,6 +327,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             ArcherPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Archer>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -424,6 +439,8 @@ public class Upgrades : MonoBehaviour
     }
 
     #endregion
+
+
 
     #region UI Functions
 

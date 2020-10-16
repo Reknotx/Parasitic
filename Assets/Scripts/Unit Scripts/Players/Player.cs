@@ -12,6 +12,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A little enum to be used in conjucture with the upgrade system
+/// to allow for the differentiating of upgrades to stats.
+/// </summary>
+public enum StatType
+{
+    
+}
+
+
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
@@ -29,20 +39,20 @@ public abstract class Player : Humanoid, IPlayer
 
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
-    public int Ability1Range;
+    public int AbilityOneRange;
 
     [Space]
     /// <summary> Range of player's second ability. </summary>
     [Header("The range of the player's second ability.")]
-    public int Ability2Range;
+    public int AbilityTwoRange;
 
     [Space]
     [Header("The cooldown of the player's first ability.")]
-    public int Ability1Cooldown;
+    public int AbilityOneCooldown;
 
     [Space]
     [Header("The cooldown of the player's second ability.")]
-    public int Ability2Cooldown;
+    public int AbilityTwoCooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
     int _remainingAbilityOneCD;
@@ -63,9 +73,9 @@ public abstract class Player : Humanoid, IPlayer
 
     
     /// <summary> Tiles ability1 affects </summary>
-    [HideInInspector] public bool[,] Ability1TileRange { get; set; }
+    [HideInInspector] public bool[,] AbilityOneTileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
-    [HideInInspector] public bool[,] Ability2TileRange { get; set; }
+    [HideInInspector] public bool[,] AbilityTwoTileRange { get; set; }
 
     /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
     public int RemainingAbilityOneCD { get { return _remainingAbilityOneCD; } }
@@ -83,6 +93,13 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator NormalAttackCR(Action callback);
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
+
+    protected abstract void AttackUpgradeOne();
+    protected abstract void AttackUpgradeTwo();
+    protected abstract void AbilityOneUpgradeOne();
+    protected abstract void AbilityOneUpgradeTwo();
+    protected abstract void AbilityTwoUpgradeOne();
+    protected abstract void AbilityTwoUpgradeTwo();
 
     [Space]
     public AudioClip abilityOneSoundEffect;
@@ -173,7 +190,7 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     protected void StartAbilityOneCD()
     {
-        _remainingAbilityOneCD = Ability1Cooldown;
+        _remainingAbilityOneCD = AbilityOneCooldown;
         CombatSystem.Instance.SetCoolDownText(this);
     }
 
@@ -182,7 +199,7 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     protected void StartAbilityTwoCD()
     {
-        _remainingAbilityTwoCD = Ability2Cooldown;
+        _remainingAbilityTwoCD = AbilityTwoCooldown;
         CombatSystem.Instance.SetCoolDownText(this);
     }
 
@@ -205,19 +222,41 @@ public abstract class Player : Humanoid, IPlayer
     public void FindActionRanges()
     {
         AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true, AttackShape);
-        Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
-        Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
+        AbilityOneTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
+        AbilityTwoTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AbilityTwoRange, true);
         //print("Ranges found");
     }
 
+    /// <summary>
+    /// Performs a simple heal on the player, healing them for 20% of their
+    /// max health.
+    /// </summary>
     public void Heal()
     {
         Health += Mathf.FloorToInt(MaxHealth * 0.2f);
-
-        if (Health > MaxHealth) Health = MaxHealth;
-
-        healthText.text = Health + "/" + _maxHealth;
-
-        healthBar.value = (float)Health / (float)_maxHealth;
     }
+
+    public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
+
+    //public void ProcessUpgrade(Abilities abilityToUpgrade)
+    //{
+    //    switch (abilityToUpgrade)
+    //    {
+    //        case Abilities.normalAttackUpgrade1:
+
+    //            break;
+    //        case Abilities.normalAttackUpgrade2:
+    //            break;
+    //        case Abilities.ability1Upgrade1:
+    //            break;
+    //        case Abilities.ability1Upgrade2:
+    //            break;
+    //        case Abilities.ability2Upgrade1:
+    //            break;
+    //        case Abilities.ability2Upgrade2:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }

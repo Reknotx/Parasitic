@@ -138,4 +138,67 @@ public class Mage : Player
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void AttackUpgradeOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AttackUpgradeTwo()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityOneUpgradeOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityOneUpgradeTwo()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityTwoUpgradeOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityTwoUpgradeTwo()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void ProcessUpgrade(Abilities abilityToUpgrade)
+    {
+        switch (abilityToUpgrade)
+        {
+            case Abilities.normalAttackUpgrade1:
+                AttackUpgradeOne();
+                break;
+
+            case Abilities.normalAttackUpgrade2:
+                AttackUpgradeTwo();
+                break;
+
+            case Abilities.ability1Upgrade1:
+                AbilityOneUpgradeOne();
+                break;
+
+            case Abilities.ability1Upgrade2:
+                AbilityTwoUpgradeTwo();
+                break;
+
+            case Abilities.ability2Upgrade1:
+                AbilityTwoUpgradeOne();
+                break;
+
+            case Abilities.ability2Upgrade2:
+                AbilityTwoUpgradeTwo();
+                break;
+
+            default:
+                break;
+        }
+    }
 }

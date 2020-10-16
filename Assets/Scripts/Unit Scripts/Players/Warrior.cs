@@ -78,7 +78,7 @@ public class Warrior : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         ActionRange.Instance.ActionDeselected();
-        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
@@ -116,7 +116,7 @@ public class Warrior : Player
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
         ActionRange.Instance.ActionDeselected();
-        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
@@ -146,5 +146,68 @@ public class Warrior : Player
         StartAbilityTwoCD();
 
         callback();
+    }
+
+    protected override void AttackUpgradeOne()
+    {
+        AttackStat += Mathf.FloorToInt(AttackStat / 2);
+    }
+
+    protected override void AttackUpgradeTwo()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityOneUpgradeOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityOneUpgradeTwo()
+    {
+        AbilityOneRange += 2;
+    }
+
+    protected override void AbilityTwoUpgradeOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void AbilityTwoUpgradeTwo()
+    {
+        AbilityTwoRange += 2;
+    }
+
+    public override void ProcessUpgrade(Abilities abilityToUpgrade)
+    {
+        switch (abilityToUpgrade)
+        {
+            case Abilities.normalAttackUpgrade1:
+                AttackUpgradeOne();
+                break;
+
+            case Abilities.normalAttackUpgrade2:
+                AttackUpgradeTwo();
+                break;
+
+            case Abilities.ability1Upgrade1:
+                AbilityOneUpgradeOne();
+                break;
+
+            case Abilities.ability1Upgrade2:
+                AbilityTwoUpgradeTwo();
+                break;
+
+            case Abilities.ability2Upgrade1:
+                AbilityTwoUpgradeOne();
+                break;
+
+            case Abilities.ability2Upgrade2:
+                AbilityTwoUpgradeTwo();
+                break;
+
+            default:
+                break;
+        }
     }
 }
