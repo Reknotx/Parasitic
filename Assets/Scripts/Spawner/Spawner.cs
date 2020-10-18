@@ -8,18 +8,26 @@ public class Spawner : MonoBehaviour
     public int maxSpawns = 1;
     int _currentSpawns = 0;
 
-    public void SpawnUnit(Tile tile)
+    public void SpawnUnit(Tile tile, bool attackThisRound = false)
     {
         if (SpawnsRemaining() && !tile.occupied)
         {
-            GameObject spawnedObject = Instantiate(spawnee, tile.transform.position + Vector3.up * spawnee.transform.position.y, Quaternion.identity);
+            GameObject spawnedObject = Instantiate(spawnee, tile.transform.position + Vector3.up * spawnee.transform.position.y, Quaternion.Euler(0,90*Random.Range(0,4),0));
             _currentSpawns++;
-            Enemy unit = spawnedObject.GetComponent<Enemy>();
+            Humanoid unit = spawnedObject.GetComponent<Humanoid>();
             if (unit)
             {
-                //CombatSystem.Instance.SubscribeEnemy(unit);
                 CombatSystem.Instance.NewSpawn(unit);
+                if (attackThisRound && unit is Enemy)
+                {
+                    Enemy tempEnemy = (Enemy)unit;
+                    CombatSystem.Instance.SubscribeEnemy(tempEnemy);
+                }
                 //ask chase about subscribe timer
+            }
+            else
+            {
+                tile.movementTile = false;
             }
 
         }

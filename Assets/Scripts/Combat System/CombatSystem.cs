@@ -453,7 +453,7 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count > 0)
+        while (enemiesToGo.Count > 0 && !CheckLoseCondition())
         {
             int index = Random.Range(0, enemiesToGo.Count);
 
@@ -486,7 +486,11 @@ public class CombatSystem : MonoBehaviour
             {
                 //print("Hive turn");
                 Hive tempS =(Hive)tempE;
-                tempS.SpawnEnemy();
+                //if enemy is spawned wait
+                if (tempS.SpawnEnemy())
+                {
+                    yield return new WaitForSeconds(1.5f);
+                }
                 EndUnitTurn(tempE);
                 continue;
             }

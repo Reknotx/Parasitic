@@ -6,6 +6,9 @@ public class Hive : Enemy
 {
 
     Spawner spawner;
+    public int spawnCooldown = 0;
+    public bool attackRoundSpawned = false;
+    int currentCooldown = 0;
     public override void Start()
     {
         base.Start();
@@ -18,10 +21,15 @@ public class Hive : Enemy
         }
     }
 
-    public void SpawnEnemy()
+    public bool SpawnEnemy()
     {
         if (spawner.SpawnsRemaining())
         {
+            if(currentCooldown > 0)
+            {
+                currentCooldown--;
+                return false;
+            }
             bool[,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
             Tile[,] tempGrid = MapGrid.Instance.grid;
             List<Tile> OpenTiles = new List<Tile>();
@@ -37,9 +45,15 @@ public class Hive : Enemy
                     }
                 }
             }
-            spawner.SpawnUnit(OpenTiles[Random.Range(0, OpenTiles.Count)]);
-        }
+            if(OpenTiles.Count > 0)
+            {
+                spawner.SpawnUnit(OpenTiles[Random.Range(0, OpenTiles.Count)], attackRoundSpawned);
+                currentCooldown = spawnCooldown;
+                return true;
+            }
 
+        }
+        return false;
     }
 
     public void Shuffle(List<Tile> list)

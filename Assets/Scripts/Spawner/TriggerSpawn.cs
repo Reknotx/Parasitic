@@ -6,6 +6,7 @@ public class TriggerSpawn : MonoBehaviour
 {
     Spawner spawner;
     Tile tile;
+    public bool attackRoundSpawned = true;
     public Transform spawnPoint;
     private void Start()
     {
@@ -19,7 +20,7 @@ public class TriggerSpawn : MonoBehaviour
         print("trigger entered");
         if (other.CompareTag("Player"))
         {
-            spawner.SpawnUnit(tile);
+            spawner.SpawnUnit(tile,true);
         }
     }
 }
