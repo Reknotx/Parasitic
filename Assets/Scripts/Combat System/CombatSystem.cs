@@ -466,17 +466,30 @@ public class CombatSystem : MonoBehaviour
 
             Enemy tempE = enemiesToGo[index];
 
+
             //if (tempE.CheckIfInRangeOfTarget())
-            if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+            if(tempE.MovementStat > 0)
             {
-                tempE.Move(tempE.TauntedPath());
-            }
-            else
-            {
-                tempE.Move(tempE.FindNearestPlayer());
+                if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+                {
+                    tempE.Move(tempE.TauntedPath());
+                }
+                else
+                {
+                    tempE.Move(tempE.FindNearestPlayer());
+                }
+
+                yield return new WaitUntil(() => tempE.HasMoved == true);
             }
 
-            yield return new WaitUntil(() => tempE.HasMoved == true);
+            if (tempE is Hive)
+            {
+                //print("Hive turn");
+                Hive tempS =(Hive)tempE;
+                tempS.SpawnEnemy();
+                EndUnitTurn(tempE);
+                continue;
+            }
 
             if (tempE.CheckIfInRangeOfTarget())
             {
@@ -820,6 +833,11 @@ public class CombatSystem : MonoBehaviour
         }
 
         removeList.Clear();
+    }
+
+    public void NewSpawn(Humanoid spawn)
+    {
+        unitsAlive.Add(spawn);
     }
 
     /// <summary>
