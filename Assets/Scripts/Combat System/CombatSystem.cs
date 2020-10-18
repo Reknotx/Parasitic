@@ -140,6 +140,9 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
+            if (player is Mage) Upgrades.Instance.mage = (Mage)player;
+            else if (player is Warrior) Upgrades.Instance.knight = (Warrior)player;
+            else if (player is Archer) Upgrades.Instance.archer = (Archer)player;
         }
 
         foreach (Enemy enemy in tempE)

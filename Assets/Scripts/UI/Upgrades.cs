@@ -50,7 +50,9 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
-
+    public Mage mage;
+    public Warrior knight;
+    public Archer archer;
 
     /// <summary>
     /// Experience System Vars
@@ -76,15 +78,19 @@ public class Upgrades : MonoBehaviour
         get { return _mageXp; }
         set
         {
-            _mageXp = value;
-            if (_mageXp >= 100)
+            if(mage != null)
             {
-                _mageXp -= 100;
-                MagePoints++;
-                ShowUpgradeNotification();
+                if(_mageXp != value) mage.ExpParticle.Play();
+                _mageXp = value;
+                if (_mageXp >= 100)
+                {
+                    _mageXp -= 100;
+                    MagePoints++;
+                    ShowUpgradeNotification();
+                }
+                mageXpBar.value = _mageXp / 100f;
+                _mageXpText.text = _mageXp + " / " + maxXP;
             }
-            mageXpBar.value = _mageXp / 100f;
-            _mageXpText.text = _mageXp + " / " + maxXP;
         }
     }
 
@@ -93,15 +99,19 @@ public class Upgrades : MonoBehaviour
         get { return _knightXp; }
         set
         {
-            _knightXp = value;
-            if (_knightXp >= 100)
+            if (knight != null)
             {
-                _knightXp -= 100;
-                KnightPoints++;
-                ShowUpgradeNotification();
+                if (_knightXp != value) knight.ExpParticle.Play();
+                _knightXp = value;
+                if (_knightXp >= 100)
+                {
+                    _knightXp -= 100;
+                    KnightPoints++;
+                    ShowUpgradeNotification();
+                }
+                knightXpBar.value = _knightXp / 100f;
+                _knightXpText.text = _knightXp + " / " + maxXP;
             }
-            knightXpBar.value = _knightXp / 100f;
-            _knightXpText.text = _knightXp + " / " + maxXP;
         }
     }
 
@@ -110,15 +120,19 @@ public class Upgrades : MonoBehaviour
         get { return _archerXp; }
         set
         {
-            _archerXp = value;
-            if (_archerXp >= 100)
+            if (archer != null)
             {
-                _archerXp -= 100;
-                ArcherPoints++;
-                ShowUpgradeNotification();
+                if (_archerXp != value) archer.ExpParticle.Play();
+                _archerXp = value;
+                if (_archerXp >= 100)
+                {
+                    _archerXp -= 100;
+                    ArcherPoints++;
+                    ShowUpgradeNotification();
+                }
+                archerXpBar.value = _archerXp / 100f;
+                _archerXpText.text = _archerXp + " / " + maxXP;
             }
-            archerXpBar.value = _archerXp / 100f;
-            _archerXpText.text = _archerXp + " / " + maxXP;
         }
     }
     #endregion

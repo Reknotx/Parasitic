@@ -62,6 +62,7 @@ public class Archer : Player
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
             Upgrades.Instance.ArcherXp += 50;
+            ExpParticle.Play();
         }
 
         hasTrueDamage = false;
