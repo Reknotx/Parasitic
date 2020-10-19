@@ -529,12 +529,23 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            foreach(Humanoid temp in unitsAlive)
+            {
+                
+                if(temp is Enemy && ((Enemy)temp).playersWhoAttacked.Count >0)
+                {
+                   // Debug.Log("Count Before: " + ((Enemy)temp).playersWhoAttacked.Count);
+                    ((Enemy)temp).playersWhoAttacked.Remove((Player)unit);
+                    //Debug.Log("Count After: " + ((Enemy)temp).playersWhoAttacked.Count);
+                }
+            }
             Instantiate(blood, unit.transform.position, blood.transform.rotation);
 
             if (CheckLoseCondition()) GameLost();
         }
         else
         {
+            Upgrades.Instance.SplitExp((Enemy)unit);
             enemiesToGo.Remove((Enemy)unit);
             var emission = bloodAndGuts.emission;
 

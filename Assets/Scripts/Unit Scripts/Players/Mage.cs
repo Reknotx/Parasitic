@@ -69,10 +69,20 @@ public class Mage : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
+        else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
-            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
-            Upgrades.Instance.MageXp += 50;
+            Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
+            int oldEnemyHealth = attackedEnemy.Health;
+            if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
+            {
+                if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
+
+                CombatSystem.Instance.KillUnit(attackedEnemy);
+            }
+            else if (!attackedEnemy.playersWhoAttacked.Contains(this) && attackedEnemy.Health < oldEnemyHealth)
+            {
+                attackedEnemy.playersWhoAttacked.Add(this);
+            }
         }
 
         callback();
@@ -115,18 +125,26 @@ public class Mage : Player
         int damageToDeal = (AttackStat / 3) + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack);
 
         List<Enemy> killList = new List<Enemy>();
+        int oldEnemyHealth;
         foreach (Enemy enemy in enemies)
         {
+            oldEnemyHealth = enemy.Health;
             if (enemy.TakeDamage(damageToDeal))
             {
+                if (!enemy.playersWhoAttacked.Contains(this)) enemy.playersWhoAttacked.Add(this);
                 killList.Add(enemy);
+            }
+
+            if (enemy.Health < oldEnemyHealth)
+            {
+                if (!enemy.playersWhoAttacked.Contains(this)) enemy.playersWhoAttacked.Add(this);
             }
         }
 
         foreach (Enemy enemy in killList)
         {
             CombatSystem.Instance.KillUnit(enemy);
-            Upgrades.Instance.MageXp += 50;
+            //Upgrades.Instance.MageXp += 50;
         }
 
         StartAbilityOneCD();
