@@ -85,7 +85,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary>Dexterity (or dodge chance) of the unit.</summary>
     public float DexterityStat { get; set; }
     
-    /// <summary>Dexterity (or dodge chance) of the unit.</summary>
+    /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
 
     /// <summary> The shape of the unitys attack </summary>
