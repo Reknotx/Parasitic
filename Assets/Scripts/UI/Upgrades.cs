@@ -50,7 +50,12 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
-
+    [HideInInspector]
+    public Mage mage;
+    [HideInInspector]
+    public Warrior knight;
+    [HideInInspector]
+    public Archer archer;
 
     /// <summary>
     /// Experience System Vars
@@ -76,15 +81,19 @@ public class Upgrades : MonoBehaviour
         get { return _mageXp; }
         set
         {
-            _mageXp = value;
-            if (_mageXp >= 100)
+            if(mage != null)
             {
-                _mageXp -= 100;
-                MagePoints++;
-                ShowUpgradeNotification();
+                if(_mageXp != value) mage.ExpParticle.Play();
+                _mageXp = value;
+                if (_mageXp >= maxXP)
+                {
+                    _mageXp -= maxXP;
+                    MagePoints++;
+                    ShowUpgradeNotification();
+                }
+                mageXpBar.value = _mageXp / maxXP;
+                _mageXpText.text = _mageXp + " / " + maxXP;
             }
-            mageXpBar.value = _mageXp / 100f;
-            _mageXpText.text = _mageXp + " / " + maxXP;
         }
     }
 
@@ -93,15 +102,19 @@ public class Upgrades : MonoBehaviour
         get { return _knightXp; }
         set
         {
-            _knightXp = value;
-            if (_knightXp >= 100)
+            if (knight != null)
             {
-                _knightXp -= 100;
-                KnightPoints++;
-                ShowUpgradeNotification();
+                if (_knightXp != value) knight.ExpParticle.Play();
+                _knightXp = value;
+                if (_knightXp >= maxXP)
+                {
+                    _knightXp -= maxXP;
+                    KnightPoints++;
+                    ShowUpgradeNotification();
+                }
+                knightXpBar.value = _knightXp / maxXP;
+                _knightXpText.text = _knightXp + " / " + maxXP;
             }
-            knightXpBar.value = _knightXp / 100f;
-            _knightXpText.text = _knightXp + " / " + maxXP;
         }
     }
 
@@ -110,15 +123,35 @@ public class Upgrades : MonoBehaviour
         get { return _archerXp; }
         set
         {
-            _archerXp = value;
-            if (_archerXp >= 100)
+            if (archer != null)
             {
-                _archerXp -= 100;
-                ArcherPoints++;
-                ShowUpgradeNotification();
+                if (_archerXp != value) archer.ExpParticle.Play();
+                _archerXp = value;
+                if (_archerXp >= maxXP)
+                {
+                    _archerXp -= maxXP;
+                    ArcherPoints++;
+                    ShowUpgradeNotification();
+                }
+                archerXpBar.value = _archerXp / maxXP;
+                _archerXpText.text = _archerXp + " / " + maxXP;
             }
-            archerXpBar.value = _archerXp / 100f;
-            _archerXpText.text = _archerXp + " / " + maxXP;
+        }
+    }
+
+    /// <summary>
+    /// Gets xp amount from input Enemy and splits it between the players who damaged that enemy
+    /// </summary>
+    /// <param name="enemy">enemy to get xp from</param>
+    public void SplitExp(Enemy enemy)
+    {
+        int splitXp = enemy.XpDrop / enemy.playersWhoAttacked.Count;
+        foreach(Player p in enemy.playersWhoAttacked)
+        {
+            if (p is Mage) MageXp += splitXp;
+            else if (p is Warrior) KnightXp += splitXp;
+            else if (p is Archer) ArcherXp += splitXp;
+            Debug.Log(p.name + " Received " + splitXp + " EXP for helping eliminate " + enemy.name);
         }
     }
     #endregion

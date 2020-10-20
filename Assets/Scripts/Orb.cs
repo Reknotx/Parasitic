@@ -13,6 +13,7 @@ public class Orb : MonoBehaviour
             Upgrades.Instance.MageXp += experienceToAdd;
             Upgrades.Instance.KnightXp += experienceToAdd;
             Upgrades.Instance.ArcherXp += experienceToAdd;
+            
             Destroy(gameObject);
         }
     }
