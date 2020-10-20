@@ -291,9 +291,21 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel()
     {
-        player = null;
-        target = null;
-        SetBattleState(BattleState.Start);
+        if (state == BattleState.Targetting)
+        {
+            ///Cancel the targetting
+            SetBattleState(BattleState.Idle);
+        }
+        else if (state == BattleState.Idle)
+        {
+            ///deselect the player
+            CharacterSelector.Instance.SelectedPlayerUnit = null;
+        }
+        CharacterSelector.Instance.SelectedPlayerUnit.StopAllCoroutines();
+
+        //player = null;
+        //target = null;
+        //SetBattleState(BattleState.Start);
     }
 
     /// <summary> 

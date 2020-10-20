@@ -195,7 +195,7 @@ public class Archer : Player
                 break;
 
             case Abilities.ability1Upgrade2:
-                AbilityTwoUpgradeTwo();
+                AbilityOneUpgradeTwo();
                 break;
 
             case Abilities.ability2Upgrade1:
