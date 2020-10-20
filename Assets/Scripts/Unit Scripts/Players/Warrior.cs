@@ -111,7 +111,15 @@ public class Warrior : Player
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.CreateAttackDownStatusEffect(this, enemy);
+            //enemy.CreateAttackDownStatusEffect(this, enemy);
+            float attackReductionVal = 0f;
+            bool ability1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.knight);
+
+            attackReductionVal = ability1U1 ? .75f : .5f;
+
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3, this, enemy);
+            enemy.AddStatusEffect(effect);
+            enemy.AttackStat = Mathf.FloorToInt(AttackStat * attackReductionVal);
         }
 
         yield return null;
@@ -173,13 +181,13 @@ public class Warrior : Player
 
     protected override void AttackUpgradeTwo()
     {
-        Debug.LogError("Attack range increased by 1.");
+        Debug.Log("Attack range increased by 1.");
         AttackRange++;
     }
 
     protected override void AbilityOneUpgradeOne()
     {
-        throw new NotImplementedException();
+        Debug.Log("Increase damage reduciton value by 25%.");
     }
 
     protected override void AbilityOneUpgradeTwo()
