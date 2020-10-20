@@ -13,7 +13,7 @@ using UnityEngine;
 
 public class Mage : Player
 {
-
+    private bool killedUnitWhileEnchantActive = false;
     /// <summary>
     /// Mage's normal attack.
     /// </summary>
@@ -51,6 +51,8 @@ public class Mage : Player
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
 
+        killedUnitWhileEnchantActive = false;
+
         StartAbilityTwoCD();
     }
 
@@ -62,7 +64,27 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
+        int additionalDamage = 0;
+
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.mage))
+        {
+            float result = UnityEngine.Random.Range(0f, 1f);
+            if (result <= 0.3f)
+            {
+                additionalDamage = Mathf.FloorToInt(AttackStat * 0.4f);
+            }
+        }
+
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
+
+        if (damageModifier > 0 && killedUnitWhileEnchantActive)
+        {
+            ///Overrides the damage modifier if an enemy was killed while enchant
+            ///was active.
+            damageModifier = AttackStat;
+        }
+
+        damageModifier += additionalDamage;
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -73,6 +95,17 @@ public class Mage : Player
         {
             CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
             Upgrades.Instance.MageXp += 50;
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade2, UnitToUpgrade.mage))
+            {
+                ///If the second upgrade is purchased and we have successfully killed the enemy, increase range by 1.
+                AttackRange++;
+            }
+
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.mage))
+            {
+                killedUnitWhileEnchantActive = true;
+            }
         }
 
         callback();
@@ -112,7 +145,10 @@ public class Mage : Player
             }
         }
 
-        int damageToDeal = (AttackStat / 3) + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack);
+        ///If the first upgrade to this ability is purchased base damage dealt will be half of mage's attack stat.
+        int attackStatDivider = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.mage) ? 2 : 3;
+
+        int damageToDeal = (AttackStat / attackStatDivider) + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack);
 
         List<Enemy> killList = new List<Enemy>();
         foreach (Enemy enemy in enemies)
@@ -120,6 +156,13 @@ public class Mage : Player
             if (enemy.TakeDamage(damageToDeal))
             {
                 killList.Add(enemy);
+            }
+            else if (enemy.damagedThisTurn)
+            {
+                //Apply debuff.
+                StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.DefenseDown, 3, this, enemy);
+                enemy.DefenseStat -= 3;
+                enemy.AddStatusEffect(effect);
             }
         }
 
@@ -141,32 +184,32 @@ public class Mage : Player
 
     protected override void AttackUpgradeOne()
     {
-        throw new NotImplementedException();
+        Debug.Log("Attacks now have 30% chance to do 1.4x damage.");
     }
 
     protected override void AttackUpgradeTwo()
     {
-        throw new NotImplementedException();
+        Debug.Log("Each kill with normal attack increases attack range by 1.");
     }
 
     protected override void AbilityOneUpgradeOne()
     {
-        throw new NotImplementedException();
+        Debug.Log("Damage dealt by ability is now 1/2 of attack stat.");
     }
 
     protected override void AbilityOneUpgradeTwo()
     {
-        throw new NotImplementedException();
+        Debug.Log("Enemy units damaged but not killed will have their defense reduced by 3 units.");
     }
 
     protected override void AbilityTwoUpgradeOne()
     {
-        throw new NotImplementedException();
+        Debug.Log("Movement speed increased by 2 tiles while enchantment is active.");
     }
 
     protected override void AbilityTwoUpgradeTwo()
     {
-        throw new NotImplementedException();
+        Debug.Log("When you get an enemy while enchantment is active, the damage will be raised to 2x for remaining durations.");
     }
 
     public override void ProcessUpgrade(Abilities abilityToUpgrade)

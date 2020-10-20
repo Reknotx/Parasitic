@@ -143,6 +143,13 @@ public class Warrior : Player
 
         yield return null;
 
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.knight))
+        {
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.DefenseUp, 2, this, this);
+            statusEffects.Add(effect);
+            DefenseStat += 2;
+        }
+
         StartAbilityTwoCD();
 
         callback();
@@ -150,12 +157,12 @@ public class Warrior : Player
 
     protected override void AttackUpgradeOne()
     {
-        AttackStat += Mathf.FloorToInt(AttackStat / 2);
+        AttackStat += 3;
     }
 
     protected override void AttackUpgradeTwo()
     {
-        throw new NotImplementedException();
+        Debug.LogError("The attack upgrade two is not incorporated yet.");
     }
 
     protected override void AbilityOneUpgradeOne()
@@ -166,16 +173,18 @@ public class Warrior : Player
     protected override void AbilityOneUpgradeTwo()
     {
         AbilityOneRange += 2;
+        Debug.Log("Ability range is increased by 2 tiles.");
     }
 
     protected override void AbilityTwoUpgradeOne()
     {
-        throw new NotImplementedException();
+        Debug.Log("Ability now increases the caster's defense by 2 points on cast.");
     }
 
     protected override void AbilityTwoUpgradeTwo()
     {
-        AbilityTwoRange += 2;
+        AbilityTwoRange += 1;
+        Debug.Log("Ability range is increased by 1 tile.");
     }
 
     public override void ProcessUpgrade(Abilities abilityToUpgrade)

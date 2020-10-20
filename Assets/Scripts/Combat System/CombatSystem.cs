@@ -370,6 +370,7 @@ public class CombatSystem : MonoBehaviour
             }
             unit.HasMoved = false;
             unit.HasAttacked = false;
+            unit.damagedThisTurn = false;
         }
         //increment tile cooldown
         for (int tile = coolingTiles.Count - 1; tile >= 0; tile--)

@@ -47,6 +47,15 @@ public enum ActionShape
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
+    #region The base starting stats of this unit.
+    /// <summary> The base stats of this unit. Used to reset individual stats when certain things happen. </summary>
+    protected int _baseMovement;
+    protected int _baseAttack;
+    protected int _baseDefense;
+    protected int _baseRange;
+    #endregion
+
+
     /// <summary> The range of the normal attack. </summary>
     public int AttackRange { get; set; } 
 
@@ -101,6 +110,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public float tileCrossTime = 0.3f;
     /// <summary> Is unity currently moving along its path </summary>
     bool moving = false;
+
+    /// <summary> Indicates if the unit was damaged this turn. </summary>
+    /// The turn means the phase on which the unit takes damage.
+    /// Used for certain abilities.
+    [HideInInspector] public bool damagedThisTurn = false;
 
     /// <summary> The value representing the remaining time on the buff/debuff
     /// currently active on this unit. </summary>
@@ -157,11 +171,21 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public virtual void Start()
     {
         _maxHealth = _baseStats.Health;
+
+        _baseAttack = _baseStats.BaseAttack;
         AttackStat = _baseStats.BaseAttack;
+
+        _baseDefense = _baseStats.BaseDefense;
         DefenseStat = _baseStats.BaseDefense;
+
+        _baseMovement = _baseStats.Movement;
         MovementStat = _baseStats.Movement;
+
         DexterityStat = _baseStats.Dexterity;
+
+        _baseRange = _baseStats.AttackRange;
         AttackRange = _baseStats.AttackRange;
+
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
@@ -478,9 +502,46 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         _maxHealth = Health;
     }
 
+    public enum Stat
+    {
+        Attack,
+        Defense,
+        Movement,
+        AttackRange
+    }
+
+    public void ResetSpecificStat(Stat stat)
+    {
+        switch (stat)
+        {
+            case Stat.Attack:
+                AttackStat = _baseAttack;
+                break;
+
+            case Stat.Defense:
+                DefenseStat = _baseDefense;
+                break;
+
+            case Stat.Movement:
+                MovementStat = _baseMovement;
+                break;
+
+            case Stat.AttackRange:
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public int GetNumOfStatusEffects()
     {
         return statusEffects.Count;
+    }
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        statusEffects.Add(effect);
     }
 
     /// <summary>
@@ -499,6 +560,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Placeholder to remind me to do this tomorrow.
+    /// </summary>
+    public void ResetTheStatOnStatusEffectEnd()
+    {
+
     }
 
     /// <summary>
@@ -526,7 +595,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             Taunted,
             AttackDown,
-            AttackUp
+            AttackUp,
+            MoveUp,
+            MoveDown,
+            DefenseUp,
+            DefenseDown
         }
 
         int _duration;

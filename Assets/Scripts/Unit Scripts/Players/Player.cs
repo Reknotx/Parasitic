@@ -233,7 +233,14 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public void Heal()
     {
-        Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer) == false)
+        {
+            Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+        }
+        else
+        {
+            Health += Mathf.FloorToInt(MaxHealth * 0.3f);
+        }
     }
 
     public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
