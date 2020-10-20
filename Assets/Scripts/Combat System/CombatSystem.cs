@@ -291,21 +291,27 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel()
     {
-        Player selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
+        Player selectedPlayer = null;
 
-        ActionRange.Instance.ActionDeselected(false);
-        selectedPlayer.StopAllCoroutines();
+        if (CharacterSelector.Instance.SelectedPlayerUnit != null)
+        {
+            selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
+            ActionRange.Instance.ActionDeselected(false);
+            selectedPlayer.StopAllCoroutines();
+        }
+
 
         if (state == BattleState.Targetting)
         {
+            ///Assumes that you have a player character in the process of targetting an ability.
             ///Cancel the targetting
             SetBattleState(BattleState.Idle);
-            if (selectedPlayer.HasMoved == false)
+            if (selectedPlayer != null && selectedPlayer.HasMoved == false)
             {
                 CharacterSelector.Instance.BoarderLine.SetActive(true);
             }
         }
-        else if (state == BattleState.Idle)
+        else if (state == BattleState.Idle && selectedPlayer != null)
         {
             ///deselect the player
             CharacterSelector.Instance.SelectedPlayerUnit = null;
