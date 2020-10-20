@@ -28,6 +28,8 @@ public abstract class Enemy : Humanoid, IEnemy
 
     //}
 
+    public List<Player> playersWhoAttacked = new List<Player>();
+
     /// <summary> The current target of the enemy. </summary>
     private Player _currTarget;
 

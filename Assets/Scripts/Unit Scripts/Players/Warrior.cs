@@ -62,10 +62,21 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
+        else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
-            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
-            Upgrades.Instance.KnightXp += 50;
+            Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
+            int oldEnemyHealth = attackedEnemy.Health;
+            if (attackedEnemy.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
+            {
+                if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
+
+                CombatSystem.Instance.KillUnit(attackedEnemy);
+            }
+            else if (!attackedEnemy.playersWhoAttacked.Contains(this) && attackedEnemy.Health < oldEnemyHealth)
+            {
+                attackedEnemy.playersWhoAttacked.Add(this);
+            }
+
         }
 
         callback();
