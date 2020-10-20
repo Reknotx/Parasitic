@@ -173,7 +173,8 @@ public class Warrior : Player
 
     protected override void AttackUpgradeTwo()
     {
-        Debug.LogError("The attack upgrade two is not incorporated yet.");
+        Debug.LogError("Attack range increased by 1.");
+        AttackRange++;
     }
 
     protected override void AbilityOneUpgradeOne()

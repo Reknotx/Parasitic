@@ -46,6 +46,7 @@ public class Archer : Player
 
         if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.archer))
         {
+            Debug.Log("Increasing attack and move range.");
             MovementStat += 2;
             AttackRange += 2;
         }
@@ -85,7 +86,7 @@ public class Archer : Player
 
             int oldEnemyHealth = attackedEnemy.Health;
 
-            if (attackedEnemy.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
+            if (attackedEnemy.TakeDamage(AttackStat + extraDamage + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
             {
                 if(!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
 
@@ -99,11 +100,12 @@ public class Archer : Player
             ///If the attack doesn't kill the enemy, but does deal damage, and we have purchased the first upgrade
             ///for the basic attack, then we will apply a move speed debuff on the enemy hit.
             if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.archer)
-                && CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn)
+                && attackedEnemy.Health < oldEnemyHealth)
             {
-                StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.MoveDown, 3, this, CharacterSelector.Instance.SelectedTargetUnit);
-                CharacterSelector.Instance.SelectedTargetUnit.AddStatusEffect(effect);
-                CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn = false;
+                StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.MoveDown, 3, this, attackedEnemy);
+                attackedEnemy.AddStatusEffect(effect);
+                attackedEnemy.damagedThisTurn = false;
+                attackedEnemy.MovementStat--;
             }
         }
 
