@@ -282,7 +282,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 transform.position = p01;
                 if (this is Enemy)
                 {
-                    //EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -298,7 +298,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         HealingTileCheck();
         if (this is Enemy)
         {
-            //EnemyPath.Instance.HidePath();
+            EnemyPath.Instance.HidePath();
         }
     }
 
