@@ -133,8 +133,10 @@ public class Archer : Player
         Debug.Log("Enemy units will now have their move speed reduced when attack hits.");
     }
 
+    /// <summary> WIP. NOT YET IMPLEMENTED </summary>
     protected override void AttackUpgradeTwo()
     {
+        ///WIP NOT YET IMPLEMENTED
         Debug.Log("Increases the accuracy of the player's basic attack.");
     }
 

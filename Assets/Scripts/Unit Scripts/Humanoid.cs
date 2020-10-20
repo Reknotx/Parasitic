@@ -277,7 +277,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 transform.position = p01;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                    //EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -293,7 +293,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         HealingTileCheck();
         if (this is Enemy)
         {
-            EnemyPath.Instance.HidePath();
+            //EnemyPath.Instance.HidePath();
         }
     }
 
@@ -433,6 +433,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         foreach (StatusEffect effect in removeList)
         {
+            if (effect.Type != StatusEffect.StatusEffectType.Taunted)
+            {
+                ResetSpecificStat(effect.Type);
+            }
+
             statusEffects.Remove(effect);
         }
 
@@ -502,35 +507,27 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         _maxHealth = Health;
     }
 
-    public enum Stat
-    {
-        Attack,
-        Defense,
-        Movement,
-        AttackRange
-    }
+    //public enum Stat
+    //{
+    //    Attack,
+    //    Defense,
+    //    Movement,
+    //    AttackRange
+    //}
 
-    public void ResetSpecificStat(Stat stat)
+    public void ResetSpecificStat(StatusEffect.StatusEffectType stat)
     {
-        switch (stat)
+        if (stat == StatusEffect.StatusEffectType.AttackDown || stat == StatusEffect.StatusEffectType.AttackUp)
         {
-            case Stat.Attack:
-                AttackStat = _baseAttack;
-                break;
-
-            case Stat.Defense:
-                DefenseStat = _baseDefense;
-                break;
-
-            case Stat.Movement:
-                MovementStat = _baseMovement;
-                break;
-
-            case Stat.AttackRange:
-                break;
-
-            default:
-                break;
+            AttackStat = _baseAttack;
+        }
+        else if (stat == StatusEffect.StatusEffectType.DefenseDown || stat == StatusEffect.StatusEffectType.DefenseUp)
+        {
+            DefenseStat = _baseDefense;
+        }
+        else if (stat == StatusEffect.StatusEffectType.MoveDown || stat == StatusEffect.StatusEffectType.MoveUp)
+        {
+            MovementStat = _baseMovement;
         }
     }
 

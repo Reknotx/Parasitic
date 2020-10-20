@@ -233,14 +233,21 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public void Heal()
     {
-        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer) == false)
-        {
-            Health += Mathf.FloorToInt(MaxHealth * 0.2f);
-        }
-        else
-        {
-            Health += Mathf.FloorToInt(MaxHealth * 0.3f);
-        }
+        ///States if the archers mend ability is upgraded.
+        bool archerAbility1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer);
+
+        float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
+
+        Health += Mathf.FloorToInt(MaxHealth * healPercent);
+
+        //if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer) == false)
+        //{
+        //    Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+        //}
+        //else
+        //{
+        //    Health += Mathf.FloorToInt(MaxHealth * 0.3f);
+        //}
     }
 
     public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
