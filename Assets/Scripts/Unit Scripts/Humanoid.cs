@@ -218,11 +218,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Vector3 p01;
         float timeStart;
         Vector3 direction;
+        float unitHeight = transform.position.y - currentTile.transform.position.y;
         foreach (Tile tile in path)
         {
             timeStart = Time.time;
             moving = true;
-
             //get the position of the tile the unit is starting on
             p0 = currentTile.transform.position;
 
@@ -231,8 +231,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             p1 = tile.transform.position;
 
             // set the y position to be that of the moving unit
-            p0 = new Vector3(p0.x, transform.position.y, p0.z);
-            p1 = new Vector3(p1.x, transform.position.y, p1.z);
+            p0 = new Vector3(p0.x, unitHeight + p0.y, p0.z);
+            p1 = new Vector3(p1.x, unitHeight + p1.y, p1.z);
 
             //mark the starting tile as no longer occupied
             currentTile.occupied = false;

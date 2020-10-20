@@ -18,6 +18,7 @@ public class MapGrid : MonoBehaviour
     public int rows = 10;
     [HideInInspector]
     public float tileSize = 1;
+    public float tileHeight = 1;
     public Mesh gizmoMesh;
     public bool drawGizmoMesh = true;
     List<Tile> path;
@@ -382,6 +383,7 @@ public class MapGrid : MonoBehaviour
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
         List<Vector3> points = new List<Vector3>();
+        List<Tile> boarderPath = new List<Tile>();
         Vector3 pos = Vector3.zero;
         Vector3 startPos = Vector3.zero;
         Vector3 hitPoint;
@@ -400,11 +402,12 @@ public class MapGrid : MonoBehaviour
                 if (inRange[x, y])
                 {
                     pos = grid[x, y].transform.position;
-                    startPos = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                    startPos = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
                     //make start current position
                     xCoord = x;
                     yCoord = y;
                     points.Add(startPos);
+                    boarderPath.Add(grid[xCoord, yCoord]);
                     startFound = true;
                     break;
                 }
@@ -435,10 +438,19 @@ public class MapGrid : MonoBehaviour
                         //rotate right
                         facing = Dir.up;
                         //add point to list
-                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z + tileSize / 2);
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z + tileSize / 2);
+                        if (grid[xCoord, yCoord].slope)
+                        {
+                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                        }
                         if (hitPoint != startPos)
                         {
+                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
+                            //{
+                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
+                            //}
                             points.Add(hitPoint);
+                            boarderPath.Add(grid[xCoord, yCoord]);
                         }
                         else
                         {
@@ -463,10 +475,19 @@ public class MapGrid : MonoBehaviour
                         //rotate right
                         facing = Dir.right;
                         //add pint to list
-                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z + tileSize / 2);
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z + tileSize / 2);
+                        if (grid[xCoord, yCoord].slope)
+                        {
+                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                        }
                         if (hitPoint != startPos)
                         {
+                            //if(grid[xCoord,yCoord].level != boarderPath[boarderPath.Count - 1].level)
+                            //{
+                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
+                            //}
                             points.Add(hitPoint);
+                            boarderPath.Add(grid[xCoord, yCoord]);
                         }
                         else
                         {
@@ -491,10 +512,19 @@ public class MapGrid : MonoBehaviour
                         //rotate right
                         facing = Dir.down;
                         //add pint to list
-                        hitPoint = new Vector3(pos.x + tileSize / 2, height, pos.z - tileSize / 2);
+                        hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z - tileSize / 2);
+                        if(grid[xCoord, yCoord].slope)
+                        {
+                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                        }
                         if (hitPoint != startPos)
                         {
+                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
+                            //{
+                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
+                            //}
                             points.Add(hitPoint);
+                            boarderPath.Add(grid[xCoord, yCoord]);
                         }
                         else
                         {
@@ -519,10 +549,19 @@ public class MapGrid : MonoBehaviour
                         //rotate right
                         facing = Dir.left;
                         //add pint to list
-                        hitPoint = new Vector3(pos.x - tileSize / 2, height, pos.z - tileSize / 2);
+                        hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
+                        if (grid[xCoord, yCoord].slope)
+                        {
+                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                        }
                         if (hitPoint != startPos)
                         {
+                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
+                            //{
+                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
+                            //}
                             points.Add(hitPoint);
+                            boarderPath.Add(grid[xCoord, yCoord]);
                         }
                         else
                         {

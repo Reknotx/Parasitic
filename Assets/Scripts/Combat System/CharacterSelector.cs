@@ -260,14 +260,34 @@ public class CharacterSelector : MonoBehaviour
     void DrawPath()
     {
         List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, pathHeight, SelectedPlayerUnit.transform.position.z));
-        foreach (Tile tile in path)
+        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.transform.position.y + pathHeight, SelectedPlayerUnit.transform.position.z));
+        for (int i = 0; i < path.Count; i++)
         {
-            points.Add(new Vector3(tile.transform.position.x, pathHeight, tile.transform.position.z));
+            if(path[i].slope)
+            {
+                //points is used instead of path here because there is always a previos point
+                points.Add(new Vector3((points[points.Count-1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                    points[points.Count - 1].y, 
+                    (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                //print((path[i - 1].transform.position.x - path[i].transform.position.x) / 2f + path[i].transform.position.x);
+                points.Add(new Vector3( path[i].transform.position.x,path[i].Elevation+MapGrid.Instance.tileHeight/2 + pathHeight, path[i].transform.position.z));
+                if (path[i].slope && i != path.Count - 1)
+                {
+                    points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                        path[i + 1].transform.position.y + pathHeight,
+                        (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                }
+            }
+            else
+            {
+                points.Add(path[i].transform.position + Vector3.up * pathHeight);
+            }
+            
+            
         }
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
-        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, 0.25f, selectedTile.transform.position.z);
+        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, pathHeight + selectedTile.transform.position.y, selectedTile.transform.position.z);
         PathLine.SetActive(true);
         EndPoint.SetActive(true);
     }

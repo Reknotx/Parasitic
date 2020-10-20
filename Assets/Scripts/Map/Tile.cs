@@ -18,6 +18,11 @@ public class Tile : MonoBehaviour
     /// <summary> Ranged attacks will pass through tile if false</summary>
     public bool blocksLOS = false;
 
+    public bool slope = false;
+    public List<Tile> MovementNeighbors = new List<Tile>();
+
+    public int level = 0;
+
     bool drawTileGizmo = true;
     private float gizmoHeight = 0.5f;
 
@@ -25,6 +30,8 @@ public class Tile : MonoBehaviour
     public float effectMagnitude = 0;
     public int effectCooldown = 10;
     public int remainingCooldown = 0;
+
+    
 
     //used for pathfinding
     [HideInInspector]
@@ -38,6 +45,21 @@ public class Tile : MonoBehaviour
     //reference to unit currently on tile
     [HideInInspector]
     public Humanoid occupant;
+
+    private void Start()
+    {
+        if (slope)
+        {
+            MovementNeighbors = MapGrid.Instance.GetNeighbors(this);
+            for(int i = MovementNeighbors.Capacity -1; i >= 0; i--)
+            {
+                if (!MovementNeighbors[i].movementTile)
+                {
+                    MovementNeighbors.RemoveAt(i);
+                }
+            }
+        }
+    }
 
     public int fCost
     {
@@ -114,4 +136,8 @@ public class Tile : MonoBehaviour
         return false;
     }
 
+    public float Elevation
+    {
+        get { return level * MapGrid.Instance.tileHeight; }
+    }
 }
