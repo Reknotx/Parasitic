@@ -14,6 +14,11 @@ public class MainMenuUI : MonoBehaviour
     public GameObject options;
 
 
+    private void Start()
+    {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+    }
+
     /// <summary>
     /// Shows Level Select Screen
     /// </summary>

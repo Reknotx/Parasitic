@@ -140,6 +140,9 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
+            if (player is Mage) Upgrades.Instance.mage = (Mage)player;
+            else if (player is Warrior) Upgrades.Instance.knight = (Warrior)player;
+            else if (player is Archer) Upgrades.Instance.archer = (Archer)player;
         }
 
         foreach (Enemy enemy in tempE)
@@ -454,7 +457,7 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enemiesToGo.Count > 0)
+        while (enemiesToGo.Count > 0 && !CheckLoseCondition())
         {
             int index = Random.Range(0, enemiesToGo.Count);
 
@@ -467,18 +470,36 @@ public class CombatSystem : MonoBehaviour
 
             Enemy tempE = enemiesToGo[index];
 
+            if (tempE is Hive)
+            {
+                //print("Hive turn");
+                Hive tempS = (Hive)tempE;
+                //if enemy is spawned wait
+                if (tempS.SpawnEnemy())
+                {
+                    yield return new WaitForSeconds(1.5f);
+                }
+                if(!(tempE is Brood))
+                {
+                    EndUnitTurn(tempE);
+                    continue;
+                }
+            }
+
             //if (tempE.CheckIfInRangeOfTarget())
-            if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+            if (tempE.MovementStat > 0)
             {
-                tempE.Move(tempE.TauntedPath());
-            }
-            else
-            {
-                tempE.Move(tempE.FindNearestPlayer());
-            }
+                if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
+                {
+                    tempE.Move(tempE.TauntedPath());
+                }
+                else
+                {
+                    tempE.Move(tempE.FindNearestPlayer());
+                }
 
-            yield return new WaitUntil(() => tempE.HasMoved == true);
-
+                yield return new WaitUntil(() => tempE.HasMoved == true);
+            }
             if (tempE.CheckIfInRangeOfTarget())
             {
                 tempE.Attack();
@@ -527,12 +548,23 @@ public class CombatSystem : MonoBehaviour
         if (unit is Player)
         {
             playersToGo.Remove((Player)unit);
+            foreach(Humanoid temp in unitsAlive)
+            {
+                
+                if(temp is Enemy && ((Enemy)temp).playersWhoAttacked.Count >0)
+                {
+                   // Debug.Log("Count Before: " + ((Enemy)temp).playersWhoAttacked.Count);
+                    ((Enemy)temp).playersWhoAttacked.Remove((Player)unit);
+                    //Debug.Log("Count After: " + ((Enemy)temp).playersWhoAttacked.Count);
+                }
+            }
             Instantiate(blood, unit.transform.position, blood.transform.rotation);
 
             if (CheckLoseCondition()) GameLost();
         }
         else
         {
+            Upgrades.Instance.SplitExp((Enemy)unit);
             enemiesToGo.Remove((Enemy)unit);
             var emission = bloodAndGuts.emission;
 
@@ -821,6 +853,11 @@ public class CombatSystem : MonoBehaviour
         }
 
         removeList.Clear();
+    }
+
+    public void NewSpawn(Humanoid spawn)
+    {
+        unitsAlive.Add(spawn);
     }
 
     /// <summary>

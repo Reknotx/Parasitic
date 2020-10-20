@@ -79,10 +79,21 @@ public class Archer : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if (CharacterSelector.Instance.SelectedTargetUnit.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack) + extraDamage, hasTrueDamage))
+        else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
-            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
-            Upgrades.Instance.ArcherXp += 50;
+            Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
+            int oldEnemyHealth = attackedEnemy.Health;
+            if (attackedEnemy.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
+            {
+                if(!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
+
+                CombatSystem.Instance.KillUnit(attackedEnemy);
+            }
+            else if( !attackedEnemy.playersWhoAttacked.Contains(this) && attackedEnemy.Health < oldEnemyHealth)
+            {
+                attackedEnemy.playersWhoAttacked.Add(this);
+            }
+               
         }
         ///If the attack doesn't kill the enemy, but does deal damage, and we have purchased the first upgrade
         ///for the basic attack, then we will apply a move speed debuff on the enemy hit.

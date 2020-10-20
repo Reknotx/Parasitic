@@ -93,6 +93,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     /// <summary>Dexterity (or dodge chance) of the unit.</summary>
     public float DexterityStat { get; set; }
+    
+    /// <summary>XP Dropped when this Unit Dies</summary>
+    public int XpDrop { get; set; }
 
     /// <summary> The shape of the unitys attack </summary>
     public ActionShape AttackShape = ActionShape.Diamond;
@@ -185,7 +188,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         _baseRange = _baseStats.AttackRange;
         AttackRange = _baseStats.AttackRange;
-
+        
+        XpDrop = _baseStats.XPDropOnDeath;
+        
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;

@@ -37,6 +37,9 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> The material for the player when they are selected. </summary>
     public Material selectedMat;
 
+    // EXP Particle System that Is a Child of the Player Unit
+    public ParticleSystem ExpParticle;
+
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
     public int AbilityOneRange;

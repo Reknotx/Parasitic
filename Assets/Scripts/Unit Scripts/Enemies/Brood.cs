@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Brood : Enemy
+public class Brood : Hive
 {
     public override void Attack()
     {
