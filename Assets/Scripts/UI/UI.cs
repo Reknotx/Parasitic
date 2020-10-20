@@ -40,6 +40,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
         LoadAudioLevels();
         SetGraphics(PlayerPrefs.GetInt("Quality Level", 5));
         combatSystem = CombatSystem.Instance;
@@ -177,6 +178,7 @@ public class UI : MonoBehaviour
 
     public void SetGraphics(float qualityIndex)
     {
+        
         QualitySettings.SetQualityLevel((int)qualityIndex);
         PlayerPrefs.SetInt("Quality Level", (int)qualityIndex);
         qualityText.text = "Quality: " + QualitySettings.names[(int)qualityIndex];
