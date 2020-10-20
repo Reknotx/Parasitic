@@ -30,7 +30,7 @@ public class Hive : Enemy
                 currentCooldown--;
                 return false;
             }
-            bool[,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+            bool[,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, 1, true, ActionShape.Square);
             Tile[,] tempGrid = MapGrid.Instance.grid;
             List<Tile> OpenTiles = new List<Tile>();
             for (int i = 0; i < neighbors.GetLength(0); i++)
@@ -70,17 +70,6 @@ public class Hive : Enemy
     }
 
 
-    public override void Attack()
-    {
-        Debug.Log("Larva Attack");
-        base.Attack();
-    }
 
-
-    public override void Defend()
-    {
-        Debug.Log("Larva Defend");
-        base.Defend();
-    }
 
 }

@@ -154,7 +154,21 @@ public abstract class Enemy : Humanoid, IEnemy
 
             path.RemoveAt(path.Count - 1);
         }
-
+        //shorten path so the enemy is as far as they can be when they attack
+        for(int i = path.Count - 1; i >= 0; i--)
+        {
+            if (CheckIfInRangeOfTarget(path[i]))
+            {
+                if(path.Count - 1 != i)
+                {
+                    path.RemoveRange(i+1,1);
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
         int movementDist = Mathf.Min(MovementStat, path.Count);
         //truncate path to movement range
         path.RemoveRange(movementDist, path.Count - movementDist);
@@ -165,12 +179,15 @@ public abstract class Enemy : Humanoid, IEnemy
     /// Runs a check to see if the target player is within range of their attack.
     /// </summary>
     /// <returns>True if in range, false otherwise.</returns>
-    public bool CheckIfInRangeOfTarget()
+    public bool CheckIfInRangeOfTarget(Tile target = null)
     {
         if (_currTarget == null) return false;
-
+        if(target == null)
+        {
+            target = currentTile;
+        }
         //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
-        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true);
+        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(target, AttackRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Player> players = new List<Player>();
 

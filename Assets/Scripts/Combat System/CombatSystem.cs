@@ -466,9 +466,24 @@ public class CombatSystem : MonoBehaviour
 
             Enemy tempE = enemiesToGo[index];
 
+            if (tempE is Hive)
+            {
+                //print("Hive turn");
+                Hive tempS = (Hive)tempE;
+                //if enemy is spawned wait
+                if (tempS.SpawnEnemy())
+                {
+                    yield return new WaitForSeconds(1.5f);
+                }
+                if(!(tempE is Brood))
+                {
+                    EndUnitTurn(tempE);
+                    continue;
+                }
+            }
 
             //if (tempE.CheckIfInRangeOfTarget())
-            if(tempE.MovementStat > 0)
+            if (tempE.MovementStat > 0)
             {
                 if (tempE.GetNumOfStatusEffects() > 0 && tempE.IsTaunted())
                 {
@@ -481,20 +496,6 @@ public class CombatSystem : MonoBehaviour
 
                 yield return new WaitUntil(() => tempE.HasMoved == true);
             }
-
-            if (tempE is Hive)
-            {
-                //print("Hive turn");
-                Hive tempS =(Hive)tempE;
-                //if enemy is spawned wait
-                if (tempS.SpawnEnemy())
-                {
-                    yield return new WaitForSeconds(1.5f);
-                }
-                EndUnitTurn(tempE);
-                continue;
-            }
-
             if (tempE.CheckIfInRangeOfTarget())
             {
                 tempE.Attack();
