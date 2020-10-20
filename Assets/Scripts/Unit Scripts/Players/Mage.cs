@@ -43,7 +43,20 @@ public class Mage : Player
     {
         Debug.Log("Mage Ability Two");
 
-        CreateAttackUpStatusEffect(this, this);
+        //CreateAttackUpStatusEffect(this, this);
+
+        StatusEffect attackUp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 3, this, this);
+
+        AddStatusEffect(attackUp);
+
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.mage))
+        {
+            StatusEffect moveUp = new StatusEffect(StatusEffect.StatusEffectType.MoveUp, 3, this, this);
+
+            MovementStat += 2;
+
+            AddStatusEffect(moveUp);
+        }
 
         ActionRange.Instance.ActionDeselected(false);
 
