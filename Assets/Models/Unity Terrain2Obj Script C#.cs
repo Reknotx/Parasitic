@@ -6,7 +6,7 @@ using System.Text;
  
 internal enum SaveFormat { Triangles, Quads }
 internal enum SaveResolution { Full=0, Half, Quarter, Eighth, Sixteenth }
-
+#if(UNITY_EDITOR)
 internal class Terrain2Obj : EditorWindow
 {
    private SaveFormat _saveFormat = SaveFormat.Triangles;
@@ -202,3 +202,4 @@ internal class Terrain2Obj : EditorWindow
       EditorUtility.DisplayProgressBar("Saving...", "", Mathf.InverseLerp(0, _totalCount, ++_tCount));
    }
 }
+#endif
