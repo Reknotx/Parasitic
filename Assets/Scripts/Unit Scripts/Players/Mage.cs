@@ -64,27 +64,7 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
-        int additionalDamage = 0;
-
-        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.mage))
-        {
-            float result = UnityEngine.Random.Range(0f, 1f);
-            if (result <= 0.3f)
-            {
-                additionalDamage = Mathf.FloorToInt(AttackStat * 0.4f);
-            }
-        }
-
-        int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
-
-        if (damageModifier > 0 && killedUnitWhileEnchantActive)
-        {
-            ///Overrides the damage modifier if an enemy was killed while enchant
-            ///was active.
-            damageModifier = AttackStat;
-        }
-
-        damageModifier += additionalDamage;
+        
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -93,25 +73,46 @@ public class Mage : Player
         }
         else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
-            CombatSystem.Instance.KillUnit(CharacterSelector.Instance.SelectedTargetUnit);
-            Upgrades.Instance.MageXp += 50;
+            int additionalDamage = 0;
 
-            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade2, UnitToUpgrade.mage))
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.mage))
             {
-                ///If the second upgrade is purchased and we have successfully killed the enemy, increase range by 1.
-                AttackRange++;
+                float result = UnityEngine.Random.Range(0f, 1f);
+                if (result <= 0.3f)
+                {
+                    additionalDamage = Mathf.FloorToInt(AttackStat * 0.4f);
+                }
             }
 
-            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.mage))
-            {
-                killedUnitWhileEnchantActive = true;
+            int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
 
+            if (damageModifier > 0 && killedUnitWhileEnchantActive)
+            {
+                ///Overrides the damage modifier if an enemy was killed while enchant
+                ///was active.
+                damageModifier = AttackStat;
+            }
+
+            damageModifier += additionalDamage;
 
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
+
             int oldEnemyHealth = attackedEnemy.Health;
+
             if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
             {
                 if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
+
+                if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade2, UnitToUpgrade.mage))
+                {
+                    ///If the second upgrade is purchased and we have successfully killed the enemy, increase range by 1.
+                    AttackRange++;
+                }
+
+                if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.mage))
+                {
+                    killedUnitWhileEnchantActive = true;
+                }
 
                 CombatSystem.Instance.KillUnit(attackedEnemy);
             }
@@ -174,19 +175,16 @@ public class Mage : Player
                 killList.Add(enemy);
             }
 
-
-
-            else if (enemy.damagedThisTurn)
-            {
-                //Apply debuff.
-                StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.DefenseDown, 3, this, enemy);
-                enemy.DefenseStat -= 3;
-                enemy.AddStatusEffect(effect);
-
-
-
             if (enemy.Health < oldEnemyHealth)
             {
+                if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade2, UnitToUpgrade.archer))
+                {
+                    ///Apply the debuff.
+                    StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.DefenseDown, 3, this, enemy);
+                    enemy.DefenseStat -= 3;
+                    enemy.AddStatusEffect(effect);
+                }
+
                 if (!enemy.playersWhoAttacked.Contains(this)) enemy.playersWhoAttacked.Add(this);
             }
         }

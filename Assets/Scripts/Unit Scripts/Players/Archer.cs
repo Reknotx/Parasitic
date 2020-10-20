@@ -82,7 +82,9 @@ public class Archer : Player
         else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
+
             int oldEnemyHealth = attackedEnemy.Health;
+
             if (attackedEnemy.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
             {
                 if(!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
@@ -93,16 +95,16 @@ public class Archer : Player
             {
                 attackedEnemy.playersWhoAttacked.Add(this);
             }
-               
-        }
-        ///If the attack doesn't kill the enemy, but does deal damage, and we have purchased the first upgrade
-        ///for the basic attack, then we will apply a move speed debuff on the enemy hit.
-        else if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.archer) 
-            && CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn)
-        {
-            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.MoveDown, 3, this, CharacterSelector.Instance.SelectedTargetUnit);
-            CharacterSelector.Instance.SelectedTargetUnit.AddStatusEffect(effect);
-            CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn = false;
+
+            ///If the attack doesn't kill the enemy, but does deal damage, and we have purchased the first upgrade
+            ///for the basic attack, then we will apply a move speed debuff on the enemy hit.
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.archer)
+                && CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn)
+            {
+                StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.MoveDown, 3, this, CharacterSelector.Instance.SelectedTargetUnit);
+                CharacterSelector.Instance.SelectedTargetUnit.AddStatusEffect(effect);
+                CharacterSelector.Instance.SelectedTargetUnit.damagedThisTurn = false;
+            }
         }
 
         hasTrueDamage = false;
