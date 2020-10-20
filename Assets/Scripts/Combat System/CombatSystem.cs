@@ -155,7 +155,7 @@ public class CombatSystem : MonoBehaviour
 
         DeactivateCombatButtons();
 
-        SetBattleState(BattleState.Start);
+        SetBattleState(BattleState.Idle);
         SetActiveUnits(ActiveUnits.Players);
 
         if (endCanvas.activeSelf) endCanvas.SetActive(false);
@@ -291,18 +291,26 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel()
     {
+        Player selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
+
+        ActionRange.Instance.ActionDeselected(false);
+        selectedPlayer.StopAllCoroutines();
+
         if (state == BattleState.Targetting)
         {
             ///Cancel the targetting
             SetBattleState(BattleState.Idle);
+            if (selectedPlayer.HasMoved == false)
+            {
+                CharacterSelector.Instance.BoarderLine.SetActive(true);
+            }
         }
         else if (state == BattleState.Idle)
         {
             ///deselect the player
             CharacterSelector.Instance.SelectedPlayerUnit = null;
+            selectedPlayer.UnitDeselected();
         }
-        CharacterSelector.Instance.SelectedPlayerUnit.StopAllCoroutines();
-
         //player = null;
         //target = null;
         //SetBattleState(BattleState.Start);

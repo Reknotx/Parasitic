@@ -125,6 +125,9 @@ public abstract class Player : Humanoid, IPlayer
         CombatSystem.Instance.ActivateCombatButtons();
         CombatSystem.Instance.SetPlayer(this);
         selected = true;
+
+        if (!HasMoved)
+            CharacterSelector.Instance.BoarderLine.SetActive(true);
     }
 
     public void UnitDeselected()
@@ -135,6 +138,7 @@ public abstract class Player : Humanoid, IPlayer
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
         selected = false;
+        CharacterSelector.Instance.BoarderLine.SetActive(false);
     }
 
     /// <summary>
