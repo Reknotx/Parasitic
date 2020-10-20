@@ -109,14 +109,13 @@ public class Warrior : Player
             }
         }
 
+        float attackReductionVal = 0f;
+        bool ability1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.knight);
+        attackReductionVal = ability1U1 ? .75f : .5f;
+
         foreach (Enemy enemy in enemies)
         {
             //enemy.CreateAttackDownStatusEffect(this, enemy);
-            float attackReductionVal = 0f;
-            bool ability1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.knight);
-
-            attackReductionVal = ability1U1 ? .75f : .5f;
-
             StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3, this, enemy);
             enemy.AddStatusEffect(effect);
             enemy.AttackStat = Mathf.FloorToInt(AttackStat * attackReductionVal);

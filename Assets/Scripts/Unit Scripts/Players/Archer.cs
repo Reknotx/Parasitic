@@ -52,6 +52,8 @@ public class Archer : Player
         }
 
         StartAbilityTwoCD();
+
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
 
