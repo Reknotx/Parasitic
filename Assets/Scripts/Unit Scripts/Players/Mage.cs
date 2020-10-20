@@ -78,8 +78,9 @@ public class Mage : Player
             if (Upgrades.Instance.IsAbilityUnlocked(Abilities.normalAttackUpgrade1, UnitToUpgrade.mage))
             {
                 float result = UnityEngine.Random.Range(0f, 1f);
-                if (result <= 0.3f)
+                if (result <= 0.3f || true)
                 {
+                    Debug.Log("Applying additional damage.");
                     additionalDamage = Mathf.FloorToInt(AttackStat * 0.4f);
                 }
             }

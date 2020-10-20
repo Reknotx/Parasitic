@@ -336,6 +336,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         if (this == null) return false;
 
         int damageDealt = damage;
+        bool blocked = false;
 
         //If defending apply defense stat reduction.
         if (trueDamage == false)
@@ -344,7 +345,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             {
                 print("Target unit was defending this round.");
                 damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
-                if (damageDealt <= 0) damageDealt = 0;
+                if (damageDealt <= 0)
+                {
+                    damageDealt = 0;
+                    blocked = true;
+                }
             }
             else //See if we can dodge the attack.
             {
@@ -360,7 +365,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         
         Health -= damageDealt;
         
-        StartCoroutine(ShowDamage(damageDealt));
+        StartCoroutine(ShowDamage(damageDealt, blocked));
 
         return Health <= 0 ? true : false;
     }
@@ -391,11 +396,18 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// </summary>
     /// <param name="damage"> Amount of Damage to Display</param>
     /// <returns></returns>
-    IEnumerator ShowDamage(int damage)
+    IEnumerator ShowDamage(int damage, bool blocked = false)
     {
         if (damage == 0)
         {
-            damageText.text = "Miss";
+            if (blocked)
+            {
+                damageText.text = "Blocked";
+            }
+            else
+            {
+                damageText.text = "Miss";
+            }
         }
         else
         {
