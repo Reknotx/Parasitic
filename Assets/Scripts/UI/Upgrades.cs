@@ -555,7 +555,7 @@ public class Upgrades : MonoBehaviour
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
-            CombatSystem.Instance.Cancel();
+            CombatSystem.Instance.Cancel(false);
         }
 
         ClearUpgradeNotification();

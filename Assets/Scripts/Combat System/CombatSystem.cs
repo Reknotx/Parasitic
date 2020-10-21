@@ -289,7 +289,7 @@ public class CombatSystem : MonoBehaviour
     }
 
     /// <summary> Cancles the current action we have selected. </summary>
-    public void Cancel()
+    public void Cancel(bool deselectPlayer = true)
     {
         Player selectedPlayer = null;
 
@@ -314,8 +314,11 @@ public class CombatSystem : MonoBehaviour
         else if (state == BattleState.Idle && selectedPlayer != null)
         {
             ///deselect the player
-            CharacterSelector.Instance.SelectedPlayerUnit = null;
-            selectedPlayer.UnitDeselected();
+            if (deselectPlayer)
+            {
+                CharacterSelector.Instance.SelectedPlayerUnit = null;
+                selectedPlayer.UnitDeselected();
+            }
         }
         //player = null;
         //target = null;

@@ -49,6 +49,7 @@ public class Archer : Player
             Debug.Log("Increasing attack and move range.");
             MovementStat += 2;
             AttackRange += 2;
+            FindActionRanges();
         }
 
         StartAbilityTwoCD();
@@ -166,6 +167,7 @@ public class Archer : Player
     {
         Debug.Log("Ability range is now 4 tiles.");
         AbilityOneRange = 4;
+        FindActionRanges();
     }
 
     protected override void AbilityTwoUpgradeOne()
