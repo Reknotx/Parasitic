@@ -55,6 +55,9 @@ public class Mage : Player
 
             MovementStat += 2;
 
+            FindMovementRange();
+            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
+
             AddStatusEffect(moveUp);
         }
 

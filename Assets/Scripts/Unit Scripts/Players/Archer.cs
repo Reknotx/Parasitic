@@ -49,6 +49,8 @@ public class Archer : Player
             Debug.Log("Increasing attack and move range.");
             MovementStat += 2;
             AttackRange += 2;
+            FindMovementRange();
+            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
             FindActionRanges();
         }
 

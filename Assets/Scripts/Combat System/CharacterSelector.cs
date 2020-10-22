@@ -58,7 +58,7 @@ public class CharacterSelector : MonoBehaviour
 
     /// <summary> Line Renderers for the path and boarder </summary>
     LineRenderer lineRenderer; 
-    LineRenderer boarderRenderer;
+    [HideInInspector] public LineRenderer boarderRenderer;
 
     /// <summary> Player unit is currently moving in the scene</summary>
     [HideInInspector] public bool unitMoving = false;

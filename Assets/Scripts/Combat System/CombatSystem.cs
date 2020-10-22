@@ -489,10 +489,11 @@ public class CombatSystem : MonoBehaviour
         while (enemiesToGo.Count > 0 && !CheckLoseCondition())
         {
             int index = Random.Range(0, enemiesToGo.Count);
+            enemiesToGo[index].DefendState = DefendingState.NotDefending;
 
+            //Removes the enemies from the list if they are in it but still in fog.
             if (enemiesToGo[index].Revealed == false)
             {
-                enemiesToGo[index].DefendState = DefendingState.NotDefending;
                 enemiesToGo.Remove(enemiesToGo[index]);
                 continue;
             }
