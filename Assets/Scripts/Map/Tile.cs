@@ -19,7 +19,8 @@ public class Tile : MonoBehaviour
     public bool blocksLOS = false;
 
     public bool slope = false;
-    public List<Tile> MovementNeighbors = new List<Tile>();
+    public Dir facing = Dir.up;
+    [HideInInspector] public List<Tile> MovementNeighbors = new List<Tile>();
 
     public int level = 0;
 
@@ -30,7 +31,7 @@ public class Tile : MonoBehaviour
     public float effectMagnitude = 0;
     public int effectCooldown = 10;
     public int remainingCooldown = 0;
-
+    [HideInInspector]public Quaternion tilt = Quaternion.identity;
     
 
     //used for pathfinding
@@ -45,6 +46,7 @@ public class Tile : MonoBehaviour
     //reference to unit currently on tile
     [HideInInspector]
     public Humanoid occupant;
+    int gridMask = (1 << 9);
 
     private void Start()
     {
@@ -58,6 +60,18 @@ public class Tile : MonoBehaviour
                     MovementNeighbors.RemoveAt(i);
                 }
             }
+            FindTilt();
+        }
+    }
+
+    void FindTilt()
+    {
+        print("find tilt");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up*100, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, gridMask))
+        {
+            tilt = hit.transform.rotation;
+            print("tilt: " + tilt);
         }
     }
 
@@ -117,7 +131,11 @@ public class Tile : MonoBehaviour
             }
         }
         if (drawTileGizmo)
-            Gizmos.DrawSphere(transform.position + Vector3.up*gizmoHeight, 0.2f);
+        {
+            MapGrid map = transform.parent.transform.parent.transform.parent.GetComponent<MapGrid>();
+            Gizmos.DrawSphere(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight), 0.2f);
+        }
+            
     }
 
     public void StartCooldown()
@@ -139,5 +157,10 @@ public class Tile : MonoBehaviour
     public float Elevation
     {
         get { return level * MapGrid.Instance.tileHeight; }
+    }
+
+    public Vector3 ElevatedPos()
+    {
+        return new Vector3(transform.position.x, Elevation, transform.position.z);
     }
 }

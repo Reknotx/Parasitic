@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Dir { left, up, right, down }
+
 public class MapGrid : MonoBehaviour
 {
 
@@ -37,11 +39,6 @@ public class MapGrid : MonoBehaviour
         grid = new Tile[columns, rows];
         //find tile fill tile array
         GetTiles();
-    }
-
-    void Start()
-    {
-
     }
 
     private void Update()
@@ -378,12 +375,14 @@ public class MapGrid : MonoBehaviour
         return inRange;
     }
 
-    enum Dir { left, up, right, down }
+    
     //TODO: limmit search to tiles in range around selected unit
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
         List<Vector3> points = new List<Vector3>();
-        List<Tile> boarderPath = new List<Tile>();
+        //List<Tile> boarderPath = new List<Tile>();
+        Tile lastTile = null;
+        Tile currentTile = null;
         Vector3 pos = Vector3.zero;
         Vector3 startPos = Vector3.zero;
         Vector3 hitPoint;
@@ -401,13 +400,13 @@ public class MapGrid : MonoBehaviour
             {
                 if (inRange[x, y])
                 {
-                    pos = grid[x, y].transform.position;
+                    pos = grid[x, y].ElevatedPos();
                     startPos = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
                     //make start current position
                     xCoord = x;
                     yCoord = y;
                     points.Add(startPos);
-                    boarderPath.Add(grid[xCoord, yCoord]);
+                    lastTile = grid[xCoord, yCoord];
                     startFound = true;
                     break;
                 }
@@ -420,6 +419,7 @@ public class MapGrid : MonoBehaviour
         //if tile ahead is in range move that tile and rotate left
         while (startFound && !endFound)
         {
+            currentTile = grid[xCoord, yCoord];
             switch (facing)
             {
                 case Dir.left:
@@ -428,7 +428,7 @@ public class MapGrid : MonoBehaviour
                     {
                         xCoord--;
                         //move to tile
-                        pos = grid[xCoord, yCoord].transform.position;
+                        pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.down;
                     }
@@ -439,18 +439,18 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.up;
                         //add point to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if (grid[xCoord, yCoord].slope)
+                        if (currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left)
                         {
-                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                            hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
-                            //{
-                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
-                            //}
+                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            {
+                                points.Add(new Vector3(hitPoint.x, points[points.Count-1].y, hitPoint.z));
+                            }
                             points.Add(hitPoint);
-                            boarderPath.Add(grid[xCoord, yCoord]);
+                            lastTile = grid[xCoord, yCoord];
                         }
                         else
                         {
@@ -465,7 +465,7 @@ public class MapGrid : MonoBehaviour
                     {
                         yCoord++;
                         //move to tile
-                        pos = grid[xCoord, yCoord].transform.position;
+                        pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.left;
                     }
@@ -476,18 +476,18 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.right;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if (grid[xCoord, yCoord].slope)
+                        if (currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right)
                         {
-                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                            hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            //if(grid[xCoord,yCoord].level != boarderPath[boarderPath.Count - 1].level)
-                            //{
-                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
-                            //}
+                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            {
+                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                            }
                             points.Add(hitPoint);
-                            boarderPath.Add(grid[xCoord, yCoord]);
+                            lastTile = grid[xCoord, yCoord];
                         }
                         else
                         {
@@ -502,7 +502,7 @@ public class MapGrid : MonoBehaviour
                     {
                         xCoord++;
                         //move to tile
-                        pos = grid[xCoord, yCoord].transform.position;
+                        pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.up;
                     }
@@ -513,18 +513,18 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.down;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if(grid[xCoord, yCoord].slope)
+                        if(currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down)
                         {
-                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                            hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
-                            //{
-                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
-                            //}
+                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            {
+                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                            }
                             points.Add(hitPoint);
-                            boarderPath.Add(grid[xCoord, yCoord]);
+                            lastTile = grid[xCoord, yCoord];
                         }
                         else
                         {
@@ -539,7 +539,7 @@ public class MapGrid : MonoBehaviour
                     {
                         yCoord--;
                         //move to tile
-                        pos = grid[xCoord, yCoord].transform.position;
+                        pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.right;
                     }
@@ -550,18 +550,18 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.left;
                         //add pint to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if (grid[xCoord, yCoord].slope)
+                        if (currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left)
                         {
-                            hitPoint.y = boarderPath[boarderPath.Count - 1].transform.position.y;
+                            hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            //if (grid[xCoord, yCoord].level != boarderPath[boarderPath.Count - 1].level)
-                            //{
-                            //    points.Add(new Vector3(hitPoint.x, boarderPath[boarderPath.Count - 1].transform.position.y, hitPoint.z));
-                            //}
+                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            {
+                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                            }
                             points.Add(hitPoint);
-                            boarderPath.Add(grid[xCoord, yCoord]);
+                            lastTile = grid[xCoord, yCoord];
                         }
                         else
                         {

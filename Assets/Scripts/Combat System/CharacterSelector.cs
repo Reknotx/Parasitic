@@ -274,20 +274,29 @@ public class CharacterSelector : MonoBehaviour
                 if (path[i].slope && i != path.Count - 1)
                 {
                     points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
-                        path[i + 1].transform.position.y + pathHeight,
+                        path[i + 1].Elevation + pathHeight,
                         (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
                 }
             }
             else
             {
-                points.Add(path[i].transform.position + Vector3.up * pathHeight);
+                points.Add(path[i].transform.position + Vector3.up * (pathHeight + path[i].Elevation));
             }
             
             
         }
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
-        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, pathHeight + selectedTile.transform.position.y, selectedTile.transform.position.z);
+        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, pathHeight + selectedTile.Elevation, selectedTile.transform.position.z);
+        if (path[path.Count - 1].slope)
+        {
+            EndPoint.transform.position += Vector3.up * MapGrid.Instance.tileHeight/2;
+            EndPoint.transform.rotation = path[path.Count - 1].tilt;
+        }
+        else
+        {
+            EndPoint.transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
         PathLine.SetActive(true);
         EndPoint.SetActive(true);
     }
