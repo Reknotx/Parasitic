@@ -14,6 +14,8 @@ using UnityEngine;
 public class Mage : Player
 {
     private bool killedUnitWhileEnchantActive = false;
+
+    #region Normal Attack
     /// <summary>
     /// Mage's normal attack.
     /// </summary>
@@ -24,54 +26,6 @@ public class Mage : Player
         StartCoroutine(NormalAttackCR(callback));
     }
 
-    /// <summary>
-    /// Mage's first ability. AOE fire blast.
-    /// </summary>
-    public override void AbilityOne(Action callback)
-    {
-        Debug.Log("Mage Ability One");
-
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
-
-        StartCoroutine(AbilityOneCR(callback));
-    }
-
-    /// <summary>
-    /// Mage's second ability. Damage boost.
-    /// </summary>
-    public override void AbilityTwo(Action callback)
-    {
-        Debug.Log("Mage Ability Two");
-
-        //CreateAttackUpStatusEffect(this, this);
-
-        StatusEffect attackUp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 3, this, this);
-
-        AddStatusEffect(attackUp);
-
-        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.mage))
-        {
-            StatusEffect moveUp = new StatusEffect(StatusEffect.StatusEffectType.MoveUp, 3, this, this);
-
-            MovementStat += 2;
-
-            FindMovementRange();
-            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
-
-            AddStatusEffect(moveUp);
-        }
-
-        ActionRange.Instance.ActionDeselected(false);
-
-        CombatSystem.Instance.SetAbilityTwoButtonState(false);
-
-        CombatSystem.Instance.SetBattleState(BattleState.Idle);
-
-        killedUnitWhileEnchantActive = false;
-
-        StartAbilityTwoCD();
-    }
-
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         Debug.Log("Select a target for the mage's normal attack.");
@@ -80,14 +34,14 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
-        
+
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
+        else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
             int additionalDamage = 0;
 
@@ -141,6 +95,20 @@ public class Mage : Player
 
         callback();
     }
+    #endregion
+
+    #region Ability One
+    /// <summary>
+    /// Mage's first ability. AOE fire blast.
+    /// </summary>
+    public override void AbilityOne(Action callback)
+    {
+        Debug.Log("Mage Ability One");
+
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+
+        StartCoroutine(AbilityOneCR(callback));
+    }
 
     /// <summary>
     /// AOE
@@ -154,7 +122,7 @@ public class Mage : Player
         ActionRange.Instance.ActionDeselected();
 
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
-        Enemy focus = (Enemy) CharacterSelector.Instance.SelectedTargetUnit;
+        Enemy focus = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
         bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
@@ -216,12 +184,52 @@ public class Mage : Player
 
         callback();
     }
+    #endregion
+
+    #region Ability Two
+    /// <summary>
+    /// Mage's second ability. Damage boost.
+    /// </summary>
+    public override void AbilityTwo(Action callback)
+    {
+        Debug.Log("Mage Ability Two");
+
+        //CreateAttackUpStatusEffect(this, this);
+
+        StatusEffect attackUp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 3, this, this);
+
+        AddStatusEffect(attackUp);
+
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.mage))
+        {
+            StatusEffect moveUp = new StatusEffect(StatusEffect.StatusEffectType.MoveUp, 3, this, this);
+
+            MovementStat += 2;
+
+            FindMovementRange();
+            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
+
+            AddStatusEffect(moveUp);
+        }
+
+        ActionRange.Instance.ActionDeselected(false);
+
+        CombatSystem.Instance.SetAbilityTwoButtonState(false);
+
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
+
+        killedUnitWhileEnchantActive = false;
+
+        StartAbilityTwoCD();
+    }
 
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
         throw new System.NotImplementedException();
     }
+    #endregion
 
+    #region Upgrade Functions
     protected override void AttackUpgradeOne()
     {
         Debug.Log("Attacks now have 30% chance to do 1.4x damage.");
@@ -284,4 +292,5 @@ public class Mage : Player
                 break;
         }
     }
+    #endregion
 }

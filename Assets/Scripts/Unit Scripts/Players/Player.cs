@@ -12,15 +12,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A little enum to be used in conjucture with the upgrade system
-/// to allow for the differentiating of upgrades to stats.
-/// </summary>
-public enum StatType
-{
-    
-}
-
 
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
@@ -33,13 +24,14 @@ public abstract class Player : Humanoid, IPlayer
     }
 
     bool selected = false;
-     public Material defaultMat;
+    public Material defaultMat;
     /// <summary> The material for the player when they are selected. </summary>
     public Material selectedMat;
 
     // EXP Particle System that Is a Child of the Player Unit
     public ParticleSystem ExpParticle;
 
+    #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
     public int AbilityOneRange;
@@ -73,8 +65,6 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> The sprites of the player's second ability.</summary>
     public Sprite[] Ability2Sprites = new Sprite[5];
 
-
-    
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] AbilityOneTileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
@@ -85,7 +75,9 @@ public abstract class Player : Humanoid, IPlayer
 
     /// <summary> Public property to get the remaining cooldown of ability2. </summary>
     public int RemainingAbilityTwoCD { get { return _remainingAbilityTwoCD; } }
+    #endregion
 
+    #region Abstract functions
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
     /// <summary> Abstract method for player ability two.</summary>
@@ -103,6 +95,9 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract void AbilityOneUpgradeTwo();
     protected abstract void AbilityTwoUpgradeOne();
     protected abstract void AbilityTwoUpgradeTwo();
+
+    public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
+    #endregion
 
     [Space]
     public AudioClip abilityOneSoundEffect;
@@ -151,23 +146,10 @@ public abstract class Player : Humanoid, IPlayer
     }
 
     /// <summary>
-    /// Allows the unit to pass there turn.
-    /// </summary>
-    public void Pass()
-    {
-        HasAttacked = true;
-        HasMoved = true;
-
-        CharacterSelector.Instance.SelectedPlayerUnit = null;
-        State = HumanoidState.Done;
-    }
-
-    /// <summary>
     /// Override of advance timer that also reduces the cooldown on abilities.
     /// </summary>
     public override void AdvanceTimer()
     {
-
         if (_remainingAbilityOneCD > 0)
         {
             _remainingAbilityOneCD--;
@@ -182,16 +164,8 @@ public abstract class Player : Humanoid, IPlayer
 
         base.AdvanceTimer();
     }
-    /// <summary>
-    /// Bandaid Fix
-    /// </summary>
-    public void CoolDown()
-    {
-        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
-        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
-    }
-
+    #region Ability Functions
     /// <summary>
     /// Starts the cooldown of this unit's first ability.
     /// </summary>
@@ -225,6 +199,7 @@ public abstract class Player : Humanoid, IPlayer
 
         audioSource.Play();
     }
+    #endregion
 
     public void FindActionRanges()
     {
@@ -246,38 +221,5 @@ public abstract class Player : Humanoid, IPlayer
         float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
 
         Health += Mathf.FloorToInt(MaxHealth * healPercent);
-
-        //if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer) == false)
-        //{
-        //    Health += Mathf.FloorToInt(MaxHealth * 0.2f);
-        //}
-        //else
-        //{
-        //    Health += Mathf.FloorToInt(MaxHealth * 0.3f);
-        //}
     }
-
-    public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
-
-    //public void ProcessUpgrade(Abilities abilityToUpgrade)
-    //{
-    //    switch (abilityToUpgrade)
-    //    {
-    //        case Abilities.normalAttackUpgrade1:
-
-    //            break;
-    //        case Abilities.normalAttackUpgrade2:
-    //            break;
-    //        case Abilities.ability1Upgrade1:
-    //            break;
-    //        case Abilities.ability1Upgrade2:
-    //            break;
-    //        case Abilities.ability2Upgrade1:
-    //            break;
-    //        case Abilities.ability2Upgrade2:
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
 }

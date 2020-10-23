@@ -10,8 +10,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable IDE0020 // Use pattern matching
+
 public class Warrior : Player
 {
+
+    #region Normal Attack
     /// <summary>
     /// The warrior's attack.
     /// </summary>
@@ -22,31 +26,6 @@ public class Warrior : Player
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
         StartCoroutine(NormalAttackCR(callback));
-    }
-
-    /// <summary>
-    /// Warrior's first ability. Lowers attack of enemies in radius.
-    /// </summary>
-    public override void AbilityOne(Action callback)
-    {
-        Debug.Log("Warrior Ability One");
-
-        /*
-         * Scare the surrounding enemies of the warrior and causing those
-         * enemies to deal less damage. Effectively lowering their attack stat.
-         */
-
-        StartCoroutine(AbilityOneCR(callback));
-    }
-
-    /// <summary>
-    /// Warrior's second ability. Taunts nearby enemies.
-    /// </summary>
-    public override void AbilityTwo(Action callback)
-    {
-        Debug.Log("Warrior Ability Two");
-
-        StartCoroutine(AbilityTwoCR(callback));
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -62,7 +41,7 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
+        else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
             int oldEnemyHealth = attackedEnemy.Health;
@@ -81,6 +60,23 @@ public class Warrior : Player
 
         callback();
 
+    }
+    #endregion
+
+    #region Ability One
+    /// <summary>
+    /// Warrior's first ability. Lowers attack of enemies in radius.
+    /// </summary>
+    public override void AbilityOne(Action callback)
+    {
+        Debug.Log("Warrior Ability One");
+
+        /*
+         * Scare the surrounding enemies of the warrior and causing those
+         * enemies to deal less damage. Effectively lowering their attack stat.
+         */
+
+        StartCoroutine(AbilityOneCR(callback));
     }
 
     /// <summary>
@@ -104,7 +100,7 @@ public class Warrior : Player
                 if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
                 {
                     if (!enemies.Contains((Enemy)(tempGrid[i, j].occupant)))
-                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
+                        enemies.Add((Enemy)(tempGrid[i, j].occupant));
                 }
             }
         }
@@ -126,6 +122,18 @@ public class Warrior : Player
         StartAbilityOneCD();
 
         callback();
+    }
+    #endregion
+
+    #region Ability Two
+    /// <summary>
+    /// Warrior's second ability. Taunts nearby enemies.
+    /// </summary>
+    public override void AbilityTwo(Action callback)
+    {
+        Debug.Log("Warrior Ability Two");
+
+        StartCoroutine(AbilityTwoCR(callback));
     }
 
     /// <summary>
@@ -156,7 +164,9 @@ public class Warrior : Player
         foreach (Enemy enemy in enemies)
         {
             //enemy.ForceTarget(this);
-            enemy.CreateTauntedStatusEffect(this, enemy);
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 3, this, enemy);
+
+            enemy.AddStatusEffect(effect);
         }
 
         yield return null;
@@ -172,7 +182,9 @@ public class Warrior : Player
 
         callback();
     }
+    #endregion
 
+    #region Upgrade Functions
     protected override void AttackUpgradeOne()
     {
         AttackStat += 3;
@@ -241,4 +253,5 @@ public class Warrior : Player
                 break;
         }
     }
+    #endregion
 }

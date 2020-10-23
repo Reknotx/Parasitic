@@ -12,6 +12,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+#pragma warning disable IDE0044 // Add readonly modifier
 public class CharacterSelector : MonoBehaviour
 {
 

@@ -9,11 +9,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#pragma warning disable IDE0020 // Use pattern matching
 
 public class Archer : Player
 {
     private bool hasTrueDamage = false;
 
+    #region Normal Attack
     /// <summary>
     /// Triggers the normal attack of the archer.
     /// </summary>
@@ -23,41 +25,6 @@ public class Archer : Player
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
 
-    }
-
-    /// <summary>
-    /// Triggers the archer's first ability which heals players.
-    /// </summary>
-    public override void AbilityOne(Action callback)
-    {
-        Debug.Log("Archer Ability One");
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
-        StartCoroutine(AbilityOneCR(callback));
-    }
-
-    /// <summary>
-    /// Triggers the archer's second ability.
-    /// </summary>
-    public override void AbilityTwo(Action callback)
-    {
-        Debug.Log("Archer Ability Two");
-        hasTrueDamage = true;
-        ActionRange.Instance.ActionDeselected(false);
-
-        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.archer))
-        {
-            Debug.Log("Increasing attack and move range.");
-            MovementStat += 2;
-            AttackRange += 2;
-            FindMovementRange();
-            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
-            FindActionRanges();
-        }
-
-        StartAbilityTwoCD();
-
-        CombatSystem.Instance.SetBattleState(BattleState.Idle);
-        CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
 
     /// <summary>
@@ -93,11 +60,11 @@ public class Archer : Player
 
             if (attackedEnemy.TakeDamage(AttackStat + extraDamage + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
             {
-                if(!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
+                if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
 
                 CombatSystem.Instance.KillUnit(attackedEnemy);
             }
-            else if( !attackedEnemy.playersWhoAttacked.Contains(this) && attackedEnemy.Health < oldEnemyHealth)
+            else if (!attackedEnemy.playersWhoAttacked.Contains(this) && attackedEnemy.Health < oldEnemyHealth)
             {
                 attackedEnemy.playersWhoAttacked.Add(this);
             }
@@ -118,6 +85,18 @@ public class Archer : Player
 
         callback();
     }
+    #endregion
+
+    #region Ability One
+    /// <summary>
+    /// Triggers the archer's first ability which heals players.
+    /// </summary>
+    public override void AbilityOne(Action callback)
+    {
+        Debug.Log("Archer Ability One");
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
+        StartCoroutine(AbilityOneCR(callback));
+    }
 
     /// <summary>
     /// Heals the player
@@ -128,26 +107,54 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
-        ActionRange.Instance.ActionDeselected();
-
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
-            Player target = (Player) CharacterSelector.Instance.SelectedTargetUnit;
+            ActionRange.Instance.ActionDeselected();
+
+            Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
             target.Heal();
+
+            StartAbilityOneCD();
+
+            callback();
+        }
+    }
+    #endregion
+
+    #region Ability Two
+    /// <summary>
+    /// Triggers the archer's second ability.
+    /// </summary>
+    public override void AbilityTwo(Action callback)
+    {
+        Debug.Log("Archer Ability Two");
+        hasTrueDamage = true;
+        ActionRange.Instance.ActionDeselected(false);
+
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.archer))
+        {
+            Debug.Log("Increasing attack and move range.");
+            MovementStat += 2;
+            AttackRange += 2;
+            FindMovementRange();
+            MapGrid.Instance.DrawBoarder(TileRange, ref CharacterSelector.Instance.boarderRenderer);
+            FindActionRanges();
         }
 
-        StartAbilityOneCD();
+        StartAbilityTwoCD();
 
-        callback();
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
+        CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
 
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
-
         throw new System.NotImplementedException();
     }
+    #endregion
 
+    #region Upgrade Functions
     protected override void AttackUpgradeOne()
     {
         Debug.Log("Enemy units will now have their move speed reduced when attack hits.");
@@ -214,4 +221,5 @@ public class Archer : Player
                 break;
         }
     }
+    #endregion
 }

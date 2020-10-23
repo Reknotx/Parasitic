@@ -55,7 +55,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected int _baseRange;
     #endregion
 
-
+    #region Unit Combat Stats
     /// <summary> The range of the normal attack. </summary>
     public int AttackRange { get; set; } 
 
@@ -96,6 +96,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     
     /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
+    #endregion
 
     /// <summary> The shape of the unitys attack </summary>
     public ActionShape AttackShape = ActionShape.Diamond;
@@ -140,6 +141,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     protected List<StatusEffect> statusEffects = new List<StatusEffect>();
 
+    #region Health UI
     [Space]
     [Header("The text component representing this unit's health.")]
     /// <summary> The text component representing this unit's Health. </summary>
@@ -154,6 +156,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     [Header("The graphical slider representing our health bar.")]
     /// <summary> The graphical slider representing our health bar. </summary>
     public Slider healthBar;
+    #endregion
 
     /// <summary> time it takes to switch directions </summary>
     float turnSmoothTime = 0.1f;
@@ -214,6 +217,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         HasAttacked = false;
     }
 
+    #region Movement
     /// <summary>
     /// Begins the movement coroutine for moving on map.
     /// </summary>
@@ -228,7 +232,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             StartCoroutine(MoveCR(path));
         }
     }
-
 
     /// <summary>
     /// Movement coroutine that moves the unit along the grid.
@@ -301,29 +304,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             EnemyPath.Instance.HidePath();
         }
     }
-
-    void HealingTileCheck()
-    {
-        if (this is Player && currentTile.tileEffect == TileEffect.Healing && currentTile.remainingCooldown <= 0)
-        {
-            Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
-            print("Healing Tile used");
-            currentTile.StartCooldown();
-            CombatSystem.Instance.coolingTiles.Add(currentTile);
-            if(Health <= 0)
-            {
-                CombatSystem.Instance.KillUnit(this);
-            }
-        }
-    }
-
-    protected void LookInDirection(Vector3 direction)
-    {
-        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-    }
-
+    #endregion
+    
+    #region Damage
     /**
      * <summary>Deals damage to unit.</summary>
      * 
@@ -371,27 +354,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
 
     /// <summary>
-    /// When the incoming attack is dodged correctly we will activate the animation
-    /// for this particular unit here.
-    /// </summary>
-    private void Dodge()
-    {
-        // Activate the dodging animation
-    }
-
-    public void FindMovementRange()
-    {
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
-    }
-
-    // /// <summary>
-    // /// Sets the unit's HasAttacked variable to true.
-    // /// </summary>
-    // protected void AttackComplete() { HasAttacked = true; }
-
-    public void SetHumanoidState(HumanoidState state) { State = state; }
-
-    /// <summary>
     /// Displays "damage" for a short time
     /// </summary>
     /// <param name="damage"> Amount of Damage to Display</param>
@@ -416,6 +378,50 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         yield return new WaitForSecondsRealtime(1.5f);
         damageText.text = "";
     }
+    #endregion
+
+    void HealingTileCheck()
+    {
+        if (this is Player && currentTile.tileEffect == TileEffect.Healing && currentTile.remainingCooldown <= 0)
+        {
+            Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
+            print("Healing Tile used");
+            currentTile.StartCooldown();
+            CombatSystem.Instance.coolingTiles.Add(currentTile);
+            if(Health <= 0)
+            {
+                CombatSystem.Instance.KillUnit(this);
+            }
+        }
+    }
+
+    protected void LookInDirection(Vector3 direction)
+    {
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+    }
+
+    /// <summary>
+    /// When the incoming attack is dodged correctly we will activate the animation
+    /// for this particular unit here.
+    /// </summary>
+    private void Dodge()
+    {
+        // Activate the dodging animation
+    }
+
+    public void FindMovementRange()
+    {
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
+    }
+
+    // /// <summary>
+    // /// Sets the unit's HasAttacked variable to true.
+    // /// </summary>
+    // protected void AttackComplete() { HasAttacked = true; }
+
+    public void SetHumanoidState(HumanoidState state) { State = state; }
 
     /// <summary> Plays the attacking sound effect for this unit. </summary>
     protected void PlayAttackSoundEffect()
@@ -461,67 +467,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         removeList.Clear();
     }
 
-    /// <summary>
-    /// Creates a taunted status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateTauntedStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
-
-    /// <summary>
-    /// Creates a attack up status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateAttackUpStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
-
-    /// <summary>
-    /// Creates a attack down status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateAttackDownStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        AttackStat = AttackStat / 2;
-
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
-
     private void AddEffectToList(StatusEffect effect)
     {
         statusEffects.Add(effect);
         CombatSystem.Instance.SubscribeTimerUnit(this);
-    }
-
-    public void ResetStats()
-    {
-        Health = _baseStats.Health;
-        AttackStat = _baseStats.BaseAttack;
-        DefenseStat = _baseStats.BaseDefense;
-        MovementStat = _baseStats.Movement;
-        DexterityStat = _baseStats.Dexterity;
-        _maxHealth = Health;
     }
 
     //public enum Stat
