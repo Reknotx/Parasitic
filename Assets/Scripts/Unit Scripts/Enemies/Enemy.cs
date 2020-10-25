@@ -42,9 +42,9 @@ public abstract class Enemy : Humanoid, IEnemy
     public bool Revealed { get; set; } = true;
 
     #region Move Functions
-    public override void Move(List<Tile> path)
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
-        if (CheckIfInRangeOfTarget() == false)
+        if (bypassRangeCheck || CheckIfInRangeOfTarget() == false)
         {
             base.Move(path);
         }

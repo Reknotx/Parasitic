@@ -222,7 +222,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// Begins the movement coroutine for moving on map.
     /// </summary>
     /// <param name="path">The path the unit will take.</param>
-    public virtual void Move(List<Tile> path)
+    public virtual void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
         if (path != null)
         {
@@ -467,19 +467,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         removeList.Clear();
     }
 
+
+    #region Status Effects
     private void AddEffectToList(StatusEffect effect)
     {
         statusEffects.Add(effect);
         CombatSystem.Instance.SubscribeTimerUnit(this);
     }
-
-    //public enum Stat
-    //{
-    //    Attack,
-    //    Defense,
-    //    Movement,
-    //    AttackRange
-    //}
 
     public void ResetSpecificStat(StatusEffect.StatusEffectType stat)
     {
@@ -594,4 +588,5 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             return false;
         }
     }
+    #endregion
 }
