@@ -189,7 +189,7 @@ public abstract class Enemy : Humanoid, IEnemy
             target = currentTile;
         }
         //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
-        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(target, AttackRange, true);
+        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(target, AttackRange, true, AttackShape);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Player> players = new List<Player>();
 

@@ -420,6 +420,7 @@ public class MapGrid : MonoBehaviour
         while (startFound && !endFound)
         {
             currentTile = grid[xCoord, yCoord];
+
             switch (facing)
             {
                 case Dir.left:
@@ -431,6 +432,7 @@ public class MapGrid : MonoBehaviour
                         pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.down;
+                        
                     }
                     //out of range, therefore left boarder
                     else
@@ -447,7 +449,7 @@ public class MapGrid : MonoBehaviour
                         {
                             if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
                             {
-                                points.Add(new Vector3(hitPoint.x, points[points.Count-1].y, hitPoint.z));
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count-1].z));
                             }
                             points.Add(hitPoint);
                             lastTile = grid[xCoord, yCoord];
@@ -468,6 +470,7 @@ public class MapGrid : MonoBehaviour
                         pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.left;
+
                     }
                     //out of range, therefore upper boarder
                     else
@@ -484,7 +487,7 @@ public class MapGrid : MonoBehaviour
                         {
                             if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
                             {
-                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
                             points.Add(hitPoint);
                             lastTile = grid[xCoord, yCoord];
@@ -505,6 +508,7 @@ public class MapGrid : MonoBehaviour
                         pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.up;
+
                     }
                     //out of range, therefore right boarder
                     else
@@ -521,7 +525,7 @@ public class MapGrid : MonoBehaviour
                         {
                             if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
                             {
-                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
                             points.Add(hitPoint);
                             lastTile = grid[xCoord, yCoord];
@@ -542,6 +546,8 @@ public class MapGrid : MonoBehaviour
                         pos = grid[xCoord, yCoord].ElevatedPos();
                         //rotate left
                         facing = Dir.right;
+
+
                     }
                     //out of range, therefore bottom boarder
                     else
@@ -558,7 +564,7 @@ public class MapGrid : MonoBehaviour
                         {
                             if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
                             {
-                                points.Add(new Vector3(hitPoint.x, points[points.Count - 1].y, hitPoint.z));
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
                             points.Add(hitPoint);
                             lastTile = grid[xCoord, yCoord];

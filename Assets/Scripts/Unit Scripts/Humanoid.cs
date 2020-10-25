@@ -215,24 +215,37 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
+        Vector3 p2;
         Vector3 p01;
+        Vector3 p12;
         float timeStart;
         Vector3 direction;
-        float unitHeight = transform.position.y - currentTile.transform.position.y;
+        float unitHeight = transform.position.y - currentTile.Elevation;
         foreach (Tile tile in path)
         {
             timeStart = Time.time;
             moving = true;
             //get the position of the tile the unit is starting on
-            p0 = currentTile.transform.position;
+            p0 = currentTile.ElevatedPos();
 
 
             //get the positon of the tile to move to
-            p1 = tile.transform.position;
+            p2 = tile.ElevatedPos();
 
             // set the y position to be that of the moving unit
-            p0 = new Vector3(p0.x, unitHeight + p0.y, p0.z);
-            p1 = new Vector3(p1.x, unitHeight + p1.y, p1.z);
+            p0 = new Vector3(p0.x, unitHeight + p0.y + (currentTile.slope ? MapGrid.Instance.tileHeight/2f : 0), p0.z);
+
+            p2 = new Vector3(p2.x, unitHeight + p2.y + (tile.slope ? MapGrid.Instance.tileHeight / 2f : 0), p2.z);
+            
+            if (currentTile.level < tile.level)
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, tile.Elevation + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            else
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, currentTile.Elevation + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            
 
             //mark the starting tile as no longer occupied
             currentTile.occupied = false;
@@ -245,7 +258,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             //interpolate between the two points
             while (moving)
             {
-                float u = (Time.time - timeStart) / tileCrossTime;
+                float u = (Time.time - timeStart) / (tileCrossTime/2);
                 if (u >= 1)
                 {
                     u = 1;
@@ -255,6 +268,23 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
+
+                yield return new WaitForFixedUpdate();
+            }
+            timeStart = Time.time;
+            moving = true;
+            while (moving)
+            {
+                float u = (Time.time - timeStart) / (tileCrossTime/2);
+                if (u >= 1)
+                {
+                    u = 1;
+                    moving = false;
+                }
+                direction = (p2 - p1).normalized;
+                LookInDirection(direction);
+                p12 = (1 - u) * p1 + u * p2;
+                transform.position = p12;
                 if (this is Enemy)
                 {
                     EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
