@@ -71,6 +71,7 @@ public class Spiker : Enemy
             ///within move range.
             ///Then pass in that path. 
             ///
+
             break;
         }
 
@@ -187,10 +188,10 @@ public class Spiker : Enemy
     //}
 
 
-    private class Coord
+    private readonly struct Coord
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get; }
+        public int Y { get; }
 
         public Coord(int x, int y)
         {
