@@ -33,7 +33,7 @@ public abstract class Enemy : Humanoid, IEnemy
     public List<Player> playersWhoAttacked = new List<Player>();
 
     /// <summary> The current target of the enemy. </summary>
-    private Player _currTarget;
+    protected Player _currTarget;
 
     /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
     //public bool Taunted { get; set; } = false;

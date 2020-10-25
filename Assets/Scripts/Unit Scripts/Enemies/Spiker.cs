@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spiker : Enemy
 {
+    #region Combat Functions
     public override void Attack()
     {
         Debug.Log("Spiker Attack");
@@ -15,10 +16,8 @@ public class Spiker : Enemy
         Debug.Log("Spiker Defend");
         base.Defend();
     }
+    #endregion
 
-    //public override void Dodge()
-    //{
-    //    Debug.Log("Spiker Dodge");
-    //    base.Dodge();
-    //}
+    
+
 }
