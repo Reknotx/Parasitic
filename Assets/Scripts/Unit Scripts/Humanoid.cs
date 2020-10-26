@@ -326,7 +326,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             if (DefendState == DefendingState.Defending)
             {
-                print("Target unit was defending this round.");
+                //print("Target unit was defending this round.");
                 damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
                 if (damageDealt <= 0)
                 {
