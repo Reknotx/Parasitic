@@ -25,7 +25,7 @@ public class Spiker : Enemy
         Debug.Log("Spiker Defend");
         base.Defend();
     }
-    #endregion
+    #endregion  
 
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
@@ -128,7 +128,7 @@ public class Spiker : Enemy
                 }
                 else
                 {
-                    break;
+                    break;  
                 }
                     
             }
