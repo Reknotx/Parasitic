@@ -10,8 +10,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable IDE0020 // Use pattern matching
+
 public class Warrior : Player
 {
+
+    #region Normal Attack
     /// <summary>
     /// The warrior's attack.
     /// </summary>
@@ -22,31 +26,6 @@ public class Warrior : Player
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
         StartCoroutine(NormalAttackCR(callback));
-    }
-
-    /// <summary>
-    /// Warrior's first ability. Lowers attack of enemies in radius.
-    /// </summary>
-    public override void AbilityOne(Action callback)
-    {
-        Debug.Log("Warrior Ability One");
-
-        /*
-         * Scare the surrounding enemies of the warrior and causing those
-         * enemies to deal less damage. Effectively lowering their attack stat.
-         */
-
-        StartCoroutine(AbilityOneCR(callback));
-    }
-
-    /// <summary>
-    /// Warrior's second ability. Taunts nearby enemies.
-    /// </summary>
-    public override void AbilityTwo(Action callback)
-    {
-        Debug.Log("Warrior Ability Two");
-
-        StartCoroutine(AbilityTwoCR(callback));
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
@@ -62,7 +41,7 @@ public class Warrior : Player
         {
             Debug.Log("Can't attack yourself.");
         }
-        else if(CharacterSelector.Instance.SelectedTargetUnit is Enemy)
+        else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
             int oldEnemyHealth = attackedEnemy.Health;
@@ -82,6 +61,23 @@ public class Warrior : Player
         callback();
 
     }
+    #endregion
+
+    #region Ability One
+    /// <summary>
+    /// Warrior's first ability. Lowers attack of enemies in radius.
+    /// </summary>
+    public override void AbilityOne(Action callback)
+    {
+        Debug.Log("Warrior Ability One");
+
+        /*
+         * Scare the surrounding enemies of the warrior and causing those
+         * enemies to deal less damage. Effectively lowering their attack stat.
+         */
+
+        StartCoroutine(AbilityOneCR(callback));
+    }
 
     /// <summary>
     /// Warrior's first ability. Lowers attack of enemies in radius.
@@ -89,7 +85,7 @@ public class Warrior : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         ActionRange.Instance.ActionDeselected();
-        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
@@ -104,14 +100,21 @@ public class Warrior : Player
                 if (tempGrid[i, j].occupied && tempGrid[i, j].occupant is Enemy)
                 {
                     if (!enemies.Contains((Enemy)(tempGrid[i, j].occupant)))
-                    enemies.Add((Enemy)(tempGrid[i, j].occupant));
+                        enemies.Add((Enemy)(tempGrid[i, j].occupant));
                 }
             }
         }
 
+        float attackReductionVal = 0f;
+        bool ability1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.knight);
+        attackReductionVal = ability1U1 ? .75f : .5f;
+
         foreach (Enemy enemy in enemies)
         {
-            enemy.CreateAttackDownStatusEffect(this, enemy);
+            //enemy.CreateAttackDownStatusEffect(this, enemy);
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 3, this, enemy);
+            enemy.AddStatusEffect(effect);
+            enemy.AttackStat = Mathf.FloorToInt(AttackStat * attackReductionVal);
         }
 
         yield return null;
@@ -120,6 +123,18 @@ public class Warrior : Player
 
         callback();
     }
+    #endregion
+
+    #region Ability Two
+    /// <summary>
+    /// Warrior's second ability. Taunts nearby enemies.
+    /// </summary>
+    public override void AbilityTwo(Action callback)
+    {
+        Debug.Log("Warrior Ability Two");
+
+        StartCoroutine(AbilityTwoCR(callback));
+    }
 
     /// <summary>
     /// Warrior's second ability. Taunts nearby enemies.
@@ -127,7 +142,7 @@ public class Warrior : Player
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
         ActionRange.Instance.ActionDeselected();
-        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
@@ -149,13 +164,94 @@ public class Warrior : Player
         foreach (Enemy enemy in enemies)
         {
             //enemy.ForceTarget(this);
-            enemy.CreateTauntedStatusEffect(this, enemy);
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 3, this, enemy);
+
+            enemy.AddStatusEffect(effect);
         }
 
         yield return null;
+
+        if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.knight))
+        {
+            StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.DefenseUp, 2, this, this);
+            statusEffects.Add(effect);
+            DefenseStat += 2;
+        }
 
         StartAbilityTwoCD();
 
         callback();
     }
+    #endregion
+
+    #region Upgrade Functions
+    protected override void AttackUpgradeOne()
+    {
+        AttackStat += 3;
+    }
+
+    protected override void AttackUpgradeTwo()
+    {
+        Debug.Log("Attack range increased by 1.");
+        AttackRange++;
+        FindActionRanges();
+    }
+
+    protected override void AbilityOneUpgradeOne()
+    {
+        Debug.Log("Increase damage reduciton value by 25%.");
+    }
+
+    protected override void AbilityOneUpgradeTwo()
+    {
+        AbilityOneRange += 2;
+        FindActionRanges();
+        Debug.Log("Ability range is increased by 2 tiles.");
+    }
+
+    protected override void AbilityTwoUpgradeOne()
+    {
+        Debug.Log("Ability now increases the caster's defense by 2 points on cast.");
+    }
+
+    protected override void AbilityTwoUpgradeTwo()
+    {
+        AbilityTwoRange += 1;
+        FindActionRanges();
+        Debug.Log("Ability range is increased by 1 tile.");
+    }
+
+    public override void ProcessUpgrade(Abilities abilityToUpgrade)
+    {
+        switch (abilityToUpgrade)
+        {
+            case Abilities.normalAttackUpgrade1:
+                AttackUpgradeOne();
+                break;
+
+            case Abilities.normalAttackUpgrade2:
+                AttackUpgradeTwo();
+                break;
+
+            case Abilities.ability1Upgrade1:
+                AbilityOneUpgradeOne();
+                break;
+
+            case Abilities.ability1Upgrade2:
+                AbilityOneUpgradeTwo();
+                break;
+
+            case Abilities.ability2Upgrade1:
+                AbilityTwoUpgradeOne();
+                break;
+
+            case Abilities.ability2Upgrade2:
+                AbilityTwoUpgradeTwo();
+                break;
+
+            default:
+                break;
+        }
+    }
+    #endregion
 }

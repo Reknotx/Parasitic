@@ -12,6 +12,7 @@ using UnityEngine;
 
 public abstract class Enemy : Humanoid, IEnemy
 {
+    #region Combat Functions
     public virtual void Attack()
     {
         if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
@@ -21,6 +22,7 @@ public abstract class Enemy : Humanoid, IEnemy
     {
         DefendState = DefendingState.Defending;
     }
+    #endregion
 
     //public virtual void Dodge()
     //{
@@ -31,17 +33,18 @@ public abstract class Enemy : Humanoid, IEnemy
     public List<Player> playersWhoAttacked = new List<Player>();
 
     /// <summary> The current target of the enemy. </summary>
-    private Player _currTarget;
+    protected Player _currTarget;
 
     /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
-    public bool Taunted { get; set; } = false;
+    //public bool Taunted { get; set; } = false;
 
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
 
-    public override void Move(List<Tile> path)
+    #region Move Functions
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
-        if (CheckIfInRangeOfTarget() == false)
+        if (bypassRangeCheck || CheckIfInRangeOfTarget() == false)
         {
             base.Move(path);
         }
@@ -214,6 +217,7 @@ public abstract class Enemy : Humanoid, IEnemy
 
         return false;
     }
+    #endregion
 
     /// <summary>
     /// Adds the enemy to the combat system when they are revealed.
@@ -226,15 +230,9 @@ public abstract class Enemy : Humanoid, IEnemy
     }
 
     /// <summary>
-    /// Forces the enemy to have a set target. (I.e. when the enemy is taunted.)
+    /// Tells us if the enemy is taunted by the warrior.
     /// </summary>
-    /// <param name="player">The target player.</param>
-    public void ForceTarget(Player player)
-    {
-        _currTarget = player;
-        Taunted = true;
-    }
-
+    /// <returns>True if enemy is currently taunted, else false.</returns>
     public bool IsTaunted()
     {
         foreach (StatusEffect effect in statusEffects)
@@ -259,29 +257,19 @@ public abstract class Enemy : Humanoid, IEnemy
 
         foreach (StatusEffect effect in removeList)
         {
-            switch (effect.Type)
+            if (effect.Type == StatusEffect.StatusEffectType.Taunted)
             {
-                case StatusEffect.StatusEffectType.Taunted:
-                    Taunted = false;
-                    _currTarget = null;
-                    break;
-
-                case StatusEffect.StatusEffectType.AttackDown:
-                    ResetStats();
-                    break;
-
-                default:
-                    break;
+                //Taunted = false;
+                _currTarget = null;
+            }
+            else
+            {
+                ResetSpecificStat(effect.Type);
             }
             statusEffects.Remove(effect);
 
         }
 
         removeList.Clear();
-
-        //if (statusEffects.Count == 0)
-        //{
-        //    CombatSystem.Instance.UnsubscribeTimerUnit(this);
-        //}
     }
 }
