@@ -42,9 +42,9 @@ public abstract class Enemy : Humanoid, IEnemy
     public bool Revealed { get; set; } = true;
 
     #region Move Functions
-    public override void Move(List<Tile> path)
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
-        if (CheckIfInRangeOfTarget() == false)
+        if (bypassRangeCheck || CheckIfInRangeOfTarget() == false)
         {
             base.Move(path);
         }
@@ -271,10 +271,5 @@ public abstract class Enemy : Humanoid, IEnemy
         }
 
         removeList.Clear();
-
-        //if (statusEffects.Count == 0)
-        //{
-        //    CombatSystem.Instance.UnsubscribeTimerUnit(this);
-        //}
     }
 }

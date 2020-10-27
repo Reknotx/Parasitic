@@ -10,7 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 /// <summary>
 /// Enum for the various states of combat we can be in.
@@ -588,15 +587,15 @@ public class CombatSystem : MonoBehaviour
                 st.disabledSprite = tempP.Ability1Sprites[3];
                 button.spriteState = st;
 
-                print(tempP.name + " ability one CD: " + tempP.RemainingAbilityOneCD);
+                //print(tempP.name + " ability one CD: " + tempP.RemainingAbilityOneCD);
 
 
                 if (tempP.RemainingAbilityOneCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
                 {
-                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
-                    {
-                        print(tempP.name + " ability One not unlocked");
-                    }
+                    //if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1, unitType))
+                    //{
+                    //    print(tempP.name + " ability One not unlocked");
+                    //}
 
                     button.interactable = false;
                 }
@@ -612,15 +611,15 @@ public class CombatSystem : MonoBehaviour
                 st.disabledSprite = tempP.Ability2Sprites[3];
                 button.spriteState = st;
 
-                print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
+                //print(tempP.name + " ability two CD: " + tempP.RemainingAbilityTwoCD);
 
 
                 if (tempP.RemainingAbilityTwoCD > 0 || !Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
                 {
-                    if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
-                    {
-                        print(tempP.name + " ability Two not unlocked");
-                    }
+                    //if (!Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, unitType))
+                    //{
+                    //    print(tempP.name + " ability Two not unlocked");
+                    //}
 
                     button.interactable = false;
                 }
@@ -721,49 +720,6 @@ public class CombatSystem : MonoBehaviour
     #endregion
 
     #region Deprecated Functions
-    ///// <summary> Currently a hard pass which cancels all of the player's actions. </summary>
-    //public void Pass()
-    //{
-    //    if (player == null) return;
-
-    //    StopAllCoroutines();
-    //    SetBattleState(BattleState.Idle);
-    //    player.Pass();
-    //    EndUnitTurn(player);
-    //}
-
-    /// <summary>
-    /// Moves a random enemy on the grid. For testing purposes only.
-    /// </summary>
-    public void MoveRandEnemy()
-    {
-        int index = Random.Range(0, enemiesToGo.Count);
-
-        List<Tile> path = enemiesToGo[index].FindNearestPlayer();
-
-        enemiesToGo[index].Move(path);
-    }
-
-    /// <summary>
-    /// Triggers a random enemy attack on grid if they are near a player. For testing purposes only
-    /// </summary>
-    public void TriggerEnemyAttack()
-    {
-        int index = Random.Range(0, enemiesToGo.Count);
-
-        List<Tile> temp = MapGrid.Instance.GetNeighbors(enemiesToGo[index].currentTile);
-
-        foreach (Tile tile in temp)
-        {
-            if (tile.occupied && tile.occupant is Player)
-            {
-                tile.occupant.TakeDamage(enemiesToGo[index].AttackStat);
-                break;
-            }
-        }
-
-    }
-
     /// <summary>
     /// Sets the player we have currently selected.
     /// </summary>
@@ -778,20 +734,6 @@ public class CombatSystem : MonoBehaviour
 
         player = selection;
     }
-
-    /// <summary>
-    /// Sets the target of our attack or ability.
-    /// </summary>
-    /// <param name="selection">The target of our attack or ability.</param>
-    //public void SetTarget(Humanoid selection)
-    //{
-    //    if (selection == player)
-    //    {
-    //        Debug.Log("Can't select yourself for attack.");
-    //        return;
-    //    }
-    //    target = selection;
-    //}
     #endregion
 
 

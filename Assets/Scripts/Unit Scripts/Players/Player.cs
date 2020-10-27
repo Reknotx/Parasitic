@@ -113,7 +113,7 @@ public abstract class Player : Humanoid, IPlayer
 
     public void UnitSelected()
     {
-        print("Player selected");
+        //print("Player selected");
         GetComponent<MeshRenderer>().material = selectedMat;
         State = HumanoidState.Selected;
 
@@ -127,7 +127,7 @@ public abstract class Player : Humanoid, IPlayer
 
     public void UnitDeselected()
     {
-        print("Player deselected");
+        //print("Player deselected");
         GetComponent<MeshRenderer>().material = defaultMat;
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
@@ -141,7 +141,7 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public void Defend()
     {
-        print("Defending this round.");
+        //print("Defending this round.");
         DefendState = DefendingState.Defending;
     }
 

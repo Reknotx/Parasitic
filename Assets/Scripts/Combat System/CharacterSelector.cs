@@ -140,11 +140,11 @@ public class CharacterSelector : MonoBehaviour
                         //Make sure previous action range is no longer displayed
                         ActionRange.Instance.ActionDeselected();
                         SelectedPlayerUnit.FindActionRanges();
-                        print("Selected Player Unit");
+                        //print("Selected Player Unit");
                     }
                     else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                     {
-                        print("Deselecting the already selected unit.");
+                        //print("Deselecting the already selected unit.");
                         SetLastSelected();
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedUnitObj = null;
