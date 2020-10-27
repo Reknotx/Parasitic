@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 5245908529373590993}
   - component: {fileID: 5245908529373590992}
   - component: {fileID: 5245908529373590995}
-  - component: {fileID: 5245908529373590994}
+  - component: {fileID: 5294962372341985793}
   m_Layer: 10
   m_Name: Spiker A
   m_TagString: Untagged
@@ -615,7 +615,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.3947381, z: 1}
   m_Center: {x: 0, y: -0.60502553, z: 0}
---- !u!114 &5245908529373590994
+--- !u!114 &5294962372341985793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -624,12 +624,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5245908529373590957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeee1204cfed654bbdee083d6be3edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fab292af25c46247871610076c8b1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AttackShape: 1
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  damagedThisTurn: 0
   RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: 9803e8d20b3bfb34fa4b648a01c099a3, type: 2}
   healthText: {fileID: 5245908528065821746}
@@ -638,6 +639,7 @@ MonoBehaviour:
   attackSoundEffect: {fileID: 0}
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
+  playersWhoAttacked: []
 --- !u!1 &5245908529567739247
 GameObject:
   m_ObjectHideFlags: 0

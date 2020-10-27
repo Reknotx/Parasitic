@@ -25,5 +25,5 @@ public interface IPlayer
     /// <summary>
     /// Passes the player's turn.
     /// </summary>
-    void Pass();
+    //void Pass();
 }
