@@ -27,21 +27,6 @@ public class Archer : Player
 
     }
 
-    /// <summary>
-    /// Starts the targetting process while we wait for the archer to attack.
-    /// </summary>
-    /// <param name="callback"></param>
-    /// <returns></returns>
-    public override void AbilityTwo(Action callback)
-    {
-        Debug.Log("Archer Ability Two");
-        hasTrueDamage = true;
-        ActionRange.Instance.ActionDeselected(false);
-        StartAbilityTwoCD();
-        CombatSystem.Instance.SetBattleState(BattleState.Idle);
-        CombatSystem.Instance.SetAbilityTwoButtonState(false);
-    }
-
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
