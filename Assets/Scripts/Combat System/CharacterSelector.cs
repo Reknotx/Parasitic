@@ -260,7 +260,7 @@ public class CharacterSelector : MonoBehaviour
     void DrawPath()
     {
         List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.transform.position.y + pathHeight, SelectedPlayerUnit.transform.position.z));
+        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.Elevation + pathHeight, SelectedPlayerUnit.transform.position.z));
         for (int i = 0; i < path.Count; i++)
         {
             if(path[i].slope)

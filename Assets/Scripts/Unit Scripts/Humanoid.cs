@@ -220,7 +220,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Vector3 p12;
         float timeStart;
         Vector3 direction;
-        float unitHeight = transform.position.y - currentTile.Elevation;
+        float unitHeight = transform.position.y - (currentTile.slope ? MapGrid.Instance.tileHeight / 2f : 0) - currentTile.Elevation;
         foreach (Tile tile in path)
         {
             timeStart = Time.time;
@@ -268,6 +268,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
                 transform.position = p01;
+                if (this is Enemy)
+                {
+                    EnemyPath.Instance.DrawPath(untraveledPath, transform.position - Vector3.up * unitHeight, p1 - Vector3.up * unitHeight);
+                }
 
                 yield return new WaitForFixedUpdate();
             }
@@ -287,7 +291,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 transform.position = p12;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                    EnemyPath.Instance.DrawPath(untraveledPath, transform.position - Vector3.up * unitHeight);
                 }
 
                 yield return new WaitForFixedUpdate();

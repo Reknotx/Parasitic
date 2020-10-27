@@ -141,6 +141,10 @@ public class MapGrid : MonoBehaviour
                     if (!(ignoreEnd && (endTile == neighbor)))
                         continue;
                 }
+                if (!ignoreOccupied && !ValidSlopeMovement(currentTile, neighbor))
+                {
+                    continue;
+                }
                 int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor, actionShape);
                 //if the current cost of moving to the tile is lower than the previous set it to the new cost
                 if(currentCost < neighbor.gCost || !frontier.Contains(neighbor))
@@ -337,7 +341,11 @@ public class MapGrid : MonoBehaviour
                 //skip tile if it is not valid to move through, has already been explored, or is currently occupied 
                 if ((neighbor.movementTile || (ignoreOccupied && !neighbor.blocksLOS)) && !explored.Contains(neighbor) && (!neighbor.occupied || ignoreOccupied))
                 {
-
+                    if (!ignoreOccupied && !ValidSlopeMovement(currentTile, neighbor))
+                    {
+                        continue;
+                    }
+                    
                     int currentCost = currentTile.gCost + GetDistanceCost(currentTile, neighbor, actionShape);
                     if (currentCost < neighbor.gCost || !frontier.Contains(neighbor))
                     {
@@ -376,6 +384,61 @@ public class MapGrid : MonoBehaviour
     }
 
     
+    bool ValidSlopeMovement(Tile currentTile, Tile neighbor)
+    {
+        if (currentTile.slope)
+        {
+            if (neighbor.slope)
+            {
+                //if neighbor is a slope we will assume it connects for now
+            }
+            else if (currentTile.facing == Dir.up || currentTile.facing == Dir.down)
+            {
+                int up = (int)currentTile.gridPosition.y + 1;
+                int down = (int)currentTile.gridPosition.y - 1;
+                if (!(up == neighbor.gridPosition.y || down == neighbor.gridPosition.y))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                int right = (int)currentTile.gridPosition.x + 1;
+                int left = (int)currentTile.gridPosition.x - 1;
+                if (!(right == neighbor.gridPosition.x || left == neighbor.gridPosition.x))
+                {
+                    return false;
+                }
+            }
+        }
+        else if (neighbor.slope)
+        {
+            if (neighbor.facing == Dir.up || neighbor.facing == Dir.down)
+            {
+                int up = (int)neighbor.gridPosition.y + 1;
+                int down = (int)neighbor.gridPosition.y - 1;
+                if (!(up == currentTile.gridPosition.y || down == currentTile.gridPosition.y))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                int right = (int)neighbor.gridPosition.x + 1;
+                int left = (int)neighbor.gridPosition.x - 1;
+                if (!(right == currentTile.gridPosition.x || left == currentTile.gridPosition.x))
+                {
+                    return false;
+                }
+            }
+        }
+        else if (neighbor.level != currentTile.level)
+        {
+            return false;
+        }
+        return true;
+    }
+
     //TODO: limmit search to tiles in range around selected unit
     public void DrawBoarder(bool[,] inRange, ref LineRenderer boarder,float height = 0.25f)
     {
@@ -441,7 +504,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.up;
                         //add point to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if (currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left)
+                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left) && ValidSlopeMovement(lastTile, currentTile))
                         {
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
@@ -479,7 +542,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.right;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if (currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right)
+                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right) && ValidSlopeMovement(lastTile, currentTile))
                         {
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
@@ -517,7 +580,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.down;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if(currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down)
+                        if((currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down) && ValidSlopeMovement(lastTile, currentTile))
                         {
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
@@ -556,7 +619,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.left;
                         //add pint to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if (currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left)
+                        if ((currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left) && ValidSlopeMovement(lastTile, currentTile))
                         {
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
