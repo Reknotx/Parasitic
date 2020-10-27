@@ -50,6 +50,13 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
+    [HideInInspector]
+    public Mage mage;
+    [HideInInspector]
+    public Warrior knight;
+    [HideInInspector]
+    public Archer archer;
+
     /// <summary>
     /// Experience System Vars
     /// </summary>
@@ -58,7 +65,7 @@ public class Upgrades : MonoBehaviour
     public Slider knightXpBar;
     public Slider archerXpBar;
 
-    public int maxXP = 100;
+    public float maxXP = 100f;
 
     private int _mageXp;
     private int _knightXp;
@@ -74,15 +81,19 @@ public class Upgrades : MonoBehaviour
         get { return _mageXp; }
         set
         {
-            _mageXp = value;
-            if (_mageXp >= 100)
+            if(mage != null)
             {
-                _mageXp -= 100;
-                MagePoints++;
-                ShowUpgradeNotification();
+                if(_mageXp != value) mage.ExpParticle.Play();
+                _mageXp = value;
+                if (_mageXp >= maxXP)
+                {
+                    _mageXp -= (int)maxXP;
+                    MagePoints++;
+                    ShowUpgradeNotification();
+                }
+                mageXpBar.value = _mageXp / maxXP;
+                _mageXpText.text = _mageXp + " / " + maxXP;
             }
-            mageXpBar.value = _mageXp / 100f;
-            _mageXpText.text = _mageXp + " / " + maxXP;
         }
     }
 
@@ -91,15 +102,19 @@ public class Upgrades : MonoBehaviour
         get { return _knightXp; }
         set
         {
-            _knightXp = value;
-            if (_knightXp >= 100)
+            if (knight != null)
             {
-                _knightXp -= 100;
-                KnightPoints++;
-                ShowUpgradeNotification();
+                if (_knightXp != value) knight.ExpParticle.Play();
+                _knightXp = value;
+                if (_knightXp >= maxXP)
+                {
+                    _knightXp -= (int)maxXP;
+                    KnightPoints++;
+                    ShowUpgradeNotification();
+                }
+                knightXpBar.value = _knightXp / maxXP;
+                _knightXpText.text = _knightXp + " / " + maxXP;
             }
-            knightXpBar.value = _knightXp / 100f;
-            _knightXpText.text = _knightXp + " / " + maxXP;
         }
     }
 
@@ -108,15 +123,36 @@ public class Upgrades : MonoBehaviour
         get { return _archerXp; }
         set
         {
-            _archerXp = value;
-            if (_archerXp >= 100)
+            if (archer != null)
             {
-                _archerXp -= 100;
-                ArcherPoints++;
-                ShowUpgradeNotification();
+                if (_archerXp != value) archer.ExpParticle.Play();
+                _archerXp = value;
+                if (_archerXp >= maxXP)
+                {
+                    _archerXp -= (int)maxXP;
+                    ArcherPoints++;
+                    ShowUpgradeNotification();
+                }
+                archerXpBar.value = _archerXp / maxXP;
+                Debug.Log(archerXpBar.value);
+                _archerXpText.text = _archerXp + " / " + maxXP;
             }
-            archerXpBar.value = _archerXp / 100f;
-            _archerXpText.text = _archerXp + " / " + maxXP;
+        }
+    }
+
+    /// <summary>
+    /// Gets xp amount from input Enemy and splits it between the players who damaged that enemy
+    /// </summary>
+    /// <param name="enemy">enemy to get xp from</param>
+    public void SplitExp(Enemy enemy)
+    {
+        int splitXp = enemy.XpDrop / enemy.playersWhoAttacked.Count;
+        foreach(Player p in enemy.playersWhoAttacked)
+        {
+            if (p is Mage) MageXp += splitXp;
+            else if (p is Warrior) KnightXp += splitXp;
+            else if (p is Archer) ArcherXp += splitXp;
+            Debug.Log(p.name + " Received " + splitXp + " EXP for helping eliminate " + enemy.name);
         }
     }
     #endregion
@@ -215,6 +251,11 @@ public class Upgrades : MonoBehaviour
         {
             infoWindow.transform.position = Input.mousePosition;
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus)
+        {
+            ToggleUpgradeMenu();
+        }
     }
 
     #region Saving/Loading (if needed in future)
@@ -288,6 +329,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             MagePoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Mage>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -299,6 +345,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             KnightPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Warrior>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -310,6 +361,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             ArcherPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Archer>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -418,6 +474,8 @@ public class Upgrades : MonoBehaviour
 
     #endregion
 
+
+
     #region UI Functions
 
     /// <summary>
@@ -429,9 +487,9 @@ public class Upgrades : MonoBehaviour
         KnightPoints = KnightPoints;
         ArcherPoints = ArcherPoints;
 
-        MageXp = MageXp;
-        KnightXp = KnightXp;
-        ArcherXp = ArcherXp;
+        MageXp = _mageXp;
+        KnightXp = _knightXp;
+        ArcherXp = _archerXp;
     }
 
     /// <summary>
@@ -497,6 +555,7 @@ public class Upgrades : MonoBehaviour
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
+            CombatSystem.Instance.Cancel(false);
         }
 
         ClearUpgradeNotification();

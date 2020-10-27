@@ -60,7 +60,7 @@ public class Defog : MonoBehaviour
     /// </summary>
     private void ChangeLayers()
     {
-        if (objectsToReveal[0] != null)
+        if (objectsToReveal.Length != 0)
         {
             for(int index = 0; index < objectsToReveal.Length; index++)
             {

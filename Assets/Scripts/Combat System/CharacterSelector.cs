@@ -12,6 +12,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+#pragma warning disable IDE0044 // Add readonly modifier
 public class CharacterSelector : MonoBehaviour
 {
 
@@ -58,7 +59,7 @@ public class CharacterSelector : MonoBehaviour
 
     /// <summary> Line Renderers for the path and boarder </summary>
     LineRenderer lineRenderer; 
-    LineRenderer boarderRenderer;
+    [HideInInspector] public LineRenderer boarderRenderer;
 
     /// <summary> Player unit is currently moving in the scene</summary>
     [HideInInspector] public bool unitMoving = false;
@@ -139,11 +140,11 @@ public class CharacterSelector : MonoBehaviour
                         //Make sure previous action range is no longer displayed
                         ActionRange.Instance.ActionDeselected();
                         SelectedPlayerUnit.FindActionRanges();
-                        print("Selected Player Unit");
+                        //print("Selected Player Unit");
                     }
                     else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                     {
-                        print("Deselecting the already selected unit.");
+                        //print("Deselecting the already selected unit.");
                         SetLastSelected();
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedUnitObj = null;
@@ -158,6 +159,11 @@ public class CharacterSelector : MonoBehaviour
 
                     Tile lastTile = selectedTile;
                     selectedTile = MapGrid.Instance.TileFromPosition(info.point);
+                    if(selectedTile == null)
+                    {
+                        Debug.Log("this bitch empty");
+                        Debug.Log(info.point);
+                    }
                     //if the tile selected is a valid tile to move to find the path
                     if (selectedTile.movementTile && !selectedTile.occupied && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                     {
@@ -245,11 +251,6 @@ public class CharacterSelector : MonoBehaviour
                 HidePath();
             }
         }
-        
-
-
-        
-
     }
 
     void DrawPath()

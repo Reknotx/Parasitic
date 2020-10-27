@@ -4066,7 +4066,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4110,6 +4110,9 @@ MonoBehaviour:
   unlockedMageAbilities: 
   unlockedKnightAbilities: 
   unlockedArcherAbilities: 
+  mage: {fileID: 0}
+  knight: {fileID: 0}
+  archer: {fileID: 0}
   mageXpBar: {fileID: 6150243045895127105}
   knightXpBar: {fileID: 6150243046635968670}
   archerXpBar: {fileID: 6150243047321726836}
@@ -6499,7 +6502,7 @@ RectTransform:
   m_GameObject: {fileID: 6150243046852234674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1424, y: 1.1424, z: 1.1424}
   m_Children:
   - {fileID: 2504407555075989875}
   m_Father: {fileID: 6150243046010341625}
@@ -6507,7 +6510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 202.78851, y: -22.099976}
+  m_AnchoredPosition: {x: 246.5, y: -22.200012}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6150243046852234678
@@ -6560,7 +6563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -8027,7 +8030,7 @@ RectTransform:
   m_GameObject: {fileID: 6150243047397662880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1424, y: 1.1424, z: 1.1424}
   m_Children:
   - {fileID: 2504407556234590547}
   m_Father: {fileID: 6150243046010341625}
@@ -8035,7 +8038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 233.99997, y: -10}
+  m_AnchoredPosition: {x: 287, y: -12.5}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6150243047397662885
