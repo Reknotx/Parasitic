@@ -162,6 +162,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
+    [Header("This refers to the transform of the parent object for this unit.")]
+    /// <summary> The transform of the parent of this unit. </summary>
+    /// This is needed because the animations will put the character up in the Y due to how they
+    /// were set up and how we have originally set up the characters themselves
+    /// 
+    public Transform parentTransform;
+
     /// <summary> The state of the humanoid in combat. </summary>
     public HumanoidState State { get; set; }
 
@@ -173,9 +180,27 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public AudioClip damagedSoundEffect;
 
     public AudioSource audioSource;
-    
+
+    public Animator animatorController;
+
+    public bool AnimationComplete { get; set; } = false;
+
+    public void SetAnimationComplete()
+    {
+        AnimationComplete = true;
+    }
+
     public virtual void Start()
     {
+        if (parentTransform == null && transform.parent != null)
+        {
+            parentTransform = transform.parent;
+        }
+        else
+        {
+            parentTransform = this.transform;
+        }
+
         _maxHealth = _baseStats.Health;
 
         _baseAttack = _baseStats.BaseAttack;
@@ -191,21 +216,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         _baseRange = _baseStats.AttackRange;
         AttackRange = _baseStats.AttackRange;
-        
+
         XpDrop = _baseStats.XPDropOnDeath;
-        
+
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
 
-        
-        /*if(healthText)
-        healthText.text = Health + "/" + _maxHealth;
-
-        if(healthBar)
-        healthBar.value = 1f;*/
-
-        currentTile = MapGrid.Instance.TileFromPosition(transform.position);
+        currentTile = MapGrid.Instance.TileFromPosition(parentTransform.position);
         currentTile.occupied = true;
 
         State = HumanoidState.Idle;
@@ -215,6 +233,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         HasMoved = false;
         HasAttacked = false;
+
+        
     }
 
     #region Movement
@@ -259,8 +279,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             p1 = tile.transform.position;
 
             // set the y position to be that of the moving unit
-            p0 = new Vector3(p0.x, transform.position.y, p0.z);
-            p1 = new Vector3(p1.x, transform.position.y, p1.z);
+            p0 = new Vector3(p0.x, parentTransform.position.y, p0.z);
+            p1 = new Vector3(p1.x, parentTransform.position.y, p1.z);
 
             //mark the starting tile as no longer occupied
             currentTile.occupied = false;
@@ -282,7 +302,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 direction = (p1 - p0).normalized;
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
-                transform.position = p01;
+                parentTransform.position = p01;
                 if (this is Enemy)
                 {
                     EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
@@ -296,12 +316,18 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         State = HumanoidState.Idle;
         HasMoved = true;
 
+        animatorController.SetBool("IsWalking", false);
+
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
         if (this is Enemy)
         {
             EnemyPath.Instance.HidePath();
+        }
+        else if (this is Mage)
+        {
+            ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
         }
     }
     #endregion
@@ -398,8 +424,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected void LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>

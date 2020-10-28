@@ -15,6 +15,14 @@ public class Mage : Player
 {
     private bool killedUnitWhileEnchantActive = false;
 
+    public Animator staffAndBookController;
+
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
+    {
+        staffAndBookController.SetBool("IsWalking", true);
+        base.Move(path, bypassRangeCheck);
+    }
+
     #region Normal Attack
     /// <summary>
     /// Mage's normal attack.
@@ -33,8 +41,6 @@ public class Mage : Player
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
         ActionRange.Instance.ActionDeselected();
-
-
 
         Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -69,6 +75,11 @@ public class Mage : Player
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
 
             int oldEnemyHealth = attackedEnemy.Health;
+
+            animatorController.SetTrigger("CastLightning");
+            staffAndBookController.SetTrigger("CastLightning");
+
+            yield return new WaitUntil(() => AnimationComplete);
 
             if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
             {
@@ -123,7 +134,7 @@ public class Mage : Player
 
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
         Enemy focus = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
-        bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true);
+        bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true, ActionShape.Square);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
@@ -151,6 +162,12 @@ public class Mage : Player
 
         List<Enemy> killList = new List<Enemy>();
         int oldEnemyHealth;
+
+        animatorController.SetTrigger("CastFireball");
+        staffAndBookController.SetTrigger("CastFireball");
+
+        yield return new WaitUntil(() => AnimationComplete);
+
         foreach (Enemy enemy in enemies)
         {
             oldEnemyHealth = enemy.Health;
@@ -211,6 +228,9 @@ public class Mage : Player
 
             AddStatusEffect(moveUp);
         }
+
+        animatorController.SetTrigger("CastEnchant");
+        staffAndBookController.SetTrigger("CastEnchant");
 
         ActionRange.Instance.ActionDeselected(false);
 

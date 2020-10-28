@@ -165,6 +165,12 @@ public abstract class Player : Humanoid, IPlayer
         base.AdvanceTimer();
     }
 
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
+    {
+        animatorController.SetBool("IsWalking", true); 
+        base.Move(path, bypassRangeCheck);
+    }
+
     #region Ability Functions
     /// <summary>
     /// Starts the cooldown of this unit's first ability.

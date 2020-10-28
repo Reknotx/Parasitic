@@ -53,6 +53,10 @@ public class Archer : Player
 
             int oldEnemyHealth = attackedEnemy.Health;
 
+            animatorController.SetTrigger("CastAttack");
+
+            yield return new WaitUntil(() => AnimationComplete);
+
             if (attackedEnemy.TakeDamage(AttackStat + extraDamage + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
             {
                 if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
@@ -107,6 +111,10 @@ public class Archer : Player
             ActionRange.Instance.ActionDeselected();
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
+
+            animatorController.SetTrigger("CastHeal");
+
+            yield return new WaitUntil(() => AnimationComplete);
 
             target.Heal();
 
