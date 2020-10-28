@@ -53,9 +53,9 @@ public class Archer : Player
 
             int oldEnemyHealth = attackedEnemy.Health;
 
-            animatorController.SetTrigger("CastAttack");
+            //animatorController.SetTrigger("CastAttack");
 
-            yield return new WaitUntil(() => AnimationComplete);
+            //yield return new WaitUntil(() => AnimationComplete);
 
             if (attackedEnemy.TakeDamage(AttackStat + extraDamage + (int)currentTile.TileBoost(TileEffect.Attack), hasTrueDamage))
             {
@@ -112,9 +112,9 @@ public class Archer : Player
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
-            animatorController.SetTrigger("CastHeal");
+            //animatorController.SetTrigger("CastHeal");
 
-            yield return new WaitUntil(() => AnimationComplete);
+            //yield return new WaitUntil(() => AnimationComplete);
 
             target.Heal();
 
@@ -147,7 +147,7 @@ public class Archer : Player
 
         StartAbilityTwoCD();
 
-        animatorController.SetTrigger("CastEagleEye");
+        //animatorController.SetTrigger("CastEagleEye");
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
