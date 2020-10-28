@@ -332,6 +332,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
         }
+
+        if (this is Player && ((Player)this).HasAttacked == false)
+        {
+            ((Player)this).FindActionRanges();
+        }
     }
     #endregion
     
