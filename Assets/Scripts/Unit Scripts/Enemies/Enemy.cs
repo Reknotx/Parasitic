@@ -18,6 +18,15 @@ public abstract class Enemy : Humanoid, IEnemy
         if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
+    IEnumerator AttackCR()
+    {
+        //animatorController.SetTrigger("EnemyAttack");
+
+        //yield return new WaitUntil(() => AnimationComplete);
+        yield return null;
+        if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
+    }
+
     public virtual void Defend()
     {
         DefendState = DefendingState.Defending;

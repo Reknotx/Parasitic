@@ -185,9 +185,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public bool AnimationComplete { get; set; } = false;
 
-    public void SetAnimationComplete()
+    /// <summary>
+    /// Sets the animation complete parameter, used through animation events.
+    /// </summary>
+    /// <param name="value">States if the animation is complete or not.</param>
+    public void SetAnimationComplete(bool value)
     {
-        AnimationComplete = true;
+        AnimationComplete = value;
     }
 
     public virtual void Start()
