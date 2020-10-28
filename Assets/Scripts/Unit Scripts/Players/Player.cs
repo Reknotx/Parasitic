@@ -167,7 +167,8 @@ public abstract class Player : Humanoid, IPlayer
 
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
-        animatorController.SetBool("IsWalking", true); 
+        if (animatorController != null)
+            animatorController.SetBool("IsWalking", true); 
         base.Move(path, bypassRangeCheck);
     }
 
