@@ -147,6 +147,8 @@ public class Archer : Player
 
         StartAbilityTwoCD();
 
+        animatorController.SetTrigger("CastEagleEye");
+
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
     }
