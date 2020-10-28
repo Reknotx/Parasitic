@@ -16,11 +16,17 @@ public abstract class Enemy : Humanoid, IEnemy
     public virtual void Attack()
     {
         AnimationComplete = false;
-        if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
+        //if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
+        StartCoroutine(AttackCR());
     }
 
     IEnumerator AttackCR()
     {
+        ///MESSAGE FOR RYAN 10/27/2020
+        ///Hey dude if you get to this point where you need to set up the animations and trigger the behavior so that
+        ///the damage is only applied on the animation event as well as activating the animations themselves just
+        ///uncomment these two lines and you should be just fine :) Just make sure that your triggers are set
+        ///with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
         //animatorController.SetTrigger("EnemyAttack");
 
         //yield return new WaitUntil(() => AnimationComplete);
