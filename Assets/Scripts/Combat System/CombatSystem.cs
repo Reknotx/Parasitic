@@ -230,6 +230,7 @@ public class CombatSystem : MonoBehaviour
     public void AttackComplete()
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
+        CharacterSelector.Instance.SelectedPlayerUnit.SetAnimationComplete(false);
         CharacterSelector.Instance.SetLastSelected();
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;

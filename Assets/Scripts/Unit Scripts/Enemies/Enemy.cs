@@ -15,6 +15,7 @@ public abstract class Enemy : Humanoid, IEnemy
     #region Combat Functions
     public virtual void Attack()
     {
+        AnimationComplete = false;
         if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
