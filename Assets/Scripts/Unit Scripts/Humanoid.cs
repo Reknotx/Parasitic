@@ -316,7 +316,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         State = HumanoidState.Idle;
         HasMoved = true;
 
-        animatorController.SetBool("IsWalking", false);
+        if (animatorController != null)
+        {
+            animatorController.SetBool("IsWalking", false);
+        }
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
