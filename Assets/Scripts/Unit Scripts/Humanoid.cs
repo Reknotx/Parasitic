@@ -237,7 +237,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
             p2 = new Vector3(p2.x, unitHeight + p2.y + (tile.slope ? MapGrid.Instance.tileHeight / 2f : 0), p2.z);
             
-            if (currentTile.level < tile.level)
+            if(currentTile.slope && tile.slope && currentTile.level == tile.level)
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, tile.Elevation + MapGrid.Instance.tileHeight / 2f + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            else if (currentTile.level < tile.level)
             {
                 p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, tile.Elevation + unitHeight, (p2.z - p0.z) / 2 + p0.z);
             }

@@ -260,12 +260,23 @@ public class CharacterSelector : MonoBehaviour
     void DrawPath()
     {
         List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.Elevation + pathHeight, SelectedPlayerUnit.transform.position.z));
+        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.Elevation + pathHeight + (SelectedPlayerUnit.currentTile.slope ? MapGrid.Instance.tileHeight/2f : 0), SelectedPlayerUnit.transform.position.z));
         for (int i = 0; i < path.Count; i++)
         {
             if(path[i].slope)
             {
                 //points is used instead of path here because there is always a previos point
+                bool fromSlope;
+                if (i > 0)
+                {
+                    fromSlope = path[i - 1].slope;
+                }
+                else
+                {
+                    fromSlope = SelectedPlayerUnit.currentTile.slope;
+                }
+                //if coming from slope dont add another point
+                if(!fromSlope)
                 points.Add(new Vector3((points[points.Count-1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
                     points[points.Count - 1].y, 
                     (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
@@ -273,8 +284,10 @@ public class CharacterSelector : MonoBehaviour
                 points.Add(new Vector3( path[i].transform.position.x,path[i].Elevation+MapGrid.Instance.tileHeight/2 + pathHeight, path[i].transform.position.z));
                 if (path[i].slope && i != path.Count - 1)
                 {
+                    //if entering an adjacent slope dont add another point 
+                    if(!(path[i + 1].slope /*&& path[i].level == path[i + 1].level*/))
                     points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
-                        path[i + 1].Elevation + pathHeight,
+                        path[i + 1].Elevation + pathHeight /*+ (path[i + 1].slope ? MapGrid.Instance.tileHeight / 2f : 0)*/,
                         (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
                 }
             }

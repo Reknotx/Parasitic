@@ -464,7 +464,13 @@ public class MapGrid : MonoBehaviour
                 if (inRange[x, y])
                 {
                     pos = grid[x, y].ElevatedPos();
+                    currentTile = grid[x, y];
+                    
                     startPos = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
+                    if ((currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left))
+                    {
+                        startPos = new Vector3(startPos.x, startPos.y + tileHeight, startPos.z);
+                    }
                     //make start current position
                     xCoord = x;
                     yCoord = y;
@@ -480,8 +486,13 @@ public class MapGrid : MonoBehaviour
         //travel around boarder until start position is encountered again
         //if tile ahead is not in range boarder position is added to the list and the check rotates right
         //if tile ahead is in range move that tile and rotate left
+        int loops = 0;
+        
         while (startFound && !endFound)
         {
+            loops++;
+            if (loops > 1000) break;
+            lastTile = currentTile;
             currentTile = grid[xCoord, yCoord];
 
             switch (facing)
@@ -504,15 +515,24 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.up;
                         //add point to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left) && ValidSlopeMovement(lastTile, currentTile))
+                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left))
                         {
+                            Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
+                            if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
+                            {
+                                points.Add(pastHit);
+                            }
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            if (currentTile.level != lastTile.level && ( !currentTile.slope))
                             {
                                 points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count-1].z));
+                            }
+                            else if((currentTile.slope || lastTile.slope) && !ValidSlopeMovement(lastTile, currentTile))
+                            {
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
                             points.Add(hitPoint);
                             lastTile = grid[xCoord, yCoord];
@@ -542,17 +562,27 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.right;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right) && ValidSlopeMovement(lastTile, currentTile))
+                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right))
                         {
+                            Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
+                            if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
+                            {
+                                points.Add(pastHit);
+                            }
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            if (currentTile.level != lastTile.level && (!currentTile.slope))
+                            {
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
+                            }
+                            else if ((currentTile.slope || lastTile.slope) && !ValidSlopeMovement(lastTile, currentTile))
                             {
                                 points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
                             points.Add(hitPoint);
+                            //print("last: " + lastTile.gridPosition + ", current: " + currentTile.gridPosition + ", valid move: " + ValidSlopeMovement(lastTile, currentTile));
                             lastTile = grid[xCoord, yCoord];
                         }
                         else
@@ -580,13 +610,22 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.down;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if((currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down) && ValidSlopeMovement(lastTile, currentTile))
+                        if((currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down))
                         {
+                            Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
+                            if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
+                            {
+                                points.Add(pastHit);
+                            }
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            if (currentTile.level != lastTile.level && (!currentTile.slope))
+                            {
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
+                            }
+                            else if ((currentTile.slope || lastTile.slope) && !ValidSlopeMovement(lastTile, currentTile))
                             {
                                 points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }
@@ -619,13 +658,22 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.left;
                         //add pint to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left) && ValidSlopeMovement(lastTile, currentTile))
+                        if ((currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left))
                         {
+                            Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
+                            if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
+                            {
+                                points.Add(pastHit);
+                            }
                             hitPoint = new Vector3(hitPoint.x, hitPoint.y + tileHeight, hitPoint.z);
                         }
                         if (hitPoint != startPos)
                         {
-                            if (currentTile.level != lastTile.level && (!lastTile.slope && !currentTile.slope))
+                            if (currentTile.level != lastTile.level && (!currentTile.slope))
+                            {
+                                points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
+                            }
+                            else if ((currentTile.slope || lastTile.slope) && !ValidSlopeMovement(lastTile, currentTile))
                             {
                                 points.Add(new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z));
                             }

@@ -66,13 +66,32 @@ public class Tile : MonoBehaviour
 
     void FindTilt()
     {
-        print("find tilt");
+        float w = MapGrid.Instance.tileSize;
+        float h = MapGrid.Instance.tileHeight;
+        switch (facing)
+        {
+            case Dir.left:
+                tilt = Quaternion.LookRotation(new Vector3(-w, h, 0));
+                break;
+            case Dir.up:
+                tilt = Quaternion.LookRotation(new Vector3(0, h, w));
+                break;
+            case Dir.right:
+                tilt = Quaternion.LookRotation(new Vector3(w, h, 0));
+                break;
+            case Dir.down:
+                tilt = Quaternion.LookRotation(new Vector3(0, h, -w));
+                break;
+            default:
+                break;
+        }
+        /*print("find tilt");
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up*100, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, gridMask))
         {
             tilt = hit.transform.rotation;
             print("tilt: " + tilt);
-        }
+        }*/
     }
 
     public int fCost
@@ -133,7 +152,29 @@ public class Tile : MonoBehaviour
         if (drawTileGizmo)
         {
             MapGrid map = transform.parent.transform.parent.transform.parent.GetComponent<MapGrid>();
-            Gizmos.DrawSphere(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight), 0.2f);
+            Gizmos.DrawSphere(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight + (slope ? map.tileHeight/2f : 0)), 0.2f);
+            if (slope)
+            {
+                float w = map.tileSize;
+                float h = map.tileHeight;
+                switch (facing)
+                {
+                    case Dir.left:
+                        Gizmos.DrawRay(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight) + Vector3.right * h / 2f, new Vector3(-w, h, 0));
+                        break;
+                    case Dir.up:
+                        Gizmos.DrawRay(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight) + Vector3.back * h / 2f, new Vector3(0, h, w));
+                        break;
+                    case Dir.right:
+                        Gizmos.DrawRay(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight) + Vector3.left * h / 2f, new Vector3(w, h, 0));
+                        break;
+                    case Dir.down:
+                        Gizmos.DrawRay(transform.position + Vector3.up * (gizmoHeight + level * map.tileHeight) + Vector3.forward * h/2f, new Vector3(0, h, -w));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
             
     }

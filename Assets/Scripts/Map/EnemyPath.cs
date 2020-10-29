@@ -42,8 +42,13 @@ public class EnemyPath : MonoBehaviour
         {
             if (path[i].slope)
             {
+                bool fromSlope = false;
+                if (i > 0)
+                {
+                    fromSlope = path[i - 1].slope;
+                }
                 //points is used instead of path here because there is always a previos point
-                if(i!=0)
+                if (i!=0 && !fromSlope)
                 points.Add(new Vector3((points[points.Count - 1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
                     points[points.Count - 1].y,
                     (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
@@ -51,6 +56,7 @@ public class EnemyPath : MonoBehaviour
                 points.Add(new Vector3(path[i].transform.position.x, path[i].Elevation + MapGrid.Instance.tileHeight / 2 + pathHeight, path[i].transform.position.z));
                 if (path[i].slope && i != path.Count - 1)
                 {
+                    if (!path[i + 1].slope)
                     points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
                         path[i + 1].Elevation + pathHeight,
                         (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
