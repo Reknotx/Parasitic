@@ -10,22 +10,28 @@ public class LevelLoader : MonoBehaviour
     private bool loading = false;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (CombatSystem.Instance == null) return;
+    //void Update()
+    //{
+    //    if (CombatSystem.Instance == null) return;
 
-        if (CombatSystem.Instance.state == BattleState.Won && loading == false)
-        {
-            Debug.Log("Level Won");
-            LoadNextLevel();
-        }
-    }
+    //    if (CombatSystem.Instance.state == BattleState.Won && loading == false)
+    //    {
+    //        Debug.Log("Level Won");
+    //        LoadNextLevel();
+    //    }
+    //}
 
     public void LoadNextLevel()
     {
         Debug.Log("In Load next Level");
         loading = true;
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    public void LoadSpecificLevel(int index)
+    {
+        Debug.Log("Loading level at index " + index);
+        StartCoroutine(LoadLevel(index));
     }
 
     IEnumerator LoadLevel(int levelIndex)

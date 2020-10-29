@@ -65,7 +65,7 @@ public class Upgrades : MonoBehaviour
     public Slider knightXpBar;
     public Slider archerXpBar;
 
-    public int maxXP = 100;
+    public float maxXP = 100f;
 
     private int _mageXp;
     private int _knightXp;
@@ -87,7 +87,7 @@ public class Upgrades : MonoBehaviour
                 _mageXp = value;
                 if (_mageXp >= maxXP)
                 {
-                    _mageXp -= maxXP;
+                    _mageXp -= (int)maxXP;
                     MagePoints++;
                     ShowUpgradeNotification();
                 }
@@ -108,7 +108,7 @@ public class Upgrades : MonoBehaviour
                 _knightXp = value;
                 if (_knightXp >= maxXP)
                 {
-                    _knightXp -= maxXP;
+                    _knightXp -= (int)maxXP;
                     KnightPoints++;
                     ShowUpgradeNotification();
                 }
@@ -129,11 +129,12 @@ public class Upgrades : MonoBehaviour
                 _archerXp = value;
                 if (_archerXp >= maxXP)
                 {
-                    _archerXp -= maxXP;
+                    _archerXp -= (int)maxXP;
                     ArcherPoints++;
                     ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
+                Debug.Log(archerXpBar.value);
                 _archerXpText.text = _archerXp + " / " + maxXP;
             }
         }
@@ -328,6 +329,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             MagePoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Mage>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -339,6 +345,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             KnightPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Warrior>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -350,6 +361,11 @@ public class Upgrades : MonoBehaviour
                             SetAbilityButtonState(ability, unit);
                             ArcherPoints -= pointRequirement;
                             Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+
+                            if (ability != Abilities.ability1 || ability != Abilities.ability2)
+                            {
+                                FindObjectOfType<Archer>().ProcessUpgrade(ability);
+                            }
                         }
                         else
                             StartCoroutine(CantUnlockMessage("Not Enough Points: Need " + pointRequirement));
@@ -458,6 +474,8 @@ public class Upgrades : MonoBehaviour
 
     #endregion
 
+
+
     #region UI Functions
 
     /// <summary>
@@ -469,9 +487,9 @@ public class Upgrades : MonoBehaviour
         KnightPoints = KnightPoints;
         ArcherPoints = ArcherPoints;
 
-        MageXp = MageXp;
-        KnightXp = KnightXp;
-        ArcherXp = ArcherXp;
+        MageXp = _mageXp;
+        KnightXp = _knightXp;
+        ArcherXp = _archerXp;
     }
 
     /// <summary>
@@ -537,6 +555,7 @@ public class Upgrades : MonoBehaviour
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
+            CombatSystem.Instance.Cancel(false);
         }
 
         ClearUpgradeNotification();

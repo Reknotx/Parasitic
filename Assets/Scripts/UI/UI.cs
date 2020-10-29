@@ -139,6 +139,7 @@ public class UI : MonoBehaviour
     {
         if(value)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("MainMenuTest");
         }
         else
