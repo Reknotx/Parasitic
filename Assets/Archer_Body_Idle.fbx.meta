@@ -22,9 +22,12 @@ ModelImporter:
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\n\t'Archer_Rig_Final__1_:BaseModel_Body_2_Jnt'
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Archer_Rig_Final__1_:BaseModel_Body_2_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__1_:BaseModel_Body_3_Jnt'
       has translation animation that will be discarded.\n\t'Archer_Rig_Final__1_:BaseModel_Hand_Wrist_R_Jnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Archer_Rig_Final__1_:BaseModel_Shoulder_L_Jnt'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -985,7 +988,7 @@ ModelImporter:
     feetSpacing: 0
     globalScale: 1
     rootMotionBoneName: 
-    hasTranslationDoF: 0
+    hasTranslationDoF: 1
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
