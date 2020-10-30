@@ -76,8 +76,8 @@ public class Mage : Player
 
             int oldEnemyHealth = attackedEnemy.Health;
 
-            animatorController.SetTrigger("CastLightning");
-            staffAndBookController.SetTrigger("CastLightning");
+            AttackAnim();
+            staffAndBookController.SetTrigger("CastAttack");
 
             yield return new WaitUntil(() => AnimationComplete);
 
@@ -163,8 +163,8 @@ public class Mage : Player
         List<Enemy> killList = new List<Enemy>();
         int oldEnemyHealth;
 
-        animatorController.SetTrigger("CastFireball");
-        staffAndBookController.SetTrigger("CastFireball");
+        AbilityOneAnim();
+        staffAndBookController.SetTrigger("CastAbilityOne");
 
         yield return new WaitUntil(() => AnimationComplete);
 
@@ -229,8 +229,8 @@ public class Mage : Player
             AddStatusEffect(moveUp);
         }
 
-        animatorController.SetTrigger("CastEnchant");
-        staffAndBookController.SetTrigger("CastEnchant");
+        AbilityTwoAnim();
+        staffAndBookController.SetTrigger("CastAbilityTwo");
 
         ActionRange.Instance.ActionDeselected(false);
 

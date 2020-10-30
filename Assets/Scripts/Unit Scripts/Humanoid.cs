@@ -162,12 +162,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    [Header("This refers to the transform of the parent object for this unit.")]
+    //[Header("This refers to the transform of the parent object for this unit.")]
     /// <summary> The transform of the parent of this unit. </summary>
     /// This is needed because the animations will put the character up in the Y due to how they
     /// were set up and how we have originally set up the characters themselves
     /// 
-    public Transform parentTransform;
+    [HideInInspector] public Transform parentTransform;
 
     /// <summary> The state of the humanoid in combat. </summary>
     public HumanoidState State { get; set; }
@@ -196,7 +196,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public virtual void Start()
     {
-        if (parentTransform == null && transform.parent != null)
+        if (transform.parent != null)
         {
             parentTransform = transform.parent;
         }

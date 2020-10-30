@@ -27,7 +27,7 @@ public abstract class Enemy : Humanoid, IEnemy
         ///the damage is only applied on the animation event as well as activating the animations themselves just
         ///uncomment these two lines and you should be just fine :) Just make sure that your triggers are set
         ///with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
-        //animatorController.SetTrigger("EnemyAttack");
+        //animatorController.SetTrigger("CastAttack");
 
         //yield return new WaitUntil(() => AnimationComplete);
         yield return null;

@@ -111,6 +111,7 @@ public abstract class Player : Humanoid, IPlayer
         base.Start();
     }
 
+    #region Selection/Deselection
     public void UnitSelected()
     {
         //print("Player selected");
@@ -135,6 +136,30 @@ public abstract class Player : Humanoid, IPlayer
         selected = false;
         CharacterSelector.Instance.BoarderLine.SetActive(false);
     }
+    #endregion
+
+    #region Animation Executers
+    ///Note: All animation triggers need to follow this naming convention for 
+    ///simplistic implementation and programming reasons.
+
+    /// <summary> Executes the normal attack animation of this player. </summary>
+    protected void AttackAnim()
+    {
+        animatorController.SetTrigger("CastAttack");
+    }
+
+    /// <summary> Triggers the ability one animation for this player. </summary>
+    protected void AbilityOneAnim()
+    {
+        animatorController.SetTrigger("CastAbilityOne");
+    }
+
+    /// <summary> Triggers the ability two animation for this player. </summary>
+    protected void AbilityTwoAnim()
+    {
+        animatorController.SetTrigger("CastAbilityTwo");
+    }
+    #endregion
 
     /// <summary>
     /// Raises the defense stat of the player temporarily.
