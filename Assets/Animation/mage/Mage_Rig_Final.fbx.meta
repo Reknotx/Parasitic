@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 12019265cae7d9145a474d7d9cd5e8e2
+guid: a6ef647e124422c43a896a9a860f9410
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -18,7 +21,13 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'BaseModel_Body_1_Jnt' has translation animation
+      that will be discarded.\n\t'BaseModel_Body_2_Jnt' has translation animation
+      that will be discarded.\n\t'BaseModel_Body_3_Jnt' has translation animation
+      that will be discarded.\n\t'BaseModel_Shoulder_Jnt' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -30,7 +39,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -193,7 +231,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: BaseModel_Hand_Wrist_L_Jnt
+    - boneName: BaseModel_Arm_Wrist_L_Jnt
       humanName: LeftHand
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -201,7 +239,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: BaseModel_Hand_Wrist_R_Jnt
+    - boneName: BaseModel_Arm_Wrist_R_Jnt
       humanName: RightHand
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -409,70 +447,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: BaseModel_Finger_Pointer_L_3_Jnt
-      humanName: Left Index Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Middle_L_3_Jnt
-      humanName: Left Middle Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Ring_L_3_Jnt
-      humanName: Left Ring Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Pinky_3_Jnt
-      humanName: Left Little Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Pointer_R_3_Jnt
-      humanName: Right Index Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Middle_R_3_Jnt
-      humanName: Right Middle Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Ring_R_3_Jnt
-      humanName: Right Ring Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: BaseModel_Finger_Pinky_R_3_Jnt
-      humanName: Right Little Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: BaseModel_Shoulder_L_Jnt
       humanName: LeftShoulder
       limit:
@@ -490,49 +464,59 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: mage_rig(Clone)
+    - name: MAGE_RIG_FINAL_1(Clone)
       parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Geo
-      parentName: mage_rig(Clone)
+      parentName: MAGE_RIG_FINAL_1(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Body_Geo
       parentName: BaseModel_Geo
-      position: {x: -0, y: 0, z: 0}
+      position: {x: 0.000028095244, y: 0.93203515, z: 0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Face
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Hand_L
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Hand_R
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Clothing
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Foot_R
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Foot_L
+      parentName: BaseModel_Body_Geo
+      position: {x: -0.000028095244, y: -0.93203515, z: -0.002299688}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_GlobalTransform_Grp
-      parentName: mage_rig(Clone)
+      parentName: MAGE_RIG_FINAL_1(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_GlobalScale_Grp
       parentName: BaseModel_GlobalTransform_Grp
       position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Controls
-      parentName: BaseModel_GlobalScale_Grp
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Local_Ctrl
-      parentName: BaseModel_Controls
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Back_Ctrl
-      parentName: BaseModel_Local_Ctrl
-      position: {x: 1.2705494e-23, y: 0.8295011, z: -3.5527136e-17}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Hip_Ctrl
-      parentName: BaseModel_Back_Ctrl
-      position: {x: 2.471086e-17, y: 0, z: 3.5527093e-17}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Joints
@@ -552,8 +536,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Hip_Jnt
       parentName: BaseModel_Hip_Jnt_Grp
-      position: {x: 3.1763735e-24, y: 0.000000032873103, z: 5.293956e-25}
-      rotation: {x: -0.7071067, y: 0.7071068, z: 0.00000061884936, w: -0.000000012844171}
+      position: {x: 3.1763735e-24, y: 0, z: 5.293956e-25}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.0000005649418, w: 3.7613274e-14}
       scale: {x: 0.99999994, y: 1, z: 1}
     - name: BaseModel_Rig_FIX_6:transform2
       parentName: BaseModel_Hip_Jnt
@@ -563,7 +547,7 @@ ModelImporter:
     - name: BaseModel_Body_1_Jnt
       parentName: BaseModel_Rig_FIX_6:transform2
       position: {x: -0.14326146, y: 8.508189e-10, z: 2.0371818e-10}
-      rotation: {x: -0.36920598, y: 0.00000004934793, z: -0.000000029896135, w: 0.9293476}
+      rotation: {x: -0.36920598, y: 0.00000004934793, z: -0.00000002989614, w: 0.9293476}
       scale: {x: 0.99999994, y: 1, z: 1}
     - name: BaseModel_Body_2_Jnt
       parentName: BaseModel_Body_1_Jnt
@@ -593,17 +577,17 @@ ModelImporter:
     - name: BaseModel_Shoulder_L_Jnt
       parentName: transform3
       position: {x: -0.21586278, y: 1.337815, z: -0.019275308}
-      rotation: {x: -0.684697, y: -0.01049891, z: 0.009865045, w: 0.7286856}
+      rotation: {x: -0.68469685, y: -0.010498819, z: 0.009865013, w: 0.72868556}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Elbow_1_L_Jnt
       parentName: BaseModel_Shoulder_L_Jnt
       position: {x: -0.27271426, y: -2.3270274e-15, z: 6.110667e-15}
-      rotation: {x: -0.06855051, y: 0.015040482, z: 0.03715585, w: 0.996842}
+      rotation: {x: -0.0685503, y: 0.015041056, z: 0.03715585, w: 0.9968421}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Elbow_2_L_Jnt
       parentName: BaseModel_Elbow_1_L_Jnt
       position: {x: -0.041826315, y: -6.3948843e-16, z: 1.563194e-15}
-      rotation: {x: 0.000006769549, y: -0.000023048748, z: -0.000017856195, w: 1}
+      rotation: {x: 0.000006769549, y: -0.000023048748, z: -0.000017856193, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Arm_Wrist_L_Jnt
       parentName: BaseModel_Elbow_2_L_Jnt
@@ -613,52 +597,32 @@ ModelImporter:
     - name: BaseModel_Hand_Wrist_L_Jnt
       parentName: BaseModel_Arm_Wrist_L_Jnt
       position: {x: -2.1316282e-16, y: -3.5527136e-17, z: 0}
-      rotation: {x: 0.7027924, y: 0.040590893, z: -0.027440485, w: 0.70970577}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Hand_Thumb_1_L_Jnt
-      parentName: BaseModel_Hand_Wrist_L_Jnt
-      position: {x: -0.041183583, y: -0.034117136, z: 0.041914552}
-      rotation: {x: -0.1096539, y: 0.3623291, z: 0.22400263, w: 0.89806265}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_L_2_Jnt
-      parentName: BaseModel_Hand_Thumb_1_L_Jnt
-      position: {x: -0.041119084, y: -1.4210854e-16, z: 0}
-      rotation: {x: 0.9990531, y: -0.00038281077, z: 0.031432968, w: 0.030079398}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_L_3_Jnt
-      parentName: BaseModel_Finger_Thumb_L_2_Jnt
-      position: {x: -0.03166747, y: -1.0658141e-16, z: -7.105427e-17}
-      rotation: {x: -0.0000006054735, y: 0.0000050451663, z: 0.000004608976, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_L_4_Jnt
-      parentName: BaseModel_Finger_Thumb_L_3_Jnt
-      position: {x: -0.03783304, y: 1.7763567e-16, z: 0}
-      rotation: {x: -0.70584625, y: -0.04220311, z: 0.04219984, w: 0.7058464}
+      rotation: {x: 0.70279247, y: 0.040590893, z: -0.02744048, w: 0.7097057}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_L_1_Jnt
       parentName: BaseModel_Hand_Wrist_L_Jnt
       position: {x: -0.1270764, y: -0.026316212, z: 0.041617163}
-      rotation: {x: 0.9860281, y: 0.16174832, z: -0.03684605, w: 0.015119087}
+      rotation: {x: 0.9860277, y: 0.16175039, z: -0.0368451, w: 0.015119329}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_L_2_Jnt
       parentName: BaseModel_Finger_Pointer_L_1_Jnt
       position: {x: -0.03195487, y: 0, z: -2.842171e-16}
-      rotation: {x: -0.0025785568, y: 0.0031648574, z: -0.0370157, w: 0.9993064}
+      rotation: {x: -0.0025784196, y: 0.0031653563, z: -0.037014067, w: 0.9993064}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_L_3_Jnt
       parentName: BaseModel_Finger_Pointer_L_2_Jnt
       position: {x: -0.056395523, y: 3.5527136e-17, z: -2.1316282e-16}
-      rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Middle_L_1_Jnt
       parentName: BaseModel_Hand_Wrist_L_Jnt
       position: {x: -0.13789453, y: -0.024243291, z: 0.008355363}
-      rotation: {x: 0.9866884, y: 0.16158606, z: -0.017576035, w: 0.005216011}
+      rotation: {x: 0.9866879, y: 0.16158858, z: -0.017575298, w: 0.00521585}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Middle_L_2_Jnt
       parentName: BaseModel_Finger_Middle_L_1_Jnt
       position: {x: -0.040678, y: -2.842171e-16, z: 7.105427e-17}
-      rotation: {x: 0.007767811, y: -0.0060580233, z: -0.034342535, w: 0.9993616}
+      rotation: {x: 0.0077677844, y: -0.0060576266, z: -0.0343391, w: 0.9993617}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Middle_L_3_Jnt
       parentName: BaseModel_Finger_Middle_L_2_Jnt
@@ -668,12 +632,12 @@ ModelImporter:
     - name: BaseModel_Finger_Ring_L_1_Jnt
       parentName: BaseModel_Hand_Wrist_L_Jnt
       position: {x: -0.1289092, y: -0.033567354, z: -0.020193584}
-      rotation: {x: 0.98688483, y: 0.1608852, z: -0.012941414, w: 0.0026292847}
+      rotation: {x: 0.9868848, y: 0.16088541, z: -0.012941465, w: 0.0026292894}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Ring_L_2_Jnt
       parentName: BaseModel_Finger_Ring_L_1_Jnt
       position: {x: -0.04600933, y: 2.842171e-16, z: 0}
-      rotation: {x: 0.015735876, y: -0.0062368507, z: -0.030533936, w: 0.9993905}
+      rotation: {x: 0.015736004, y: -0.006237274, z: -0.030529248, w: 0.99939054}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Ring_L_3_Jnt
       parentName: BaseModel_Finger_Ring_L_2_Jnt
@@ -683,17 +647,37 @@ ModelImporter:
     - name: BaseModel_Finger_Pinky_L_1_Jnt
       parentName: BaseModel_Hand_Wrist_L_Jnt
       position: {x: -0.10695604, y: -0.038571272, z: -0.043226197}
-      rotation: {x: 0.9897888, y: 0.14051686, z: 0.01545798, w: -0.018287111}
+      rotation: {x: 0.98978907, y: 0.14051469, z: 0.015456924, w: -0.018286938}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pinky_2_Jnt
       parentName: BaseModel_Finger_Pinky_L_1_Jnt
       position: {x: -0.029398264, y: 1.4210854e-16, z: 7.5495166e-17}
-      rotation: {x: 0.041400153, y: -0.017366122, z: -0.026313493, w: 0.9986451}
+      rotation: {x: 0.04140099, y: -0.017365262, z: -0.026318306, w: 0.99864495}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pinky_3_Jnt
       parentName: BaseModel_Finger_Pinky_2_Jnt
       position: {x: -0.047685325, y: -3.1530333e-16, z: 3.5527136e-17}
-      rotation: {x: 1, y: 0, z: -0, w: 6.123234e-17}
+      rotation: {x: 1, y: -0, z: 0, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Hand_Thumb_1_L_Jnt
+      parentName: BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.041183583, y: -0.034117136, z: 0.041914552}
+      rotation: {x: -0.10965414, y: 0.36232874, z: 0.22400223, w: 0.8980628}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_L_2_Jnt
+      parentName: BaseModel_Hand_Thumb_1_L_Jnt
+      position: {x: -0.041119084, y: -1.4210854e-16, z: 0}
+      rotation: {x: 0.999053, y: -0.00038157412, z: 0.031435557, w: 0.030079305}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_L_3_Jnt
+      parentName: BaseModel_Finger_Thumb_L_2_Jnt
+      position: {x: -0.03166747, y: -1.0658141e-16, z: -7.105427e-17}
+      rotation: {x: -0.0000006054734, y: 0.0000050451663, z: 0.000004608976, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_L_4_Jnt
+      parentName: BaseModel_Finger_Thumb_L_3_Jnt
+      position: {x: -0.03783304, y: 1.7763567e-16, z: 0}
+      rotation: {x: -0.70584625, y: -0.04220311, z: 0.04219984, w: 0.7058464}
       scale: {x: 1, y: 1, z: 1}
     - name: transform4
       parentName: BaseModel_Shoulder_Jnt
@@ -703,17 +687,17 @@ ModelImporter:
     - name: BaseModel_Shoulder_R_Jnt
       parentName: transform4
       position: {x: 0.21586278, y: 1.337815, z: -0.019275308}
-      rotation: {x: 0.00044818787, y: -0.031104565, z: 0.9994123, w: 0.014399501}
+      rotation: {x: 0.00044815714, y: -0.031104553, z: 0.9994123, w: 0.014399501}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Elbow_1_R_Jnt
       parentName: BaseModel_Shoulder_R_Jnt
       position: {x: -0.27271426, y: 6.536993e-15, z: -2.2382096e-15}
-      rotation: {x: 0.06855026, y: 0.03715584, z: 0.0150410645, w: 0.9968421}
+      rotation: {x: 0.06855034, y: 0.037155755, z: 0.015040974, w: 0.9968421}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Elbow_2_R_Jnt
       parentName: BaseModel_Elbow_1_R_Jnt
       position: {x: -0.041826315, y: 1.4210854e-16, z: 7.105427e-17}
-      rotation: {x: -0.000008319954, y: -0.000017856159, z: -0.000023048777, w: 1}
+      rotation: {x: -0.000008319954, y: -0.00001785616, z: -0.000023048777, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Arm_Wrist_R_Jnt
       parentName: BaseModel_Elbow_2_R_Jnt
@@ -723,37 +707,17 @@ ModelImporter:
     - name: BaseModel_Hand_Wrist_R_Jnt
       parentName: BaseModel_Arm_Wrist_R_Jnt
       position: {x: 0.000000012014275, y: -0.000000021732339, z: 0.000000008092667}
-      rotation: {x: -0.051995955, y: -0.16519296, z: -0.12871857, w: 0.97644216}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Hand_Thumb_1_R_Jnt
-      parentName: BaseModel_Hand_Wrist_R_Jnt
-      position: {x: -0.03214915, y: 0.014278397, z: 0.058166254}
-      rotation: {x: 0.06099763, y: 0.5385437, z: -0.055210948, w: 0.83857125}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_R_2_Jnt
-      parentName: BaseModel_Hand_Thumb_1_R_Jnt
-      position: {x: -0.0410907, y: 7.105427e-17, z: 0}
-      rotation: {x: 0.030076943, y: -0.031436235, z: 0.00038093515, w: 0.9990531}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_R_3_Jnt
-      parentName: BaseModel_Finger_Thumb_R_2_Jnt
-      position: {x: -0.03166747, y: 1.7763567e-16, z: 0}
-      rotation: {x: 2.3253047e-11, y: -0.000005045169, z: 0.0000046089726, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Finger_Thumb_R_4_Jnt
-      parentName: BaseModel_Finger_Thumb_R_3_Jnt
-      position: {x: -0.03783304, y: -7.105427e-17, z: -2.1316282e-16}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.051995955, y: -0.16519298, z: -0.12871857, w: 0.97644216}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_R_1_Jnt
       parentName: BaseModel_Hand_Wrist_R_Jnt
       position: {x: -0.105293326, y: -0.023959367, z: 0.08313969}
-      rotation: {x: 0.04288612, y: 0.21834749, z: 0.01604096, w: 0.97479635}
+      rotation: {x: 0.04288651, y: 0.2183468, z: 0.01604148, w: 0.9747964}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_R_2_Jnt
       parentName: BaseModel_Finger_Pointer_R_1_Jnt
       position: {x: -0.03195487, y: -1.4210854e-16, z: 0}
-      rotation: {x: 0.002578481, y: -0.0031642902, z: -0.037012503, w: 0.9993065}
+      rotation: {x: 0.002578534, y: -0.0031634266, z: -0.037013378, w: 0.99930644}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pointer_R_3_Jnt
       parentName: BaseModel_Finger_Pointer_R_2_Jnt
@@ -763,12 +727,12 @@ ModelImporter:
     - name: BaseModel_Finger_Middle_R_1_Jnt
       parentName: BaseModel_Hand_Wrist_R_Jnt
       position: {x: -0.12596852, y: -0.027715422, z: 0.05510211}
-      rotation: {x: 0.036752876, y: 0.19807602, z: 0.016793584, w: 0.9793534}
+      rotation: {x: 0.036753945, y: 0.19807577, z: 0.016797628, w: 0.97935337}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Middle_R_2_Jnt
       parentName: BaseModel_Finger_Middle_R_1_Jnt
       position: {x: -0.040678, y: -2.842171e-16, z: -2.842171e-16}
-      rotation: {x: -0.0077677835, y: 0.0060584084, z: -0.034336947, w: 0.99936175}
+      rotation: {x: -0.0077679316, y: 0.006060182, z: -0.034340113, w: 0.99936163}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Middle_R_3_Jnt
       parentName: BaseModel_Finger_Middle_R_2_Jnt
@@ -778,31 +742,51 @@ ModelImporter:
     - name: BaseModel_Finger_Ring_R_1_Jnt
       parentName: BaseModel_Hand_Wrist_R_Jnt
       position: {x: -0.13116972, y: -0.014014943, z: 0.02739}
-      rotation: {x: 0.03519623, y: 0.1931303, z: 0.017659696, w: 0.9803826}
+      rotation: {x: 0.03519645, y: 0.19313, z: 0.0176602, w: 0.9803827}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Ring_R_2_Jnt
       parentName: BaseModel_Finger_Ring_R_1_Jnt
       position: {x: -0.04600933, y: -1.4210854e-16, z: 3.5527136e-17}
-      rotation: {x: -0.015735881, y: 0.00623712, z: -0.030530294, w: 0.99939054}
+      rotation: {x: -0.015735934, y: 0.0062373714, z: -0.030528894, w: 0.99939054}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Ring_R_3_Jnt
       parentName: BaseModel_Finger_Ring_R_2_Jnt
       position: {x: -0.03859853, y: 3.375078e-16, z: 2.1316282e-16}
-      rotation: {x: 1, y: -0, z: 0, w: -5.390303e-15}
+      rotation: {x: 1, y: 0, z: 0, w: -5.390303e-15}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pinky_R_1_Jnt
       parentName: BaseModel_Hand_Wrist_R_Jnt
       position: {x: -0.121638164, y: 2.842171e-16, z: 8.881784e-18}
-      rotation: {x: 0.02363296, y: 0.16120417, z: 0.039674297, w: 0.9858401}
+      rotation: {x: 0.02363304, y: 0.16120446, z: 0.0396751, w: 0.98584}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pinky_R_2_Jnt
       parentName: BaseModel_Finger_Pinky_R_1_Jnt
       position: {x: -0.029398264, y: -4.2632563e-16, z: -9.7699626e-17}
-      rotation: {x: -0.041400436, y: 0.01736675, z: -0.026320469, w: 0.9986449}
+      rotation: {x: -0.041400243, y: 0.017366823, z: -0.02631748, w: 0.998645}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Finger_Pinky_R_3_Jnt
       parentName: BaseModel_Finger_Pinky_R_2_Jnt
       position: {x: -0.047685325, y: 7.5495166e-17, z: 2.4868996e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Hand_Thumb_1_R_Jnt
+      parentName: BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.03214915, y: 0.014278397, z: 0.058166254}
+      rotation: {x: 0.06099776, y: 0.5385438, z: -0.055210747, w: 0.83857125}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_R_2_Jnt
+      parentName: BaseModel_Hand_Thumb_1_R_Jnt
+      position: {x: -0.0410907, y: 7.105427e-17, z: 0}
+      rotation: {x: 0.03007701, y: -0.03143727, z: 0.0003817509, w: 0.999053}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_R_3_Jnt
+      parentName: BaseModel_Finger_Thumb_R_2_Jnt
+      position: {x: -0.03166747, y: 1.7763567e-16, z: 0}
+      rotation: {x: 2.3253047e-11, y: -0.000005045169, z: 0.0000046089726, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Finger_Thumb_R_4_Jnt
+      parentName: BaseModel_Finger_Thumb_R_3_Jnt
+      position: {x: -0.03783304, y: -7.105427e-17, z: -2.1316282e-16}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: transform5
@@ -823,7 +807,7 @@ ModelImporter:
     - name: BaseModel_Head_2_Jnt
       parentName: BaseModel_Head_1_Jnt
       position: {x: -0.3529102, y: 0, z: 0}
-      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071068}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: transform1
       parentName: BaseModel_Hip_Jnt
@@ -833,22 +817,22 @@ ModelImporter:
     - name: BaseModel_Hip_Rotate_R_Jnt
       parentName: transform1
       position: {x: 0.06207913, y: 0.8418351, z: 3.4314764e-17}
-      rotation: {x: 0, y: 0, z: 0.15385187, w: 0.988094}
+      rotation: {x: 0, y: 0, z: 0.15385188, w: 0.988094}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Hip_Translate_R_Jnt
       parentName: BaseModel_Hip_Rotate_R_Jnt
       position: {x: 0.047402468, y: -0.033688247, z: -6.2718385e-18}
-      rotation: {x: -0.00009406236, y: -0.000084827996, z: 0.5600691, w: 0.828446}
+      rotation: {x: -0.00009406236, y: -0.00008482799, z: 0.560069, w: 0.828446}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Knee_R_Jnt
       parentName: BaseModel_Hip_Translate_R_Jnt
       position: {x: -0.32677594, y: -0.047985613, z: 0.0014314584}
-      rotation: {x: -3.2004998e-14, y: 2.3351194e-13, z: 0.0059438045, w: 0.99998236}
+      rotation: {x: -3.2005e-14, y: 2.3351194e-13, z: 0.0059438045, w: 0.99998236}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Ankle_R_Jnt
       parentName: BaseModel_Knee_R_Jnt
       position: {x: -0.39040613, y: -0.047878455, z: -0.07443583}
-      rotation: {x: 0.6671374, y: 0.23436667, z: -0.19325103, w: 0.68018675}
+      rotation: {x: 0.6671374, y: 0.23436669, z: -0.19325103, w: 0.68018675}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Foot_R_Jnt
       parentName: BaseModel_Ankle_R_Jnt
@@ -868,57 +852,32 @@ ModelImporter:
     - name: BaseModel_Hip_Rotate_L_Jnt
       parentName: transform2
       position: {x: -0.06207913, y: 0.8418351, z: 3.431478e-17}
-      rotation: {x: 0, y: 0, z: 0.15385187, w: 0.988094}
+      rotation: {x: 0, y: 0, z: 0.15385188, w: 0.988094}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Hip_Translate_L_Jnt
       parentName: BaseModel_Hip_Rotate_L_Jnt
       position: {x: -0.05815404, y: 4.2632563e-16, z: -6.271826e-18}
-      rotation: {x: 0.000104471954, y: 0.00007161793, z: 0.56009024, w: 0.82843167}
+      rotation: {x: -0.000260246, y: 0.00030205568, z: 0.560065, w: 0.8284486}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Knee_L_Jnt
       parentName: BaseModel_Hip_Translate_L_Jnt
       position: {x: -0.33028036, y: 1.02875023e-16, z: 0.0014314584}
-      rotation: {x: 1.8667607e-15, y: 2.914741e-13, z: 0.0059438045, w: 0.99998236}
+      rotation: {x: -0.0000022090767, y: -0.0003874696, z: 0.005967587, w: 0.9999821}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Ankle_L_Jnt
       parentName: BaseModel_Knee_L_Jnt
       position: {x: -0.39333102, y: -2.1938007e-15, z: -0.07443583}
-      rotation: {x: 0.6671374, y: 0.23436667, z: -0.19325103, w: 0.68018675}
+      rotation: {x: 0.6672553, y: 0.23439778, z: -0.19319944, w: 0.680075}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Foot_L_Jnt
       parentName: BaseModel_Ankle_L_Jnt
       position: {x: -0.1417038, y: 0.0518686, z: -0.015705341}
-      rotation: {x: 0.9092715, y: -0.39532173, z: 0.11938051, w: 0.05190768}
+      rotation: {x: 0.9092715, y: -0.3953218, z: 0.11938048, w: 0.05190772}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Toes_L_Jnt
       parentName: BaseModel_Foot_L_Jnt
       position: {x: -0.12069898, y: 4.440892e-18, z: 1.7763567e-16}
       rotation: {x: -4.8572257e-17, y: 5.551115e-17, z: -5.551115e-17, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Shoulder_R_Jnt_IK_Grp
-      parentName: BaseModel_Joints
-      position: {x: 0.21586278, y: 1.337815, z: -0.019275308}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Shoulder_R_Jnt_IK
-      parentName: BaseModel_Shoulder_R_Jnt_IK_Grp
-      position: {x: 0.0000000025440277, y: -0.000000007501533, z: 5.8237465e-10}
-      rotation: {x: -0.051613785, y: -0.020812945, z: 0.79829794, w: 0.599686}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Elbow_1_R_Jnt_IK
-      parentName: BaseModel_Shoulder_R_Jnt_IK
-      position: {x: -0.27271426, y: 1.4210854e-16, z: 8.8817837e-17}
-      rotation: {x: 0.06638738, y: 0.12959, z: 0.014727405, w: 0.9892332}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Elbow_2_R_Jnt_IK
-      parentName: BaseModel_Elbow_1_R_Jnt_IK
-      position: {x: -0.041826315, y: -1.4210854e-16, z: 2.4868996e-16}
-      rotation: {x: -0.000008319854, y: -0.000016126427, z: -0.00002613228, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: BaseModel_Arm_Wrist_R_Jnt_IK
-      parentName: BaseModel_Elbow_2_R_Jnt_IK
-      position: {x: -0.18261573, y: 1.10134124e-13, z: -8.583356e-14}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: BaseModel_Shoulder_L_Jnt_FK
       parentName: BaseModel_Joints
@@ -940,6 +899,76 @@ ModelImporter:
       position: {x: -0.18261573, y: 0.000000008095767, z: -0.000000021742098}
       rotation: {x: 0, y: -2.7755576e-17, z: -6.661338e-16, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Shoulder_L_Jnt_IK_Grp
+      parentName: BaseModel_Joints
+      position: {x: -0.21586278, y: 1.337815, z: -0.019275308}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Shoulder_L_Jnt_IK
+      parentName: BaseModel_Shoulder_L_Jnt_IK_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.5710788, y: -0.40213323, z: 0.37785757, w: 0.60776776}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_1_L_Jnt_IK
+      parentName: BaseModel_Shoulder_L_Jnt_IK
+      position: {x: -0.27271426, y: 0, z: -1.4210854e-16}
+      rotation: {x: -0.06623065, y: 0.016925605, z: 0.14874786, w: 0.98650956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_2_L_Jnt_IK
+      parentName: BaseModel_Elbow_1_L_Jnt_IK
+      position: {x: -0.041826315, y: -1.4210854e-16, z: 5.684342e-16}
+      rotation: {x: 0.000006769549, y: -0.000023048748, z: -0.000017856193, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Arm_Wrist_L_Jnt_IK
+      parentName: BaseModel_Elbow_2_L_Jnt_IK
+      position: {x: -0.18261573, y: 2.7476686e-13, z: -3.5470292e-13}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Shoulder_R_Jnt_FK
+      parentName: BaseModel_Joints
+      position: {x: 0.21586278, y: 1.337815, z: -0.019275308}
+      rotation: {x: 0.017165432, y: -0.02594314, z: 0.83357036, w: 0.55153674}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_1_R_Jnt_FK
+      parentName: BaseModel_Shoulder_R_Jnt_FK
+      position: {x: -0.27271426, y: 0, z: 5.3290704e-17}
+      rotation: {x: 0.06623063, y: 0.14874783, z: 0.016925605, w: 0.98650956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_2_R_Jnt_FK
+      parentName: BaseModel_Elbow_1_R_Jnt_FK
+      position: {x: -0.041826315, y: 0, z: 1.7763567e-16}
+      rotation: {x: -0.000008319954, y: -0.000017856159, z: -0.000023048777, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Arm_Wrist_R_Jnt_FK
+      parentName: BaseModel_Elbow_2_R_Jnt_FK
+      position: {x: -0.18261573, y: 0.000000021727317, z: -0.000000008092752}
+      rotation: {x: 1.0408341e-17, y: -1.3910314e-16, z: -1.1126794e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Shoulder_R_Jnt_IK_Grp
+      parentName: BaseModel_Joints
+      position: {x: 0.21586278, y: 1.337815, z: -0.019275308}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Shoulder_R_Jnt_IK
+      parentName: BaseModel_Shoulder_R_Jnt_IK_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.017165486, y: -0.025943056, z: 0.83357036, w: 0.55153674}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_1_R_Jnt_IK
+      parentName: BaseModel_Shoulder_R_Jnt_IK
+      position: {x: -0.27271426, y: 1.4210854e-16, z: 8.8817837e-17}
+      rotation: {x: 0.06623063, y: 0.14874783, z: 0.016925605, w: 0.98650956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Elbow_2_R_Jnt_IK
+      parentName: BaseModel_Elbow_1_R_Jnt_IK
+      position: {x: -0.041826315, y: -1.4210854e-16, z: 2.4868996e-16}
+      rotation: {x: -0.000008319954, y: -0.00001785616, z: -0.000023048777, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BaseModel_Arm_Wrist_R_Jnt_IK
+      parentName: BaseModel_Elbow_2_R_Jnt_IK
+      position: {x: -0.18261573, y: 1.10134124e-13, z: -8.583356e-14}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -949,7 +978,7 @@ ModelImporter:
     feetSpacing: 0
     globalScale: 1
     rootMotionBoneName: 
-    hasTranslationDoF: 1
+    hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
