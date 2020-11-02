@@ -334,7 +334,7 @@ public class CombatSystem : MonoBehaviour
             //Deactivate combat buttons
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
-            player.GetComponent<MeshRenderer>().material = player.defaultMat;
+            //player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
                 if (enemiesToGo.Count > 0)
@@ -381,8 +381,7 @@ public class CombatSystem : MonoBehaviour
                 //((Player)unit).CoolDown(); //bandaid
                 playersToGo.Add((Player)unit);
                 unit.DefendState = DefendingState.NotDefending;
-                //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
+                //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
             else if (unit is Enemy && ((Enemy)unit).Revealed == true)
             {

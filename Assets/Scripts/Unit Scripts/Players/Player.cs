@@ -24,12 +24,14 @@ public abstract class Player : Humanoid, IPlayer
     }
 
     bool selected = false;
-    public Material defaultMat;
-    /// <summary> The material for the player when they are selected. </summary>
-    public Material selectedMat;
+    //public Material defaultMat;
+    ///// <summary> The material for the player when they are selected. </summary>
+    //public Material selectedMat;
 
     // EXP Particle System that Is a Child of the Player Unit
     public ParticleSystem ExpParticle;
+
+    public ParticleSystem SelectedParticle;
 
     #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
@@ -105,8 +107,8 @@ public abstract class Player : Humanoid, IPlayer
 
     public override void Start()
     {
-        defaultMat = GetComponent<MeshRenderer>().material;
-        if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
+        //defaultMat = GetComponent<MeshRenderer>().material;
+        //if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
 
         base.Start();
     }
@@ -115,7 +117,8 @@ public abstract class Player : Humanoid, IPlayer
     public void UnitSelected()
     {
         //print("Player selected");
-        GetComponent<MeshRenderer>().material = selectedMat;
+        //GetComponent<MeshRenderer>().material = selectedMat;
+        SelectedParticle.Play();
         State = HumanoidState.Selected;
 
         CombatSystem.Instance.ActivateCombatButtons();
@@ -129,7 +132,8 @@ public abstract class Player : Humanoid, IPlayer
     public void UnitDeselected()
     {
         //print("Player deselected");
-        GetComponent<MeshRenderer>().material = defaultMat;
+        //GetComponent<MeshRenderer>().material = defaultMat;
+        SelectedParticle.Stop();
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
