@@ -12,8 +12,25 @@ using UnityEngine;
 
 public abstract class Enemy : Humanoid, IEnemy
 {
+    #region Combat Functions
     public virtual void Attack()
     {
+        AnimationComplete = false;
+        //if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
+        StartCoroutine(AttackCR());
+    }
+
+    IEnumerator AttackCR()
+    {
+        ///MESSAGE FOR RYAN 10/27/2020
+        ///Hey dude if you get to this point where you need to set up the animations and trigger the behavior so that
+        ///the damage is only applied on the animation event as well as activating the animations themselves just
+        ///uncomment these two lines and you should be just fine :) Just make sure that your triggers are set
+        ///with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
+        //animatorController.SetTrigger("CastAttack");
+
+        //yield return new WaitUntil(() => AnimationComplete);
+        yield return null;
         if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
@@ -21,6 +38,7 @@ public abstract class Enemy : Humanoid, IEnemy
     {
         DefendState = DefendingState.Defending;
     }
+    #endregion
 
     //public virtual void Dodge()
     //{
@@ -31,17 +49,18 @@ public abstract class Enemy : Humanoid, IEnemy
     public List<Player> playersWhoAttacked = new List<Player>();
 
     /// <summary> The current target of the enemy. </summary>
-    private Player _currTarget;
+    protected Player _currTarget;
 
     /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
-    public bool Taunted { get; set; } = false;
+    //public bool Taunted { get; set; } = false;
 
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
 
-    public override void Move(List<Tile> path)
+    #region Move Functions
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
-        if (CheckIfInRangeOfTarget() == false)
+        if (bypassRangeCheck || CheckIfInRangeOfTarget() == false)
         {
             base.Move(path);
         }
@@ -189,7 +208,7 @@ public abstract class Enemy : Humanoid, IEnemy
             target = currentTile;
         }
         //List<Tile> neighbors = MapGrid.Instance.GetNeighbors(currentTile);
-        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(target, AttackRange, true);
+        bool[,] neighbors = MapGrid.Instance.FindTilesInRange(target, AttackRange, true, AttackShape);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Player> players = new List<Player>();
 
@@ -214,6 +233,7 @@ public abstract class Enemy : Humanoid, IEnemy
 
         return false;
     }
+    #endregion
 
     /// <summary>
     /// Adds the enemy to the combat system when they are revealed.
@@ -226,15 +246,9 @@ public abstract class Enemy : Humanoid, IEnemy
     }
 
     /// <summary>
-    /// Forces the enemy to have a set target. (I.e. when the enemy is taunted.)
+    /// Tells us if the enemy is taunted by the warrior.
     /// </summary>
-    /// <param name="player">The target player.</param>
-    public void ForceTarget(Player player)
-    {
-        _currTarget = player;
-        Taunted = true;
-    }
-
+    /// <returns>True if enemy is currently taunted, else false.</returns>
     public bool IsTaunted()
     {
         foreach (StatusEffect effect in statusEffects)
@@ -259,29 +273,19 @@ public abstract class Enemy : Humanoid, IEnemy
 
         foreach (StatusEffect effect in removeList)
         {
-            switch (effect.Type)
+            if (effect.Type == StatusEffect.StatusEffectType.Taunted)
             {
-                case StatusEffect.StatusEffectType.Taunted:
-                    Taunted = false;
-                    _currTarget = null;
-                    break;
-
-                case StatusEffect.StatusEffectType.AttackDown:
-                    ResetStats();
-                    break;
-
-                default:
-                    break;
+                //Taunted = false;
+                _currTarget = null;
+            }
+            else
+            {
+                ResetSpecificStat(effect.Type);
             }
             statusEffects.Remove(effect);
 
         }
 
         removeList.Clear();
-
-        //if (statusEffects.Count == 0)
-        //{
-        //    CombatSystem.Instance.UnsubscribeTimerUnit(this);
-        //}
     }
 }

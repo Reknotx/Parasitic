@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
@@ -23,29 +24,32 @@ public abstract class Player : Humanoid, IPlayer
     }
 
     bool selected = false;
-     public Material defaultMat;
-    /// <summary> The material for the player when they are selected. </summary>
-    public Material selectedMat;
+    //public Material defaultMat;
+    ///// <summary> The material for the player when they are selected. </summary>
+    //public Material selectedMat;
 
     // EXP Particle System that Is a Child of the Player Unit
     public ParticleSystem ExpParticle;
 
+    public ParticleSystem SelectedParticle;
+
+    #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
-    public int Ability1Range;
+    public int AbilityOneRange;
 
     [Space]
     /// <summary> Range of player's second ability. </summary>
     [Header("The range of the player's second ability.")]
-    public int Ability2Range;
+    public int AbilityTwoRange;
 
     [Space]
     [Header("The cooldown of the player's first ability.")]
-    public int Ability1Cooldown;
+    public int AbilityOneCooldown;
 
     [Space]
     [Header("The cooldown of the player's second ability.")]
-    public int Ability2Cooldown;
+    public int AbilityTwoCooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
     int _remainingAbilityOneCD;
@@ -63,19 +67,19 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> The sprites of the player's second ability.</summary>
     public Sprite[] Ability2Sprites = new Sprite[5];
 
-
-    
     /// <summary> Tiles ability1 affects </summary>
-    [HideInInspector] public bool[,] Ability1TileRange { get; set; }
+    [HideInInspector] public bool[,] AbilityOneTileRange { get; set; }
     /// <summary> Tiles ability 1 affects </summary>
-    [HideInInspector] public bool[,] Ability2TileRange { get; set; }
+    [HideInInspector] public bool[,] AbilityTwoTileRange { get; set; }
 
     /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
     public int RemainingAbilityOneCD { get { return _remainingAbilityOneCD; } }
 
     /// <summary> Public property to get the remaining cooldown of ability2. </summary>
     public int RemainingAbilityTwoCD { get { return _remainingAbilityTwoCD; } }
+    #endregion
 
+    #region Abstract functions
     /// <summary> Abstract method for player ability one.</summary>
     public abstract void AbilityOne(Action callback);
     /// <summary> Abstract method for player ability two.</summary>
@@ -87,58 +91,89 @@ public abstract class Player : Humanoid, IPlayer
     protected abstract IEnumerator AbilityOneCR(Action callback);
     protected abstract IEnumerator AbilityTwoCR(Action callback);
 
+    protected abstract void AttackUpgradeOne();
+    protected abstract void AttackUpgradeTwo();
+    protected abstract void AbilityOneUpgradeOne();
+    protected abstract void AbilityOneUpgradeTwo();
+    protected abstract void AbilityTwoUpgradeOne();
+    protected abstract void AbilityTwoUpgradeTwo();
+
+    public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
+    #endregion
+
     [Space]
     public AudioClip abilityOneSoundEffect;
     public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
-        defaultMat = GetComponent<MeshRenderer>().material;
-        if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
-
+        //defaultMat = GetComponent<MeshRenderer>().material;
+        //if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
+        if (SelectedParticle != null) SelectedParticle.Stop();
         base.Start();
     }
 
+    #region Selection/Deselection
     public void UnitSelected()
     {
-        print("Player selected");
-        GetComponent<MeshRenderer>().material = selectedMat;
+        //print("Player selected");
+        //GetComponent<MeshRenderer>().material = selectedMat;
+        SelectedParticle.Play();
         State = HumanoidState.Selected;
 
         CombatSystem.Instance.ActivateCombatButtons();
         CombatSystem.Instance.SetPlayer(this);
         selected = true;
+
+        if (!HasMoved)
+            CharacterSelector.Instance.BoarderLine.SetActive(true);
     }
 
     public void UnitDeselected()
     {
         print("Player deselected");
-        GetComponent<MeshRenderer>().material = defaultMat;
+        //GetComponent<MeshRenderer>().material = defaultMat;
+        SelectedParticle.Stop();
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
         selected = false;
+        CharacterSelector.Instance.BoarderLine.SetActive(false);
     }
+    #endregion
+
+    #region Animation Executers
+    ///Note: All animation triggers need to follow this naming convention for 
+    ///simplistic implementation and programming reasons.
+
+    /// <summary> Executes the normal attack animation of this player. </summary>
+    protected void AttackAnim()
+    {
+        animatorController.SetTrigger("CastAttack");
+        if (attackParticle != null)
+            attackParticle.Play();
+    }
+
+    /// <summary> Triggers the ability one animation for this player. </summary>
+    protected void AbilityOneAnim()
+    {
+        animatorController.SetTrigger("CastAbilityOne");
+    }
+
+    /// <summary> Triggers the ability two animation for this player. </summary>
+    protected void AbilityTwoAnim()
+    {
+        animatorController.SetTrigger("CastAbilityTwo");
+    }
+    #endregion
 
     /// <summary>
     /// Raises the defense stat of the player temporarily.
     /// </summary>
     public void Defend()
     {
-        print("Defending this round.");
+        //print("Defending this round.");
         DefendState = DefendingState.Defending;
-    }
-
-    /// <summary>
-    /// Allows the unit to pass there turn.
-    /// </summary>
-    public void Pass()
-    {
-        HasAttacked = true;
-        HasMoved = true;
-
-        CharacterSelector.Instance.SelectedPlayerUnit = null;
-        State = HumanoidState.Done;
     }
 
     /// <summary>
@@ -146,7 +181,6 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     public override void AdvanceTimer()
     {
-
         if (_remainingAbilityOneCD > 0)
         {
             _remainingAbilityOneCD--;
@@ -161,22 +195,21 @@ public abstract class Player : Humanoid, IPlayer
 
         base.AdvanceTimer();
     }
-    /// <summary>
-    /// Bandaid Fix
-    /// </summary>
-    public void CoolDown()
-    {
-        if (_remainingAbilityOneCD > 0) _remainingAbilityOneCD--;
 
-        if (_remainingAbilityTwoCD > 0) _remainingAbilityTwoCD--;
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
+    {
+        if (animatorController != null)
+            animatorController.SetBool("IsWalking", true); 
+        base.Move(path, bypassRangeCheck);
     }
 
+    #region Ability Functions
     /// <summary>
     /// Starts the cooldown of this unit's first ability.
     /// </summary>
     protected void StartAbilityOneCD()
     {
-        _remainingAbilityOneCD = Ability1Cooldown;
+        _remainingAbilityOneCD = AbilityOneCooldown;
         CombatSystem.Instance.SetCoolDownText(this);
     }
 
@@ -185,7 +218,7 @@ public abstract class Player : Humanoid, IPlayer
     /// </summary>
     protected void StartAbilityTwoCD()
     {
-        _remainingAbilityTwoCD = Ability2Cooldown;
+        _remainingAbilityTwoCD = AbilityTwoCooldown;
         CombatSystem.Instance.SetCoolDownText(this);
     }
 
@@ -204,23 +237,27 @@ public abstract class Player : Humanoid, IPlayer
 
         audioSource.Play();
     }
+    #endregion
 
     public void FindActionRanges()
     {
         AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true, AttackShape);
-        Ability1TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability1Range, true);
-        Ability2TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Ability2Range, true);
+        AbilityOneTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
+        AbilityTwoTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AbilityTwoRange, true);
         //print("Ranges found");
     }
 
+    /// <summary>
+    /// Performs a simple heal on the player, healing them for 20% of their
+    /// max health.
+    /// </summary>
     public void Heal()
     {
-        Health += Mathf.FloorToInt(MaxHealth * 0.2f);
+        ///States if the archers mend ability is upgraded.
+        bool archerAbility1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.archer);
 
-        if (Health > MaxHealth) Health = MaxHealth;
+        float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
 
-        healthText.text = Health + "/" + _maxHealth;
-
-        healthBar.value = (float)Health / (float)_maxHealth;
+        Health += Mathf.FloorToInt(MaxHealth * healPercent);
     }
 }

@@ -29,17 +29,57 @@ public class EnemyPath : MonoBehaviour
     }
 
 
-    public void DrawPath(List<Tile> path, Enemy enemyUnit)
+    public void DrawPath(List<Tile> path, Vector3 startPoint, Vector3 p1 = default(Vector3))
     {
+
         List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(enemyUnit.transform.position.x, pathHeight, enemyUnit.transform.position.z));
-        foreach (Tile tile in path)
+        points.Add(startPoint + Vector3.up * pathHeight);
+        if (p1 != Vector3.zero)
         {
-            points.Add(new Vector3(tile.transform.position.x, pathHeight, tile.transform.position.z));
+            points.Add(p1 + Vector3.up * pathHeight);
+        }
+        for (int i = 0; i < path.Count; i++)
+        {
+            if (path[i].slope)
+            {
+                bool fromSlope = false;
+                if (i > 0)
+                {
+                    fromSlope = path[i - 1].slope;
+                }
+                //points is used instead of path here because there is always a previos point
+                if (i!=0 && !fromSlope)
+                points.Add(new Vector3((points[points.Count - 1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                    points[points.Count - 1].y,
+                    (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                //print((path[i - 1].transform.position.x - path[i].transform.position.x) / 2f + path[i].transform.position.x);
+                points.Add(new Vector3(path[i].transform.position.x, path[i].Elevation + MapGrid.Instance.tileHeight / 2 + pathHeight, path[i].transform.position.z));
+                if (path[i].slope && i != path.Count - 1)
+                {
+                    if (!path[i + 1].slope)
+                    points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                        path[i + 1].Elevation + pathHeight,
+                        (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                }
+            }
+            else
+            {
+                points.Add(path[i].transform.position + Vector3.up * (pathHeight + path[i].Elevation));
+            }
+
+
         }
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
         endPoint.transform.position = points[points.Count - 1];
+        if (path[path.Count - 1].slope)
+        {
+            endPoint.transform.rotation = Quaternion.Euler(path[path.Count - 1].tilt.eulerAngles.x, endPoint.transform.rotation.eulerAngles.y, path[path.Count - 1].tilt.eulerAngles.z);
+        }
+        else
+        {
+            endPoint.transform.rotation = Quaternion.Euler(0, endPoint.transform.rotation.eulerAngles.y, 0);
+        }
         enemyPathLine.SetActive(true);
         endPoint.SetActive(true);
     }

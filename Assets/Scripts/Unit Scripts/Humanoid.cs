@@ -47,6 +47,15 @@ public enum ActionShape
 #pragma warning disable CS0649
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
+    #region The base starting stats of this unit.
+    /// <summary> The base stats of this unit. Used to reset individual stats when certain things happen. </summary>
+    protected int _baseMovement;
+    protected int _baseAttack;
+    protected int _baseDefense;
+    protected int _baseRange;
+    #endregion
+
+    #region Unit Combat Stats
     /// <summary> The range of the normal attack. </summary>
     public int AttackRange { get; set; } 
 
@@ -87,6 +96,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     
     /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
+    #endregion
 
     /// <summary> The shape of the unitys attack </summary>
     public ActionShape AttackShape = ActionShape.Diamond;
@@ -104,6 +114,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public float tileCrossTime = 0.3f;
     /// <summary> Is unity currently moving along its path </summary>
     bool moving = false;
+
+    /// <summary> Indicates if the unit was damaged this turn. </summary>
+    /// The turn means the phase on which the unit takes damage.
+    /// Used for certain abilities.
+    [HideInInspector] public bool damagedThisTurn = false;
 
     /// <summary> The value representing the remaining time on the buff/debuff
     /// currently active on this unit. </summary>
@@ -126,6 +141,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     protected List<StatusEffect> statusEffects = new List<StatusEffect>();
 
+    #region Health UI
     [Space]
     [Header("The text component representing this unit's health.")]
     /// <summary> The text component representing this unit's Health. </summary>
@@ -140,10 +156,18 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     [Header("The graphical slider representing our health bar.")]
     /// <summary> The graphical slider representing our health bar. </summary>
     public Slider healthBar;
+    #endregion
 
     /// <summary> time it takes to switch directions </summary>
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+
+    //[Header("This refers to the transform of the parent object for this unit.")]
+    /// <summary> The transform of the parent of this unit. </summary>
+    /// This is needed because the animations will put the character up in the Y due to how they
+    /// were set up and how we have originally set up the characters themselves
+    /// 
+    [HideInInspector] public Transform parentTransform;
 
     /// <summary> The state of the humanoid in combat. </summary>
     public HumanoidState State { get; set; }
@@ -156,28 +180,60 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public AudioClip damagedSoundEffect;
 
     public AudioSource audioSource;
-    
+
+    public Animator animatorController;
+
+    public bool AnimationComplete { get; set; } = false;
+
+    public ParticleSystem attackParticle;
+    /// <summary>
+    /// Sets the animation complete parameter, used through animation events.
+    /// </summary>
+    /// <param name="value">States if the animation is complete or not.</param>
+    public void SetAnimationComplete(bool value)
+    {
+        AnimationComplete = value;
+        if (attackParticle != null)
+            attackParticle.Stop();
+    }
+
     public virtual void Start()
     {
+        if (transform.parent != null)
+        {
+            parentTransform = transform.parent;
+        }
+        else
+        {
+            parentTransform = this.transform;
+        }
+
+        if (attackParticle != null)
+            attackParticle.Stop();
+
         _maxHealth = _baseStats.Health;
+
+        _baseAttack = _baseStats.BaseAttack;
         AttackStat = _baseStats.BaseAttack;
+
+        _baseDefense = _baseStats.BaseDefense;
         DefenseStat = _baseStats.BaseDefense;
+
+        _baseMovement = _baseStats.Movement;
         MovementStat = _baseStats.Movement;
+
         DexterityStat = _baseStats.Dexterity;
+
+        _baseRange = _baseStats.AttackRange;
         AttackRange = _baseStats.AttackRange;
+
         XpDrop = _baseStats.XPDropOnDeath;
+
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
 
-        
-        /*if(healthText)
-        healthText.text = Health + "/" + _maxHealth;
-
-        if(healthBar)
-        healthBar.value = 1f;*/
-
-        currentTile = MapGrid.Instance.TileFromPosition(transform.position);
+        currentTile = MapGrid.Instance.TileFromPosition(parentTransform.position);
         currentTile.occupied = true;
 
         State = HumanoidState.Idle;
@@ -187,13 +243,16 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         HasMoved = false;
         HasAttacked = false;
+
+        
     }
 
+    #region Movement
     /// <summary>
     /// Begins the movement coroutine for moving on map.
     /// </summary>
     /// <param name="path">The path the unit will take.</param>
-    public virtual void Move(List<Tile> path)
+    public virtual void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
         if (path != null)
         {
@@ -203,7 +262,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             StartCoroutine(MoveCR(path));
         }
     }
-
 
     /// <summary>
     /// Movement coroutine that moves the unit along the grid.
@@ -215,24 +273,41 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
+        Vector3 p2;
         Vector3 p01;
+        Vector3 p12;
         float timeStart;
         Vector3 direction;
+        float unitHeight = parentTransform.position.y - (currentTile.slope ? MapGrid.Instance.tileHeight / 2f : 0) - currentTile.Elevation;
         foreach (Tile tile in path)
         {
             timeStart = Time.time;
             moving = true;
-
             //get the position of the tile the unit is starting on
-            p0 = currentTile.transform.position;
+            p0 = currentTile.ElevatedPos();
 
 
             //get the positon of the tile to move to
-            p1 = tile.transform.position;
+            p2 = tile.ElevatedPos();
 
             // set the y position to be that of the moving unit
-            p0 = new Vector3(p0.x, transform.position.y, p0.z);
-            p1 = new Vector3(p1.x, transform.position.y, p1.z);
+            p0 = new Vector3(p0.x, unitHeight + p0.y + (currentTile.slope ? MapGrid.Instance.tileHeight/2f : 0), p0.z);
+
+            p2 = new Vector3(p2.x, unitHeight + p2.y + (tile.slope ? MapGrid.Instance.tileHeight / 2f : 0), p2.z);
+            
+            if(currentTile.slope && tile.slope && currentTile.level == tile.level)
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, tile.Elevation + MapGrid.Instance.tileHeight / 2f + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            else if (currentTile.level < tile.level)
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, tile.Elevation + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            else
+            {
+                p1 = new Vector3((p2.x - p0.x) / 2 + p0.x, currentTile.Elevation + unitHeight, (p2.z - p0.z) / 2 + p0.z);
+            }
+            
 
             //mark the starting tile as no longer occupied
             currentTile.occupied = false;
@@ -245,7 +320,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             //interpolate between the two points
             while (moving)
             {
-                float u = (Time.time - timeStart) / tileCrossTime;
+                float u = (Time.time - timeStart) / (tileCrossTime/2);
                 if (u >= 1)
                 {
                     u = 1;
@@ -254,10 +329,31 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 direction = (p1 - p0).normalized;
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
-                transform.position = p01;
+                parentTransform.position = p01;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, (Enemy)this);
+                    EnemyPath.Instance.DrawPath(untraveledPath, parentTransform.position - Vector3.up * unitHeight, p1 - Vector3.up * unitHeight);
+                }
+
+                yield return new WaitForFixedUpdate();
+            }
+            timeStart = Time.time;
+            moving = true;
+            while (moving)
+            {
+                float u = (Time.time - timeStart) / (tileCrossTime/2);
+                if (u >= 1)
+                {
+                    u = 1;
+                    moving = false;
+                }
+                direction = (p2 - p1).normalized;
+                LookInDirection(direction);
+                p12 = (1 - u) * p1 + u * p2;
+                parentTransform.position = p12;
+                if (this is Enemy)
+                {
+                    EnemyPath.Instance.DrawPath(untraveledPath, parentTransform.position - Vector3.up * unitHeight);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -268,6 +364,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         State = HumanoidState.Idle;
         HasMoved = true;
 
+        if (animatorController != null)
+        {
+            animatorController.SetBool("IsWalking", false);
+        }
+
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
@@ -275,7 +376,91 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             EnemyPath.Instance.HidePath();
         }
+        else if (this is Mage)
+        {
+            ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
+        }
+
+        if (this is Player && ((Player)this).HasAttacked == false)
+        {
+            ((Player)this).FindActionRanges();
+        }
     }
+    #endregion
+    
+    #region Damage
+    /**
+     * <summary>Deals damage to unit.</summary>
+     * 
+     * <param name="damage">Damage unit will take.</param>
+     * 
+     * <returns>True if unit is dead, false otherwise.</returns>
+     */
+    public bool TakeDamage(int damage, bool trueDamage = false)
+    {
+        if (this == null) return false;
+
+        int damageDealt = damage;
+        bool blocked = false;
+
+        //If defending apply defense stat reduction.
+        if (trueDamage == false)
+        {
+            if (DefendState == DefendingState.Defending)
+            {
+                //print("Target unit was defending this round.");
+                damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
+                if (damageDealt <= 0)
+                {
+                    damageDealt = 0;
+                    blocked = true;
+                }
+            }
+            else //See if we can dodge the attack.
+            {
+                float chance = Random.Range(0.0f, 1.0f);
+
+                if (chance <= DexterityStat + currentTile.TileBoost(TileEffect.Dodge))
+                {
+                    //Then dodge the attack.
+                    damageDealt = 0;
+                }
+            }
+        }
+        
+        Health -= damageDealt;
+        
+        StartCoroutine(ShowDamage(damageDealt, blocked));
+
+        return Health <= 0 ? true : false;
+    }
+
+    /// <summary>
+    /// Displays "damage" for a short time
+    /// </summary>
+    /// <param name="damage"> Amount of Damage to Display</param>
+    /// <returns></returns>
+    IEnumerator ShowDamage(int damage, bool blocked = false)
+    {
+        if (damage == 0)
+        {
+            if (blocked)
+            {
+                damageText.text = "Blocked";
+            }
+            else
+            {
+                damageText.text = "Miss";
+            }
+        }
+        else
+        {
+            damageText.text = damage.ToString();
+        }
+        yield return new WaitForSecondsRealtime(1.5f);
+        damageText.text = "";
+    }
+    #endregion
 
     void HealingTileCheck()
     {
@@ -295,49 +480,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected void LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-    }
-
-    /**
-     * <summary>Deals damage to unit.</summary>
-     * 
-     * <param name="damage">Damage unit will take.</param>
-     * 
-     * <returns>True if unit is dead, false otherwise.</returns>
-     */
-    public bool TakeDamage(int damage, bool trueDamage = false)
-    {
-        if (this == null) return false;
-
-        int damageDealt = damage;
-
-        //If defending apply defense stat reduction.
-        if (trueDamage == false)
-        {
-            if (DefendState == DefendingState.Defending)
-            {
-                print("Target unit was defending this round.");
-                damageDealt -= DefenseStat + (int)currentTile.TileBoost(TileEffect.Defense);
-                if (damageDealt <= 0) damageDealt = 0;
-            }
-            else //See if we can dodge the attack.
-            {
-                float chance = Random.Range(0.0f, 1.0f);
-
-                if (chance <= DexterityStat + currentTile.TileBoost(TileEffect.Dodge))
-                {
-                    //Then dodge the attack.
-                    damageDealt = 0;
-                }
-            }
-        }
-        
-        Health -= damageDealt;
-        
-        StartCoroutine(ShowDamage(damageDealt));
-
-        return Health <= 0 ? true : false;
+        float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
@@ -360,25 +504,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     // protected void AttackComplete() { HasAttacked = true; }
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
-
-    /// <summary>
-    /// Displays "damage" for a short time
-    /// </summary>
-    /// <param name="damage"> Amount of Damage to Display</param>
-    /// <returns></returns>
-    IEnumerator ShowDamage(int damage)
-    {
-        if (damage == 0)
-        {
-            damageText.text = "Miss";
-        }
-        else
-        {
-            damageText.text = damage.ToString();
-        }
-        yield return new WaitForSecondsRealtime(1.5f);
-        damageText.text = "";
-    }
 
     /// <summary> Plays the attacking sound effect for this unit. </summary>
     protected void PlayAttackSoundEffect()
@@ -413,78 +538,49 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         foreach (StatusEffect effect in removeList)
         {
+            if (effect.Type != StatusEffect.StatusEffectType.Taunted)
+            {
+                ResetSpecificStat(effect.Type);
+            }
+
             statusEffects.Remove(effect);
         }
 
         removeList.Clear();
     }
 
-    /// <summary>
-    /// Creates a taunted status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateTauntedStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
 
-    /// <summary>
-    /// Creates a attack up status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateAttackUpStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackUp, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
-
-    /// <summary>
-    /// Creates a attack down status effect on this unit.
-    /// </summary>
-    /// <param name="source">The source that caused the status effect.</param>
-    /// <param name="target">The target of the status effect.</param>
-    /// <param name="duration">How long teh status effect lasts. Has a default value of three rounds.</param>
-    public void CreateAttackDownStatusEffect(Humanoid source, Humanoid target, int duration = 3)
-    {
-        AttackStat = AttackStat / 2;
-
-        StatusEffect temp = new StatusEffect(StatusEffect.StatusEffectType.AttackDown, 
-                                            duration, 
-                                            source, 
-                                            target);
-        AddEffectToList(temp);
-    }
-
+    #region Status Effects
     private void AddEffectToList(StatusEffect effect)
     {
         statusEffects.Add(effect);
         CombatSystem.Instance.SubscribeTimerUnit(this);
     }
 
-    public void ResetStats()
+    public void ResetSpecificStat(StatusEffect.StatusEffectType stat)
     {
-        Health = _baseStats.Health;
-        AttackStat = _baseStats.BaseAttack;
-        DefenseStat = _baseStats.BaseDefense;
-        MovementStat = _baseStats.Movement;
-        DexterityStat = _baseStats.Dexterity;
-        _maxHealth = Health;
+        if (stat == StatusEffect.StatusEffectType.AttackDown || stat == StatusEffect.StatusEffectType.AttackUp)
+        {
+            AttackStat = _baseAttack;
+        }
+        else if (stat == StatusEffect.StatusEffectType.DefenseDown || stat == StatusEffect.StatusEffectType.DefenseUp)
+        {
+            DefenseStat = _baseDefense;
+        }
+        else if (stat == StatusEffect.StatusEffectType.MoveDown || stat == StatusEffect.StatusEffectType.MoveUp)
+        {
+            MovementStat = _baseMovement;
+        }
     }
 
     public int GetNumOfStatusEffects()
     {
         return statusEffects.Count;
+    }
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        statusEffects.Add(effect);
     }
 
     /// <summary>
@@ -503,6 +599,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Placeholder to remind me to do this tomorrow.
+    /// </summary>
+    public void ResetTheStatOnStatusEffectEnd()
+    {
+
     }
 
     /// <summary>
@@ -530,7 +634,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             Taunted,
             AttackDown,
-            AttackUp
+            AttackUp,
+            MoveUp,
+            MoveDown,
+            DefenseUp,
+            DefenseDown
         }
 
         int _duration;
@@ -562,4 +670,5 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             return false;
         }
     }
+    #endregion
 }
