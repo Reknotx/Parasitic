@@ -1098,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.10001831, y: 10.999994}
+  m_AnchoredPosition: {x: -0.10001831, y: -1.8}
   m_SizeDelta: {x: 75.08, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2660129872403541805
@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 2660129872426991137}
   m_Layer: 0
   m_Name: Mage
-  m_TagString: Untagged
+  m_TagString: UnitHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1456,7 +1456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3408700460789640096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3920,6 +3920,7 @@ GameObject:
   - component: {fileID: 3785941141175704177}
   - component: {fileID: 5698215418732316115}
   - component: {fileID: 5698215418732316114}
+  - component: {fileID: 1000127005}
   m_Layer: 8
   m_Name: Mage Script
   m_TagString: Player
@@ -4022,9 +4023,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 09568719dd5fe5d43a8257479edb2255, type: 3}
   - {fileID: 21300000, guid: db4700ae383b3cd41a6c265458b300c6, type: 3}
   - {fileID: 21300000, guid: a3d7bd49914433548a3defd745e859d2, type: 3}
+  UpgradeToggleSprites:
+  - {fileID: 21300000, guid: 2cbceb7c21dd7fc4b8c13720d4afd464, type: 3}
+  - {fileID: 21300000, guid: 78933145cedd3a24799a8b8cad38f9e9, type: 3}
+  - {fileID: 21300000, guid: e7e4050d835b241449afa51c534a7549, type: 3}
   abilityOneSoundEffect: {fileID: 0}
   abilityTwoSoundEffect: {fileID: 0}
   staffAndBookController: {fileID: 2021098162232171640}
+--- !u!65 &1000127005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743230892929877991}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.15375192, z: 1}
+  m_Center: {x: 0, y: -0.50662744, z: 0}
 --- !u!1 &7808510580502455008
 GameObject:
   m_ObjectHideFlags: 0
@@ -4624,7 +4642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9144212385876671361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4909,15 +4927,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a330c857797b96e459cc634d55ace8e7, type: 3}
---- !u!198 &2187747607454048890 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2187747607913712173, guid: a330c857797b96e459cc634d55ace8e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 728377431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2187747607454048891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2187747607913712172, guid: a330c857797b96e459cc634d55ace8e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 728377431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2187747607454048890 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2187747607913712173, guid: a330c857797b96e459cc634d55ace8e7,
     type: 3}
   m_PrefabInstance: {fileID: 728377431}
   m_PrefabAsset: {fileID: 0}

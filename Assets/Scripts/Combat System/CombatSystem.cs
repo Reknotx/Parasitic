@@ -58,13 +58,25 @@ public class CombatSystem : MonoBehaviour
     public Text roundCounterText;
 
 
-    //public GameObject turnSwitch;
-
-    /// <summary> The text stating which side is active. </summary>
-    public Text activeSideText;
-
     public Text abilityOneCDText;
     public Text abilityTwoCDText;
+
+    /// <summary> Images Showing which side is active. </summary>
+    public Image activeSideTextImage;
+    public Image activeSideImage;
+
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite;
+
+    [Header("Player Health Bars and Text References")]
+    public Slider knightHealthSlider;
+    public Slider mageHealthSlider;
+    public Slider archerHealthSlider;
+    public Text knightHealthText;
+    public Text mageHealthText;
+    public Text archerHealthText;
+    public Image knightIcon;
+    public Image mageIcon;
+    public Image archerIcon;
 
     [Header("The canvas that is displayed when you have met the win/lose condition.")]
     /// <summary> The list of buttons used for combat when a player is selected. </summary>
@@ -326,6 +338,18 @@ public class CombatSystem : MonoBehaviour
 
         if (unit is Player)
         {
+            if (unit is Warrior)
+            {
+                knightIcon.color = Color.gray;
+            }
+            else if(unit is Mage)
+            {
+                mageIcon.color = Color.gray;
+            }
+            else if(unit is Archer)
+            {
+                archerIcon.color = Color.gray;
+            }
             playersToGo.Remove((Player)unit);
             //Make sure action range is no longer displayed
             ActionRange.Instance.ActionDeselected();
@@ -342,7 +366,7 @@ public class CombatSystem : MonoBehaviour
                 {
                     StartCoroutine(EnemyTurn());
                     SetActiveUnits(ActiveUnits.Enemies);
-                    activeSideText.text = "Enemy Turn";
+                    SetTurnUI(activeUnits);
                 }
                 else
                 {
@@ -380,6 +404,18 @@ public class CombatSystem : MonoBehaviour
             if (unit is Player)
             {
                 //((Player)unit).CoolDown(); //bandaid
+                if (unit is Warrior)
+                {
+                    knightIcon.color = Color.white;
+                }
+                else if (unit is Mage)
+                {
+                    mageIcon.color = Color.white;
+                }
+                else if (unit is Archer)
+                {
+                    archerIcon.color = Color.white;
+                }
                 playersToGo.Add((Player)unit);
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
@@ -405,10 +441,10 @@ public class CombatSystem : MonoBehaviour
 
         SetActiveUnits(ActiveUnits.Players);
 
-        activeSideText.text = "Player's turn";
+        SetTurnUI(activeUnits);
 
         _roundCounter++;
-        roundCounterText.text = "Round: " + _roundCounter;
+        roundCounterText.text = _roundCounter.ToString();
     }
 
     /// <summary>
@@ -428,6 +464,18 @@ public class CombatSystem : MonoBehaviour
 
         if (unit is Player)
         {
+            if (unit is Warrior)
+            {
+                knightIcon.color = Color.red;
+            }
+            else if (unit is Mage)
+            {
+                mageIcon.color = Color.red;
+            }
+            else if (unit is Archer)
+            {
+                archerIcon.color = Color.red;
+            }
             playersToGo.Remove((Player)unit);
             foreach (Humanoid temp in unitsAlive)
             {
@@ -458,7 +506,7 @@ public class CombatSystem : MonoBehaviour
         }
 
 
-        Destroy(unit.gameObject);
+        Destroy(unit.parentTransform.gameObject);
 
     }
     #endregion
@@ -480,7 +528,7 @@ public class CombatSystem : MonoBehaviour
                 count++;
             }
         }
-        enemiesAliveText.text = "Enemies Left: " + count;
+        enemiesAliveText.text = count.ToString();
     }
 
     /// <summary>
@@ -657,6 +705,23 @@ public class CombatSystem : MonoBehaviour
         GameObject.Find("Ability Two").GetComponent<Button>().interactable = activeState;
     }
     #endregion
+
+    private void SetTurnUI(ActiveUnits activeSide)
+    {
+        switch (activeSide)
+        {
+            case ActiveUnits.Players:
+                activeSideImage.sprite = playerTurnSprite;
+                activeSideTextImage.sprite = playerTurnTextSprite;
+                break;
+            case ActiveUnits.Enemies:
+                activeSideImage.sprite = enemyTurnSprite;
+                activeSideTextImage.sprite = enemyTurnTextSprite;
+                break;
+            default:
+                break;
+        }
+    }
     /// <summary>
     /// Checks if there are any units left to go this round.
     /// </summary>
@@ -737,18 +802,22 @@ public class CombatSystem : MonoBehaviour
     }
     #endregion
 
-
-    void Start()
+    private void Awake()
     {
-        state = BattleState.Start;
         if (Instance != null && Instance != this)
         {
             Destroy(Instance.gameObject);
         }
         Instance = this;
+    }
+
+    void Start()
+    {
+        state = BattleState.Start;
+
         SetupBattle();
         SetEnemyCountText();
-        roundCounterText.text = "Round: " + _roundCounter;
+        roundCounterText.text = _roundCounter.ToString();
     }
 
     private void Update()

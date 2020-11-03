@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 #pragma warning disable CS0414
@@ -66,6 +67,9 @@ public abstract class Player : Humanoid, IPlayer
     [Space(5)]
     /// <summary> The sprites of the player's second ability.</summary>
     public Sprite[] Ability2Sprites = new Sprite[5];
+
+    [Space(5)]
+    public Sprite[] UpgradeToggleSprites = new Sprite[3];
 
     /// <summary> Tiles ability1 affects </summary>
     [HideInInspector] public bool[,] AbilityOneTileRange { get; set; }
@@ -127,6 +131,16 @@ public abstract class Player : Humanoid, IPlayer
 
         if (!HasMoved)
             CharacterSelector.Instance.BoarderLine.SetActive(true);
+
+        Upgrades.Instance.upgradesMenuToggle.SetActive(true);
+        Upgrades.Instance.ShowUpgradeNotification();
+
+        SpriteState st;
+        Upgrades.Instance.upgradesMenuToggle.GetComponent<Image>().sprite = UpgradeToggleSprites[0];
+        st.highlightedSprite = UpgradeToggleSprites[1];
+        st.pressedSprite = UpgradeToggleSprites[2];
+
+        Upgrades.Instance.upgradesMenuToggle.GetComponent<Button>().spriteState = st;
     }
 
     public void UnitDeselected()
@@ -139,6 +153,8 @@ public abstract class Player : Humanoid, IPlayer
         CombatSystem.Instance.DeactivateCombatButtons();
         selected = false;
         CharacterSelector.Instance.BoarderLine.SetActive(false);
+        Upgrades.Instance.upgradesMenuToggle.SetActive(false);
+        Upgrades.Instance.ClearUpgradeNotification();
     }
     #endregion
 

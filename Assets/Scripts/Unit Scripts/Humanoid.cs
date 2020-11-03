@@ -199,7 +199,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public virtual void Start()
     {
-        if (transform.parent != null)
+        if (transform.parent != null && transform.parent.CompareTag("UnitHolder"))
         {
             parentTransform = transform.parent;
         }

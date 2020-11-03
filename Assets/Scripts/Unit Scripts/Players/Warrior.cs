@@ -14,6 +14,14 @@ using UnityEngine;
 
 public class Warrior : Player
 {
+
+    public override void Start()
+    {
+        healthBar = CombatSystem.Instance.knightHealthSlider;
+        healthText = CombatSystem.Instance.knightHealthText;
+        base.Start();
+    }
+
     #region Normal Attack
     /// <summary>
     /// The warrior's attack.
