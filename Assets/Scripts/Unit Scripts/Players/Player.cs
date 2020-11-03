@@ -153,6 +153,7 @@ public abstract class Player : Humanoid, IPlayer
         print("Player deselected");
         //GetComponent<MeshRenderer>().material = defaultMat;
         SelectedParticle.Stop();
+        SelectedParticle.Clear();
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
