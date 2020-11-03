@@ -31,7 +31,12 @@ public abstract class Enemy : Humanoid, IEnemy
 
         //yield return new WaitUntil(() => AnimationComplete);
         yield return null;
-        if (_currTarget.TakeDamage(base.AttackStat + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
+        int attack = AttackStat;
+
+        if (CheckForEffectOfType(StatusEffect.StatusEffectType.AttackDown))
+            attack /= 2;
+
+        if (_currTarget.TakeDamage(attack + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
     public virtual void Defend()

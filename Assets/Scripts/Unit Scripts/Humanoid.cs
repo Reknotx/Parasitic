@@ -185,9 +185,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public bool AnimationComplete { get; set; } = false;
 
+    #region Particle Systems
     public ParticleSystem attackParticle;
 
+    public ParticleSystem defendParticle;
+
     protected ParticleSystem activeParticle;
+    #endregion
     /// <summary>
     /// Sets the animation complete parameter, used through animation events.
     /// </summary>
@@ -202,7 +206,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             activeParticle.Stop();
         }
-
         activeParticle = null;
     }
 
