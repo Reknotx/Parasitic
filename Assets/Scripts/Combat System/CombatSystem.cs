@@ -506,7 +506,7 @@ public class CombatSystem : MonoBehaviour
         }
 
 
-        Destroy(unit.parentTransform);
+        Destroy(unit.parentTransform.gameObject);
 
     }
     #endregion
