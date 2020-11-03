@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4324536659986282284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 4324536661531618469}
   - component: {fileID: 4324536661531618468}
   - component: {fileID: 4324536661531618471}
+  - component: {fileID: 3593533055453533484}
   - component: {fileID: 4128835137737702694}
   m_Layer: 10
   m_Name: Spiker B
@@ -497,8 +498,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3947381, z: 1}
-  m_Center: {x: 0, y: -0.60502553, z: 0}
+  m_Size: {x: 1, y: 0.44730812, z: 1}
+  m_Center: {x: 0, y: -1.0787405, z: 0}
+--- !u!136 &3593533055453533484
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324536661531618521}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 2.3980079
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.0958902, z: 0}
 --- !u!114 &4128835137737702694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +540,8 @@ MonoBehaviour:
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
   animatorController: {fileID: 0}
+  attackParticle: {fileID: 0}
+  healthCanvas: {fileID: 4324536659986282287}
   playersWhoAttacked: []
 --- !u!1 &4324536661739621434
 GameObject:
@@ -637,7 +654,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

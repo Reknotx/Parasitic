@@ -45,7 +45,7 @@ public abstract class Enemy : Humanoid, IEnemy
     //    //Activate the dodge animation
 
     //}
-
+    public GameObject healthCanvas;
     public List<Player> playersWhoAttacked = new List<Player>();
 
     /// <summary> The current target of the enemy. </summary>
@@ -287,5 +287,15 @@ public abstract class Enemy : Humanoid, IEnemy
         }
 
         removeList.Clear();
+    }
+
+    private void OnMouseEnter()
+    {
+        healthCanvas.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        healthCanvas.SetActive(false);
     }
 }

@@ -172,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3959948271433025057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 7852278052383941874}
   - component: {fileID: 7852278052383941875}
   - component: {fileID: 689798859487908089}
+  - component: {fileID: 5605830485353054328}
   - component: {fileID: 7852278052383941876}
   m_Layer: 10
   m_Name: Shambler_C
@@ -461,8 +462,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3947381, z: 1}
-  m_Center: {x: 0, y: -0.60502553, z: 0}
+  m_Size: {x: 1, y: 0.4358851, z: 1}
+  m_Center: {x: 0, y: -1.084452, z: 0}
+--- !u!136 &5605830485353054328
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852278052383941873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 2.3980079
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.0958902, z: 0}
 --- !u!114 &7852278052383941876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +505,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animatorController: {fileID: 0}
   attackParticle: {fileID: 0}
+  healthCanvas: {fileID: 3959948271433025053}
   playersWhoAttacked: []
 --- !u!1 &7852278054047889473
 GameObject:
@@ -602,7 +618,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

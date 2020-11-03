@@ -113,7 +113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7786142372032996603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -622,14 +622,22 @@ MonoBehaviour:
   AttackShape: 2
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  damagedThisTurn: 0
   RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: 07cd525124ef7dd4ca63b856afa21bc1, type: 2}
   healthText: {fileID: 7786142372738889361}
   damageText: {fileID: 7786142373752528878}
   healthBar: {fileID: 7786142372203616998}
+  parentTransform: {fileID: 0}
   attackSoundEffect: {fileID: 0}
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
+  animatorController: {fileID: 0}
+  attackParticle: {fileID: 0}
+  healthCanvas: {fileID: 7786142372032996600}
+  playersWhoAttacked: []
+  spawnCooldown: 0
+  attackRoundSpawned: 0
 --- !u!1 &7786142373752528877
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +749,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

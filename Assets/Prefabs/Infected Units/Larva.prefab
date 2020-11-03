@@ -122,6 +122,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animatorController: {fileID: 0}
   attackParticle: {fileID: 0}
+  healthCanvas: {fileID: 4540526625372951249}
   playersWhoAttacked: []
 --- !u!65 &28454777264391221
 BoxCollider:
@@ -275,12 +276,12 @@ PrefabInstance:
     - target: {fileID: 5228965071397274234, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5228965071397274234, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6488678474177933364, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
@@ -305,7 +306,7 @@ PrefabInstance:
     - target: {fileID: 6488678475238775492, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6488678475238775544, guid: f623d44eb1765294390042ba8d3e13f4,
         type: 3}
