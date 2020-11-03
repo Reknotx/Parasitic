@@ -247,10 +247,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -302,10 +307,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -357,10 +367,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -802,7 +817,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &50977314
 GameObject:
@@ -850,10 +865,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -905,10 +925,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1002,10 +1027,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1161,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -1271,10 +1301,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1326,10 +1361,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1381,10 +1421,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1678,7 +1723,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -1778,10 +1823,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -1892,7 +1942,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -1992,10 +2042,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2047,10 +2102,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2101,7 +2161,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -2269,10 +2329,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2368,7 +2433,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &164342029 stripped
 Transform:
@@ -2422,10 +2487,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2477,10 +2547,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2532,10 +2607,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2672,10 +2752,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2727,10 +2812,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2782,10 +2872,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -2837,10 +2932,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3086,6 +3186,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 200872308}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &203689875 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
+    type: 3}
+  m_PrefabInstance: {fileID: 1922044110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &206015405
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,10 +3238,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3261,10 +3372,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3396,10 +3512,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3544,10 +3665,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3599,10 +3725,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3740,10 +3871,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3795,10 +3931,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3856,10 +3997,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -3985,10 +4131,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4040,10 +4191,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4170,10 +4326,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4225,10 +4386,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4259,7 +4425,7 @@ PrefabInstance:
     - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
         type: 3}
@@ -4289,7 +4455,7 @@ PrefabInstance:
     - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7363160660438249665, guid: 00005a76cab52ea4f83e944de9dc5a44,
         type: 3}
@@ -4359,10 +4525,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4414,10 +4585,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4469,10 +4645,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -4837,7 +5018,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 29
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -4947,10 +5128,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5124,10 +5310,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5185,10 +5376,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5240,10 +5436,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5301,10 +5502,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5356,10 +5562,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5417,10 +5628,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5526,7 +5742,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -5626,10 +5842,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5681,10 +5902,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5780,7 +6006,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &402402815
 GameObject:
@@ -5828,10 +6054,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -5883,10 +6114,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6036,10 +6272,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6048,6 +6289,12 @@ MonoBehaviour:
 --- !u!1 &439000913 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7282138462873858109, guid: 3861744d439171048b40e7f84b48b1da,
+    type: 3}
+  m_PrefabInstance: {fileID: 864832245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &439000918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
     type: 3}
   m_PrefabInstance: {fileID: 864832245}
   m_PrefabAsset: {fileID: 0}
@@ -6078,7 +6325,7 @@ PrefabInstance:
     - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
@@ -6108,7 +6355,7 @@ PrefabInstance:
     - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2660129872426991137, guid: 76ef630a4bdf23e468ee3a9427e6a06f,
         type: 3}
@@ -6262,10 +6509,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6317,10 +6569,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6595,10 +6852,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6650,10 +6912,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6920,10 +7187,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -6975,10 +7247,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7104,10 +7381,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7159,10 +7441,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7214,10 +7501,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7269,10 +7561,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7417,10 +7714,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7472,10 +7774,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7527,10 +7834,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7630,10 +7942,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7685,10 +8002,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7740,10 +8062,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -7795,10 +8122,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8023,10 +8355,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8078,10 +8415,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8133,10 +8475,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8267,10 +8614,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8328,10 +8680,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8383,10 +8740,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8397,7 +8759,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 823989867}
     m_Modifications:
     - target: {fileID: 358893907209378861, guid: 7ebf90aa046e05b42863e27375f3e17c,
         type: 3}
@@ -8442,7 +8804,7 @@ PrefabInstance:
     - target: {fileID: 1130646189066421911, guid: 7ebf90aa046e05b42863e27375f3e17c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1130646189066421911, guid: 7ebf90aa046e05b42863e27375f3e17c,
         type: 3}
@@ -8556,7 +8918,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 823989867}
     m_Modifications:
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
@@ -8576,7 +8938,7 @@ PrefabInstance:
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
@@ -8586,7 +8948,7 @@ PrefabInstance:
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
@@ -8596,7 +8958,7 @@ PrefabInstance:
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 127
       objectReference: {fileID: 0}
     - target: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
         type: 3}
@@ -8672,10 +9034,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -8904,10 +9271,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9052,10 +9424,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9149,10 +9526,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9204,10 +9586,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9421,10 +9808,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9518,10 +9910,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9671,10 +10068,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9726,10 +10128,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -9878,10 +10285,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10129,10 +10541,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10283,10 +10700,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10412,10 +10834,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10467,10 +10894,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10522,10 +10954,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10652,10 +11089,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10686,7 +11128,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -10786,10 +11228,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -10840,7 +11287,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -10916,10 +11363,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11233,8 +11685,11 @@ Transform:
   - {fileID: 667418488}
   - {fileID: 1305782293}
   - {fileID: 830376222}
+  - {fileID: 1295738450}
+  - {fileID: 1629732020}
+  - {fileID: 203689875}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &825252993 stripped
 Transform:
@@ -11459,7 +11914,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -11616,7 +12071,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2110914628}
     m_Modifications:
     - target: {fileID: 3287168537379277423, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -11636,7 +12091,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -11666,7 +12121,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -11736,10 +12191,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11791,10 +12251,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11938,10 +12403,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -11992,7 +12462,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -12147,10 +12617,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12276,10 +12751,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12331,10 +12811,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12392,10 +12877,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12447,10 +12937,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12463,6 +12958,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 199309373090194381, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199309373090194381, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 509758492632284196, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 509758492632284196, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1081236398952046455, guid: e4de99bbe11d8094badf5e34d277aa3b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -12516,7 +13031,7 @@ PrefabInstance:
     - target: {fileID: 3296674104038350215, guid: e4de99bbe11d8094badf5e34d277aa3b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3296674104038350215, guid: e4de99bbe11d8094badf5e34d277aa3b,
         type: 3}
@@ -12567,6 +13082,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296674104886408607, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3296674104932549749, guid: e4de99bbe11d8094badf5e34d277aa3b,
         type: 3}
@@ -12628,6 +13148,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 8676441278970298570, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676441278970298570, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4de99bbe11d8094badf5e34d277aa3b, type: 3}
 --- !u!1001 &981898622
@@ -12655,7 +13185,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -12755,10 +13285,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -12884,10 +13419,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13118,10 +13658,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13173,10 +13718,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13308,10 +13858,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13861,10 +14416,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -13960,7 +14520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1060028387
 GameObject:
@@ -14101,10 +14661,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14236,10 +14801,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14291,10 +14861,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14346,10 +14921,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14728,10 +15308,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -14827,7 +15412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1086071150 stripped
 GameObject:
@@ -15046,10 +15631,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15187,10 +15777,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15243,7 +15838,7 @@ Transform:
   - {fileID: 1334340675}
   - {fileID: 564209555}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1129756798 stripped
 Transform:
@@ -15553,10 +16148,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15707,10 +16307,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15762,10 +16367,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 1
   effectMagnitude: 30
   effectCooldown: 0
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -15891,7 +16501,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -16013,10 +16623,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16339,10 +16954,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16394,10 +17014,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16571,10 +17196,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16632,10 +17262,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -16666,7 +17301,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -17036,10 +17671,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17091,10 +17731,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17231,10 +17876,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17358,7 +18008,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -17429,6 +18079,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7852278052383941877, guid: cf7bb5c62c9c8d646a3dab7fb6d35405,
     type: 3}
   m_PrefabInstance: {fileID: 1098780404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1295738450 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 431208901765011359, guid: bd168ef769bf6ce4683e36a57ff94a2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 639714306}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1295795004 stripped
 Transform:
@@ -17921,10 +18577,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -17982,10 +18643,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18191,10 +18857,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18321,10 +18992,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18376,10 +19052,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18431,10 +19112,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18486,10 +19172,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -18541,10 +19232,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19029,7 +19725,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -19139,10 +19835,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19279,10 +19980,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -19399,7 +20105,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -19547,7 +20253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1436156572
 MonoBehaviour:
@@ -19564,21 +20270,26 @@ MonoBehaviour:
   AttackShape: 1
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  damagedThisTurn: 0
   RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: be118dc0b88cec841ab2fca20bbcea88, type: 2}
   healthText: {fileID: 0}
   damageText: {fileID: 0}
   healthBar: {fileID: 0}
+  parentTransform: {fileID: 0}
   attackSoundEffect: {fileID: 0}
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
-  defaultMat: {fileID: 0}
-  selectedMat: {fileID: 2100000, guid: 2a3d23bea6773534683deb31827aa0af, type: 2}
+  animatorController: {fileID: 0}
+  attackParticle: {fileID: 0}
   ExpParticle: {fileID: 0}
-  Ability1Range: 0
-  Ability2Range: 0
-  Ability1Cooldown: 0
-  Ability2Cooldown: 0
+  SelectedParticle: {fileID: 0}
+  AbilityOneParticle: {fileID: 0}
+  AbilityTwoParticle: {fileID: 0}
+  AbilityOneRange: 0
+  AbilityTwoRange: 0
+  AbilityOneCooldown: 0
+  AbilityTwoCooldown: 0
   NormalAttackSprites:
   - {fileID: 0}
   - {fileID: 0}
@@ -19594,6 +20305,10 @@ MonoBehaviour:
   Ability2Sprites:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  UpgradeToggleSprites:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -19925,10 +20640,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20478,10 +21198,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20778,10 +21503,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20833,10 +21563,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -20999,10 +21734,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21033,7 +21773,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -21269,7 +22009,7 @@ Transform:
   - {fileID: 75931655}
   - {fileID: 1315815411}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1601088764
 PrefabInstance:
@@ -21370,7 +22110,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -21556,10 +22296,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21611,15 +22356,26 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
+--- !u!4 &1629732020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1130646189066421911, guid: 7ebf90aa046e05b42863e27375f3e17c,
+    type: 3}
+  m_PrefabInstance: {fileID: 625668535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1630114060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21735,10 +22491,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -21870,10 +22631,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22073,10 +22839,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22364,10 +23135,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22512,10 +23288,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22567,10 +23348,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22622,10 +23408,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22677,10 +23468,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -22985,10 +23781,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23040,10 +23841,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23175,10 +23981,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23311,10 +24122,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23471,7 +24287,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -23891,10 +24707,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -23946,10 +24767,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24081,10 +24907,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24486,10 +25317,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24541,10 +25377,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24811,10 +25652,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -24866,10 +25712,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25115,7 +25966,7 @@ PrefabInstance:
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8531504825834069813, guid: d3c1403d80a79b64ab90b30fef87f3f7,
         type: 3}
@@ -25269,7 +26120,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 823989867}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
         type: 3}
@@ -25289,7 +26140,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
         type: 3}
@@ -25309,7 +26160,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c57544c7d29935a48ad9cd5e15283408,
         type: 3}
@@ -25469,10 +26320,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -25524,10 +26380,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26009,7 +26870,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -26093,7 +26954,7 @@ PrefabInstance:
     - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
         type: 3}
@@ -26123,7 +26984,7 @@ PrefabInstance:
     - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1308270442748563221, guid: aea0077ce2de5f54b9fa4cf1a133bc92,
         type: 3}
@@ -26268,10 +27129,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26403,10 +27269,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26457,7 +27328,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -26527,10 +27398,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26582,10 +27458,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26679,10 +27560,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26734,10 +27620,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26795,10 +27686,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -26849,7 +27745,7 @@ PrefabInstance:
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3381596135232273116, guid: 91087dd61a881fe4da7a3ea3f1c66c81,
         type: 3}
@@ -27004,10 +27900,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27059,10 +27960,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27301,7 +28207,7 @@ PrefabInstance:
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.619
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 7282138462873858105, guid: 3861744d439171048b40e7f84b48b1da,
         type: 3}
@@ -27476,8 +28382,9 @@ Transform:
   - {fileID: 145415912}
   - {fileID: 1397914229}
   - {fileID: 1957408452}
+  - {fileID: 439000918}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113079215
 GameObject:
@@ -27618,10 +28525,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27673,10 +28585,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27821,10 +28738,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27845,10 +28767,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -27942,10 +28869,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28011,10 +28943,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28066,10 +29003,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28138,10 +29080,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28176,10 +29123,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28248,10 +29200,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28272,10 +29229,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28358,10 +29320,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28382,10 +29349,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28437,10 +29409,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28506,10 +29483,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28547,10 +29529,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28633,10 +29620,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28657,10 +29649,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28712,10 +29709,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28781,10 +29783,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28836,10 +29843,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28908,10 +29920,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -28963,10 +29980,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29001,10 +30023,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29056,10 +30083,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29128,10 +30160,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29152,10 +30189,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29207,10 +30249,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29276,10 +30323,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29331,10 +30383,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29372,10 +30429,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29458,10 +30520,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29482,6 +30549,7 @@ MonoBehaviour:
   columns: 12
   rows: 27
   tileSize: 1
+  tileHeight: 1
   gizmoMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
   drawGizmoMesh: 0
 --- !u!4 &8820341765998940201
@@ -29498,7 +30566,7 @@ Transform:
   - {fileID: 8820341766138399119}
   - {fileID: 8820341766019506356}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8820341765998940203
 GameObject:
@@ -29708,10 +30776,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29763,10 +30836,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29804,10 +30882,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29890,10 +30973,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29914,10 +31002,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -29969,10 +31062,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30038,10 +31136,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30110,10 +31213,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30165,10 +31273,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30189,10 +31302,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30244,10 +31362,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30424,10 +31547,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30490,10 +31618,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30576,10 +31709,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30600,10 +31738,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30686,10 +31829,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30766,10 +31914,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30838,10 +31991,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30876,10 +32034,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30917,10 +32080,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -30986,10 +32154,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31041,10 +32214,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31096,10 +32274,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31151,10 +32334,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31206,10 +32394,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31261,10 +32454,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31302,10 +32500,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31371,10 +32574,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31485,10 +32693,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31509,10 +32722,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31578,10 +32796,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31650,10 +32873,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31688,10 +32916,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31743,10 +32976,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31784,10 +33022,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31895,10 +33138,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -31936,10 +33184,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32033,10 +33286,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32088,10 +33346,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32174,10 +33437,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32229,10 +33497,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32284,10 +33557,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32322,10 +33600,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32363,10 +33646,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32432,10 +33720,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32473,10 +33766,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32528,10 +33826,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32597,10 +33900,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32669,10 +33977,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32707,10 +34020,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32762,10 +34080,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32817,10 +34140,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32889,10 +34217,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32913,10 +34246,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -32999,10 +34337,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33079,10 +34422,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33134,10 +34482,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33206,10 +34559,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33230,10 +34588,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33299,10 +34662,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33354,10 +34722,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33451,10 +34824,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33492,10 +34870,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33561,10 +34944,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33616,10 +35004,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33688,10 +35081,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33712,10 +35110,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33781,10 +35184,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33836,10 +35244,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33877,10 +35290,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -33946,10 +35364,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34018,10 +35441,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34042,10 +35470,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34097,10 +35530,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34152,10 +35590,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34207,10 +35650,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34318,10 +35766,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34390,10 +35843,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34445,10 +35903,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34483,10 +35946,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34538,10 +36006,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34593,10 +36066,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34648,10 +36126,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34689,10 +36172,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34775,10 +36263,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34799,10 +36292,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34868,10 +36366,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34923,10 +36426,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -34978,10 +36486,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35019,10 +36532,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35088,10 +36606,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35129,10 +36652,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35198,10 +36726,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35239,10 +36772,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35294,10 +36832,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35349,10 +36892,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35460,10 +37008,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35515,10 +37068,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35570,10 +37128,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35625,10 +37188,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35680,10 +37248,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35752,10 +37325,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35790,10 +37368,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35831,10 +37414,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35886,10 +37474,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -35983,10 +37576,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36038,10 +37636,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36093,10 +37696,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36148,10 +37756,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36217,10 +37830,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36272,10 +37890,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36344,10 +37967,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36382,10 +38010,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36423,10 +38056,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36492,10 +38130,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36547,10 +38190,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36602,10 +38250,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36674,10 +38327,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36698,10 +38356,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36767,10 +38430,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36808,10 +38476,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36863,10 +38536,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -36918,10 +38596,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -37015,10 +38698,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 1
   blocksLOS: 0
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
@@ -37070,10 +38758,15 @@ MonoBehaviour:
   occupied: 0
   movementTile: 0
   blocksLOS: 1
+  slope: 0
+  facing: 1
+  MovementNeighbors: []
+  level: 0
   tileEffect: 0
   effectMagnitude: 0
   effectCooldown: 10
   remainingCooldown: 0
+  tilt: {x: 0, y: 0, z: 0, w: 1}
   gridPosition: {x: 0, y: 0}
   gCost: 0
   hCost: 0
