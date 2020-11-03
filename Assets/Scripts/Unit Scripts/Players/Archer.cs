@@ -15,10 +15,17 @@ public class Archer : Player
 {
     private bool hasTrueDamage = false;
 
+    public override void Start()
+    {
+        healthBar = CombatSystem.Instance.archerHealthSlider;
+        healthText = CombatSystem.Instance.archerHealthText;
+        base.Start();
+    }
+
     #region Normal Attack
-    /// <summary>
-    /// Triggers the normal attack of the archer.
-    /// </summary>
+        /// <summary>
+        /// Triggers the normal attack of the archer.
+        /// </summary>
     public override void NormalAttack(Action callback)
     {
         Debug.Log("Archer Normal Attack");

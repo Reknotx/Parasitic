@@ -17,6 +17,13 @@ public class Mage : Player
 
     public Animator staffAndBookController;
 
+    public override void Start()
+    {
+        healthBar = CombatSystem.Instance.mageHealthSlider;
+        healthText = CombatSystem.Instance.mageHealthText;
+        base.Start();
+    }
+
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
         staffAndBookController.SetBool("IsWalking", true);

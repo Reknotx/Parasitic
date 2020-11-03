@@ -32,7 +32,11 @@ public class Upgrades : MonoBehaviour
     public static Upgrades Instance;
 
     public GameObject upgradeWindow;
+    public GameObject knightUpgrades;
+    public GameObject mageUpgrades;
+    public GameObject archerUpgrades;
     public GameObject infoWindow;
+    public GameObject upgradesMenuToggle;
     public GameObject notification;
 
     public Text magePointText;
@@ -172,7 +176,9 @@ public class Upgrades : MonoBehaviour
         set
         {
             _magePoints = value;
-            magePointText.text = _magePoints.ToString();
+            magePointText.text = _magePoints + " point";
+            if (_magePoints > 1 || _magePoints < 1)
+                magePointText.text += "s";
         }
     }
 
@@ -182,7 +188,9 @@ public class Upgrades : MonoBehaviour
         set
         {
             _knightPoints = value;
-            knightPointText.text = _knightPoints.ToString();
+            knightPointText.text = _knightPoints + " point";
+            if (_knightPoints > 1 || _knightPoints < 1)
+                knightPointText.text += "s";
         }
     }
 
@@ -192,7 +200,9 @@ public class Upgrades : MonoBehaviour
         set
         {
             _archerPoints = value;
-            archerPointText.text = _archerPoints.ToString();
+            archerPointText.text = _archerPoints + " point";
+            if (_archerPoints > 1 || _archerPoints < 1)
+                archerPointText.text += "s";
         }
     }
     #endregion
@@ -252,7 +262,7 @@ public class Upgrades : MonoBehaviour
             infoWindow.transform.position = Input.mousePosition;
         }
 
-        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus)
+        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus && CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
             ToggleUpgradeMenu();
         }
@@ -548,10 +558,27 @@ public class Upgrades : MonoBehaviour
     {
         if (upgradeWindow.activeInHierarchy)
         {
+            knightUpgrades.SetActive(false);
+            mageUpgrades.SetActive(false);
+            archerUpgrades.SetActive(false);
             upgradeWindow.SetActive(false);
         }
         else
         {
+            Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
+            if(temp is Warrior)
+            {
+                knightUpgrades.SetActive(true);
+            }
+            else if (temp is Mage)
+            {
+                mageUpgrades.SetActive(true);
+            }
+            else if (temp is Archer)
+            {
+                archerUpgrades.SetActive(true);
+            }
+
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
@@ -579,18 +606,28 @@ public class Upgrades : MonoBehaviour
     }
 
 
-    private void ShowUpgradeNotification()
+    public void ShowUpgradeNotification()
     {
-
-        if ((MagePoints + KnightPoints + ArcherPoints) > 0)
+        Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
+        if (temp is Warrior && KnightPoints > 0)
         {
             notification.SetActive(true);
-            notificationText.text = (MagePoints + KnightPoints + ArcherPoints) + "";
+            notificationText.text = KnightPoints + "";
+        }
+        else if (temp is Mage && MagePoints > 0)
+        {
+            notification.SetActive(true);
+            notificationText.text = MagePoints + "";
+        }
+        else if (temp is Archer && ArcherPoints > 0)
+        {
+            notification.SetActive(true);
+            notificationText.text = ArcherPoints + "";
         }
 
     }
 
-    private void ClearUpgradeNotification()
+    public void ClearUpgradeNotification()
     {
         notification.SetActive(false);
     }
