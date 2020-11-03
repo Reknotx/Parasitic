@@ -34,6 +34,10 @@ public abstract class Player : Humanoid, IPlayer
 
     public ParticleSystem SelectedParticle;
 
+    public ParticleSystem AbilityOneParticle;
+
+    public ParticleSystem AbilityTwoParticle;
+
     #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
@@ -117,6 +121,7 @@ public abstract class Player : Humanoid, IPlayer
         base.Start();
     }
 
+
     #region Selection/Deselection
     public void UnitSelected()
     {
@@ -167,19 +172,29 @@ public abstract class Player : Humanoid, IPlayer
     {
         animatorController.SetTrigger("CastAttack");
         if (attackParticle != null)
-            attackParticle.Play();
+        {
+            SetActiveParticle(attackParticle);
+        }
     }
 
     /// <summary> Triggers the ability one animation for this player. </summary>
     protected void AbilityOneAnim()
     {
         animatorController.SetTrigger("CastAbilityOne");
+        if (AbilityOneParticle != null)
+        {
+            SetActiveParticle(AbilityOneParticle);
+        }
     }
 
     /// <summary> Triggers the ability two animation for this player. </summary>
     protected void AbilityTwoAnim()
     {
         animatorController.SetTrigger("CastAbilityTwo");
+        if (AbilityTwoParticle != null)
+        {
+            SetActiveParticle(AbilityTwoParticle);
+        }
     }
     #endregion
 
