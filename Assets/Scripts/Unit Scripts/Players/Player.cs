@@ -150,6 +150,8 @@ public abstract class Player : Humanoid, IPlayer
     protected void AttackAnim()
     {
         animatorController.SetTrigger("CastAttack");
+        if (attackParticle != null)
+            attackParticle.Play();
     }
 
     /// <summary> Triggers the ability one animation for this player. </summary>

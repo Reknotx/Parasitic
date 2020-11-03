@@ -14,7 +14,6 @@ using UnityEngine;
 
 public class Warrior : Player
 {
-
     #region Normal Attack
     /// <summary>
     /// The warrior's attack.
