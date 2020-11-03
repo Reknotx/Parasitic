@@ -7,7 +7,8 @@ public enum UnitToUpgrade
 {
     mage,
     knight,
-    archer
+    archer,
+    none
 }
 public class UpgradeButton : MonoBehaviour
 {
