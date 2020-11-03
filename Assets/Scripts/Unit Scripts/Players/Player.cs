@@ -172,6 +172,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void AttackAnim()
     {
         animatorController.SetTrigger("CastAttack");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
         if (attackParticle != null)
         {
             SetActiveParticle(attackParticle);
@@ -182,6 +183,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void AbilityOneAnim()
     {
         animatorController.SetTrigger("CastAbilityOne");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
         if (AbilityOneParticle != null)
         {
             SetActiveParticle(AbilityOneParticle);
@@ -192,6 +194,7 @@ public abstract class Player : Humanoid, IPlayer
     protected void AbilityTwoAnim()
     {
         animatorController.SetTrigger("CastAbilityTwo");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
         if (AbilityTwoParticle != null)
         {
             SetActiveParticle(AbilityTwoParticle);
