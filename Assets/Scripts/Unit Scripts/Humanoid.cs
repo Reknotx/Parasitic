@@ -242,8 +242,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         XpDrop = _baseStats.XPDropOnDeath;
 
-        if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
-        if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
 
         currentTile = MapGrid.Instance.TileFromPosition(parentTransform.position);
@@ -477,7 +475,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     void HealingTileCheck()
     {
-        if (this is Player && currentTile.tileEffect == TileEffect.Healing && currentTile.remainingCooldown <= 0)
+        if (this is Player
+            && currentTile.tileEffect == TileEffect.Healing
+            && currentTile.remainingCooldown <= 0)
         {
             Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
             print("Healing Tile used");
