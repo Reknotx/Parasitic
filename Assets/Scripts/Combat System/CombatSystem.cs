@@ -802,15 +802,19 @@ public class CombatSystem : MonoBehaviour
     }
     #endregion
 
-
-    void Start()
+    private void Awake()
     {
-        state = BattleState.Start;
         if (Instance != null && Instance != this)
         {
             Destroy(Instance.gameObject);
         }
         Instance = this;
+    }
+
+    void Start()
+    {
+        state = BattleState.Start;
+
         SetupBattle();
         SetEnemyCountText();
         roundCounterText.text = _roundCounter.ToString();
