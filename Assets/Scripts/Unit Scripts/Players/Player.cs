@@ -109,7 +109,7 @@ public abstract class Player : Humanoid, IPlayer
     {
         //defaultMat = GetComponent<MeshRenderer>().material;
         //if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
-
+        if (SelectedParticle != null) SelectedParticle.Stop();
         base.Start();
     }
 
@@ -131,7 +131,7 @@ public abstract class Player : Humanoid, IPlayer
 
     public void UnitDeselected()
     {
-        //print("Player deselected");
+        print("Player deselected");
         //GetComponent<MeshRenderer>().material = defaultMat;
         SelectedParticle.Stop();
         State = HumanoidState.Idle;
