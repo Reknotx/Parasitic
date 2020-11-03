@@ -178,8 +178,8 @@ public class CharacterSelector : MonoBehaviour
                         {
                             SelectedPlayerUnit.Move(path);
                             SetLastSelected();
-                            SelectedPlayerUnit.UnitDeselected();
-                            SelectedPlayerUnit = null;
+                            //SelectedPlayerUnit.UnitDeselected();
+                            //SelectedPlayerUnit = null;
                             selectedTile = null;
                             BoarderLine.SetActive(false);
                             HidePath();

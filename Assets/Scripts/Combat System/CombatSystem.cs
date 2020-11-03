@@ -230,6 +230,7 @@ public class CombatSystem : MonoBehaviour
     public void AttackComplete()
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
+        CharacterSelector.Instance.SelectedPlayerUnit.SetAnimationComplete(false);
         CharacterSelector.Instance.SetLastSelected();
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
@@ -330,10 +331,11 @@ public class CombatSystem : MonoBehaviour
             ActionRange.Instance.ActionDeselected();
             //Make sure movement range is no longer displayed
             CharacterSelector.Instance.BoarderLine.SetActive(false);
+            CharacterSelector.Instance.SelectedPlayerUnit.UnitDeselected();
             //Deactivate combat buttons
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
-            player.GetComponent<MeshRenderer>().material = player.defaultMat;
+            //player.GetComponent<MeshRenderer>().material = player.defaultMat;
             if (playersToGo.Count == 0)
             {
                 if (enemiesToGo.Count > 0)
@@ -380,8 +382,7 @@ public class CombatSystem : MonoBehaviour
                 //((Player)unit).CoolDown(); //bandaid
                 playersToGo.Add((Player)unit);
                 unit.DefendState = DefendingState.NotDefending;
-                //unit.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
+                //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
             else if (unit is Enemy && ((Enemy)unit).Revealed == true)
             {

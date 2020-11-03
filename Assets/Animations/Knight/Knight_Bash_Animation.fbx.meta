@@ -1,0 +1,899 @@
+fileFormatVersion: 2
+guid: 4741226c0a54bd743a5791ac9fffacf9
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Bash
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\n\t'Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt'
+      has translation animation that will be discarded.\n\t'Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Bash
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_L_Jnt
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_R_Jnt
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Knee_L_Jnt
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Knee_R_Jnt
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Ankle_L_Jnt
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Ankle_R_Jnt
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Body_1_Jnt
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Body_2_Jnt
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Neck_Jnt
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Head_1_Jnt
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Elbow_1_L_Jnt
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Elbow_1_R_Jnt
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Elbow_2_L_Jnt
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Elbow_2_R_Jnt
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Foot_L_Jnt
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Foot_R_Jnt
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_L_Jnt
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_2_Jnt
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_3_Jnt
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_1_Jnt
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_2_Jnt
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_1_Jnt
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_2_Jnt
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_1_Jnt
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_2_Jnt
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_L_1_Jnt
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_2_Jnt
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_R_Jnt
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_2_Jnt
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_3_Jnt
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_1_Jnt
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_2_Jnt
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_1_Jnt
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_2_Jnt
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_1_Jnt
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_2_Jnt
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_1_Jnt
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_2_Jnt
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Body_3_Jnt
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Shoulder_L_Jnt
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight_Rig_Final_New_4:BaseModel_Shoulder_R_Jnt
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Knight_Bash_Animation(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:Knight_Geo
+      parentName: Knight_Bash_Animation(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel
+      parentName: Knight_Rig_Final_New_4:Knight_Geo
+      position: {x: -0, y: 0, z: -2.1684042e-20}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:Knight_Armor
+      parentName: Knight_Rig_Final_New_4:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:Knight_Helmet
+      parentName: Knight_Rig_Final_New_4:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_GlobalTransform_Grp
+      parentName: Knight_Bash_Animation(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_GlobalScale_Grp
+      parentName: Knight_Rig_Final_New_4:BaseModel_GlobalTransform_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Controls
+      parentName: Knight_Rig_Final_New_4:BaseModel_GlobalScale_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Local_Ctrl
+      parentName: Knight_Rig_Final_New_4:BaseModel_Controls
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Back_Ctrl
+      parentName: Knight_Rig_Final_New_4:BaseModel_Local_Ctrl
+      position: {x: 1.2705494e-23, y: 0.59784174, z: -3.5527136e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Ctrl
+      parentName: Knight_Rig_Final_New_4:BaseModel_Back_Ctrl
+      position: {x: 2.471086e-17, y: 0, z: 3.5527093e-17}
+      rotation: {x: 0.05588391, y: 0.092688255, z: 0.00521046, w: 0.9941121}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Joints
+      parentName: Knight_Rig_Final_New_4:BaseModel_GlobalScale_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt_Grp_Stretch
+      parentName: Knight_Rig_Final_New_4:BaseModel_Joints
+      position: {x: 1.2705494e-23, y: 0.8295011, z: 2.1175823e-24}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt_Grp
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt_Grp_Stretch
+      position: {x: -0, y: 1.4210854e-16, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt_Grp
+      position: {x: 4.2594016e-19, y: 0.007944107, z: 0.0000000036842733}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.00000062561725, w: -0.000000016463652}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000007}
+    - name: Knight_Rig_Final_New_4:BaseModel_Rig_FIX_6:transform2
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt
+      position: {x: -1.4210854e-16, y: 1.6940659e-23, z: 0}
+      rotation: {x: 0.36920643, y: 0.00000038396794, z: -0.00000015254084, w: 0.92934746}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Body_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Rig_FIX_6:transform2
+      position: {x: -0.14235887, y: 0.008669427, z: 0.013514433}
+      rotation: {x: -0.369206, y: 0.000000054948174, z: -0.000000021829337, w: 0.92934763}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000007}
+    - name: Knight_Rig_Final_New_4:BaseModel_Body_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Body_1_Jnt
+      position: {x: -0.13773383, y: 0.019383702, z: -0.00000001115}
+      rotation: {x: -0, y: 3.197442e-14, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Rig_FIX_6:transform5
+      parentName: Knight_Rig_Final_New_4:BaseModel_Body_2_Jnt
+      position: {x: -1.4210854e-16, y: 1.6940659e-23, z: 0}
+      rotation: {x: 0.22946045, y: 0.00000004240755, z: -0.00000020787877, w: 0.973318}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Body_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Rig_FIX_6:transform5
+      position: {x: -0.14388034, y: -0.016362876, z: -0.054905906}
+      rotation: {x: 0.22946043, y: 0.000000099069005, z: 0.00000005433705, w: -0.97331804}
+      scale: {x: 1.0000002, y: 1, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Body_3_Jnt
+      position: {x: -0.110719904, y: 0.007412195, z: -0.024204234}
+      rotation: {x: -0, y: 0.000000023283022, z: -1.7763568e-15, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:transform3
+      parentName: Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000045039206, z: 0.00000015825287}
+      rotation: {x: 0.7071069, y: -0.70710665, z: 0.000000042974683, w: -0.000000042974694}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Shoulder_L_Jnt
+      parentName: Knight_Rig_Final_New_4:transform3
+      position: {x: -0.22580633, y: 1.3590873, z: -0.027955707}
+      rotation: {x: 0.68237174, y: 0.014024284, z: -0.0066021667, w: -0.73084104}
+      scale: {x: 1.0000008, y: 0.9999995, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Elbow_1_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Shoulder_L_Jnt
+      position: {x: -0.2727143, y: -0.0000000011776954, z: -0.000000030667756}
+      rotation: {x: -0.068556026, y: 0.015058251, z: 0.03699627, w: 0.99684733}
+      scale: {x: 1, y: 1.0000008, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Elbow_2_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Elbow_1_L_Jnt
+      position: {x: -0.041826308, y: 0.000000004257162, z: 0.0000000015914892}
+      rotation: {x: 0.0000068098298, y: -0.00002301484, z: -0.00001786975, w: 1}
+      scale: {x: 1, y: 0.99999964, z: 0.99999976}
+    - name: Knight_Rig_Final_New_4:BaseModel_Arm_Wrist_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Elbow_2_L_Jnt
+      position: {x: -0.18261573, y: 0.000000008096101, z: -0.000000021742318}
+      rotation: {x: -0, y: -0, z: 2.940703e-13, w: 1}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Arm_Wrist_L_Jnt
+      position: {x: 3.1974422e-16, y: 1.4210854e-16, z: 1.4210854e-16}
+      rotation: {x: 0.7027925, y: 0.040590864, z: -0.027440531, w: 0.70970577}
+      scale: {x: 1.0000006, y: 1.0000001, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.041183583, y: -0.034117136, z: 0.041914552}
+      rotation: {x: -0.11062383, y: 0.36297414, z: 0.2219526, w: 0.89819217}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_L_Jnt
+      position: {x: -0.041119084, y: -1.4210854e-16, z: 0}
+      rotation: {x: 0.99905294, y: -0.00037878362, z: 0.031437796, w: 0.030078508}
+      scale: {x: 1.0000001, y: 1.0000004, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_2_Jnt
+      position: {x: -0.03166747, y: -1.0658141e-16, z: -7.105427e-17}
+      rotation: {x: -0.0000005848703, y: 0.0000051598086, z: 0.0000045455504, w: 1}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999964}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_4_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_L_3_Jnt
+      position: {x: -0.03783304, y: 1.7763567e-16, z: 0}
+      rotation: {x: -0.70584613, y: -0.042203173, z: 0.042199705, w: 0.7058464}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.1270764, y: -0.026316212, z: 0.041617163}
+      rotation: {x: 0.986028, y: 0.1617482, z: -0.036845773, w: 0.0151191205}
+      scale: {x: 1, y: 1.0000006, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_1_Jnt
+      position: {x: -0.03195487, y: 0, z: -2.842171e-16}
+      rotation: {x: -0.0025785435, y: 0.0031661952, z: -0.037016317, w: 0.9993064}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_L_2_Jnt
+      position: {x: -0.056395523, y: 3.5527136e-17, z: -2.1316282e-16}
+      rotation: {x: -0.7071068, y: -0.00000007404013, z: 0.00000017162525, w: 0.7071068}
+      scale: {x: 1.000001, y: 1.0000005, z: 1.0000007}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.13789453, y: -0.024243291, z: 0.008355363}
+      rotation: {x: 0.98668826, y: 0.16158682, z: -0.017574223, w: 0.0052161603}
+      scale: {x: 1, y: 1.0000012, z: 1.0000008}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_1_Jnt
+      position: {x: -0.040678, y: -2.842171e-16, z: 7.105427e-17}
+      rotation: {x: 0.0077677527, y: -0.0060605034, z: -0.034341063, w: 0.99936163}
+      scale: {x: 1.0000006, y: 0.99999964, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_L_2_Jnt
+      position: {x: -0.048320368, y: 7.105427e-17, z: -7.105427e-17}
+      rotation: {x: -0.7071067, y: -0.00000004656611, z: 0.0000002331216, w: 0.70710695}
+      scale: {x: 1.0000002, y: 0.99999976, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.1289092, y: -0.033567354, z: -0.020193584}
+      rotation: {x: 0.98688483, y: 0.16088462, z: -0.012941521, w: 0.0026293348}
+      scale: {x: 1, y: 1.000001, z: 1.0000006}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_1_Jnt
+      position: {x: -0.04600933, y: 2.842171e-16, z: 0}
+      rotation: {x: 0.015736, y: -0.0062370007, z: -0.03052998, w: 0.99939054}
+      scale: {x: 1.0000005, y: 1, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_L_2_Jnt
+      position: {x: -0.03859853, y: 2.3980816e-16, z: -1.0658141e-16}
+      rotation: {x: -1, y: -0.00000010704385, z: -0.000000017229462, w: 0.000000073574455}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_L_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.10695604, y: -0.038571272, z: -0.043226197}
+      rotation: {x: 0.9897889, y: 0.14051624, z: 0.015454464, w: -0.018287553}
+      scale: {x: 0.99999976, y: 1.0000008, z: 1.0000005}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_L_1_Jnt
+      position: {x: -0.029398264, y: 1.4210854e-16, z: 7.5495166e-17}
+      rotation: {x: 0.041400302, y: -0.017363094, z: -0.026316935, w: 0.9986451}
+      scale: {x: 1.0000007, y: 0.9999999, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_2_Jnt
+      position: {x: -0.047685325, y: -3.1530333e-16, z: 3.5527136e-17}
+      rotation: {x: -1, y: 0.000000014435493, z: -0.00000001303851, w: -0.00000006146726}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000005}
+    - name: Knight_Rig_Final_New_4:transform4
+      parentName: Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000045039206, z: 0.00000015825287}
+      rotation: {x: 0.7071069, y: -0.70710665, z: 0.000000042974683, w: -0.000000042974694}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Shoulder_R_Jnt
+      parentName: Knight_Rig_Final_New_4:transform4
+      position: {x: 0.21586278, y: 1.337815, z: -0.019275311}
+      rotation: {x: 0.004353419, y: 0.027933631, z: -0.9994989, w: -0.014242973}
+      scale: {x: 1.0000008, y: 1.0000007, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Elbow_1_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Shoulder_R_Jnt
+      position: {x: -0.27271423, y: -0.000000031402283, z: -0.0000000255456}
+      rotation: {x: 0.06854419, y: 0.0373148, z: 0.015020802, w: 0.9968369}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Elbow_2_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Elbow_1_R_Jnt
+      position: {x: -0.041826308, y: 0.0000000013421568, z: 6.4411154e-10}
+      rotation: {x: -0.000008262693, y: -0.000017777083, z: -0.000023001801, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 0.99999964}
+    - name: Knight_Rig_Final_New_4:BaseModel_Arm_Wrist_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Elbow_2_R_Jnt
+      position: {x: -0.18261573, y: 0.00000002172776, z: -0.000000005280311}
+      rotation: {x: -0, y: -0, z: 4.5154153e-13, w: 1}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Arm_Wrist_R_Jnt
+      position: {x: 0.000000012014273, y: -0.000000021732342, z: 0.000000008092666}
+      rotation: {x: -0.051995948, y: -0.16519299, z: -0.12871861, w: 0.97644216}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000005}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.03214915, y: 0.014278397, z: 0.058166254}
+      rotation: {x: 0.059812196, y: 0.5378434, z: -0.057086226, w: 0.8389804}
+      scale: {x: 1.0000002, y: 1, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Thumb_1_R_Jnt
+      position: {x: -0.0410907, y: 7.105427e-17, z: 0}
+      rotation: {x: 0.030077104, y: -0.031435125, z: 0.000381451, w: 0.9990531}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_2_Jnt
+      position: {x: -0.03166747, y: 1.7763567e-16, z: 0}
+      rotation: {x: -0.000000039115534, y: -0.0000050067883, z: 0.000004624946, w: 1}
+      scale: {x: 0.9999999, y: 1.0000004, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_4_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Thumb_R_3_Jnt
+      position: {x: -0.03783304, y: -7.105427e-17, z: -2.1316282e-16}
+      rotation: {x: -0, y: -0, z: -1.958432e-13, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.105293326, y: -0.023959367, z: 0.08313969}
+      rotation: {x: 0.042886328, y: 0.21834785, z: 0.016042996, w: 0.97479624}
+      scale: {x: 1.0000004, y: 1, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_1_Jnt
+      position: {x: -0.03195487, y: -1.4210854e-16, z: 0}
+      rotation: {x: 0.0025783947, y: -0.0031624716, z: -0.03701501, w: 0.99930644}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pointer_R_2_Jnt
+      position: {x: -0.056395523, y: 1.0658141e-16, z: 2.1316282e-16}
+      rotation: {x: -0, y: -0, z: 0.0000000013315001, w: 1}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.12596852, y: -0.027715422, z: 0.05510211}
+      rotation: {x: 0.036753353, y: 0.19807607, z: 0.016796198, w: 0.9793533}
+      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_1_Jnt
+      position: {x: -0.040678, y: -2.842171e-16, z: -2.842171e-16}
+      rotation: {x: -0.0077678943, y: 0.0060617737, z: -0.034342937, w: 0.9993616}
+      scale: {x: 0.99999976, y: 1, z: 0.99999964}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Middle_R_2_Jnt
+      position: {x: -0.048320368, y: -5.3290704e-17, z: 4.6185276e-16}
+      rotation: {x: -4.6566107e-10, y: -0, z: -7.275954e-11, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.13116972, y: -0.014014943, z: 0.02739}
+      rotation: {x: 0.035196442, y: 0.19313118, z: 0.017661922, w: 0.98038244}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_1_Jnt
+      position: {x: -0.04600933, y: -1.4210854e-16, z: 3.5527136e-17}
+      rotation: {x: -0.015735896, y: 0.00623324, z: -0.030531893, w: 0.9993905}
+      scale: {x: 0.99999964, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Ring_R_2_Jnt
+      position: {x: -0.03859853, y: 3.375078e-16, z: 2.1316282e-16}
+      rotation: {x: 1, y: 0.000000018859275, z: -0.000000014202664, w: 0.000000007450578}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000006}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.121638164, y: 2.842171e-16, z: 8.881784e-18}
+      rotation: {x: 0.02363278, y: 0.1612043, z: 0.03967415, w: 0.98584}
+      scale: {x: 1.0000001, y: 0.99999976, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_1_Jnt
+      position: {x: -0.029398264, y: -4.2632563e-16, z: -9.7699626e-17}
+      rotation: {x: -0.041400667, y: 0.017363269, z: -0.026319765, w: 0.998645}
+      scale: {x: 0.9999999, y: 1.0000002, z: 0.99999976}
+    - name: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_3_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Finger_Pinky_R_2_Jnt
+      position: {x: -0.047685325, y: 7.5495166e-17, z: 2.4868996e-16}
+      rotation: {x: -0.000000003725289, y: -0, z: -0.0000000041909503, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:transform5
+      parentName: Knight_Rig_Final_New_4:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000045039206, z: 0.00000015825287}
+      rotation: {x: 0.7071069, y: -0.70710665, z: 0.000000042974683, w: -0.000000042974694}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Neck_Jnt
+      parentName: Knight_Rig_Final_New_4:transform5
+      position: {x: -0.000000011520511, y: 1.4402065, z: -0.000000010510699}
+      rotation: {x: 0.5, y: -0.5, z: 0.50000006, w: -0.5}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000006}
+    - name: Knight_Rig_Final_New_4:BaseModel_Head_1_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Neck_Jnt
+      position: {x: -0.03867772, y: -0.000000017151924, z: -0.0000000034135925}
+      rotation: {x: -0, y: -0, z: -0.000000029802319, w: 1}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Head_2_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Head_1_Jnt
+      position: {x: -0.3529102, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0.000000021073424, z: 0.00000006256254, w: 0.7071068}
+      scale: {x: 1.0000002, y: 1.0000002, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:transform1
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt
+      position: {x: 0.82950115, y: -0.0000001259285, z: -0.00000071089977}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.00000061884936, w: 0.000000012844192}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Rotate_R_Jnt
+      parentName: Knight_Rig_Final_New_4:transform1
+      position: {x: 0.06207913, y: 0.8418351, z: 9.860868e-11}
+      rotation: {x: -0.0000000045909587, y: -0.000000017881934, z: -0.15385184, w: -0.988094}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Rotate_R_Jnt
+      position: {x: 0.047402468, y: -0.033688247, z: 1.4669145e-10}
+      rotation: {x: -0.00009409871, y: -0.00008484561, z: 0.5600691, w: 0.8284459}
+      scale: {x: 1.0000002, y: 0.9999999, z: 0.99999976}
+    - name: Knight_Rig_Final_New_4:BaseModel_Knee_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_R_Jnt
+      position: {x: -0.32677594, y: -0.047985613, z: 0.0014314584}
+      rotation: {x: -0.000000021085727, y: 0.00000002077286, z: 0.0059437384, w: 0.99998236}
+      scale: {x: 1.0000001, y: 1, z: 0.9999999}
+    - name: Knight_Rig_Final_New_4:BaseModel_Ankle_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Knee_R_Jnt
+      position: {x: -0.39040613, y: -0.047878455, z: -0.07443583}
+      rotation: {x: 0.66713744, y: 0.23436655, z: -0.19325091, w: 0.6801868}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.99999976}
+    - name: Knight_Rig_Final_New_4:BaseModel_Foot_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Ankle_R_Jnt
+      position: {x: -0.1417038, y: 0.0518686, z: 0.015705341}
+      rotation: {x: 0.68048507, y: -0.19220407, z: -0.36655542, w: 0.60467744}
+      scale: {x: 1.0000004, y: 1, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:BaseModel_Toes_R_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Foot_R_Jnt
+      position: {x: -0.120472975, y: -0.0010348596, z: 0.0000019414397}
+      rotation: {x: -0, y: -0.0000000074505797, z: 0.000000014901159, w: 1}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000002}
+    - name: Knight_Rig_Final_New_4:transform2
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Jnt
+      position: {x: 0.82950115, y: -0.0000001259285, z: -0.00000071089977}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.00000061884936, w: 0.000000012844192}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Rotate_L_Jnt
+      parentName: Knight_Rig_Final_New_4:transform2
+      position: {x: -0.06207913, y: 0.8418351, z: -1.4907435e-10}
+      rotation: {x: -0.0000000045909587, y: -0.000000017881934, z: -0.15385184, w: -0.988094}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000004}
+    - name: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Rotate_L_Jnt
+      position: {x: -0.05815404, y: -2.0608296e-11, z: -7.4347126e-11}
+      rotation: {x: 0.000104458035, y: 0.00007160172, z: 0.56009024, w: 0.82843167}
+      scale: {x: 1.0000004, y: 1.0000004, z: 0.9999995}
+    - name: Knight_Rig_Final_New_4:BaseModel_Knee_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Hip_Translate_L_Jnt
+      position: {x: -0.33028036, y: 1.02875023e-16, z: 0.0014314584}
+      rotation: {x: -0.000000006548361, y: 0.000000006912159, z: 0.005943856, w: 0.99998236}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Ankle_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Knee_L_Jnt
+      position: {x: -0.39333102, y: -2.1938007e-15, z: -0.07443583}
+      rotation: {x: 0.66713744, y: 0.23436671, z: -0.193251, w: 0.6801867}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999964}
+    - name: Knight_Rig_Final_New_4:BaseModel_Foot_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Ankle_L_Jnt
+      position: {x: -0.1417038, y: 0.0518686, z: -0.015705341}
+      rotation: {x: 0.9092715, y: -0.39532167, z: 0.11938071, w: 0.051907696}
+      scale: {x: 1, y: 0.99999976, z: 1.0000001}
+    - name: Knight_Rig_Final_New_4:BaseModel_Toes_L_Jnt
+      parentName: Knight_Rig_Final_New_4:BaseModel_Foot_L_Jnt
+      position: {x: -0.12069898, y: 4.440892e-18, z: 1.7763567e-16}
+      rotation: {x: -0, y: -0, z: 0.000000029802319, w: 1}
+      scale: {x: 1.0000001, y: 0.9999999, z: 0.9999999}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 1
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

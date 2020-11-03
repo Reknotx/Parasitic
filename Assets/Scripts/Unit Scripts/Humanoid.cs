@@ -162,6 +162,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
+    //[Header("This refers to the transform of the parent object for this unit.")]
+    /// <summary> The transform of the parent of this unit. </summary>
+    /// This is needed because the animations will put the character up in the Y due to how they
+    /// were set up and how we have originally set up the characters themselves
+    /// 
+    [HideInInspector] public Transform parentTransform;
+
     /// <summary> The state of the humanoid in combat. </summary>
     public HumanoidState State { get; set; }
 
@@ -173,9 +180,37 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public AudioClip damagedSoundEffect;
 
     public AudioSource audioSource;
-    
+
+    public Animator animatorController;
+
+    public bool AnimationComplete { get; set; } = false;
+
+    public ParticleSystem attackParticle;
+    /// <summary>
+    /// Sets the animation complete parameter, used through animation events.
+    /// </summary>
+    /// <param name="value">States if the animation is complete or not.</param>
+    public void SetAnimationComplete(bool value)
+    {
+        AnimationComplete = value;
+        if (attackParticle != null)
+            attackParticle.Stop();
+    }
+
     public virtual void Start()
     {
+        if (transform.parent != null)
+        {
+            parentTransform = transform.parent;
+        }
+        else
+        {
+            parentTransform = this.transform;
+        }
+
+        if (attackParticle != null)
+            attackParticle.Stop();
+
         _maxHealth = _baseStats.Health;
 
         _baseAttack = _baseStats.BaseAttack;
@@ -191,21 +226,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         _baseRange = _baseStats.AttackRange;
         AttackRange = _baseStats.AttackRange;
-        
+
         XpDrop = _baseStats.XPDropOnDeath;
-        
+
         if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
         if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
 
-        
-        /*if(healthText)
-        healthText.text = Health + "/" + _maxHealth;
-
-        if(healthBar)
-        healthBar.value = 1f;*/
-
-        currentTile = MapGrid.Instance.TileFromPosition(transform.position);
+        currentTile = MapGrid.Instance.TileFromPosition(parentTransform.position);
         currentTile.occupied = true;
 
         State = HumanoidState.Idle;
@@ -215,6 +243,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         HasMoved = false;
         HasAttacked = false;
+
+        
     }
 
     #region Movement
@@ -248,7 +278,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         Vector3 p12;
         float timeStart;
         Vector3 direction;
-        float unitHeight = transform.position.y - (currentTile.slope ? MapGrid.Instance.tileHeight / 2f : 0) - currentTile.Elevation;
+        float unitHeight = parentTransform.position.y - (currentTile.slope ? MapGrid.Instance.tileHeight / 2f : 0) - currentTile.Elevation;
         foreach (Tile tile in path)
         {
             timeStart = Time.time;
@@ -299,10 +329,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 direction = (p1 - p0).normalized;
                 LookInDirection(direction);
                 p01 = (1 - u) * p0 + u * p1;
-                transform.position = p01;
+                parentTransform.position = p01;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, transform.position - Vector3.up * unitHeight, p1 - Vector3.up * unitHeight);
+                    EnemyPath.Instance.DrawPath(untraveledPath, parentTransform.position - Vector3.up * unitHeight, p1 - Vector3.up * unitHeight);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -320,10 +350,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 direction = (p2 - p1).normalized;
                 LookInDirection(direction);
                 p12 = (1 - u) * p1 + u * p2;
-                transform.position = p12;
+                parentTransform.position = p12;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, transform.position - Vector3.up * unitHeight);
+                    EnemyPath.Instance.DrawPath(untraveledPath, parentTransform.position - Vector3.up * unitHeight);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -334,12 +364,26 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         State = HumanoidState.Idle;
         HasMoved = true;
 
+        if (animatorController != null)
+        {
+            animatorController.SetBool("IsWalking", false);
+        }
+
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
         if (this is Enemy)
         {
             EnemyPath.Instance.HidePath();
+        }
+        else if (this is Mage)
+        {
+            ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
+        }
+
+        if (this is Player && ((Player)this).HasAttacked == false)
+        {
+            ((Player)this).FindActionRanges();
         }
     }
     #endregion
@@ -436,8 +480,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected void LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>

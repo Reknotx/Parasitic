@@ -122,7 +122,8 @@ public class ActionRange : MonoBehaviour
         }
         lineMaterial.color = color;
         MapGrid.Instance.DrawBoarder(range, ref lineRenderer,height);
-        gameObject.SetActive(true);
+        if (CharacterSelector.Instance.SelectedPlayerUnit.State != HumanoidState.Moving)
+            gameObject.SetActive(true);
     }
 
     /// <summary> Action clicked </summary>

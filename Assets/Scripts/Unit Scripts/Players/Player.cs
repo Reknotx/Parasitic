@@ -24,12 +24,14 @@ public abstract class Player : Humanoid, IPlayer
     }
 
     bool selected = false;
-    public Material defaultMat;
-    /// <summary> The material for the player when they are selected. </summary>
-    public Material selectedMat;
+    //public Material defaultMat;
+    ///// <summary> The material for the player when they are selected. </summary>
+    //public Material selectedMat;
 
     // EXP Particle System that Is a Child of the Player Unit
     public ParticleSystem ExpParticle;
+
+    public ParticleSystem SelectedParticle;
 
     #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
@@ -105,16 +107,18 @@ public abstract class Player : Humanoid, IPlayer
 
     public override void Start()
     {
-        defaultMat = GetComponent<MeshRenderer>().material;
-        if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
-
+        //defaultMat = GetComponent<MeshRenderer>().material;
+        //if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
+        if (SelectedParticle != null) SelectedParticle.Stop();
         base.Start();
     }
 
+    #region Selection/Deselection
     public void UnitSelected()
     {
         //print("Player selected");
-        GetComponent<MeshRenderer>().material = selectedMat;
+        //GetComponent<MeshRenderer>().material = selectedMat;
+        SelectedParticle.Play();
         State = HumanoidState.Selected;
 
         CombatSystem.Instance.ActivateCombatButtons();
@@ -127,14 +131,41 @@ public abstract class Player : Humanoid, IPlayer
 
     public void UnitDeselected()
     {
-        //print("Player deselected");
-        GetComponent<MeshRenderer>().material = defaultMat;
+        print("Player deselected");
+        //GetComponent<MeshRenderer>().material = defaultMat;
+        SelectedParticle.Stop();
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
         selected = false;
         CharacterSelector.Instance.BoarderLine.SetActive(false);
     }
+    #endregion
+
+    #region Animation Executers
+    ///Note: All animation triggers need to follow this naming convention for 
+    ///simplistic implementation and programming reasons.
+
+    /// <summary> Executes the normal attack animation of this player. </summary>
+    protected void AttackAnim()
+    {
+        animatorController.SetTrigger("CastAttack");
+        if (attackParticle != null)
+            attackParticle.Play();
+    }
+
+    /// <summary> Triggers the ability one animation for this player. </summary>
+    protected void AbilityOneAnim()
+    {
+        animatorController.SetTrigger("CastAbilityOne");
+    }
+
+    /// <summary> Triggers the ability two animation for this player. </summary>
+    protected void AbilityTwoAnim()
+    {
+        animatorController.SetTrigger("CastAbilityTwo");
+    }
+    #endregion
 
     /// <summary>
     /// Raises the defense stat of the player temporarily.
@@ -163,6 +194,13 @@ public abstract class Player : Humanoid, IPlayer
         }
 
         base.AdvanceTimer();
+    }
+
+    public override void Move(List<Tile> path, bool bypassRangeCheck = false)
+    {
+        if (animatorController != null)
+            animatorController.SetBool("IsWalking", true); 
+        base.Move(path, bypassRangeCheck);
     }
 
     #region Ability Functions

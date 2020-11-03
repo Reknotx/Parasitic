@@ -14,7 +14,6 @@ using UnityEngine;
 
 public class Warrior : Player
 {
-
     #region Normal Attack
     /// <summary>
     /// The warrior's attack.
@@ -45,6 +44,11 @@ public class Warrior : Player
         {
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
             int oldEnemyHealth = attackedEnemy.Health;
+
+            AttackAnim();
+
+            yield return new WaitUntil(() => AnimationComplete);
+
             if (attackedEnemy.TakeDamage(AttackStat + (int)currentTile.TileBoost(TileEffect.Attack)))
             {
                 if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
@@ -109,6 +113,10 @@ public class Warrior : Player
         bool ability1U1 = Upgrades.Instance.IsAbilityUnlocked(Abilities.ability1Upgrade1, UnitToUpgrade.knight);
         attackReductionVal = ability1U1 ? .75f : .5f;
 
+        AbilityOneAnim();
+
+        yield return new WaitUntil(() => AnimationComplete);
+
         foreach (Enemy enemy in enemies)
         {
             //enemy.CreateAttackDownStatusEffect(this, enemy);
@@ -161,9 +169,12 @@ public class Warrior : Player
             }
         }
 
+        AbilityTwoAnim();
+
+        yield return new WaitUntil(() => AnimationComplete);
+
         foreach (Enemy enemy in enemies)
         {
-            //enemy.ForceTarget(this);
             StatusEffect effect = new StatusEffect(StatusEffect.StatusEffectType.Taunted, 3, this, enemy);
 
             enemy.AddStatusEffect(effect);

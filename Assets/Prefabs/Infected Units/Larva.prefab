@@ -40,7 +40,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7282138462873858109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.5, y: 0.4, z: 14.5}
+  m_LocalPosition: {x: 11.5, y: 0, z: 14.5}
   m_LocalScale: {x: 0.78, y: 0.78, z: 0.78}
   m_Children:
   - {fileID: 4540526625372951277}
@@ -110,14 +110,19 @@ MonoBehaviour:
   AttackShape: 1
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  damagedThisTurn: 0
   RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: 87fe7d63e200f7b4d94eac7988a73175, type: 2}
   healthText: {fileID: 4540526626466904099}
   damageText: {fileID: 7282138461050530959}
   healthBar: {fileID: 2832376841731567750}
+  parentTransform: {fileID: 0}
   attackSoundEffect: {fileID: 0}
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
+  animatorController: {fileID: 0}
+  attackParticle: {fileID: 0}
+  playersWhoAttacked: []
 --- !u!65 &28454777264391221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,7 +151,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c4717870c5a684c40a300c7b76b0fbae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51282054
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4717870c5a684c40a300c7b76b0fbae,
         type: 3}
