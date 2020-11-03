@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : Item
 {
     public List<Tile> tilesToOpen;
     public List<GameObject> objectsToHide;
@@ -25,6 +25,7 @@ public class Key : MonoBehaviour
             {
                 item.SetActive(true);
             }
+            Inventory.Instance.items.Add(this);
             gameObject.SetActive(false);
         }
     }
