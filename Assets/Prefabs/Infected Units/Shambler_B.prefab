@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2651527387729415467}
   - component: {fileID: 2651527387729415466}
   - component: {fileID: 4730559981099366688}
+  - component: {fileID: 8374650903520630127}
   - component: {fileID: 2651527387729415469}
   m_Layer: 10
   m_Name: Shambler_B
@@ -172,8 +173,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3947381, z: 1}
-  m_Center: {x: 0, y: -0.60502553, z: 0}
+  m_Size: {x: 1, y: 0.42837462, z: 1}
+  m_Center: {x: 0, y: -1.0882075, z: 0}
+--- !u!136 &8374650903520630127
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651527387729415464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 2.3980079
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.0958902, z: 0}
 --- !u!114 &2651527387729415469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,14 +204,20 @@ MonoBehaviour:
   AttackShape: 1
   currentTile: {fileID: 0}
   tileCrossTime: 0.3
+  damagedThisTurn: 0
   RemainingActions: 2
   _baseStats: {fileID: 11400000, guid: a9a8f5b1a7937cc4898cc409d1a6cb2a, type: 2}
   healthText: {fileID: 9133428334223017270}
   damageText: {fileID: 2651527387115327898}
   healthBar: {fileID: 7389804447627021715}
+  parentTransform: {fileID: 0}
   attackSoundEffect: {fileID: 0}
   damagedSoundEffect: {fileID: 0}
   audioSource: {fileID: 0}
+  animatorController: {fileID: 0}
+  attackParticle: {fileID: 0}
+  healthCanvas: {fileID: 9133428333161492420}
+  playersWhoAttacked: []
 --- !u!1 &2869978457339673036
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +251,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -489,7 +510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9133428333161492472
 RectTransform:
   m_ObjectHideFlags: 0

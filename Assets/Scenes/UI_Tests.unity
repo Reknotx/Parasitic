@@ -2037,6 +2037,12 @@ MonoBehaviour:
   hCost: 0
   parent: {fileID: 0}
   occupant: {fileID: 0}
+--- !u!1 &358621741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9097216074677034920, guid: 3acc851a1834ad64b866e3a379d8a3ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1679225812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &362139933
 GameObject:
   m_ObjectHideFlags: 0
@@ -10681,6 +10687,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2608612656753016129, guid: 3acc851a1834ad64b866e3a379d8a3ff,
+        type: 3}
+      propertyPath: healthCanvas
+      value: 
+      objectReference: {fileID: 358621741}
     - target: {fileID: 2608612656753016132, guid: 3acc851a1834ad64b866e3a379d8a3ff,
         type: 3}
       propertyPath: m_Name
@@ -10689,11 +10700,16 @@ PrefabInstance:
     - target: {fileID: 7827998755667494678, guid: 3acc851a1834ad64b866e3a379d8a3ff,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7827998755667494678, guid: 3acc851a1834ad64b866e3a379d8a3ff,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097216074677034920, guid: 3acc851a1834ad64b866e3a379d8a3ff,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
