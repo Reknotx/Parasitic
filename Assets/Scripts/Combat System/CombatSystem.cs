@@ -134,6 +134,7 @@ public class CombatSystem : MonoBehaviour
     public void NormalAttack()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+        if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -145,6 +146,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityOne()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+        if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -156,6 +158,7 @@ public class CombatSystem : MonoBehaviour
     public void AbilityTwo()
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
+        if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
