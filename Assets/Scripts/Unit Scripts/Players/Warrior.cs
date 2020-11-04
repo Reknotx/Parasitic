@@ -28,7 +28,7 @@ public class Warrior : Player
     /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Warrior Normal Attack");
+        //Debug.Log("Warrior Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         ///Execute the animation
         //target.TakeDamage(BaseAttack);
@@ -37,13 +37,13 @@ public class Warrior : Player
 
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-        Debug.Log("Select a target for the warrior's normal attack.");
+        //Debug.Log("Select a target for the warrior's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
         ActionRange.Instance.ActionDeselected();
 
-        Debug.Log("Given a target");
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -81,7 +81,7 @@ public class Warrior : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Warrior Ability One");
+        //Debug.Log("Warrior Ability One");
 
         /*
          * Scare the surrounding enemies of the warrior and causing those
@@ -147,7 +147,7 @@ public class Warrior : Player
     /// </summary>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Warrior Ability Two");
+        //Debug.Log("Warrior Ability Two");
 
         StartCoroutine(AbilityTwoCR(callback));
     }

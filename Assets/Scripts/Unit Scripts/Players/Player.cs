@@ -151,6 +151,7 @@ public abstract class Player : Humanoid, IPlayer
     public void UnitDeselected()
     {
         print("Player deselected");
+        StopAllCoroutines();
         //GetComponent<MeshRenderer>().material = defaultMat;
         SelectedParticle.Stop();
         SelectedParticle.Clear();

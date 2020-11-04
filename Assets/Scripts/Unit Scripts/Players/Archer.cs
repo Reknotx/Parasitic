@@ -28,7 +28,7 @@ public class Archer : Player
         /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Archer Normal Attack");
+        //Debug.Log("Archer Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
 
@@ -49,7 +49,7 @@ public class Archer : Player
             AttackRange = _baseRange;
         }
 
-        Debug.Log("Given a target");
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -99,7 +99,7 @@ public class Archer : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Archer Ability One");
+        //Debug.Log("Archer Ability One");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
         StartCoroutine(AbilityOneCR(callback));
     }
@@ -138,7 +138,7 @@ public class Archer : Player
     /// </summary>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Archer Ability Two");
+        //Debug.Log("Archer Ability Two");
         hasTrueDamage = true;
         ActionRange.Instance.ActionDeselected(false);
 

@@ -172,6 +172,7 @@ public class CombatSystem : MonoBehaviour
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
 
         CharacterSelector.Instance.SelectedPlayerUnit.Defend();
+        CharacterSelector.Instance.StopAllCoroutines(); 
 
         AttackComplete();
     }

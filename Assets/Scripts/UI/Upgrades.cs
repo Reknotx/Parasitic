@@ -138,7 +138,6 @@ public class Upgrades : MonoBehaviour
                     ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
-                Debug.Log(archerXpBar.value);
                 _archerXpText.text = _archerXp + " / " + maxXP;
             }
         }

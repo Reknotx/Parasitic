@@ -44,14 +44,14 @@ public class Mage : Player
     /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Mage Normal Attack");
+        //Debug.Log("Mage Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
     }
 
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-        Debug.Log("Select a target for the mage's normal attack.");
+        //Debug.Log("Select a target for the mage's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
@@ -63,7 +63,7 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
-        Debug.Log("Given a target");
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -135,7 +135,7 @@ public class Mage : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Mage Ability One");
+        //Debug.Log("Mage Ability One");
 
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
 
@@ -230,7 +230,7 @@ public class Mage : Player
     /// </summary>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Mage Ability Two");
+        //Debug.Log("Mage Ability Two");
 
         //CreateAttackUpStatusEffect(this, this);
 
