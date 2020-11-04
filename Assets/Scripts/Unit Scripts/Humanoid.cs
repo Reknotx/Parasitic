@@ -176,6 +176,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> States whether or not this unit is defending this round. </summary>
     public DefendingState DefendState { get; set; }
 
+    /// <summary> Indicates if the unit is turning towards the target. </summary>
+    protected bool IsTurning { get; set; } = false;
+
     public AudioClip attackSoundEffect;
     public AudioClip damagedSoundEffect;
 
@@ -480,6 +483,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
     #endregion
 
+    protected IEnumerator LookToTarget()
+    {
+        IsTurning = true;
+        Vector3 thisUnit = currentTile.transform.position;
+        Vector3 targetUnit = CharacterSelector.Instance.SelectedTargetUnit.currentTile.transform.position;
+
+        Vector3 angle = (targetUnit - thisUnit).normalized;
+
+        while (LookInDirection(angle))
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        print("Done turning");
+        IsTurning = false;
+    }
+
     void HealingTileCheck()
     {
         if (this is Player
@@ -497,7 +516,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
     }
 
-    protected void LookInDirection(Vector3 direction)
+    protected bool LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
@@ -506,7 +525,23 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                                             ref turnSmoothVelocity,
                                             turnSmoothTime);
 
+        float result = Mathf.Abs(targetAngle - angle);
+
+        while(result >= 360)
+        {
+            result -= 360;
+        }
+
         parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (result < 0.1f)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /// <summary>

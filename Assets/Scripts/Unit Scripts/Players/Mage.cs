@@ -55,6 +55,12 @@ public class Mage : Player
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        LookToTarget();
+
+
         ActionRange.Instance.ActionDeselected();
 
         Debug.Log("Given a target");
