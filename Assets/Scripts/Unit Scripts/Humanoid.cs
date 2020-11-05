@@ -179,10 +179,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Indicates if the unit is turning towards the target. </summary>
     protected bool IsTurning { get; set; } = false;
 
-    public AudioClip attackSoundEffect;
-    public AudioClip damagedSoundEffect;
+    [HideInInspector] public AudioClip attackSoundEffect;
+    [HideInInspector] public AudioClip damagedSoundEffect;
 
-    public AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
 
     public Animator animatorController;
 
@@ -220,6 +220,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     {
         activeParticle = particle;
         activeParticle.Play();
+    }
+
+    public void DeactivateActiveParticle()
+    {
+        ///Possibly might need this in the future if things get funky.
     }
 
     /// <summary>
@@ -504,6 +509,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
     #endregion
 
+    /// <summary>
+    /// Coroutine that turns the unit in the direction of their target.
+    /// </summary>
     protected virtual IEnumerator LookToTarget()
     {
         IsTurning = true;
@@ -520,6 +528,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         IsTurning = false;
     }
 
+    /// <summary>
+    /// Checks to see if the player is on a healing tile.
+    /// </summary>
     void HealingTileCheck()
     {
         if (this is Player
@@ -537,6 +548,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
     }
 
+    /// <summary>
+    /// Smoothly turns the unit towards the direction.
+    /// </summary>
+    /// <param name="direction">The direction we want to look in.</param>
+    /// <returns>True if we are still turning, false if we've turned all the way.</returns>
     protected bool LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -569,9 +585,21 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// When the incoming attack is dodged correctly we will activate the animation
     /// for this particular unit here.
     /// </summary>
-    private void Dodge()
+    //private void Dodge()
+    //{
+    //    // Activate the dodging animation
+    //}
+
+    /// <summary>
+    /// Temporarily raises the defense stat of this unit.
+    /// </summary>
+    public virtual void Defend()
     {
-        // Activate the dodging animation
+        DefendState = DefendingState.Defending;
+        if (defendParticle != null)
+        {
+            defendParticle.Play();
+        }
     }
 
     public void FindMovementRange()

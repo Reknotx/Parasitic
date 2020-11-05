@@ -112,8 +112,8 @@ public abstract class Player : Humanoid, IPlayer
     #endregion
 
     [Space]
-    public AudioClip abilityOneSoundEffect;
-    public AudioClip abilityTwoSoundEffect;
+    [HideInInspector] public AudioClip abilityOneSoundEffect;
+    [HideInInspector] public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
@@ -223,11 +223,11 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary>
     /// Raises the defense stat of the player temporarily.
     /// </summary>
-    public void Defend()
-    {
-        //print("Defending this round.");
-        DefendState = DefendingState.Defending;
-    }
+    //public void Defend()
+    //{
+    //    //print("Defending this round.");
+    //    DefendState = DefendingState.Defending;
+    //}
 
     /// <summary>
     /// Override of advance timer that also reduces the cooldown on abilities.

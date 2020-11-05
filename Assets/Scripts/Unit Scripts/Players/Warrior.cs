@@ -55,6 +55,7 @@ public class Warrior : Player
         }
         else if (CharacterSelector.Instance.SelectedTargetUnit is Enemy)
         {
+            ActivateAttackParticle();
             Enemy attackedEnemy = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
             int oldEnemyHealth = attackedEnemy.Health;
 
