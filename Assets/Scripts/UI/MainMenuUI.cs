@@ -46,7 +46,8 @@ public class MainMenuUI : MonoBehaviour
     /// <param name="levelName">name of level to be loaded</param>
     public void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        PlayerPrefs.SetString("SelectedLevel", levelName);
+        SceneManager.LoadScene("LoadingScreen");
     }
 
 
