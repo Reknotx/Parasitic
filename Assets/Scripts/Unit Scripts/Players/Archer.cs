@@ -38,9 +38,13 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
-        ActivateAttackParticle();
 
         ActionRange.Instance.ActionDeselected();
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        LookToTarget();
+        ActivateAttackParticle();
 
         int extraDamage = 0;
 
@@ -115,11 +119,16 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
-        ActivateAbilityTwoParticle();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
+            ActivateAbilityTwoParticle();
             ActionRange.Instance.ActionDeselected();
+
+            StartCoroutine(LookToTarget());
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => IsTurning == false);
+            LookToTarget();
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 

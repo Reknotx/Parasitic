@@ -43,6 +43,11 @@ public class Warrior : Player
 
         ActionRange.Instance.ActionDeselected();
 
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        LookToTarget();
+
         //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {

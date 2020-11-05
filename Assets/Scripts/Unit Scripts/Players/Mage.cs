@@ -57,6 +57,7 @@ public class Mage : Player
         //Debug.Log("Select a target for the mage's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+        ActionRange.Instance.ActionDeselected();
 
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
@@ -76,7 +77,6 @@ public class Mage : Player
         lightningPlane.transform.Rotate(90f, 0f, 0f);
 
         
-        ActionRange.Instance.ActionDeselected();
 
         //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -170,6 +170,11 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        LookToTarget();
+
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
         Enemy focus = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
         bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true, ActionShape.Square);
@@ -177,6 +182,8 @@ public class Mage : Player
         List<Enemy> enemies = new List<Enemy>();
 
         enemies.Add(focus);
+
+
 
         for (int i = 0; i < tempGrid.GetLength(0); i++)
         {
