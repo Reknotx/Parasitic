@@ -30,7 +30,10 @@ public abstract class Enemy : Humanoid, IEnemy
         //animatorController.SetTrigger("CastAttack");
 
         //yield return new WaitUntil(() => AnimationComplete);
-        yield return null;
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+
         int attack = AttackStat;
 
         if (CheckForEffectOfType(StatusEffect.StatusEffectType.AttackDown))
@@ -61,6 +64,8 @@ public abstract class Enemy : Humanoid, IEnemy
 
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
+
+    [SerializeField] private ParticleSystem TauntedParticle;
 
     #region Move Functions
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
@@ -238,6 +243,22 @@ public abstract class Enemy : Humanoid, IEnemy
 
         return false;
     }
+
+    protected override IEnumerator LookToTarget()
+    {
+        IsTurning = true;
+        Vector3 thisUnit = currentTile.transform.position;
+        Vector3 targetUnit = _currTarget.currentTile.transform.position;
+
+        Vector3 angle = (targetUnit - thisUnit).normalized;
+
+        while (LookInDirection(angle))
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        print("Done turning");
+        IsTurning = false;
+    }
     #endregion
 
     /// <summary>
@@ -282,6 +303,7 @@ public abstract class Enemy : Humanoid, IEnemy
             {
                 //Taunted = false;
                 _currTarget = null;
+                CancelInvoke();
             }
             else
             {
@@ -292,6 +314,24 @@ public abstract class Enemy : Humanoid, IEnemy
         }
 
         removeList.Clear();
+    }
+
+    public override void AddStatusEffect(StatusEffect effect)
+    {
+        if (effect.Type == StatusEffect.StatusEffectType.Taunted)
+        {
+            InvokeRepeating("ActivateTauntedParticle", 0f, 10f);
+        }
+
+        base.AddStatusEffect(effect);
+    }
+
+    private void ActivateTauntedParticle()
+    {
+        if (TauntedParticle != null)
+        {
+            TauntedParticle.Play();
+        }
     }
 
     private void OnMouseEnter()

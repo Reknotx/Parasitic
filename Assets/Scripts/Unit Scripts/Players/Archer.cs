@@ -38,6 +38,8 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        ActivateAttackParticle();
+
         ActionRange.Instance.ActionDeselected();
 
         int extraDamage = 0;
@@ -112,6 +114,8 @@ public class Archer : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+
+        ActivateAbilityTwoParticle();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {

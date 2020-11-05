@@ -179,10 +179,13 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel(bool deselectPlayer = true)
     {
+
         Player selectedPlayer = null;
+
 
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
+            if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
             selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
             ActionRange.Instance.ActionDeselected(false);
             selectedPlayer.StopAllCoroutines();

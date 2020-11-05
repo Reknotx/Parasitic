@@ -193,7 +193,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public ParticleSystem defendParticle;
 
-    protected ParticleSystem activeParticle;
+    [SerializeField] protected ParticleSystem activeParticle;
     #endregion
     /// <summary>
     /// Sets the animation complete parameter, used through animation events.
@@ -205,17 +205,32 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         //if (attackParticle != null)
         //    attackParticle.Stop();
 
-        if (activeParticle != null)
-        {
-            activeParticle.Stop();
-        }
-        activeParticle = null;
+        //if (activeParticle != null)
+        //{
+        //    activeParticle.Stop();
+        //}
+        //activeParticle = null;
     }
 
+    /// <summary>
+    /// Sets the active particle that we wish to execute;
+    /// </summary>
+    /// <param name="particle">The particle system we want to play.</param>
     public void SetActiveParticle(ParticleSystem particle)
     {
         activeParticle = particle;
         activeParticle.Play();
+    }
+
+    /// <summary>
+    /// Activates the attack particle system if it exists.
+    /// </summary>
+    protected void ActivateAttackParticle()
+    {
+        if (attackParticle != null)
+        {
+            SetActiveParticle(attackParticle);
+        }
     }
 
     public virtual void Start()
@@ -289,6 +304,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator MoveCR(List<Tile> path)
     {
+        if (this is Player)
+        {
+            CombatSystem.Instance.DeactivateCombatButtons();
+        }
+
         List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
@@ -405,6 +425,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         if (this is Player && ((Player)this).HasAttacked == false)
         {
             ((Player)this).FindActionRanges();
+            CombatSystem.Instance.ActivateCombatButtons();
         }
     }
     #endregion
@@ -483,7 +504,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
     #endregion
 
-    protected IEnumerator LookToTarget()
+    protected virtual IEnumerator LookToTarget()
     {
         IsTurning = true;
         Vector3 thisUnit = currentTile.transform.position;
@@ -643,7 +664,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         return statusEffects.Count;
     }
 
-    public void AddStatusEffect(StatusEffect effect)
+    public virtual void AddStatusEffect(StatusEffect effect)
     {
         statusEffects.Add(effect);
     }

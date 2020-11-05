@@ -125,6 +125,8 @@ public class Warrior : Player
 
         yield return new WaitUntil(() => AnimationComplete);
 
+        ActivateAbilityOneParticle();
+
         foreach (Enemy enemy in enemies)
         {
             //enemy.CreateAttackDownStatusEffect(this, enemy);
@@ -180,6 +182,8 @@ public class Warrior : Player
         AbilityTwoAnim();
 
         yield return new WaitUntil(() => AnimationComplete);
+
+        ActivateAbilityTwoParticle();
 
         foreach (Enemy enemy in enemies)
         {

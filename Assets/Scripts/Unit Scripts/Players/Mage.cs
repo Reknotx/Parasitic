@@ -17,6 +17,9 @@ public class Mage : Player
 
     public Animator staffAndBookController;
 
+    public GameObject lightningPlane;
+    public ParticleSystem FireBlastParticle;
+
     public override void Start()
     {
         if (CombatSystem.Instance)
@@ -60,7 +63,19 @@ public class Mage : Player
         yield return new WaitUntil(() => IsTurning == false);
         LookToTarget();
 
+        Vector3 lightningPlanePos = GetTargetPos();
 
+        lightningPlane.transform.position = lightningPlanePos;
+        
+        lightningPlane.transform.LookAt(parentTransform.position + Vector3.up);
+
+        //lightningPlane.transform.Rotate(90f,
+        //                                lightningPlane.transform.rotation.y,
+        //                                lightningPlane.transform.rotation.z);
+        
+        lightningPlane.transform.Rotate(90f, 0f, 0f);
+
+        
         ActionRange.Instance.ActionDeselected();
 
         //Debug.Log("Given a target");
@@ -101,6 +116,8 @@ public class Mage : Player
             staffAndBookController.SetTrigger("CastAttack");
 
             yield return new WaitUntil(() => AnimationComplete);
+
+            ActivateAttackParticle();
 
             if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
             {
@@ -251,12 +268,13 @@ public class Mage : Player
         }
 
         AbilityTwoAnim();
+        ActivateAbilityTwoParticle();
         staffAndBookController.SetTrigger("CastAbilityTwo");
 
         ActionRange.Instance.ActionDeselected(false);
 
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
-
+            
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
 
         killedUnitWhileEnchantActive = false;

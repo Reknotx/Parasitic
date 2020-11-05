@@ -29,6 +29,7 @@ public abstract class Player : Humanoid, IPlayer
     ///// <summary> The material for the player when they are selected. </summary>
     //public Material selectedMat;
 
+    #region Particles
     // EXP Particle System that Is a Child of the Player Unit
     public ParticleSystem ExpParticle;
 
@@ -37,6 +38,7 @@ public abstract class Player : Humanoid, IPlayer
     public ParticleSystem AbilityOneParticle;
 
     public ParticleSystem AbilityTwoParticle;
+    #endregion
 
     #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
@@ -174,10 +176,7 @@ public abstract class Player : Humanoid, IPlayer
     {
         animatorController.SetTrigger("CastAttack");
         CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
-        if (attackParticle != null)
-        {
-            SetActiveParticle(attackParticle);
-        }
+        
     }
 
     /// <summary> Triggers the ability one animation for this player. </summary>
@@ -185,10 +184,7 @@ public abstract class Player : Humanoid, IPlayer
     {
         animatorController.SetTrigger("CastAbilityOne");
         CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
-        if (AbilityOneParticle != null)
-        {
-            SetActiveParticle(AbilityOneParticle);
-        }
+        
     }
 
     /// <summary> Triggers the ability two animation for this player. </summary>
@@ -196,6 +192,27 @@ public abstract class Player : Humanoid, IPlayer
     {
         animatorController.SetTrigger("CastAbilityTwo");
         CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
+        
+    }
+    #endregion
+
+    #region Particle Activators
+    /// <summary>
+    /// Activates the particle effect for ability one if it exists.
+    /// </summary>
+    protected void ActivateAbilityOneParticle()
+    {
+        if (AbilityOneParticle != null)
+        {
+            SetActiveParticle(AbilityOneParticle);
+        }
+    }
+
+    /// <summary>
+    /// Activates the particle effect for ability two if it exists.
+    /// </summary>
+    protected void ActivateAbilityTwoParticle()
+    {
         if (AbilityTwoParticle != null)
         {
             SetActiveParticle(AbilityTwoParticle);
@@ -295,5 +312,18 @@ public abstract class Player : Humanoid, IPlayer
         float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
 
         Health += Mathf.FloorToInt(MaxHealth * healPercent);
+    }
+
+    /// <summary>
+    /// Returns a vector 3 representation of the target's position.
+    /// </summary>
+    /// <returns>Vector 3 of target's position</returns>
+    protected Vector3 GetTargetPos()
+    {
+        Transform targetPos = CharacterSelector.Instance.SelectedTargetUnit.parentTransform;
+
+        Vector3 posV3 = new Vector3(targetPos.position.x, 1f, targetPos.position.z);
+
+        return posV3;
     }
 }
