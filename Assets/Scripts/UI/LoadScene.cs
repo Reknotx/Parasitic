@@ -17,12 +17,14 @@ public class LoadScene : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         string NextScene = PlayerPrefs.GetString("SelectedLevel");
+        float fill = 0;
         if (Application.CanStreamedLevelBeLoaded(NextScene))
         {
             AsyncOperation gameLevel = SceneManager.LoadSceneAsync(NextScene);
             while (gameLevel.progress < 1)
             {
-                progress.fillAmount = gameLevel.progress;
+                fill += (gameLevel.progress - fill) /2;
+                progress.fillAmount = fill;
                 yield return new WaitForEndOfFrame();
             }
         }
