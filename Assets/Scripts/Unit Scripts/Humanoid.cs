@@ -422,14 +422,14 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             EnemyPath.Instance.HidePath();
         }
-        else if (this is Mage)
+        else if (this is Mage mage)
         {
-            ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
+            mage.staffAndBookController.SetBool("IsWalking", false);
         }
 
-        if (this is Player && ((Player)this).HasAttacked == false)
+        if (this is Player player && player.HasAttacked == false)
         {
-            ((Player)this).FindActionRanges();
+            player.FindActionRanges();
             CombatSystem.Instance.ActivateCombatButtons();
         }
     }
@@ -650,6 +650,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             if (effect.Type != StatusEffect.StatusEffectType.Taunted)
             {
                 ResetSpecificStat(effect.Type);
+
+                if (this is Mage mage)
+                {
+                    mage.AbilityTwoParticle.Stop();
+                    mage.AbilityTwoParticle.Clear();
+                }
+
             }
 
             statusEffects.Remove(effect);

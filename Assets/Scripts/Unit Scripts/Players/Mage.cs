@@ -183,8 +183,6 @@ public class Mage : Player
 
         enemies.Add(focus);
 
-
-
         for (int i = 0; i < tempGrid.GetLength(0); i++)
         {
             for (int j = 0; j < tempGrid.GetLength(1); j++)
@@ -275,7 +273,7 @@ public class Mage : Player
         }
 
         AbilityTwoAnim();
-        ActivateAbilityTwoParticle();
+        AbilityTwoParticle.Play();
         staffAndBookController.SetTrigger("CastAbilityTwo");
 
         ActionRange.Instance.ActionDeselected(false);

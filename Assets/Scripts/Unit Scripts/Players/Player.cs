@@ -196,6 +196,7 @@ public abstract class Player : Humanoid, IPlayer
     }
     #endregion
 
+    #region Particle Functions
     #region Particle Activators
     /// <summary>
     /// Activates the particle effect for ability one if it exists.
@@ -218,6 +219,19 @@ public abstract class Player : Humanoid, IPlayer
             SetActiveParticle(AbilityTwoParticle);
         }
     }
+    #endregion
+
+    #region Particle Deactivators
+    protected void DeactivateAbilityOneParticle()
+    {
+
+    }
+
+    protected void DeactivateAbilityTwoParticle()
+    {
+
+    }
+    #endregion
     #endregion
 
     /// <summary>
