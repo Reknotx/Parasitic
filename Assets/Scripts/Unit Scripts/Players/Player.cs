@@ -152,7 +152,7 @@ public abstract class Player : Humanoid, IPlayer
 
     public void UnitDeselected()
     {
-        print("Player deselected");
+        //print("Player deselected");
         StopAllCoroutines();
         //GetComponent<MeshRenderer>().material = defaultMat;
         SelectedParticle.Stop();
@@ -201,7 +201,7 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary>
     /// Activates the particle effect for ability one if it exists.
     /// </summary>
-    protected void ActivateAbilityOneParticle()
+    public void ActivateAbilityOneParticle()
     {
         if (AbilityOneParticle != null)
         {
@@ -212,7 +212,7 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary>
     /// Activates the particle effect for ability two if it exists.
     /// </summary>
-    protected void ActivateAbilityTwoParticle()
+    public void ActivateAbilityTwoParticle()
     {
         if (AbilityTwoParticle != null)
         {

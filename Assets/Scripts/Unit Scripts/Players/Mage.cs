@@ -17,8 +17,9 @@ public class Mage : Player
 
     public Animator staffAndBookController;
 
-    public GameObject lightningPlane;
+    public GameObject lightningPlane, firePlane;
     public ParticleSystem FireBlastParticle;
+    private Vector3 fireBallTransform;
 
     public override void Start()
     {
@@ -32,6 +33,7 @@ public class Mage : Player
         }
         healthBar = CombatSystem.Instance.mageHealthSlider;
         healthText = CombatSystem.Instance.mageHealthText;
+        fireBallTransform = AbilityOneParticle.transform.position;
         base.Start();
     }
 
@@ -62,7 +64,6 @@ public class Mage : Player
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
         yield return new WaitUntil(() => IsTurning == false);
-        LookToTarget();
 
         Vector3 lightningPlanePos = GetTargetPos();
 
@@ -170,16 +171,26 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
+
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
         yield return new WaitUntil(() => IsTurning == false);
-        LookToTarget();
 
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
         Enemy focus = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
         bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true, ActionShape.Square);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
+
+        AbilityOneParticle.transform.position = fireBallTransform;
+
+        firePlane.transform.position = new Vector3(focus.transform.position.x,
+                                                   firePlane.transform.position.y,
+                                                   focus.transform.position.z);
+
+        FireBlastParticle.transform.position = new Vector3(focus.transform.position.x,
+                                                           firePlane.transform.position.y,
+                                                           focus.transform.position.z);
 
         enemies.Add(focus);
 

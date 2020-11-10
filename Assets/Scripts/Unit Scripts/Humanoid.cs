@@ -524,7 +524,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             yield return new WaitForFixedUpdate();
         }
-        print("Done turning");
         IsTurning = false;
     }
 

@@ -13,4 +13,18 @@ public class SendMessageOnEvent : MonoBehaviour
     {
         transform.parent.GetComponentInChildren<Humanoid>().SetAnimationComplete(true);
     }
+
+    public enum ParticleToTrigger
+    {
+        Fireball
+    }
+
+
+    public void TriggerParticle(ParticleToTrigger particle)
+    {
+        //print(particle);
+
+        transform.parent.GetComponentInChildren<Player>().AbilityOneParticle.gameObject.SetActive(true);
+        transform.parent.GetComponentInChildren<Player>().ActivateAbilityOneParticle();
+    }
 }

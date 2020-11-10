@@ -43,7 +43,6 @@ public class Archer : Player
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
         yield return new WaitUntil(() => IsTurning == false);
-        LookToTarget();
         ActivateAttackParticle();
 
         int extraDamage = 0;
@@ -128,7 +127,6 @@ public class Archer : Player
             StartCoroutine(LookToTarget());
             yield return new WaitForFixedUpdate();
             yield return new WaitUntil(() => IsTurning == false);
-            LookToTarget();
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 

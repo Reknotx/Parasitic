@@ -46,7 +46,6 @@ public class Warrior : Player
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
         yield return new WaitUntil(() => IsTurning == false);
-        LookToTarget();
 
         //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
