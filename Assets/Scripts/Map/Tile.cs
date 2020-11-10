@@ -53,13 +53,13 @@ public class Tile : MonoBehaviour
         if (slope)
         {
             MovementNeighbors = MapGrid.Instance.GetNeighbors(this);
-            for(int i = MovementNeighbors.Capacity -1; i >= 0; i--)
-            {
-                if (!MovementNeighbors[i].movementTile)
-                {
-                    MovementNeighbors.RemoveAt(i);
-                }
-            }
+            //for(int i = MovementNeighbors.Capacity -1; i >= 0; i--)
+            //{
+            //    if (!MovementNeighbors[i].movementTile)
+            //    {
+            //        MovementNeighbors.RemoveAt(i);
+            //    }
+            //}
             FindTilt();
         }
     }
