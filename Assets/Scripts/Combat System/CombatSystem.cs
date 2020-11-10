@@ -727,6 +727,8 @@ public class CombatSystem : MonoBehaviour
             default:
                 break;
         }
+        activeSideTextImage.GetComponent<Animation>().Play();
+        activeSideImage.GetComponent<Animation>().Play();
     }
     /// <summary>
     /// Checks if there are any units left to go this round.

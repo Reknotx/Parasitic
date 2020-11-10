@@ -84,7 +84,6 @@ public class WinConditionEditor : Editor
 {
     
     WinConditions winCondition;
-    int[] choices = { 0, 1 }; 
 
     //bool ShowEnumOption(System.Enum Enum)
     //{
@@ -128,7 +127,6 @@ public class WinConditionEditor : Editor
         {
             winCondition.keyObjectiveMessage = EditorGUILayout.TextField("Message for Key Condition", winCondition.keyObjectiveMessage);
         }
-
 
 
 

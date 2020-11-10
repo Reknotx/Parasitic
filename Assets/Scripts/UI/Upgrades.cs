@@ -561,6 +561,7 @@ public class Upgrades : MonoBehaviour
             mageUpgrades.SetActive(false);
             archerUpgrades.SetActive(false);
             upgradeWindow.SetActive(false);
+            HideInfo();
         }
         else
         {

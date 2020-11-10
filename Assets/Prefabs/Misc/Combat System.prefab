@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 4076608831523456197}
   - component: {fileID: 1918290331824542613}
   - component: {fileID: 897749248248730696}
+  - component: {fileID: 2889841938707708388}
   m_Layer: 5
   m_Name: UnitTurnImage
   m_TagString: Untagged
@@ -821,6 +822,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &2889841938707708388
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530822540588928030}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 24fe59e163ab5ee479ef352722f3c14f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 0e7ab3d9accd1d84c8baf944cfb47646, type: 2}
+  - {fileID: 7400000, guid: 24fe59e163ab5ee479ef352722f3c14f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3760635625321882185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1398,7 @@ GameObject:
   - component: {fileID: 694069079677987729}
   - component: {fileID: 1637589174473196328}
   - component: {fileID: 1083105792486408680}
+  - component: {fileID: 6962847623217015571}
   m_Layer: 5
   m_Name: UnitTurnTextImage
   m_TagString: Untagged
@@ -1443,6 +1462,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &6962847623217015571
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604035290120840326}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 0e7ab3d9accd1d84c8baf944cfb47646, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 0e7ab3d9accd1d84c8baf944cfb47646, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4720501004594537191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,8 +4121,8 @@ MonoBehaviour:
   playerTurnSprite: {fileID: 21300000, guid: 2986eeb90d5b4414bbc5a4e3479f3804, type: 3}
   playerTurnTextSprite: {fileID: 21300000, guid: f61f90996e8736443843e70d930f69a1,
     type: 3}
-  enemyTurnSprite: {fileID: 21300000, guid: ed8d109348130284cbdef237fa23b938, type: 3}
-  enemyTurnTextSprite: {fileID: 21300000, guid: d00c0a00fe0acef4eb9529f18c993cc1,
+  enemyTurnSprite: {fileID: 21300000, guid: d00c0a00fe0acef4eb9529f18c993cc1, type: 3}
+  enemyTurnTextSprite: {fileID: 21300000, guid: ed8d109348130284cbdef237fa23b938,
     type: 3}
   knightHealthSlider: {fileID: 1834299575820890219}
   mageHealthSlider: {fileID: 6899259837720235973}
