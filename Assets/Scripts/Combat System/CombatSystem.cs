@@ -746,10 +746,29 @@ public class CombatSystem : MonoBehaviour
     /// <returns>True if win condition met, false otherwise.</returns>
     private bool CheckWinCondition()
     {
-        foreach (Humanoid unit in unitsAlive)
+        Condition winCondition = WinConditions.Instance.condition;
+
+        switch (winCondition)
         {
-            if (unit is Enemy) return false;
+            case Condition.KillEnemies:
+                foreach (Humanoid unit in unitsAlive)
+                {
+                    if (unit is Enemy) return false;
+                }
+                break;
+            
+            case Condition.KillEnemiesOrGetKey:
+                foreach (Humanoid unit in unitsAlive)
+                {
+                    if (unit is Enemy) return false;
+                }
+                break;
+            
+            default:
+                break;
         }
+
+        
 
         return true;
     }
