@@ -185,7 +185,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public bool AnimationComplete { get; set; } = false;
 
+    #region Particle Systems
     public ParticleSystem attackParticle;
+
+    public ParticleSystem defendParticle;
+
+    protected ParticleSystem activeParticle;
+    #endregion
     /// <summary>
     /// Sets the animation complete parameter, used through animation events.
     /// </summary>
@@ -193,8 +199,20 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     public void SetAnimationComplete(bool value)
     {
         AnimationComplete = value;
-        if (attackParticle != null)
-            attackParticle.Stop();
+        //if (attackParticle != null)
+        //    attackParticle.Stop();
+
+        if (activeParticle != null)
+        {
+            activeParticle.Stop();
+        }
+        activeParticle = null;
+    }
+
+    public void SetActiveParticle(ParticleSystem particle)
+    {
+        activeParticle = particle;
+        activeParticle.Play();
     }
 
     public virtual void Start()
@@ -229,8 +247,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         XpDrop = _baseStats.XPDropOnDeath;
 
-        if (healthText == null) { healthText = GetComponentInChildren<Text>(); }
-        if (healthBar == null) { healthBar = GetComponentInChildren<Slider>(); }
         Health = _maxHealth;
 
         currentTile = MapGrid.Instance.TileFromPosition(parentTransform.position);
@@ -332,7 +348,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                 parentTransform.position = p01;
                 if (this is Enemy)
                 {
-                    EnemyPath.Instance.DrawPath(untraveledPath, parentTransform.position - Vector3.up * unitHeight, p1 - Vector3.up * unitHeight);
+                    EnemyPath.Instance.DrawPath(untraveledPath,
+                                                parentTransform.position - Vector3.up * unitHeight,
+                                                p1 - Vector3.up * unitHeight);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -464,7 +482,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     void HealingTileCheck()
     {
-        if (this is Player && currentTile.tileEffect == TileEffect.Healing && currentTile.remainingCooldown <= 0)
+        if (this is Player
+            && currentTile.tileEffect == TileEffect.Healing
+            && currentTile.remainingCooldown <= 0)
         {
             Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
             print("Healing Tile used");
@@ -480,7 +500,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected void LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y,
+                                            targetAngle,
+                                            ref turnSmoothVelocity,
+                                            turnSmoothTime);
+
         parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
@@ -559,17 +584,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void ResetSpecificStat(StatusEffect.StatusEffectType stat)
     {
-        if (stat == StatusEffect.StatusEffectType.AttackDown || stat == StatusEffect.StatusEffectType.AttackUp)
+        switch (stat)
         {
-            AttackStat = _baseAttack;
-        }
-        else if (stat == StatusEffect.StatusEffectType.DefenseDown || stat == StatusEffect.StatusEffectType.DefenseUp)
-        {
-            DefenseStat = _baseDefense;
-        }
-        else if (stat == StatusEffect.StatusEffectType.MoveDown || stat == StatusEffect.StatusEffectType.MoveUp)
-        {
-            MovementStat = _baseMovement;
+            case StatusEffect.StatusEffectType.AttackDown:
+            case StatusEffect.StatusEffectType.AttackUp:
+                AttackStat = _baseAttack;
+                break;
+
+            case StatusEffect.StatusEffectType.DefenseDown:
+            case StatusEffect.StatusEffectType.DefenseUp:
+                DefenseStat = _baseDefense;
+                break;
+
+            case StatusEffect.StatusEffectType.MoveDown:
+            case StatusEffect.StatusEffectType.MoveUp:
+                MovementStat = _baseMovement;
+                break;
         }
     }
 

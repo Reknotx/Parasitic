@@ -34,6 +34,10 @@ public abstract class Player : Humanoid, IPlayer
 
     public ParticleSystem SelectedParticle;
 
+    public ParticleSystem AbilityOneParticle;
+
+    public ParticleSystem AbilityTwoParticle;
+
     #region Ability Variables
     /// <summary> Range of player's first ability. </summary>
     [Header("The range of the player's first ability.")]
@@ -117,6 +121,7 @@ public abstract class Player : Humanoid, IPlayer
         base.Start();
     }
 
+
     #region Selection/Deselection
     public void UnitSelected()
     {
@@ -148,6 +153,7 @@ public abstract class Player : Humanoid, IPlayer
         print("Player deselected");
         //GetComponent<MeshRenderer>().material = defaultMat;
         SelectedParticle.Stop();
+        SelectedParticle.Clear();
         State = HumanoidState.Idle;
         CombatSystem.Instance.SetPlayer(null);
         CombatSystem.Instance.DeactivateCombatButtons();
@@ -166,20 +172,33 @@ public abstract class Player : Humanoid, IPlayer
     protected void AttackAnim()
     {
         animatorController.SetTrigger("CastAttack");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
         if (attackParticle != null)
-            attackParticle.Play();
+        {
+            SetActiveParticle(attackParticle);
+        }
     }
 
     /// <summary> Triggers the ability one animation for this player. </summary>
     protected void AbilityOneAnim()
     {
         animatorController.SetTrigger("CastAbilityOne");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
+        if (AbilityOneParticle != null)
+        {
+            SetActiveParticle(AbilityOneParticle);
+        }
     }
 
     /// <summary> Triggers the ability two animation for this player. </summary>
     protected void AbilityTwoAnim()
     {
         animatorController.SetTrigger("CastAbilityTwo");
+        CombatSystem.Instance.SetBattleState(BattleState.PerformingAction);
+        if (AbilityTwoParticle != null)
+        {
+            SetActiveParticle(AbilityTwoParticle);
+        }
     }
     #endregion
 

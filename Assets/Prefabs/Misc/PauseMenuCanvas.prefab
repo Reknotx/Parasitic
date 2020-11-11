@@ -879,7 +879,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Quality: '
+  m_Text: 'Quality: Very Low'
 --- !u!114 &1068321182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,7 +1184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Master: #'
+  m_Text: 'Master: 0'
 --- !u!114 &1187535661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'SFX: #'
+  m_Text: 'SFX: 0'
 --- !u!114 &1423985082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Music: #'
+  m_Text: 'Music: 0'
 --- !u!114 &1501249548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4307,7 +4307,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588731475386780885}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -4332,10 +4332,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'After aquiring experience, spend points to gain new abilities or upgrade
-    current ones.
-
-    Experience is viewable in the in upgrade menu.'
+  m_Text: The Camera is Moved using the WASD keys, and Rotated Left and Right using
+    the Q and E keys.
 --- !u!1 &3575991878303493225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4491,7 +4489,7 @@ GameObject:
   - component: {fileID: 5431765154325013050}
   - component: {fileID: 4542757663769342400}
   m_Layer: 5
-  m_Name: UpgradeVideo
+  m_Name: CameraVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4544,7 +4542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 03668069211fcbc4a8521e4c9fea7220, type: 2}
+  m_Texture: {fileID: 8400000, guid: adf18d055d364d0409f5abef6a0ad358, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4559,11 +4557,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959747143050720844}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: eff9ce56500491247903f8df37a63f41, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: da21322abc93f044e97b1ccd6190f66a, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 03668069211fcbc4a8521e4c9fea7220, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: adf18d055d364d0409f5abef6a0ad358, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
@@ -4758,7 +4756,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Upgrades
+  m_Text: 'Camera Rotation
 
 '
 --- !u!1 &4890421364817747969
@@ -6234,7 +6232,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 03668069211fcbc4a8521e4c9fea7220, type: 2}
+  m_Texture: {fileID: 8400000, guid: 7f5d5c0185883264894d3b9b3a4b1359, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6249,11 +6247,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5849410290511137681}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 38f5bf26e6d9b43408f8ebe11242225c, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c7c63085406f8aa41ae0909099991818, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 03668069211fcbc4a8521e4c9fea7220, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 7f5d5c0185883264894d3b9b3a4b1359, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
@@ -6467,7 +6465,7 @@ GameObject:
   - component: {fileID: 8175727831541088653}
   - component: {fileID: 116681973579929764}
   m_Layer: 5
-  m_Name: Upgrades
+  m_Name: Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
