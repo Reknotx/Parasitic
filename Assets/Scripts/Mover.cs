@@ -6,6 +6,7 @@ public class Mover : MonoBehaviour
 {
     public Transform firePlane;
 
+    public Transform parentTransform;
 
     IEnumerator Move()
     {
@@ -30,11 +31,22 @@ public class Mover : MonoBehaviour
             yield return new WaitForFixedUpdate();
 
         }
+    }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        GetComponent<ParticleSystem>().Stop();
+        transform.parent = parentTransform;
+        transform.position = Vector3.zero;
+        print("Reset parent transform to " + transform.parent);
+        Mage.Instance.FireBlastParticle.Play();
+        gameObject.SetActive(false);
     }
 
     public void EnableMove()
     {
+        parentTransform = transform.parent;
+        print("Parent transform is " + parentTransform.name);
         transform.parent = transform.root;
 
         StartCoroutine(Move());
