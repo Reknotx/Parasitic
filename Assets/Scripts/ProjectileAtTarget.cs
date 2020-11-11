@@ -17,7 +17,20 @@ public class ProjectileAtTarget : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             GetComponentInChildren<ParticleSystem>().Stop();
 
+            StartCoroutine(Reset());
+
         }
+    }
+
+    IEnumerator Reset()
+    {
+        ParticleSystem potionTrail = GetComponentInChildren<ParticleSystem>();
+
+        yield return new WaitUntil(() => potionTrail.isStopped);
+
+        transform.localPosition = new Vector3(0f, 0.5f, 0f);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.SetActive(false);
     }
 
     IEnumerator Move()

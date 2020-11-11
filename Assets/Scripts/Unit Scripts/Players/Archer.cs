@@ -173,9 +173,6 @@ public class Archer : Player
 
             StartAbilityOneCD();
 
-            _potion.GetComponent<MeshRenderer>().enabled = true;
-            _potion.SetActive(true);
-
             callback();
         }
     }
