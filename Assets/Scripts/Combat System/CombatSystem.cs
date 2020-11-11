@@ -768,58 +768,53 @@ public class CombatSystem : MonoBehaviour
 
         bool winConditionMet = true;
 
-        switch (winCondition)
+        foreach (Humanoid unit in unitsAlive)
         {
-            case Condition.KillEnemies:
-                foreach (Humanoid unit in unitsAlive)
-                {
-                    if (unit is Player) continue;
+            if (unit is Player) continue;
 
-                    switch (typeToKill)
-                    {
-                        case EnemyType.AllTypes:
-                            if (unit is Enemy) winConditionMet = false;
-                            break;
+            switch (typeToKill)
+            {
+                case EnemyType.AllTypes:
+                    if (unit is Enemy) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Larva:
-                            if (unit is Larva) winConditionMet = false;
-                            break;
+                case EnemyType.Larva:
+                    if (unit is Larva) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Shambler:
-                            if (unit is Shambler) winConditionMet = false;
-                            break;
+                case EnemyType.Shambler:
+                    if (unit is Shambler) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Spiker:
-                            if (unit is Spiker) winConditionMet = false;
-                            break;
+                case EnemyType.Spiker:
+                    if (unit is Spiker) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Charger:
-                            if (unit is Charger) winConditionMet = false;
-                            break;
+                case EnemyType.Charger:
+                    if (unit is Charger) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Brood:
-                            if (unit is Brood) winConditionMet = false;
-                            break;
+                case EnemyType.Brood:
+                    if (unit is Brood) winConditionMet = false;
+                    break;
 
-                        case EnemyType.Hive:
-                            if (unit is Hive) winConditionMet = false;
-                            break;
+                case EnemyType.Hive:
+                    if (unit is Hive) winConditionMet = false;
+                    break;
 
-                        default:
-                            break;
-                    }
+                default:
+                    break;
+            }
 
-                    if (winConditionMet == false) break;
+            if (winConditionMet == false) break;
 
-                }
-                break;
-            
-            case Condition.KillEnemiesOrGetKeyItem:
-                break;
-            
-            default:
-                break;
         }
+
+        if (winCondition == Condition.KillEnemiesOrGetKeyItem)
+        {
+            ///For Ryan.?
+        }
+
         return winConditionMet;
     }
 
