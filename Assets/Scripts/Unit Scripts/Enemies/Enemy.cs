@@ -51,8 +51,12 @@ public abstract class Enemy : Humanoid, IEnemy
 
     //}
     public GameObject healthCanvas;
+    public GameObject iconCanvas;
     public List<Player> playersWhoAttacked = new List<Player>();
 
+    GameObject knightIcon;
+    GameObject mageIcon;
+    GameObject archerIcon;
     /// <summary> The current target of the enemy. </summary>
     protected Player _currTarget;
 
@@ -61,6 +65,17 @@ public abstract class Enemy : Humanoid, IEnemy
 
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
+
+    public override void Start()
+    {
+        base.Start();
+        if (iconCanvas)
+        {
+            archerIcon = iconCanvas.transform.GetChild(0).gameObject;
+            mageIcon = iconCanvas.transform.GetChild(1).gameObject;
+            knightIcon = iconCanvas.transform.GetChild(2).gameObject;
+        }
+    }
 
     #region Move Functions
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
@@ -248,6 +263,23 @@ public abstract class Enemy : Humanoid, IEnemy
         Revealed = true;
 
         CombatSystem.Instance.SubscribeEnemy(this);
+    }
+
+    //will show or hide target icon
+    public void TargetIconDisplay(bool displayIcon)
+    {
+        if (_currTarget is Archer)
+        {
+            archerIcon.SetActive(displayIcon);
+        }
+        else if (_currTarget is Warrior)
+        {
+            knightIcon.SetActive(displayIcon);
+        }
+        else if(_currTarget is Mage)
+        {
+            mageIcon.SetActive(displayIcon);
+        }
     }
 
     /// <summary>

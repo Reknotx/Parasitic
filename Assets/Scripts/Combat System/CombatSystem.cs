@@ -306,7 +306,7 @@ public class CombatSystem : MonoBehaviour
                 {
                     tempE.Move(tempE.FindNearestPlayer());
                 }
-
+                tempE.TargetIconDisplay(true);
                 yield return new WaitUntil(() => tempE.HasMoved == true);
             }
             if (tempE.CheckIfInRangeOfTarget())
@@ -321,6 +321,7 @@ public class CombatSystem : MonoBehaviour
             EndUnitTurn(enemiesToGo[index]);
 
             yield return new WaitForSeconds(1.5f);
+            tempE.TargetIconDisplay(false);
         }
 
         NewRound();
@@ -724,6 +725,8 @@ public class CombatSystem : MonoBehaviour
             default:
                 break;
         }
+        activeSideTextImage.GetComponent<Animation>().Play();
+        activeSideImage.GetComponent<Animation>().Play();
     }
     /// <summary>
     /// Checks if there are any units left to go this round.
