@@ -764,30 +764,63 @@ public class CombatSystem : MonoBehaviour
     private bool CheckWinCondition()
     {
         Condition winCondition = WinConditions.Instance.condition;
+        EnemyType typeToKill = WinConditions.Instance.typeToKill;
+
+        bool winConditionMet = true;
 
         switch (winCondition)
         {
             case Condition.KillEnemies:
                 foreach (Humanoid unit in unitsAlive)
                 {
-                    if (unit is Enemy) return false;
+                    if (unit is Player) continue;
+
+                    switch (typeToKill)
+                    {
+                        case EnemyType.AllTypes:
+                            if (unit is Enemy) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Larva:
+                            if (unit is Larva) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Shambler:
+                            if (unit is Shambler) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Spiker:
+                            if (unit is Spiker) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Charger:
+                            if (unit is Charger) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Brood:
+                            if (unit is Brood) winConditionMet = false;
+                            break;
+
+                        case EnemyType.Hive:
+                            if (unit is Hive) winConditionMet = false;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (winConditionMet == false) break;
+
                 }
                 break;
             
-            case Condition.KillEnemiesOrGetKey:
-                foreach (Humanoid unit in unitsAlive)
-                {
-                    if (unit is Enemy) return false;
-                }
+            case Condition.KillEnemiesOrGetKeyItem:
                 break;
             
             default:
                 break;
         }
-
-        
-
-        return true;
+        return winConditionMet;
     }
 
     /// <summary> Checks the lose condition to see if it's met. </summary>
@@ -892,6 +925,14 @@ public class CombatSystem : MonoBehaviour
             if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
             SubscribeTimerUnit(enemy);
+        }
+
+        if (enemiesToGo.Count == 0)
+        {
+            foreach(Player player in tempP)
+            {
+                player.DoubleMoveSpeed();
+            }
         }
 
         DeactivateCombatButtons();
