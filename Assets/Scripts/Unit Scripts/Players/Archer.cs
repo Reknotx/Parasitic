@@ -28,7 +28,7 @@ public class Archer : Player
         /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Archer Normal Attack");
+        //Debug.Log("Archer Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
 
@@ -38,7 +38,12 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+
         ActionRange.Instance.ActionDeselected();
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        ActivateAttackParticle();
 
         int extraDamage = 0;
 
@@ -49,7 +54,7 @@ public class Archer : Player
             AttackRange = _baseRange;
         }
 
-        Debug.Log("Given a target");
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -99,7 +104,7 @@ public class Archer : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Archer Ability One");
+        //Debug.Log("Archer Ability One");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
         StartCoroutine(AbilityOneCR(callback));
     }
@@ -113,9 +118,15 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
+            ActivateAbilityTwoParticle();
             ActionRange.Instance.ActionDeselected();
+
+            StartCoroutine(LookToTarget());
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => IsTurning == false);
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
@@ -138,7 +149,7 @@ public class Archer : Player
     /// </summary>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Archer Ability Two");
+        //Debug.Log("Archer Ability Two");
         hasTrueDamage = true;
         ActionRange.Instance.ActionDeselected(false);
 

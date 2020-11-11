@@ -179,10 +179,13 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel(bool deselectPlayer = true)
     {
+
         Player selectedPlayer = null;
+
 
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
+            if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
             selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
             ActionRange.Instance.ActionDeselected(false);
             selectedPlayer.StopAllCoroutines();
@@ -424,9 +427,9 @@ public class CombatSystem : MonoBehaviour
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
-            else if (unit is Enemy && ((Enemy)unit).Revealed == true)
+            else if (unit is Enemy enemy && enemy.Revealed == true)
             {
-                enemiesToGo.Add((Enemy)unit);
+                enemiesToGo.Add(enemy);
             }
             unit.HasMoved = false;
             unit.HasAttacked = false;
@@ -438,6 +441,19 @@ public class CombatSystem : MonoBehaviour
             if (coolingTiles[tile].NewRound())
             {
                 coolingTiles.Remove(coolingTiles[tile]);
+            }
+        }
+
+
+        foreach (Player player in playersToGo)
+        {
+            if (enemiesToGo.Count == 0)
+            {
+                player.DoubleMoveSpeed();
+            }
+            else
+            {
+                player.SetMoveSpeedNormal();
             }
         }
 
@@ -484,10 +500,10 @@ public class CombatSystem : MonoBehaviour
             foreach (Humanoid temp in unitsAlive)
             {
 
-                if (temp is Enemy && ((Enemy)temp).playersWhoAttacked.Count > 0)
+                if (temp is Enemy enemy && enemy.playersWhoAttacked.Count > 0)
                 {
                     // Debug.Log("Count Before: " + ((Enemy)temp).playersWhoAttacked.Count);
-                    ((Enemy)temp).playersWhoAttacked.Remove((Player)unit);
+                    enemy.playersWhoAttacked.Remove((Player)unit);
                     //Debug.Log("Count After: " + ((Enemy)temp).playersWhoAttacked.Count);
                 }
             }
@@ -865,9 +881,9 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
-            if (player is Mage) Upgrades.Instance.mage = (Mage)player;
-            else if (player is Warrior) Upgrades.Instance.knight = (Warrior)player;
-            else if (player is Archer) Upgrades.Instance.archer = (Archer)player;
+            if (player is Mage mage) Upgrades.Instance.mage = mage;
+            else if (player is Warrior warrior) Upgrades.Instance.knight = warrior;
+            else if (player is Archer archer) Upgrades.Instance.archer = archer;
         }
 
         foreach (Enemy enemy in tempE)

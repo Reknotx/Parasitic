@@ -96,6 +96,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     
     /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
+
+    protected int moveSpeedModifier;
     #endregion
 
     /// <summary> The shape of the unitys attack </summary>
@@ -176,10 +178,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> States whether or not this unit is defending this round. </summary>
     public DefendingState DefendState { get; set; }
 
-    public AudioClip attackSoundEffect;
-    public AudioClip damagedSoundEffect;
+    /// <summary> Indicates if the unit is turning towards the target. </summary>
+    protected bool IsTurning { get; set; } = false;
 
-    public AudioSource audioSource;
+    [HideInInspector] public AudioClip attackSoundEffect;
+    [HideInInspector] public AudioClip damagedSoundEffect;
+
+    [HideInInspector] public AudioSource audioSource;
 
     public Animator animatorController;
 
@@ -190,7 +195,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public ParticleSystem defendParticle;
 
-    protected ParticleSystem activeParticle;
+    [SerializeField] protected ParticleSystem activeParticle;
     #endregion
     /// <summary>
     /// Sets the animation complete parameter, used through animation events.
@@ -202,17 +207,37 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         //if (attackParticle != null)
         //    attackParticle.Stop();
 
-        if (activeParticle != null)
-        {
-            activeParticle.Stop();
-        }
-        activeParticle = null;
+        //if (activeParticle != null)
+        //{
+        //    activeParticle.Stop();
+        //}
+        //activeParticle = null;
     }
 
+    /// <summary>
+    /// Sets the active particle that we wish to execute;
+    /// </summary>
+    /// <param name="particle">The particle system we want to play.</param>
     public void SetActiveParticle(ParticleSystem particle)
     {
         activeParticle = particle;
         activeParticle.Play();
+    }
+
+    public void DeactivateActiveParticle()
+    {
+        ///Possibly might need this in the future if things get funky.
+    }
+
+    /// <summary>
+    /// Activates the attack particle system if it exists.
+    /// </summary>
+    protected void ActivateAttackParticle()
+    {
+        if (attackParticle != null)
+        {
+            SetActiveParticle(attackParticle);
+        }
     }
 
     public virtual void Start()
@@ -286,6 +311,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator MoveCR(List<Tile> path)
     {
+        if (this is Player)
+        {
+            CombatSystem.Instance.DeactivateCombatButtons();
+        }
+
         List<Tile> untraveledPath = new List<Tile>(path);
         Vector3 p0;
         Vector3 p1;
@@ -394,14 +424,15 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         {
             EnemyPath.Instance.HidePath();
         }
-        else if (this is Mage)
+        else if (this is Mage mage)
         {
-            ((Mage)this).staffAndBookController.SetBool("IsWalking", false);
+            mage.staffAndBookController.SetBool("IsWalking", false);
         }
 
-        if (this is Player && ((Player)this).HasAttacked == false)
+        if (this is Player player && player.HasAttacked == false)
         {
-            ((Player)this).FindActionRanges();
+            player.FindActionRanges();
+            CombatSystem.Instance.ActivateCombatButtons();
         }
     }
     #endregion
@@ -460,6 +491,15 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator ShowDamage(int damage, bool blocked = false)
     {
+        if (this is Enemy enemy)
+        {
+            enemy.healthCanvas.SetActive(true);
+        }
+        else
+        {
+            enemy = null;
+        }
+
         if (damage == 0)
         {
             if (blocked)
@@ -476,10 +516,37 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             damageText.text = damage.ToString();
         }
         yield return new WaitForSecondsRealtime(1.5f);
+        
+        if (enemy != null)
+        {
+            enemy.healthCanvas.SetActive(false);
+        }
+
         damageText.text = "";
     }
     #endregion
 
+    /// <summary>
+    /// Coroutine that turns the unit in the direction of their target.
+    /// </summary>
+    protected virtual IEnumerator LookToTarget()
+    {
+        IsTurning = true;
+        Vector3 thisUnit = currentTile.transform.position;
+        Vector3 targetUnit = CharacterSelector.Instance.SelectedTargetUnit.currentTile.transform.position;
+
+        Vector3 angle = (targetUnit - thisUnit).normalized;
+
+        while (LookInDirection(angle))
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        IsTurning = false;
+    }
+
+    /// <summary>
+    /// Checks to see if the player is on a healing tile.
+    /// </summary>
     void HealingTileCheck()
     {
         if (this is Player
@@ -497,7 +564,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
     }
 
-    protected void LookInDirection(Vector3 direction)
+    /// <summary>
+    /// Smoothly turns the unit towards the direction.
+    /// </summary>
+    /// <param name="direction">The direction we want to look in.</param>
+    /// <returns>True if we are still turning, false if we've turned all the way.</returns>
+    protected bool LookInDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
@@ -506,21 +578,49 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
                                             ref turnSmoothVelocity,
                                             turnSmoothTime);
 
+        float result = Mathf.Abs(targetAngle - angle);
+
+        while(result >= 360)
+        {
+            result -= 360;
+        }
+
         parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (result < 0.1f)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /// <summary>
     /// When the incoming attack is dodged correctly we will activate the animation
     /// for this particular unit here.
     /// </summary>
-    private void Dodge()
+    //private void Dodge()
+    //{
+    //    // Activate the dodging animation
+    //}
+
+    /// <summary>
+    /// Temporarily raises the defense stat of this unit.
+    /// </summary>
+    public virtual void Defend()
     {
-        // Activate the dodging animation
+        DefendState = DefendingState.Defending;
+        if (defendParticle != null)
+        {
+            defendParticle.Play();
+        }
     }
 
     public void FindMovementRange()
     {
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat + moveSpeedModifier);
     }
 
     // /// <summary>
@@ -566,6 +666,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             if (effect.Type != StatusEffect.StatusEffectType.Taunted)
             {
                 ResetSpecificStat(effect.Type);
+
+                if (this is Mage mage)
+                {
+                    mage.AbilityTwoParticle.Stop();
+                    mage.AbilityTwoParticle.Clear();
+                }
+
             }
 
             statusEffects.Remove(effect);
@@ -608,7 +715,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         return statusEffects.Count;
     }
 
-    public void AddStatusEffect(StatusEffect effect)
+    public virtual void AddStatusEffect(StatusEffect effect)
     {
         statusEffects.Add(effect);
     }
