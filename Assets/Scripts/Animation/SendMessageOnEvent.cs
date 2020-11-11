@@ -27,4 +27,12 @@ public class SendMessageOnEvent : MonoBehaviour
         transform.parent.GetComponentInChildren<Player>().AbilityOneParticle.gameObject.SetActive(true);
         transform.parent.GetComponentInChildren<Player>().ActivateAbilityOneParticle();
     }
+
+    public void ThrowParticle(ParticleToTrigger particle)
+    {
+        if (particle == ParticleToTrigger.Fireball)
+        {
+            GetComponentInChildren<Mover>().EnableMove();
+        }
+    }
 }

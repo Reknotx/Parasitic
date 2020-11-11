@@ -222,6 +222,9 @@ public class Mage : Player
 
         yield return new WaitUntil(() => AnimationComplete);
 
+        yield return new WaitUntil(() => FireBlastParticle.isStopped);
+        //yield return new WaitForSeconds(1.0f);
+
         foreach (Enemy enemy in enemies)
         {
             oldEnemyHealth = enemy.Health;

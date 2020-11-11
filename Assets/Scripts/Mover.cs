@@ -33,8 +33,10 @@ public class Mover : MonoBehaviour
 
     }
 
-    private void OnEnable()
+    public void EnableMove()
     {
+        transform.parent = transform.root;
+
         StartCoroutine(Move());
     }
 
