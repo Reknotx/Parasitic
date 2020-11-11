@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4546024985949086388}
   - component: {fileID: 4546024985949086389}
   - component: {fileID: 4546024985949086390}
-  - component: {fileID: 4546024985949086391}
+  - component: {fileID: 3582395606768081449}
   m_Layer: 10
   m_Name: Charger
   m_TagString: Untagged
@@ -133,7 +133,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: -0.60502553, z: 0}
---- !u!114 &4546024985949086391
+--- !u!114 &3582395606768081449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4546024985949086408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeee1204cfed654bbdee083d6be3edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 648bbaad30a0bb04aa4bf7043a70b035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AttackShape: 1
@@ -160,6 +160,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animatorController: {fileID: 0}
   attackParticle: {fileID: 0}
+  defendParticle: {fileID: 0}
   healthCanvas: {fileID: 4546024987627600190}
   playersWhoAttacked: []
 --- !u!1 &4546024986125632043
