@@ -489,6 +489,15 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator ShowDamage(int damage, bool blocked = false)
     {
+        if (this is Enemy enemy)
+        {
+            enemy.healthCanvas.SetActive(true);
+        }
+        else
+        {
+            enemy = null;
+        }
+
         if (damage == 0)
         {
             if (blocked)
@@ -505,6 +514,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             damageText.text = damage.ToString();
         }
         yield return new WaitForSecondsRealtime(1.5f);
+        
+        if (enemy != null)
+        {
+            enemy.healthCanvas.SetActive(false);
+        }
+
         damageText.text = "";
     }
     #endregion
