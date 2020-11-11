@@ -39,10 +39,10 @@ public abstract class Enemy : Humanoid, IEnemy
         if (_currTarget.TakeDamage(attack + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
-    public virtual void Defend()
-    {
-        DefendState = DefendingState.Defending;
-    }
+    //public virtual void Defend()
+    //{
+    //    DefendState = DefendingState.Defending;
+    //}
     #endregion
 
     //public virtual void Dodge()
