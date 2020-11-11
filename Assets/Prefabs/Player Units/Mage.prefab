@@ -4099,7 +4099,7 @@ GameObject:
   - component: {fileID: 7778237724957883362}
   - component: {fileID: 7778237724957883360}
   - component: {fileID: 7778237724957883363}
-  - component: {fileID: 1592964768971313796}
+  - component: {fileID: 643785479751493927}
   m_Layer: 0
   m_Name: Fire Ball
   m_TagString: Untagged
@@ -8843,7 +8843,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1592964768971313796
+--- !u!114 &643785479751493927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8852,11 +8852,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7778237724957883365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31e44858f1ccf14394004da7e147f95, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fceab191cd22d641ad485bda502672f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePlane: {fileID: 3136302860374700565}
-  parentTransform: {fileID: 0}
+  owner: 1
+  projectileType: 2
+  target: {fileID: 3136302860374700565}
+  parentTransform: {fileID: 7654830246294141811}
+  SpeedModifer: 1
 --- !u!1 &7808510580502455008
 GameObject:
   m_ObjectHideFlags: 0

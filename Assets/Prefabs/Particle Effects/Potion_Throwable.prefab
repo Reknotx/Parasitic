@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5405755137528694108}
   - component: {fileID: 8931677286100871412}
   - component: {fileID: 521133759299736632}
-  - component: {fileID: 2754200851771758749}
   - component: {fileID: 8447529867516124209}
+  - component: {fileID: 9211517080885918238}
   m_Layer: 0
   m_Name: Potion_Throwable
   m_TagString: Untagged
@@ -82,18 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2754200851771758749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6833791961808525140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db34ad4b22171ea44b162ebbfffe4245, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &8447529867516124209
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -107,6 +95,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.14133844
   m_Center: {x: -0.009549137, y: 0.04133845, z: 0}
+--- !u!114 &9211517080885918238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833791961808525140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fceab191cd22d641ad485bda502672f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: 2
+  projectileType: 0
+  target: {fileID: 0}
+  parentTransform: {fileID: 0}
+  SpeedModifer: 2
 --- !u!1001 &2571141687310086546
 PrefabInstance:
   m_ObjectHideFlags: 0

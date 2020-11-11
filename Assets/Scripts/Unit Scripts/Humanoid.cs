@@ -56,8 +56,22 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     #endregion
 
     #region Unit Combat Stats
+    /// <summary> The private variable for the normal attack range. </summary>
+    private int _attackRange;
+
     /// <summary> The range of the normal attack. </summary>
-    public int AttackRange { get; set; } 
+    public int AttackRange 
+    {
+        get
+        {
+            return _attackRange;
+        } 
+
+        set
+        {
+            _attackRange = Mathf.Clamp(value, 0, 10);
+        }
+    } 
 
     /// <summary> The max health of this unit. </summary>
     protected int _maxHealth;

@@ -15,13 +15,15 @@ public class Archer : Player
 {
     private bool hasTrueDamage = false;
 
-    [HideInInspector] public bool potionHitTarget = false;
+    [HideInInspector] public bool potionHitTarget = false, arrowHitTarget = false;
 
     public static Archer Instance;
 
     public ParticleSystem potionSplash;
 
     [SerializeField] private GameObject _potion;
+
+    [SerializeField] private GameObject _arrow;
 
 
     private void Awake()
@@ -49,6 +51,7 @@ public class Archer : Player
     public override void NormalAttack(Action callback)
     {
         //Debug.Log("Archer Normal Attack");
+        arrowHitTarget = false;
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
 
@@ -67,12 +70,25 @@ public class Archer : Player
 
         int extraDamage = 0;
 
+        _arrow.SetActive(true);
+
         if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.archer))
         {
             extraDamage = AttackStat;
             MovementStat = _baseMovement;
             AttackRange = _baseRange;
+            _arrow.transform.GetChild(1).gameObject.SetActive(true);
+            _arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
+        else
+        {
+            _arrow.transform.GetChild(0).gameObject.SetActive(true);
+            _arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+        }
+        _arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
+        _arrow.GetComponent<ProjectileMover>().EnableMove();
+
+        yield return new WaitUntil(() => arrowHitTarget == true);
 
         //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
@@ -156,7 +172,9 @@ public class Archer : Player
 
             //yield return new WaitUntil(() => AnimationComplete);
 
-            _potion.GetComponent<ProjectileAtTarget>().EnableMove();
+            //_potion.GetComponent<ProjectileAtTarget>().EnableMove();
+            _potion.GetComponent<ProjectileMover>().SetTarget(target);
+            _potion.GetComponent<ProjectileMover>().EnableMove();
 
             yield return new WaitUntil(() => potionHitTarget == true);
 

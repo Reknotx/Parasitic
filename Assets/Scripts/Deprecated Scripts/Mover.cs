@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    public Transform firePlane;
+    public Transform target;
 
     public Transform parentTransform;
 
@@ -12,7 +12,7 @@ public class Mover : MonoBehaviour
     {
         Vector3 p0 = transform.position;
 
-        Vector3 p1 = firePlane.transform.position;
+        Vector3 p1 = target.transform.position;
         Vector3 p01;
         float startTime = Time.time;
 

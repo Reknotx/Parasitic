@@ -41,7 +41,7 @@ public class SendMessageOnEvent : MonoBehaviour
     {
         if (particle == ParticleToTrigger.Fireball)
         {
-            GetComponentInChildren<Mover>().EnableMove();
+            Mage.Instance.AbilityOneParticle.GetComponent<ProjectileMover>().EnableMove();
         }
     }
 }
