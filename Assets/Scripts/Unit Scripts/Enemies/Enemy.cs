@@ -30,10 +30,7 @@ public abstract class Enemy : Humanoid, IEnemy
         //animatorController.SetTrigger("CastAttack");
 
         //yield return new WaitUntil(() => AnimationComplete);
-        StartCoroutine(LookToTarget());
-        yield return new WaitForFixedUpdate();
-        yield return new WaitUntil(() => IsTurning == false);
-
+        yield return null;
         int attack = AttackStat;
 
         if (CheckForEffectOfType(StatusEffect.StatusEffectType.AttackDown))
@@ -42,7 +39,10 @@ public abstract class Enemy : Humanoid, IEnemy
         if (_currTarget.TakeDamage(attack + (int)currentTile.TileBoost(TileEffect.Attack))) CombatSystem.Instance.KillUnit(_currTarget);
     }
 
-    
+    public virtual void Defend()
+    {
+        DefendState = DefendingState.Defending;
+    }
     #endregion
 
     //public virtual void Dodge()
@@ -51,8 +51,12 @@ public abstract class Enemy : Humanoid, IEnemy
 
     //}
     public GameObject healthCanvas;
+    public GameObject iconCanvas;
     public List<Player> playersWhoAttacked = new List<Player>();
 
+    GameObject knightIcon;
+    GameObject mageIcon;
+    GameObject archerIcon;
     /// <summary> The current target of the enemy. </summary>
     protected Player _currTarget;
 
@@ -62,7 +66,16 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
     public bool Revealed { get; set; } = true;
 
-    [SerializeField] private ParticleSystem TauntedParticle;
+    public override void Start()
+    {
+        base.Start();
+        if (iconCanvas)
+        {
+            archerIcon = iconCanvas.transform.GetChild(0).gameObject;
+            mageIcon = iconCanvas.transform.GetChild(1).gameObject;
+            knightIcon = iconCanvas.transform.GetChild(2).gameObject;
+        }
+    }
 
     #region Move Functions
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
@@ -240,22 +253,6 @@ public abstract class Enemy : Humanoid, IEnemy
 
         return false;
     }
-
-    protected override IEnumerator LookToTarget()
-    {
-        IsTurning = true;
-        Vector3 thisUnit = currentTile.transform.position;
-        Vector3 targetUnit = _currTarget.currentTile.transform.position;
-
-        Vector3 angle = (targetUnit - thisUnit).normalized;
-
-        while (LookInDirection(angle))
-        {
-            yield return new WaitForFixedUpdate();
-        }
-        print("Done turning");
-        IsTurning = false;
-    }
     #endregion
 
     /// <summary>
@@ -266,6 +263,23 @@ public abstract class Enemy : Humanoid, IEnemy
         Revealed = true;
 
         CombatSystem.Instance.SubscribeEnemy(this);
+    }
+
+    //will show or hide target icon
+    public void TargetIconDisplay(bool displayIcon)
+    {
+        if (_currTarget is Archer)
+        {
+            archerIcon.SetActive(displayIcon);
+        }
+        else if (_currTarget is Warrior)
+        {
+            knightIcon.SetActive(displayIcon);
+        }
+        else if(_currTarget is Mage)
+        {
+            mageIcon.SetActive(displayIcon);
+        }
     }
 
     /// <summary>
@@ -300,7 +314,6 @@ public abstract class Enemy : Humanoid, IEnemy
             {
                 //Taunted = false;
                 _currTarget = null;
-                CancelInvoke();
             }
             else
             {
@@ -311,24 +324,6 @@ public abstract class Enemy : Humanoid, IEnemy
         }
 
         removeList.Clear();
-    }
-
-    public override void AddStatusEffect(StatusEffect effect)
-    {
-        if (effect.Type == StatusEffect.StatusEffectType.Taunted)
-        {
-            InvokeRepeating("ActivateTauntedParticle", 0f, 10f);
-        }
-
-        base.AddStatusEffect(effect);
-    }
-
-    private void ActivateTauntedParticle()
-    {
-        if (TauntedParticle != null)
-        {
-            TauntedParticle.Play();
-        }
     }
 
     private void OnMouseEnter()
