@@ -37,7 +37,8 @@ public class Mover : MonoBehaviour
     {
         GetComponent<ParticleSystem>().Stop();
         transform.parent = parentTransform;
-        transform.position = Vector3.zero;
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
         print("Reset parent transform to " + transform.parent);
         Mage.Instance.FireBlastParticle.Play();
         gameObject.SetActive(false);
