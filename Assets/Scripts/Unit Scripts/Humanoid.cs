@@ -96,6 +96,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     
     /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
+
+    protected int moveSpeedModifier;
     #endregion
 
     /// <summary> The shape of the unitys attack </summary>
@@ -618,7 +620,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void FindMovementRange()
     {
-        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat);
+        TileRange = MapGrid.Instance.FindTilesInRange(currentTile, MovementStat + moveSpeedModifier);
     }
 
     // /// <summary>

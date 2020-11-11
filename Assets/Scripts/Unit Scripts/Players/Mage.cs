@@ -335,7 +335,7 @@ public class Mage : Player
 
     protected override void AbilityTwoUpgradeTwo()
     {
-        Debug.Log("When you get an enemy while enchantment is active, the damage will be raised to 2x for remaining durations.");
+        Debug.Log("When you kill an enemy while enchantment is active, the damage will be raised to 2x for remaining durations.");
     }
 
     public override void ProcessUpgrade(Abilities abilityToUpgrade)

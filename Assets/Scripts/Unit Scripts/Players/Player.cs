@@ -120,6 +120,7 @@ public abstract class Player : Humanoid, IPlayer
         //defaultMat = GetComponent<MeshRenderer>().material;
         //if (selectedMat == null) selectedMat = Resources.Load<Material>("SelectedMat");
         if (SelectedParticle != null) SelectedParticle.Stop();
+        moveSpeedModifier = MovementStat;
         base.Start();
     }
 
@@ -340,4 +341,15 @@ public abstract class Player : Humanoid, IPlayer
 
         return posV3;
     }
+
+    public void DoubleMoveSpeed()
+    {
+        moveSpeedModifier = MovementStat;
+    }
+
+    public void SetMoveSpeedNormal()
+    {
+        moveSpeedModifier = 0;
+    }
+
 }

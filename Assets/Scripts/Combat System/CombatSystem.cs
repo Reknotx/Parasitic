@@ -444,6 +444,19 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
+
+        foreach (Player player in playersToGo)
+        {
+            if (enemiesToGo.Count == 0)
+            {
+                player.DoubleMoveSpeed();
+            }
+            else
+            {
+                player.SetMoveSpeedNormal();
+            }
+        }
+
         UpdateTimers();
 
         SetActiveUnits(ActiveUnits.Players);
