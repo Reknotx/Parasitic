@@ -15,6 +15,26 @@ public class Archer : Player
 {
     private bool hasTrueDamage = false;
 
+    [HideInInspector] public bool potionHitTarget = false;
+
+    public static Archer Instance;
+
+    public ParticleSystem potionSplash;
+
+    [SerializeField] private GameObject _potion;
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
+
+
     public override void Start()
     {
         healthBar = CombatSystem.Instance.archerHealthSlider;
@@ -105,6 +125,7 @@ public class Archer : Player
     public override void AbilityOne(Action callback)
     {
         //Debug.Log("Archer Ability One");
+        potionHitTarget = false;
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
         StartCoroutine(AbilityOneCR(callback));
     }
@@ -118,6 +139,7 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        _potion.SetActive(true);
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
@@ -134,9 +156,25 @@ public class Archer : Player
 
             //yield return new WaitUntil(() => AnimationComplete);
 
+            _potion.GetComponent<ProjectileAtTarget>().EnableMove();
+
+            yield return new WaitUntil(() => potionHitTarget == true);
+
+            Vector3 targetPos = CharacterSelector.Instance.SelectedTargetUnit.transform.position;
+
+            potionSplash.transform.position = new Vector3(targetPos.x,
+                                                          potionSplash.transform.position.y,
+                                                          targetPos.z);
+
+            potionSplash.Play();
+
+            print("Potion hit target");
             target.Heal();
 
             StartAbilityOneCD();
+
+            _potion.GetComponent<MeshRenderer>().enabled = true;
+            _potion.SetActive(true);
 
             callback();
         }

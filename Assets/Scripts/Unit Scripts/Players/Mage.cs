@@ -21,6 +21,18 @@ public class Mage : Player
     public ParticleSystem FireBlastParticle;
     private Vector3 fireBallTransform;
 
+    public static Mage Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
+
     public override void Start()
     {
         if (CombatSystem.Instance)

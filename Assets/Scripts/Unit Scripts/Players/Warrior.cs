@@ -14,6 +14,17 @@ using UnityEngine;
 
 public class Warrior : Player
 {
+    public static Warrior Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
 
     public override void Start()
     {
