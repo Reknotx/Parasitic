@@ -352,7 +352,7 @@ public abstract class Player : Humanoid, IPlayer
     /// text.
     /// </summary>
     /// <param name="amount">The amount of health that was gained from potion.</param>
-    IEnumerator ShowHealText(int amount)
+    public IEnumerator ShowHealText(int amount)
     {
         damageText.color = Color.green;
         damageText.text = amount.ToString();

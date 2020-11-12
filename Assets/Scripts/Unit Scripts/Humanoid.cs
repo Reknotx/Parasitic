@@ -576,11 +576,12 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// </summary>
     void HealingTileCheck()
     {
-        if (this is Player
+        if (this is Player player
             && currentTile.tileEffect == TileEffect.Healing
             && currentTile.remainingCooldown <= 0)
         {
             Health = Health + (int)currentTile.TileBoost(TileEffect.Healing);
+            StartCoroutine(player.ShowHealText((int)currentTile.TileBoost(TileEffect.Healing)));
             print("Healing Tile used");
             currentTile.StartCooldown();
             CombatSystem.Instance.coolingTiles.Add(currentTile);
