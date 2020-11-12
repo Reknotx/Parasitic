@@ -537,6 +537,31 @@ public class CombatSystem : MonoBehaviour
     #region Helpers and UI functions
 
     #region UI
+
+    /// <summary>
+    /// Sets Turn UI Based on activeSides
+    /// </summary>
+    /// Author: Jeremy Casada
+    /// <param name="activeSide"></param>
+    private void SetTurnUI(ActiveUnits activeSide)
+    {
+        switch (activeSide)
+        {
+            case ActiveUnits.Players:
+                activeSideImage.sprite = playerTurnSprite;
+                activeSideTextImage.sprite = playerTurnTextSprite;
+                break;
+            case ActiveUnits.Enemies:
+                activeSideImage.sprite = enemyTurnSprite;
+                activeSideTextImage.sprite = enemyTurnTextSprite;
+                break;
+            default:
+                break;
+        }
+        activeSideTextImage.GetComponent<Animation>().Play();
+        activeSideImage.GetComponent<Animation>().Play();
+    }
+
     /// <summary>
     /// Sets enemiesAliveText
     /// </summary>
@@ -634,6 +659,7 @@ public class CombatSystem : MonoBehaviour
 
         foreach (Button button in combatButtons)
         {
+            button.gameObject.SetActive(true);
             button.interactable = true;
 
             if (button.gameObject.name == "Normal Attack")
@@ -701,7 +727,11 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void DeactivateCombatButtons()
     {
-        foreach (Button button in combatButtons) { button.interactable = false; }
+        foreach (Button button in combatButtons)
+        {
+            button.gameObject.SetActive(false);
+            button.interactable = false;
+        }
     }
 
     /// <summary>
@@ -724,25 +754,7 @@ public class CombatSystem : MonoBehaviour
         GameObject.Find("Ability Two").GetComponent<Button>().interactable = activeState;
     }
     #endregion
-
-    private void SetTurnUI(ActiveUnits activeSide)
-    {
-        switch (activeSide)
-        {
-            case ActiveUnits.Players:
-                activeSideImage.sprite = playerTurnSprite;
-                activeSideTextImage.sprite = playerTurnTextSprite;
-                break;
-            case ActiveUnits.Enemies:
-                activeSideImage.sprite = enemyTurnSprite;
-                activeSideTextImage.sprite = enemyTurnTextSprite;
-                break;
-            default:
-                break;
-        }
-        activeSideTextImage.GetComponent<Animation>().Play();
-        activeSideImage.GetComponent<Animation>().Play();
-    }
+    
     /// <summary>
     /// Checks if there are any units left to go this round.
     /// </summary>
