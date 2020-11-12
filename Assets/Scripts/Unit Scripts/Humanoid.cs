@@ -460,7 +460,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
-        State = HumanoidState.Idle;
+        State = HumanoidState.Selected;
 
     }
     #endregion
