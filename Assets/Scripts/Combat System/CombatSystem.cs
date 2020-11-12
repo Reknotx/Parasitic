@@ -135,6 +135,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -147,6 +148,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -159,6 +161,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -619,10 +622,6 @@ public class CombatSystem : MonoBehaviour
                 abilityTwoCDText.transform.parent.gameObject.SetActive(false);
             }
         }
-
-
-
-
     }
 
     /// <summary>
