@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     public bool drawGizmoMesh = true;
     public GameObject grid;
     public MeshFilter meshFilter;
+    GameObject gridline = null;
 
     public Vector2 TileCount()
     {
@@ -126,6 +128,91 @@ public class MapGenerator : MonoBehaviour
             return b;
     }
 
+    public void GenerateGridlines()
+    {
+        gridline = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Misc/Gridline.prefab", typeof(GameObject)) as GameObject;
+        print(gridline.name);
+        GameObject gridlines;
+        MapGrid mapGrid = GetComponent<MapGrid>();
+        Tile[,] tiles = mapGrid.GetTiles(columns, rows);
+
+        if (transform.Find("Gridlines"))
+        {
+            gridlines = transform.Find("Gridlines").gameObject;
+            DestroyImmediate(gridlines);
+        }
+        gridlines = new GameObject("Gridlines");
+        gridlines.transform.parent = this.transform;
+        Transform ColumnLines = new GameObject("ColumnLines").transform;
+        ColumnLines.transform.parent = gridlines.transform;
+
+        float lastElevation;
+        float currentElevation;
+        for (int c = 0; c <= columns; c++)
+        {
+            List<Vector3> points = new List<Vector3>();
+            GameObject line = Instantiate(gridline, ColumnLines);
+            LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
+            lastElevation = GetLineElevation(tiles, c, 0, true) * mapGrid.tileHeight;
+            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, 0));
+            for (int r = 1; r < rows; r++)
+            {
+                currentElevation = GetLineElevation(tiles,c,r,true) * mapGrid.tileHeight;
+                if (currentElevation != lastElevation)
+                {
+                    points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
+                    points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+                    lastElevation = currentElevation;
+                }
+            }
+            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, rows * gridSize));
+            lineRenderer.positionCount = points.Count;
+            lineRenderer.SetPositions(points.ToArray());
+        }
+        Transform RowLines = new GameObject("RowLines").transform;
+        RowLines.transform.parent = gridlines.transform;
+        for (int r = 0; r <= rows; r++)
+        {
+            List<Vector3> points = new List<Vector3>();
+            GameObject line = Instantiate(gridline, RowLines);
+            LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
+            lastElevation = GetLineElevation(tiles, 0, r, false) * mapGrid.tileHeight;
+            points.Add(new Vector3(0, gridHeight + lastElevation, r * gridSize));
+            for (int c = 1; c < columns; c++)
+            {
+                currentElevation = GetLineElevation(tiles, c, r, false) * mapGrid.tileHeight;
+                if (currentElevation != lastElevation)
+                {
+                    points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
+                    points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+                    lastElevation = currentElevation;
+                }
+            }
+            points.Add(new Vector3(columns * gridSize, gridHeight + lastElevation, r * gridSize));
+            lineRenderer.positionCount = points.Count;
+            lineRenderer.SetPositions(points.ToArray());
+        }
+    }
+
+    float GetLineElevation(Tile[,] tiles, int w, int h, bool row)
+    {
+        if((w - 1 < 0 && row) || w >= columns)
+        {
+            return (w - 1 < 0 ? tiles[w, h].level : tiles[w - 1, h].level);
+        }
+        else if((h - 1 < 0 && !row) || h >= rows)
+        {
+            return (h - 1 < 0 ? tiles[w, h].level : tiles[w, h - 1].level);
+        }
+        else if (row)
+        {
+            return (tiles[w, h].level > tiles[w - 1, h].level ? tiles[w, h].level : tiles[w - 1, h].level);
+        }
+        else
+        {
+            return (tiles[w, h].level > tiles[w, h - 1].level ? tiles[w, h].level : tiles[w, h - 1].level);
+        }
+    }
 
     private void OnDrawGizmos()
     {

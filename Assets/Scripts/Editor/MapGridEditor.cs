@@ -14,6 +14,10 @@ public class MapGridEditor : Editor {
         {
             mapGen.MakeGrid();
         }
+        if (GUILayout.Button("Generate Gridlines"))
+        {
+            mapGen.GenerateGridlines();
+        }
     }
 
 }
