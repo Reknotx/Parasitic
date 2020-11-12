@@ -7,22 +7,27 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #pragma warning disable IDE0020 // Use pattern matching
 
 public class Archer : Player
 {
+    /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
     private bool hasTrueDamage = false;
 
+    /// <summary> Public variable telling us if the projectile has hit the target yet. </summary>
     [HideInInspector] public bool potionHitTarget = false, arrowHitTarget = false;
 
+    /// <summary> The singleton instance of the Archer. </summary>
     public static Archer Instance;
 
+    /// <summary> The splash particle system for the potion when it's hit the target. </summary>
     public ParticleSystem potionSplash;
 
+    /// <summary> The potion game object. </summary>
     [SerializeField] private GameObject _potion;
 
+    /// <summary> The arrow game object. </summary>
     [SerializeField] private GameObject _arrow;
 
 
@@ -57,6 +62,10 @@ public class Archer : Player
 
     }
 
+    /// <summary>
+    /// The coroutine for the Archer's normal attack.
+    /// </summary>
+    /// <param name="callback">The function to call back to when the attack is completed.</param>
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
@@ -149,8 +158,7 @@ public class Archer : Player
     /// <summary>
     /// Heals the player
     /// </summary>
-    /// <param name="callback"></param>
-    /// <returns></returns>
+    /// <param name="callback">The function to call back to when the ability is completed.</param>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
@@ -236,10 +244,8 @@ public class Archer : Player
         Debug.Log("Enemy units will now have their move speed reduced when attack hits.");
     }
 
-    /// <summary> WIP. NOT YET IMPLEMENTED </summary>
     protected override void AttackUpgradeTwo()
     {
-        ///WIP NOT YET IMPLEMENTED
         Debug.Log("Increases the accuracy of the player's basic attack.");
     }
 

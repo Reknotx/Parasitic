@@ -1,9 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Author: Chase O'Connor
+ * Date: 11/10/2020
+ * 
+ * Brief: Moves a player projectile towards a target. Once the target
+ * is reached, a signal can be sent back to the casting player to allow
+ * the rest of the damage logic to be executed and applied.
+ */
+
+using System.Collections;
 using UnityEngine;
 
 public class ProjectileMover : MonoBehaviour
 {
+    /// <summary>
+    /// Enum representing the owner of the projectile. Probably useless honestly.
+    /// </summary>
     public enum Owner
     { 
         Warrior,
@@ -11,24 +22,41 @@ public class ProjectileMover : MonoBehaviour
         Archer
     }
 
+    /// <summary>
+    /// Enum representing the type of the projectile that is in action. Dictates
+    /// the execution of logic.
+    /// </summary>
     public enum ProjectileType
     { 
-        Potion,
-        Arrow,
-        Fireball
+        ArcherPotion,
+        ArcherArrow,
+        MageFireball
     }
 
+    [Header("Who casts this projectile.")]
+    /// <summary> Who casts this projectile. </summary>
     public Owner owner;
+
+    [Space]
+    [Header("The type of projectile being cast.")]
+    /// <summary> The type of projectile being cast. </summary>
     public ProjectileType projectileType;
 
+    [Space]
+    [Header("The transform of the target. Can be set either in code or in the inspector.")]
+    /// <summary> The transform of the target. Can be set either in code or in the inspector. </summary>
     public Transform target;
 
+    [Space]
+    [Header("The parent transform of the projectile before casting.")]
+    /// <summary> The parent transform of the projectile before casting. </summary>
     public Transform parentTransform;
 
     [Range(1, 5)]
     [Header("The speed of the projectile.")]
     public int SpeedModifer = 1;
 
+    /// <summary> Coroutine moving the projectile towards the target. </summary>
     IEnumerator Move()
     {
         Vector3 p0 = transform.position;
@@ -65,7 +93,7 @@ public class ProjectileMover : MonoBehaviour
     {
         print("Collided with " + other.name);
 
-        if (projectileType == ProjectileType.Potion)
+        if (projectileType == ProjectileType.ArcherPotion)
         {
             if (other.GetComponent<Player>() != null && other.GetComponent<Player>() == CharacterSelector.Instance.SelectedTargetUnit)
             {
@@ -79,7 +107,7 @@ public class ProjectileMover : MonoBehaviour
                 StartCoroutine(ResetPotion());
             }
         }
-        else if (projectileType == ProjectileType.Arrow)
+        else if (projectileType == ProjectileType.ArcherArrow)
         {
             if (other.GetComponent<Enemy>() != null && other.GetComponent<Enemy>() == CharacterSelector.Instance.SelectedTargetUnit)
             {
@@ -106,11 +134,18 @@ public class ProjectileMover : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Sets the target of the projectile, can be either player or enemy.
+    /// </summary>
+    /// <param name="target">The target of the projectile. Transform is gained from game object.</param>
     public void SetTarget(Humanoid target)
     {
         this.target = target.transform;
     }
 
+    /// <summary>
+    /// Triggers the movement coroutine to move the projectile.
+    /// </summary>
     public void EnableMove()
     {
         if (parentTransform == null)
@@ -123,6 +158,10 @@ public class ProjectileMover : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    /// <summary>
+    /// Called to reset the fireball to it's original position. The fireblast
+    /// particle system is also played to complete the animation effect.
+    /// </summary>
     void ResetFireball()
     {
         transform.parent = parentTransform;
@@ -131,6 +170,10 @@ public class ProjectileMover : MonoBehaviour
         Mage.Instance.FireBlastParticle.Play();
     }
 
+    /// <summary>
+    /// Coroutine for resetting the position of the potion. Waits until the 
+    /// potion trail particle system is ended so that a smoother transition can occur.
+    /// </summary>
     IEnumerator ResetPotion()
     {
         ParticleSystem potionTrail = GetComponentInChildren<ParticleSystem>();
@@ -142,6 +185,11 @@ public class ProjectileMover : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Coroutine for resetting the position of the arrow. Waits until the
+    /// arrow trail particle system is ended so that a smoother transition can occur.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ResetArrow()
     {
         ParticleSystem[] arrowTrails = GetComponentsInChildren<ParticleSystem>();

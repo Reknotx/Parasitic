@@ -30,13 +30,16 @@ public abstract class Player : Humanoid, IPlayer
     //public Material selectedMat;
 
     #region Particles
-    // EXP Particle System that Is a Child of the Player Unit
+    /// <summary> EXP Particle System that Is a Child of the Player Unit </summary>
     public ParticleSystem ExpParticle;
 
+    /// <summary> The particle system that is played when player is selected. </summary>
     public ParticleSystem SelectedParticle;
 
+    /// <summary> The particle system for the player's first ability. </summary>
     public ParticleSystem AbilityOneParticle;
 
+    /// <summary> The particle system for the player's second ability. </summary>
     public ParticleSystem AbilityTwoParticle;
     #endregion
 
@@ -52,10 +55,12 @@ public abstract class Player : Humanoid, IPlayer
 
     [Space]
     [Header("The cooldown of the player's first ability.")]
+    /// <summary> The cooldown of the player's first ability. </summary>
     public int AbilityOneCooldown;
 
     [Space]
     [Header("The cooldown of the player's second ability.")]
+    /// <summary> The cooldown of the player's second ability. </summary>
     public int AbilityTwoCooldown;
 
     /// <summary> The remaining cooldown on ability one. </summary>
@@ -77,9 +82,10 @@ public abstract class Player : Humanoid, IPlayer
     [Space(5)]
     public Sprite[] UpgradeToggleSprites = new Sprite[3];
 
-    /// <summary> Tiles ability1 affects </summary>
+    /// <summary> Tile range of the player's first ability. </summary>
     [HideInInspector] public bool[,] AbilityOneTileRange { get; set; }
-    /// <summary> Tiles ability 1 affects </summary>
+
+    /// <summary> Tile range of the player's second ability. </summary>
     [HideInInspector] public bool[,] AbilityTwoTileRange { get; set; }
 
     /// <summary> Public property to get the remaining cooldown of ability 1. </summary>
@@ -126,6 +132,10 @@ public abstract class Player : Humanoid, IPlayer
 
 
     #region Selection/Deselection
+    /// <summary>
+    /// Called when the player is selected. Sets up the game system to display
+    /// data specific to the player unit.
+    /// </summary>
     public void UnitSelected()
     {
         //print("Player selected");
@@ -151,6 +161,10 @@ public abstract class Player : Humanoid, IPlayer
         Upgrades.Instance.upgradesMenuToggle.GetComponent<Button>().spriteState = st;
     }
 
+    /// <summary>
+    /// Called when the player unit is deslected. Deactivates all coroutines that are
+    /// running and hides information specific to that unit.
+    /// </summary>
     public void UnitDeselected()
     {
         //print("Player deselected");
@@ -307,6 +321,7 @@ public abstract class Player : Humanoid, IPlayer
     }
     #endregion
 
+    /// <summary> Find the tile range of the player's normal attack, first ability, and second ability. </summary>
     public void FindActionRanges()
     {
         AttackTileRange = MapGrid.Instance.FindTilesInRange(currentTile, AttackRange, true, AttackShape);
@@ -327,11 +342,28 @@ public abstract class Player : Humanoid, IPlayer
         float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
 
         Health += Mathf.FloorToInt(MaxHealth * healPercent);
+        StartCoroutine(ShowHealText(Mathf.FloorToInt(MaxHealth * healPercent)));
     }
 
     /// <summary>
-    /// Returns a vector 3 representation of the target's position.
+    /// Small little coroutine that displays the "damage" text for when
+    /// a heal is received from the Archer. The text color is set to green
+    /// for the moment and then immediately set back to red for damage
+    /// text.
     /// </summary>
+    /// <param name="amount">The amount of health that was gained from potion.</param>
+    IEnumerator ShowHealText(int amount)
+    {
+        damageText.color = Color.green;
+        damageText.text = amount.ToString();
+          
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        damageText.text = "";
+        damageText.color = Color.red;
+    }
+
+    /// <summary> Returns a vector 3 representation of the target's position. </summary>
     /// <returns>Vector 3 of target's position</returns>
     protected Vector3 GetTargetPos()
     {
@@ -342,11 +374,13 @@ public abstract class Player : Humanoid, IPlayer
         return posV3;
     }
 
+    /// <summary> Doubles the move speed of the player, storing it in a global variable. </summary>
     public void DoubleMoveSpeed()
     {
         moveSpeedModifier = MovementStat;
     }
 
+    /// <summary> Resets the speed modifier back to zero. </summary>
     public void SetMoveSpeedNormal()
     {
         moveSpeedModifier = 0;

@@ -9,7 +9,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 /// <summary>
 /// Enum representing the unit's current state in the system.
@@ -48,10 +47,18 @@ public enum ActionShape
 public class Humanoid : MonoBehaviour, IMove, IStatistics
 {
     #region The base starting stats of this unit.
-    /// <summary> The base stats of this unit. Used to reset individual stats when certain things happen. </summary>
+    /// The base stats of this unit. Used to reset individual stats when certain things happen.
+
+    ///<summary> The unit's base movement stat.</summary>
     protected int _baseMovement;
+
+    /// <summary> The unit's base attack stat. </summary>
     protected int _baseAttack;
+
+    /// <summary> The unit's base defense stat. </summary>
     protected int _baseDefense;
+
+    /// <summary> The unit's base attack range. </summary>
     protected int _baseRange;
     #endregion
 
@@ -94,6 +101,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
     }
 
+    /// <summary> Public property returning the unit's max health value, keeping it as read only. </summary>
     public int MaxHealth { get { return _maxHealth; } }
 
     /// <summary>Attack of the unit. </summary>
@@ -111,6 +119,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary>XP Dropped when this Unit Dies</summary>
     public int XpDrop { get; set; }
 
+    /// <summary>
+    /// The move speed modifier, used only by player's for when there are no enemies
+    /// visible in the level.
+    /// </summary>
     protected int moveSpeedModifier;
     #endregion
 
@@ -505,6 +517,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <returns></returns>
     IEnumerator ShowDamage(int damage, bool blocked = false)
     {
+        damageText.color = Color.red;
         if (this is Enemy enemy)
         {
             enemy.healthCanvas.SetActive(true);

@@ -66,6 +66,11 @@ public class Mage : Player
         StartCoroutine(NormalAttackCR(callback));
     }
 
+    /// <summary>
+    /// The coroutine for the mage's normal attack.
+    /// </summary>
+    /// <param name="callback">The function to call back to when the attack is completed.</param>
+    /// <returns></returns>
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         //Debug.Log("Select a target for the mage's normal attack.");
@@ -173,9 +178,9 @@ public class Mage : Player
     }
 
     /// <summary>
-    /// AOE
+    /// The coroutine for the mage's fireball ability.
     /// </summary>
-    /// <param name="callback"></param>
+    /// <param name="callback">The function to call back to when the ability is completed.</param>
     /// <returns></returns>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
@@ -276,6 +281,7 @@ public class Mage : Player
     /// <summary>
     /// Mage's second ability. Damage boost.
     /// </summary>
+    /// <param name="callback">The function to call back to when the ability is completed. Not used currently for this ability.</param>
     public override void AbilityTwo(Action callback)
     {
         //Debug.Log("Mage Ability Two");
