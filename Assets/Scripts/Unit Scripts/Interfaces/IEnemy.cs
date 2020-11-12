@@ -4,7 +4,7 @@
     void Attack();
 
     /// <summary>Triggers the defend animation of the enemy.</summary>
-    void Defend();
+    //void Defend();
 
     /// <summary>Triggers the dodge animation of the enemy.</summary>
     //void Dodge();

@@ -179,10 +179,13 @@ public class CombatSystem : MonoBehaviour
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel(bool deselectPlayer = true)
     {
+
         Player selectedPlayer = null;
+
 
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
+            if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
             selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
             ActionRange.Instance.ActionDeselected(false);
             selectedPlayer.StopAllCoroutines();
@@ -424,9 +427,9 @@ public class CombatSystem : MonoBehaviour
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
-            else if (unit is Enemy && ((Enemy)unit).Revealed == true)
+            else if (unit is Enemy enemy && enemy.Revealed == true)
             {
-                enemiesToGo.Add((Enemy)unit);
+                enemiesToGo.Add(enemy);
             }
             unit.HasMoved = false;
             unit.HasAttacked = false;
@@ -438,6 +441,19 @@ public class CombatSystem : MonoBehaviour
             if (coolingTiles[tile].NewRound())
             {
                 coolingTiles.Remove(coolingTiles[tile]);
+            }
+        }
+
+
+        foreach (Player player in playersToGo)
+        {
+            if (enemiesToGo.Count == 0)
+            {
+                player.DoubleMoveSpeed();
+            }
+            else
+            {
+                player.SetMoveSpeedNormal();
             }
         }
 
@@ -484,10 +500,10 @@ public class CombatSystem : MonoBehaviour
             foreach (Humanoid temp in unitsAlive)
             {
 
-                if (temp is Enemy && ((Enemy)temp).playersWhoAttacked.Count > 0)
+                if (temp is Enemy enemy && enemy.playersWhoAttacked.Count > 0)
                 {
                     // Debug.Log("Count Before: " + ((Enemy)temp).playersWhoAttacked.Count);
-                    ((Enemy)temp).playersWhoAttacked.Remove((Player)unit);
+                    enemy.playersWhoAttacked.Remove((Player)unit);
                     //Debug.Log("Count After: " + ((Enemy)temp).playersWhoAttacked.Count);
                 }
             }
@@ -759,12 +775,59 @@ public class CombatSystem : MonoBehaviour
     /// <returns>True if win condition met, false otherwise.</returns>
     private bool CheckWinCondition()
     {
+        Condition winCondition = WinConditions.Instance.condition;
+        EnemyType typeToKill = WinConditions.Instance.typeToKill;
+
+        bool winConditionMet = true;
+
         foreach (Humanoid unit in unitsAlive)
         {
-            if (unit is Enemy) return false;
+            if (unit is Player) continue;
+
+            switch (typeToKill)
+            {
+                case EnemyType.AllTypes:
+                    if (unit is Enemy) winConditionMet = false;
+                    break;
+
+                case EnemyType.Larva:
+                    if (unit is Larva) winConditionMet = false;
+                    break;
+
+                case EnemyType.Shambler:
+                    if (unit is Shambler) winConditionMet = false;
+                    break;
+
+                case EnemyType.Spiker:
+                    if (unit is Spiker) winConditionMet = false;
+                    break;
+
+                case EnemyType.Charger:
+                    if (unit is Charger) winConditionMet = false;
+                    break;
+
+                case EnemyType.Brood:
+                    if (unit is Brood) winConditionMet = false;
+                    break;
+
+                case EnemyType.Hive:
+                    if (unit is Hive) winConditionMet = false;
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (winConditionMet == false) break;
+
         }
 
-        return true;
+        if (winCondition == Condition.KillEnemiesOrGetKeyItem)
+        {
+            ///For Ryan.?
+        }
+
+        return winConditionMet;
     }
 
     /// <summary> Checks the lose condition to see if it's met. </summary>
@@ -858,9 +921,9 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
-            if (player is Mage) Upgrades.Instance.mage = (Mage)player;
-            else if (player is Warrior) Upgrades.Instance.knight = (Warrior)player;
-            else if (player is Archer) Upgrades.Instance.archer = (Archer)player;
+            if (player is Mage mage) Upgrades.Instance.mage = mage;
+            else if (player is Warrior warrior) Upgrades.Instance.knight = warrior;
+            else if (player is Archer archer) Upgrades.Instance.archer = archer;
         }
 
         foreach (Enemy enemy in tempE)
@@ -869,6 +932,14 @@ public class CombatSystem : MonoBehaviour
             if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
             SubscribeTimerUnit(enemy);
+        }
+
+        if (enemiesToGo.Count == 0)
+        {
+            foreach(Player player in tempP)
+            {
+                player.DoubleMoveSpeed();
+            }
         }
 
         DeactivateCombatButtons();
