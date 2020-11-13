@@ -91,13 +91,13 @@ public class ProjectileMover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Collided with " + other.name);
+        //print("Collided with " + other.name);
 
         if (projectileType == ProjectileType.ArcherPotion)
         {
             if (other.GetComponent<Player>() != null && other.GetComponent<Player>() == CharacterSelector.Instance.SelectedTargetUnit)
             {
-                print("We hit it");
+                //print("We hit it");
                 Archer.Instance.potionHitTarget = true;
                 //gameObject.SetActive(false);
 
@@ -111,7 +111,7 @@ public class ProjectileMover : MonoBehaviour
         {
             if (other.GetComponent<Enemy>() != null && other.GetComponent<Enemy>() == CharacterSelector.Instance.SelectedTargetUnit)
             {
-                print("Target is hit");
+                //print("Target is hit");
                 Archer.Instance.arrowHitTarget = true;
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 StartCoroutine(ResetArrow());
@@ -152,7 +152,7 @@ public class ProjectileMover : MonoBehaviour
         {
             parentTransform = transform.parent;
         }
-        print("Parent transform is " + parentTransform.name);
+        //print("Parent transform is " + parentTransform.name);
         transform.parent = transform.root;
 
         StartCoroutine(Move());

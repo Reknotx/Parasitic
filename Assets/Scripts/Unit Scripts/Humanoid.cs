@@ -435,7 +435,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             untraveledPath.RemoveAt(0);
         }
         //TileRange = MapGrid.Instance.FindTilesInRange(currentTile, Movement);
-        State = HumanoidState.Idle;
         HasMoved = true;
 
         if (animatorController != null)
@@ -443,7 +442,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             animatorController.SetBool("IsWalking", false);
         }
 
-        CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CharacterSelector.Instance.unitMoving = false;
         HealingTileCheck();
         if (this is Enemy)
@@ -460,9 +458,13 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             player.FindActionRanges();
             CombatSystem.Instance.ActivateCombatButtons();
         }
+
+        CombatSystem.Instance.SetBattleState(BattleState.Idle);
+        State = HumanoidState.Selected;
+
     }
     #endregion
-    
+
     #region Damage
     /**
      * <summary>Deals damage to unit.</summary>
