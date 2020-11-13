@@ -134,20 +134,21 @@ public class WinConditions : MonoBehaviour
         objectiveDropdown.AddOptions(objectives);
 
 
-        switch (condition)
-        {
-            case Condition.KillEnemies:
-                objectiveText.text = "Objective";
-                break;
-            case Condition.KillEnemiesOrGetKeyItem:
-                objectiveText.text = "Objectives";
-                break;
-            default:
-                break;
-        }
+       // switch (condition)
+       // {
+       //     case Condition.KillEnemies:
+       //         objectiveText.text = "Objective";
+       //         break;
+       //     case Condition.KillEnemiesOrGetKeyItem:
+       //         objectiveText.text = "Objectives";
+       //         break;
+       //     default:
+       //         break;
+       // }
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(WinConditions))]
 public class WinConditionEditor : Editor
 {
@@ -180,7 +181,7 @@ public class WinConditionEditor : Editor
         //System.Func<System.Enum, bool> showEnumOption = ShowEnumOption;
 
         winCondition.objectiveDropdown = (Dropdown)EditorGUILayout.ObjectField("Objectives Drop Down(dont touch)", winCondition.objectiveDropdown, typeof(Dropdown), true);
-        winCondition.objectiveText = (Text)EditorGUILayout.ObjectField("Objective Text(dont touch)", winCondition.objectiveText, typeof(Text), true);
+        //winCondition.objectiveText = (Text)EditorGUILayout.ObjectField("Objective Text(dont touch)", winCondition.objectiveText, typeof(Text), true);
 
         winCondition.condition = (Condition)EditorGUILayout.EnumPopup("Conditions", winCondition.condition);
 
@@ -212,7 +213,15 @@ public class WinConditionEditor : Editor
                     winCondition.enemiesKillRequirement = FindObjectsOfType<Brood>().Length;
                     break;
                 case EnemyType.Hive:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Hive>().Length;
+                    winCondition.enemiesKillRequirement = 0;
+                    foreach(Hive hive in FindObjectsOfType<Hive>())
+                    {
+                        if (hive is Brood) { }
+                        else
+                        {
+                            winCondition.enemiesKillRequirement++;
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -232,3 +241,4 @@ public class WinConditionEditor : Editor
 
     
 }
+#endif
