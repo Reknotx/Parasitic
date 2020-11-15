@@ -62,6 +62,9 @@ public class MapGenerator : MonoBehaviour
         {
             DestroyImmediate(meshCollider);
         }
+        MeshRenderer renderer = grid.GetComponent<MeshRenderer>();
+        //DestroyImmediate(renderer);
+        renderer.enabled = false;
         grid.AddComponent<MeshCollider>();
         Transform tiles = transform.Find("Tiles");
         GameObject currentRow;
