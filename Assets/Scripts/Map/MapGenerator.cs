@@ -150,48 +150,221 @@ public class MapGenerator : MonoBehaviour
         float currentElevation;
         for (int c = 0; c <= columns; c++)
         {
-            List<Vector3> points = new List<Vector3>();
+            List<Vector3> rightPoints = GetPoints(tiles, c, true, mapGrid.tileHeight);
+            List<Vector3> leftPoints = GetPoints(tiles, c, true, mapGrid.tileHeight, true);
             GameObject line = Instantiate(gridline, ColumnLines);
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-            lastElevation = GetLineElevation(tiles, c, 0, true) * mapGrid.tileHeight;
-            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, 0));
-            for (int r = 1; r < rows; r++)
+            //lastElevation = GetLineElevation(tiles, c, 0, true) * mapGrid.tileHeight;
+            //lastElevation = tiles[c, 0].level * mapGrid.tileHeight;
+            //points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, 0));
+            //for (int r = 1; r <= rows; r++)
+            //{
+            //    if(c != columns)
+            //    {
+            //        currentElevation = tiles[c, r].level * mapGrid.tileHeight;
+            //        if (tiles[c, r].slope && tiles[c, r].facing == Dir.left)
+            //        {
+            //            currentElevation += mapGrid.tileHeight;
+            //        }
+            //        if (currentElevation != lastElevation)
+            //        {
+            //            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
+            //            //if tile is a not a slope facing down (to do: or last facing up)
+            //            if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down) && !(r == 0 || tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
+            //            {
+            //                points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+            //            }
+            //        }
+            //        else
+            //        {
+            //            points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+            //        }
+            //        if (c < columns - 1)
+            //        {
+            //
+            //        }
+            //        currentElevation = tiles[c + 1, r].level * mapGrid.tileHeight;
+            //        if (tiles[c, r].slope && tiles[c, r].facing == Dir.left)
+            //        {
+            //            currentElevation += mapGrid.tileHeight;
+            //        }
+            //        if (currentElevation != lastElevation)
+            //        {
+            //            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
+            //            //if tile is a not a slope facing down (to do: or last facing up)
+            //            if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down) && !(r == 0 || tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
+            //            {
+            //                points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+            //            }
+            //        }
+            //        else
+            //        {
+            //            points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+            //        }
+            //    }
+            //   
+            //}
+            //points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, rows * gridSize));
+            lineRenderer.positionCount = rightPoints.Count;
+            lineRenderer.SetPositions(rightPoints.ToArray());
+            line.name = "column " + c + " right";
+            if(leftPoints.Count > 0 && leftPoints != rightPoints)
             {
-                currentElevation = GetLineElevation(tiles,c,r,true) * mapGrid.tileHeight;
-                if (currentElevation != lastElevation)
-                {
-                    points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
-                    points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-                    lastElevation = currentElevation;
-                }
+                line = Instantiate(gridline, ColumnLines);
+                lineRenderer = line.GetComponent<LineRenderer>();
+                lineRenderer.positionCount = leftPoints.Count;
+                lineRenderer.SetPositions(leftPoints.ToArray());
+                line.name = "column " + c + " left";
             }
-            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, rows * gridSize));
-            lineRenderer.positionCount = points.Count;
-            lineRenderer.SetPositions(points.ToArray());
         }
         Transform RowLines = new GameObject("RowLines").transform;
         RowLines.transform.parent = gridlines.transform;
         for (int r = 0; r <= rows; r++)
         {
-            List<Vector3> points = new List<Vector3>();
+            List<Vector3> upperPoints = GetPoints(tiles, r, false, mapGrid.tileHeight);
+            List<Vector3> lowerPoints = GetPoints(tiles, r, false, mapGrid.tileHeight, true);
             GameObject line = Instantiate(gridline, RowLines);
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-            lastElevation = GetLineElevation(tiles, 0, r, false) * mapGrid.tileHeight;
-            points.Add(new Vector3(0, gridHeight + lastElevation, r * gridSize));
-            for (int c = 1; c < columns; c++)
+            //lastElevation = GetLineElevation(tiles, 0, r, false) * mapGrid.tileHeight;
+            //points.Add(new Vector3(0, gridHeight + lastElevation, r * gridSize));
+            //for (int c = 1; c < columns; c++)
+            //{
+            //    currentElevation = GetLineElevation(tiles, c, r, false) * mapGrid.tileHeight;
+            //    if (currentElevation != lastElevation)
+            //    {
+            //        points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
+            //        points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
+            //        lastElevation = currentElevation;
+            //    }
+            //}
+            //points.Add(new Vector3(columns * gridSize, gridHeight + lastElevation, r * gridSize));
+            lineRenderer.positionCount = upperPoints.Count;
+            lineRenderer.SetPositions(upperPoints.ToArray());
+            line.name = "row " + r + " up";
+            if (lowerPoints.Count > 0 && lowerPoints != upperPoints)
             {
-                currentElevation = GetLineElevation(tiles, c, r, false) * mapGrid.tileHeight;
+                line = Instantiate(gridline, RowLines);
+                lineRenderer = line.GetComponent<LineRenderer>();
+                lineRenderer.positionCount = lowerPoints.Count;
+                lineRenderer.SetPositions(lowerPoints.ToArray());
+                line.name = "row " + r + " down";
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="tiles">array of tiles</param>
+    /// <param name="l">line index</param>
+    /// <param name="column">is line a column or row</param>
+    /// <param name="height">hight of tile</param>
+    /// <param name="secondPass">is this the second pass for a line</param>
+    /// <returns>list of line points</returns>
+    List <Vector3> GetPoints(Tile[,] tiles, int l, bool column, float height, bool secondPass = false)
+    {
+        List<Vector3> points = new List<Vector3>();
+        float lastElevation;
+        float currentElevation;
+        if(secondPass && l == 0)
+        {
+            return points;
+        }
+        if (column)
+        {
+            int c = l;
+            if (c == columns)
+            {
+                secondPass = true;
+                c--;
+            }
+            else if (secondPass)
+            {
+                c--;
+            }
+            //add 1 elevation if slope is facing down, left if not second pass and right if second pass
+            lastElevation = tiles[c, 0].level * height + 
+                (tiles[c, 0].slope && ((tiles[c, 0].facing == Dir.down || (!secondPass && tiles[c, 0].facing == Dir.left || secondPass && tiles[c, 0].facing == Dir.right))) ? height : 0);
+            points.Add(new Vector3(l * gridSize, gridHeight + lastElevation, 0));
+            for (int r = 1; r < rows; r++)
+            {
+
+                currentElevation = tiles[c, r].level * height;
+                if ((!secondPass && tiles[c, r].slope && tiles[c, r].facing == Dir.left) || (secondPass && tiles[c, r].slope && tiles[c, r].facing == Dir.right))
+                {
+                    currentElevation += height;
+                }
                 if (currentElevation != lastElevation)
                 {
-                    points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
-                    points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-                    lastElevation = currentElevation;
+                    if ( !(tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
+                    {
+                        points.Add(new Vector3(l * gridSize, gridHeight + lastElevation, r * gridSize));
+                    }
+                    //if tile is a not a slope facing down and the last tile was not a slop facing up
+                    if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down))
+                    {
+                        points.Add(new Vector3(l * gridSize, gridHeight + currentElevation, r * gridSize));
+                    }
                 }
+                else
+                {
+                    points.Add(new Vector3(l * gridSize, gridHeight + currentElevation, r * gridSize));
+                }
+                lastElevation = currentElevation;
             }
-            points.Add(new Vector3(columns * gridSize, gridHeight + lastElevation, r * gridSize));
-            lineRenderer.positionCount = points.Count;
-            lineRenderer.SetPositions(points.ToArray());
+            Tile lastTile = tiles[c, rows - 1];
+            lastElevation = lastTile.level * height +
+                (lastTile.slope && ((lastTile.facing == Dir.up || (!secondPass && lastTile.facing == Dir.left || secondPass && lastTile.facing == Dir.right))) ? height : 0);
+            points.Add(new Vector3(l * gridSize, gridHeight + lastElevation, rows * gridSize));
         }
+        else
+        {
+            int r = l;
+            if (r == rows)
+            {
+                secondPass = true;
+                r--;
+            }
+            else if (secondPass)
+            {
+                r--;
+            }
+            //add 1 elevation if slope is facing down, left if not second pass and right if second pass
+            lastElevation = tiles[0, r].level * height +
+                (tiles[0, r].slope && ((tiles[0, r].facing == Dir.left || (!secondPass && tiles[0, r].facing == Dir.down || secondPass && tiles[0, r].facing == Dir.up))) ? height : 0);
+            points.Add(new Vector3(0, gridHeight + lastElevation, l * gridSize));
+            for (int c = 1; c < columns; c++)
+            {
+
+                currentElevation = tiles[c, r].level * height;
+                if ((!secondPass && tiles[c, r].slope && tiles[c, r].facing == Dir.down) || (secondPass && tiles[c, r].slope && tiles[c, r].facing == Dir.up))
+                {
+                    currentElevation += height;
+                }
+                if (currentElevation != lastElevation)
+                {
+                    if(!(tiles[c - 1, r].slope && tiles[c - 1, r].facing == Dir.right))
+                    {
+                        points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, l * gridSize));
+                    }
+                    //if tile is a not a slope facing down and the last tile was not a slop facing up
+                    if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.left))
+                    {
+                        points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, l * gridSize));
+                    }
+                }
+                else
+                {
+                    points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, l * gridSize));
+                }
+                lastElevation = currentElevation;
+            }
+            Tile lastTile = tiles[columns - 1, r];
+            lastElevation = lastTile.level * height +
+                (lastTile.slope && ((lastTile.facing == Dir.right || (!secondPass && lastTile.facing == Dir.down || secondPass && lastTile.facing == Dir.up))) ? height : 0);
+            points.Add(new Vector3(columns * gridSize, gridHeight + lastElevation, l * gridSize));
+        }
+        return points;
     }
 
     float GetLineElevation(Tile[,] tiles, int w, int h, bool row)
