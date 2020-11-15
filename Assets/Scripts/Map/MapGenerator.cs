@@ -157,57 +157,7 @@ public class MapGenerator : MonoBehaviour
             List<Vector3> leftPoints = GetPoints(tiles, c, true, mapGrid.tileHeight, true);
             GameObject line = Instantiate(gridline, ColumnLines);
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-            //lastElevation = GetLineElevation(tiles, c, 0, true) * mapGrid.tileHeight;
-            //lastElevation = tiles[c, 0].level * mapGrid.tileHeight;
-            //points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, 0));
-            //for (int r = 1; r <= rows; r++)
-            //{
-            //    if(c != columns)
-            //    {
-            //        currentElevation = tiles[c, r].level * mapGrid.tileHeight;
-            //        if (tiles[c, r].slope && tiles[c, r].facing == Dir.left)
-            //        {
-            //            currentElevation += mapGrid.tileHeight;
-            //        }
-            //        if (currentElevation != lastElevation)
-            //        {
-            //            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
-            //            //if tile is a not a slope facing down (to do: or last facing up)
-            //            if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down) && !(r == 0 || tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
-            //            {
-            //                points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-            //            }
-            //        }
-            //        else
-            //        {
-            //            points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-            //        }
-            //        if (c < columns - 1)
-            //        {
-            //
-            //        }
-            //        currentElevation = tiles[c + 1, r].level * mapGrid.tileHeight;
-            //        if (tiles[c, r].slope && tiles[c, r].facing == Dir.left)
-            //        {
-            //            currentElevation += mapGrid.tileHeight;
-            //        }
-            //        if (currentElevation != lastElevation)
-            //        {
-            //            points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
-            //            //if tile is a not a slope facing down (to do: or last facing up)
-            //            if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down) && !(r == 0 || tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
-            //            {
-            //                points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-            //            }
-            //        }
-            //        else
-            //        {
-            //            points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-            //        }
-            //    }
-            //   
-            //}
-            //points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, rows * gridSize));
+
             lineRenderer.positionCount = rightPoints.Count;
             lineRenderer.SetPositions(rightPoints.ToArray());
             line.name = "column " + c + " right";
@@ -228,19 +178,7 @@ public class MapGenerator : MonoBehaviour
             List<Vector3> lowerPoints = GetPoints(tiles, r, false, mapGrid.tileHeight, true);
             GameObject line = Instantiate(gridline, RowLines);
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-            //lastElevation = GetLineElevation(tiles, 0, r, false) * mapGrid.tileHeight;
-            //points.Add(new Vector3(0, gridHeight + lastElevation, r * gridSize));
-            //for (int c = 1; c < columns; c++)
-            //{
-            //    currentElevation = GetLineElevation(tiles, c, r, false) * mapGrid.tileHeight;
-            //    if (currentElevation != lastElevation)
-            //    {
-            //        points.Add(new Vector3(c * gridSize, gridHeight + lastElevation, r * gridSize));
-            //        points.Add(new Vector3(c * gridSize, gridHeight + currentElevation, r * gridSize));
-            //        lastElevation = currentElevation;
-            //    }
-            //}
-            //points.Add(new Vector3(columns * gridSize, gridHeight + lastElevation, r * gridSize));
+
             lineRenderer.positionCount = upperPoints.Count;
             lineRenderer.SetPositions(upperPoints.ToArray());
             line.name = "row " + r + " up";
@@ -299,13 +237,16 @@ public class MapGenerator : MonoBehaviour
                 }
                 if (currentElevation != lastElevation)
                 {
+                    //if the previous tile is a slope facing up don't make it a cliff
                     if ( !(tiles[c, r - 1].slope && tiles[c, r - 1].facing == Dir.up))
                     {
+                        //adds a point that is at the previous elevation but on the current position
                         points.Add(new Vector3(l * gridSize, gridHeight + lastElevation, r * gridSize));
                     }
-                    //if tile is a not a slope facing down and the last tile was not a slop facing up
+                    //if tile is a not a slope facing down don't make it a cliff
                     if (!(tiles[c, r].slope && tiles[c, r].facing == Dir.down))
                     {
+                        //adds a point that is the current elevation but at the previous postion
                         points.Add(new Vector3(l * gridSize, gridHeight + currentElevation, r * gridSize));
                     }
                 }
