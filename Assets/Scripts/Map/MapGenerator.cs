@@ -149,8 +149,6 @@ public class MapGenerator : MonoBehaviour
         Transform ColumnLines = new GameObject("ColumnLines").transform;
         ColumnLines.transform.parent = gridlines.transform;
 
-        float lastElevation;
-        float currentElevation;
         for (int c = 0; c <= columns; c++)
         {
             List<Vector3> rightPoints = GetPoints(tiles, c, true, mapGrid.tileHeight);
