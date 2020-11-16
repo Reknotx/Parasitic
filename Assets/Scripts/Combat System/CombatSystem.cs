@@ -65,7 +65,7 @@ public class CombatSystem : MonoBehaviour
     public Image activeSideTextImage;
     public Image activeSideImage;
 
-    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite;
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite;
 
     [Header("Player Health Bars and Text References")]
     public Slider knightHealthSlider;
@@ -179,6 +179,44 @@ public class CombatSystem : MonoBehaviour
         AttackComplete();
     }
 
+    /// <summary>
+    /// Makes All Player Units Defend if they are able to this round
+    /// </summary>
+    /// Author: Jeremy Casada 
+    /// Date: 11/15/2020
+    public void AllDefend()
+    {
+        if(Mage.Instance != null && playersToGo.Contains(Mage.Instance))
+        {
+            Mage.Instance.Defend();
+            EndUnitTurn(Mage.Instance);
+            Mage.Instance.SetAnimationComplete(false);
+        }
+
+        if (Warrior.Instance != null && playersToGo.Contains(Warrior.Instance))
+        {
+            Warrior.Instance.Defend();
+            EndUnitTurn(Warrior.Instance);
+            Warrior.Instance.SetAnimationComplete(false);
+        }
+
+        if (Archer.Instance != null && playersToGo.Contains(Archer.Instance))
+        {
+            Archer.Instance.Defend();
+            EndUnitTurn(Archer.Instance);
+            Archer.Instance.SetAnimationComplete(false);
+        }
+
+
+        CharacterSelector.Instance.SelectedPlayerUnit = null;
+        CharacterSelector.Instance.SelectedTargetUnit = null;
+
+        if (state != BattleState.Won)
+            SetBattleState(BattleState.Idle);
+
+        //SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
+    }
+
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel(bool deselectPlayer = true)
     {
@@ -252,14 +290,14 @@ public class CombatSystem : MonoBehaviour
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
         CharacterSelector.Instance.SelectedPlayerUnit.SetAnimationComplete(false);
-        CharacterSelector.Instance.SetLastSelected();
+       
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
         if (state != BattleState.Won)
             SetBattleState(BattleState.Idle);
 
-        SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
+        //SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
     }
     #endregion
 
@@ -365,7 +403,10 @@ public class CombatSystem : MonoBehaviour
             ActionRange.Instance.ActionDeselected();
             //Make sure movement range is no longer displayed
             CharacterSelector.Instance.BoarderLine.SetActive(false);
-            CharacterSelector.Instance.SelectedPlayerUnit.UnitDeselected();
+            //CharacterSelector.Instance.SelectedPlayerUnit.UnitDeselected();
+
+            ((Player)unit).UnitDeselected();
+
             //Deactivate combat buttons
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
@@ -541,8 +582,8 @@ public class CombatSystem : MonoBehaviour
     /// <summary>
     /// Sets Turn UI Based on activeSides
     /// </summary>
-    /// Author: Jeremy Casada
     /// <param name="activeSide"></param>
+    /// Author: Jeremy Casada
     private void SetTurnUI(ActiveUnits activeSide)
     {
         switch (activeSide)
@@ -601,6 +642,10 @@ public class CombatSystem : MonoBehaviour
             {
                 abilityInfo.sprite = tempP.Ability2Sprites[4];
             }
+            else if (button.gameObject.name == "Defend")
+            {
+                abilityInfo.sprite = defendInfoSprite;
+            }
             abilityInfo.gameObject.SetActive(true);
         }
 
@@ -624,7 +669,7 @@ public class CombatSystem : MonoBehaviour
     /// 10/6/20
     public void SetCoolDownText(Player player)
     {
-        if (CharacterSelector.Instance.SelectedPlayerUnit == player || (CharacterSelector.Instance.SelectedPlayerUnit == null && CharacterSelector.Instance.LastSelectedPlayerUnit == player))
+        if (CharacterSelector.Instance.SelectedPlayerUnit == player )
         {
             if (player.RemainingAbilityOneCD > 0)
             {
@@ -732,6 +777,7 @@ public class CombatSystem : MonoBehaviour
             button.gameObject.SetActive(false);
             button.interactable = false;
         }
+        HideAbilityInfo();
     }
 
     /// <summary>
@@ -920,9 +966,6 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
-            if (player is Mage mage) Upgrades.Instance.mage = mage;
-            else if (player is Warrior warrior) Upgrades.Instance.knight = warrior;
-            else if (player is Archer archer) Upgrades.Instance.archer = archer;
         }
 
         foreach (Enemy enemy in tempE)
