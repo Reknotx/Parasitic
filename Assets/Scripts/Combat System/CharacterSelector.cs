@@ -38,7 +38,7 @@ public class CharacterSelector : MonoBehaviour
     /// <summary> The selected player unit. </summary>
     [HideInInspector] public Player SelectedPlayerUnit;
 
-    /// <summary> Ryan? </summary>
+    /// <summary> DEPRECATED Ryan? No, this is Jeremy </summary>
     [HideInInspector] public Player LastSelectedPlayerUnit;
 
     /// <summary> The selected enemy unit. </summary>
@@ -128,15 +128,11 @@ public class CharacterSelector : MonoBehaviour
                     {
                         if (SelectedPlayerUnit != null)
                         {
-                            SetLastSelected();
                             SelectedPlayerUnit.UnitDeselected();
                         }
                         SelectedUnitObj = playerObj.gameObject;
                         SelectedPlayerUnit = playerObj;
-                        if(LastSelectedPlayerUnit == null)
-                        {
-                            SetLastSelected();
-                        }
+
                         SelectedPlayerUnit.UnitSelected();
                         BoarderLine.SetActive(false);
                         CombatSystem.Instance.SetCoolDownText(SelectedPlayerUnit);
@@ -154,12 +150,12 @@ public class CharacterSelector : MonoBehaviour
                     else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                     {
                         //print("Deselecting the already selected unit.");
-                        SetLastSelected();
+                        
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedUnitObj = null;
                         SelectedPlayerUnit = null;
                         BoarderLine.SetActive(false);
-                        CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
+                        
                     }
                 }
                 else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
@@ -188,13 +184,13 @@ public class CharacterSelector : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             SelectedPlayerUnit.Move(path);
-                            SetLastSelected();
+                            
                             //SelectedPlayerUnit.UnitDeselected();
                             //SelectedPlayerUnit = null;
                             selectedTile = null;
                             BoarderLine.SetActive(false);
                             HidePath();
-                            CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
+                            
                         }
                     }
                     else
@@ -347,6 +343,7 @@ public class CharacterSelector : MonoBehaviour
     }
 
     /// <summary>
+    /// DEPRECATED
     /// Sets the Last Selected Player to the Current Selected Player
     /// </summary>
     /// Author: Jeremy Casada
