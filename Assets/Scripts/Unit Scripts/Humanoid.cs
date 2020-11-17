@@ -610,9 +610,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
         float result = Mathf.Abs(targetAngle - angle);
 
-        while(result >= 360)
+        while(result >= 359)
         {
-            result -= 360;
+            result = Mathf.Abs(result - 360);
+            //print("Result: " + result);
         }
 
         parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
