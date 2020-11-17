@@ -13,7 +13,7 @@ using UnityEngine;
 public class Archer : Player
 {
     /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
-    [SerializeField] private bool hasTrueDamage = false;
+    private bool hasTrueDamage = false;
 
     /// <summary> Public variable telling us if the projectile has hit the target yet. </summary>
     [HideInInspector] public bool potionHitTarget = false, arrowHitTarget = false;
