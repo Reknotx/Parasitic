@@ -21,6 +21,8 @@ public class UI : MonoBehaviour
     public GameObject pauseBG;
     public GameObject howToPlay;
 
+    public Text cameraPivotText;
+
     public static UI Instance;
 
     private bool _isPaused;
@@ -46,6 +48,8 @@ public class UI : MonoBehaviour
         combatSystem = CombatSystem.Instance;
         //Time.timeScale = 0;
         _isPaused = true;
+        
+        
     }
 
     // Update is called once per frame
@@ -179,8 +183,9 @@ public class UI : MonoBehaviour
 
     public void SetGraphics(float qualityIndex)
     {
-        
+        Debug.Log("Quality Index: " + qualityIndex);
         QualitySettings.SetQualityLevel((int)qualityIndex);
+        Debug.Log("Quality Level: " + QualitySettings.GetQualityLevel());
         PlayerPrefs.SetInt("Quality Level", (int)qualityIndex);
         qualityText.text = "Quality: " + QualitySettings.names[(int)qualityIndex];
 
@@ -203,6 +208,47 @@ public class UI : MonoBehaviour
             Screen.SetResolution((int)(Screen.currentResolution.width), (int)(Screen.currentResolution.height), true);
         }
         //StartCoroutine(DebugResolution());
+    }
+
+    /// <summary>
+    /// Toggles the Camera Pivot and Sets Text if isInitialSet is false, else just Sets Text
+    /// </summary>
+    /// <param name="isInitialSet">if true, only set text, else set text and pivot</param>
+    public void ToggleCameraPivot()
+    {
+        
+        if (CameraMovement.Instance.useRotateAround)
+        {
+            CameraMovement.Instance.useRotateAround = false;
+            
+        }
+        else
+        {
+            CameraMovement.Instance.useRotateAround = true;
+            
+        }
+
+        SetPivotText(CameraMovement.Instance.useRotateAround);
+
+        PlayerPrefs.SetInt("Camera Pivot", CameraMovement.Instance.useRotateAround ? 1 : 0);
+        Debug.Log("Cummies: " + PlayerPrefs.GetInt("Camera Pivot"));
+
+    }
+
+    /// <summary>
+    /// Sets text based on rotateAround
+    /// </summary>
+    /// <param name="rotateAround">if true, pivot is center, else pivot is camera</param>
+    public void SetPivotText(bool rotateAround)
+    {
+        if(rotateAround)
+        {
+            cameraPivotText.text = "Pivot: Screen Center";
+        }
+        else
+        {
+            cameraPivotText.text = "Pivot: Camera";
+        }
     }
 
     IEnumerator DebugResolution()

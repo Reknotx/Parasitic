@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
+    public static CameraMovement Instance;
 
     private Camera _mainCamera;
     private Transform _mainTransform;
@@ -19,6 +19,15 @@ public class CameraMovement : MonoBehaviour
 
     Plane plane = new Plane(Vector3.up, 0);
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
     private void Start()
     {
         _mainTransform = this.transform;
@@ -26,8 +35,17 @@ public class CameraMovement : MonoBehaviour
         zoomPoint1 = _mainTransform.Find("ZoomPoint_1");
         zoomPoint2 = _mainTransform.Find("ZoomPoint_2");
 
-        
+        if(PlayerPrefs.GetInt("Camera Pivot", 0) == 0)
+        {
+            useRotateAround = false;
+        }
+        else
+        {
+            useRotateAround = true;
+        }
 
+        UI.Instance.SetPivotText(useRotateAround);
+            
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
         float dist;
         if (plane.Raycast(ray, out dist))
