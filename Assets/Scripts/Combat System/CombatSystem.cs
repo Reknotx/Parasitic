@@ -871,7 +871,7 @@ public class CombatSystem : MonoBehaviour
 
         }
 
-        if (winCondition == Condition.KillEnemiesOrGetKeyItem)
+        if (winCondition == Condition.GetKeyItem)
         {
             ///For Ryan.?
         }

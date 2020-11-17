@@ -7,7 +7,9 @@ using UnityEditor;
 public enum Condition
 {
     KillEnemies,
-    KillEnemiesOrGetKeyItem
+    GetKeyItem,
+    ReachArea,
+    MultipartObjective
 }
 
 public enum EnemyType
@@ -34,6 +36,17 @@ public class WinConditions : MonoBehaviour
 
     public Dropdown objectiveDropdown;
     public Text objectiveText;
+
+    public bool orderedObjectives;
+    [System.Serializable]
+    public struct Objective
+    {
+        public Condition condition;
+        public EnemyType typeToKill;
+
+    }
+
+    public List<Objective> objectives = new List<Objective>();
 
     private void Awake()
     {
@@ -187,7 +200,39 @@ public class WinConditionEditor : Editor
 
         winCondition.typeToKill = (EnemyType)EditorGUILayout.EnumPopup("Type of Enemy to Kill", winCondition.typeToKill);
 
+        if((int)winCondition.condition == 3)
+        {
 
+            winCondition.orderedObjectives = (bool)EditorGUILayout.Toggle("Ordered Objectives",winCondition.orderedObjectives);
+            //serializedObject.Update();
+            //EditorGUILayout.PropertyField(serializedObject.FindProperty("objectives"),);
+            //serializedObject.ApplyModifiedProperties();
+            var list = winCondition.objectives;
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("size", list.Count));
+            while (newCount < list.Count)
+                list.RemoveAt(list.Count - 1);
+            while (newCount > list.Count)
+                list.Add(new WinConditions.Objective());
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                EditorGUILayout.Separator();
+                Condition tmpCon = (Condition)EditorGUILayout.EnumPopup("Condition", list[i].condition);
+                if(tmpCon == Condition.MultipartObjective)
+                {
+                    tmpCon = Condition.KillEnemies;
+                }
+                EnemyType tmpToKill;
+                if(tmpCon == Condition.KillEnemies)
+                tmpToKill = (EnemyType)EditorGUILayout.EnumPopup("Type of Enemy to Kill", winCondition.typeToKill);
+                WinConditions.Objective tmp = new WinConditions.Objective();
+                tmp.condition = tmpCon;
+                winCondition.objectives[i] = tmp;
+                
+            }
+        }
+
+        //winCondition.objectives = (List<T>)EditorGUILayout.li
 
         
         if (GUILayout.Button("Click to Set Requirement to All of Type: " + winCondition.typeToKill))
