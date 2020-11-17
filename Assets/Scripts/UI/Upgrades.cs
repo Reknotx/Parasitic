@@ -138,7 +138,6 @@ public class Upgrades : MonoBehaviour
                     ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
-                Debug.Log(archerXpBar.value);
                 _archerXpText.text = _archerXp + " / " + maxXP;
             }
         }
@@ -221,6 +220,9 @@ public class Upgrades : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mage = Mage.Instance;
+        knight = Warrior.Instance;
+        archer = Archer.Instance;
         //Gets Components of Info Hover Window
         Text[] info = infoWindow.GetComponentsInChildren<Text>();
         infoTitleText = info[0];

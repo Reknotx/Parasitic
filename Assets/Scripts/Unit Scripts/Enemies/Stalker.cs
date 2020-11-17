@@ -7,6 +7,7 @@ public class Stalker : Enemy
     public override void Attack()
     {
         Debug.Log("Stalker Attack");
+        base.Attack();
     }
 
     public override void Defend()

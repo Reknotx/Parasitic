@@ -7,13 +7,40 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #pragma warning disable IDE0020 // Use pattern matching
 
 public class Archer : Player
 {
+    /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
     private bool hasTrueDamage = false;
+
+    /// <summary> Public variable telling us if the projectile has hit the target yet. </summary>
+    [HideInInspector] public bool potionHitTarget = false, arrowHitTarget = false;
+
+    /// <summary> The singleton instance of the Archer. </summary>
+    public static Archer Instance;
+
+    /// <summary> The splash particle system for the potion when it's hit the target. </summary>
+    public ParticleSystem potionSplash;
+
+    /// <summary> The potion game object. </summary>
+    [SerializeField] private GameObject _potion;
+
+    /// <summary> The arrow game object. </summary>
+    [SerializeField] private GameObject _arrow;
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
+
 
     public override void Start()
     {
@@ -28,28 +55,51 @@ public class Archer : Player
         /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Archer Normal Attack");
+        //Debug.Log("Archer Normal Attack");
+        arrowHitTarget = false;
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
 
     }
 
+    /// <summary>
+    /// The coroutine for the Archer's normal attack.
+    /// </summary>
+    /// <param name="callback">The function to call back to when the attack is completed.</param>
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+
         ActionRange.Instance.ActionDeselected();
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+        ActivateAttackParticle();
 
         int extraDamage = 0;
+
+        _arrow.SetActive(true);
 
         if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.archer))
         {
             extraDamage = AttackStat;
             MovementStat = _baseMovement;
             AttackRange = _baseRange;
+            _arrow.transform.GetChild(1).gameObject.SetActive(true);
+            _arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
+        else
+        {
+            _arrow.transform.GetChild(0).gameObject.SetActive(true);
+            _arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+        }
+        _arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
+        _arrow.GetComponent<ProjectileMover>().EnableMove();
 
-        Debug.Log("Given a target");
+        yield return new WaitUntil(() => arrowHitTarget == true);
+
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -99,7 +149,8 @@ public class Archer : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Archer Ability One");
+        //Debug.Log("Archer Ability One");
+        potionHitTarget = false;
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
         StartCoroutine(AbilityOneCR(callback));
     }
@@ -107,15 +158,21 @@ public class Archer : Player
     /// <summary>
     /// Heals the player
     /// </summary>
-    /// <param name="callback"></param>
-    /// <returns></returns>
+    /// <param name="callback">The function to call back to when the ability is completed.</param>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
+        _potion.SetActive(true);
+
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
+            ActivateAbilityTwoParticle();
             ActionRange.Instance.ActionDeselected();
+
+            StartCoroutine(LookToTarget());
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => IsTurning == false);
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
@@ -123,6 +180,21 @@ public class Archer : Player
 
             //yield return new WaitUntil(() => AnimationComplete);
 
+            //_potion.GetComponent<ProjectileAtTarget>().EnableMove();
+            _potion.GetComponent<ProjectileMover>().SetTarget(target);
+            _potion.GetComponent<ProjectileMover>().EnableMove();
+
+            yield return new WaitUntil(() => potionHitTarget == true);
+
+            Vector3 targetPos = CharacterSelector.Instance.SelectedTargetUnit.transform.position;
+
+            potionSplash.transform.position = new Vector3(targetPos.x,
+                                                          potionSplash.transform.position.y,
+                                                          targetPos.z);
+
+            potionSplash.Play();
+
+            print("Potion hit target");
             target.Heal();
 
             StartAbilityOneCD();
@@ -138,7 +210,7 @@ public class Archer : Player
     /// </summary>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Archer Ability Two");
+        //Debug.Log("Archer Ability Two");
         hasTrueDamage = true;
         ActionRange.Instance.ActionDeselected(false);
 
@@ -172,10 +244,8 @@ public class Archer : Player
         Debug.Log("Enemy units will now have their move speed reduced when attack hits.");
     }
 
-    /// <summary> WIP. NOT YET IMPLEMENTED </summary>
     protected override void AttackUpgradeTwo()
     {
-        ///WIP NOT YET IMPLEMENTED
         Debug.Log("Increases the accuracy of the player's basic attack.");
     }
 

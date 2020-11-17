@@ -65,7 +65,7 @@ public class CombatSystem : MonoBehaviour
     public Image activeSideTextImage;
     public Image activeSideImage;
 
-    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite;
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite;
 
     [Header("Player Health Bars and Text References")]
     public Slider knightHealthSlider;
@@ -127,6 +127,8 @@ public class CombatSystem : MonoBehaviour
     public ParticleSystem blood;
     public ParticleSystem bloodAndGuts;
 
+    public bool IgnoreDoubleMoveCheck = false;
+
     #region Player Combat
 
     #region Combat Button Functions
@@ -135,6 +137,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -147,6 +150,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -159,6 +163,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
         if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
+        CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
         SetBattleState(BattleState.Targetting);
@@ -176,13 +181,54 @@ public class CombatSystem : MonoBehaviour
         AttackComplete();
     }
 
+    /// <summary>
+    /// Makes All Player Units Defend if they are able to this round
+    /// </summary>
+    /// Author: Jeremy Casada 
+    /// Date: 11/15/2020
+    public void AllDefend()
+    {
+        if(Mage.Instance != null && playersToGo.Contains(Mage.Instance))
+        {
+            Mage.Instance.Defend();
+            EndUnitTurn(Mage.Instance);
+            Mage.Instance.SetAnimationComplete(false);
+        }
+
+        if (Warrior.Instance != null && playersToGo.Contains(Warrior.Instance))
+        {
+            Warrior.Instance.Defend();
+            EndUnitTurn(Warrior.Instance);
+            Warrior.Instance.SetAnimationComplete(false);
+        }
+
+        if (Archer.Instance != null && playersToGo.Contains(Archer.Instance))
+        {
+            Archer.Instance.Defend();
+            EndUnitTurn(Archer.Instance);
+            Archer.Instance.SetAnimationComplete(false);
+        }
+
+
+        CharacterSelector.Instance.SelectedPlayerUnit = null;
+        CharacterSelector.Instance.SelectedTargetUnit = null;
+
+        if (state != BattleState.Won)
+            SetBattleState(BattleState.Idle);
+
+        //SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
+    }
+
     /// <summary> Cancles the current action we have selected. </summary>
     public void Cancel(bool deselectPlayer = true)
     {
+
         Player selectedPlayer = null;
+
 
         if (CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
+            if (CharacterSelector.Instance.SelectedPlayerUnit.State == HumanoidState.Moving) return;
             selectedPlayer = CharacterSelector.Instance.SelectedPlayerUnit;
             ActionRange.Instance.ActionDeselected(false);
             selectedPlayer.StopAllCoroutines();
@@ -246,14 +292,14 @@ public class CombatSystem : MonoBehaviour
     {
         EndUnitTurn(CharacterSelector.Instance.SelectedPlayerUnit);
         CharacterSelector.Instance.SelectedPlayerUnit.SetAnimationComplete(false);
-        CharacterSelector.Instance.SetLastSelected();
+       
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
         if (state != BattleState.Won)
             SetBattleState(BattleState.Idle);
 
-        SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
+        //SetCoolDownText(CharacterSelector.Instance.LastSelectedPlayerUnit);
     }
     #endregion
 
@@ -359,7 +405,10 @@ public class CombatSystem : MonoBehaviour
             ActionRange.Instance.ActionDeselected();
             //Make sure movement range is no longer displayed
             CharacterSelector.Instance.BoarderLine.SetActive(false);
-            CharacterSelector.Instance.SelectedPlayerUnit.UnitDeselected();
+            //CharacterSelector.Instance.SelectedPlayerUnit.UnitDeselected();
+
+            ((Player)unit).UnitDeselected();
+
             //Deactivate combat buttons
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
@@ -424,9 +473,9 @@ public class CombatSystem : MonoBehaviour
                 unit.DefendState = DefendingState.NotDefending;
                 //unit.GetComponent<MeshRenderer>().material = unit.GetComponent<Player>().defaultMat;
             }
-            else if (unit is Enemy && ((Enemy)unit).Revealed == true)
+            else if (unit is Enemy enemy && enemy.Revealed == true)
             {
-                enemiesToGo.Add((Enemy)unit);
+                enemiesToGo.Add(enemy);
             }
             unit.HasMoved = false;
             unit.HasAttacked = false;
@@ -438,6 +487,21 @@ public class CombatSystem : MonoBehaviour
             if (coolingTiles[tile].NewRound())
             {
                 coolingTiles.Remove(coolingTiles[tile]);
+            }
+        }
+
+        if (IgnoreDoubleMoveCheck == false)
+        {
+            foreach (Player player in playersToGo)
+            {
+                if (enemiesToGo.Count == 0)
+                {
+                    player.DoubleMoveSpeed();
+                }
+                else
+                {
+                    player.SetMoveSpeedNormal();
+                }
             }
         }
 
@@ -484,10 +548,10 @@ public class CombatSystem : MonoBehaviour
             foreach (Humanoid temp in unitsAlive)
             {
 
-                if (temp is Enemy && ((Enemy)temp).playersWhoAttacked.Count > 0)
+                if (temp is Enemy enemy && enemy.playersWhoAttacked.Count > 0)
                 {
                     // Debug.Log("Count Before: " + ((Enemy)temp).playersWhoAttacked.Count);
-                    ((Enemy)temp).playersWhoAttacked.Remove((Player)unit);
+                    enemy.playersWhoAttacked.Remove((Player)unit);
                     //Debug.Log("Count After: " + ((Enemy)temp).playersWhoAttacked.Count);
                 }
             }
@@ -518,6 +582,31 @@ public class CombatSystem : MonoBehaviour
     #region Helpers and UI functions
 
     #region UI
+
+    /// <summary>
+    /// Sets Turn UI Based on activeSides
+    /// </summary>
+    /// <param name="activeSide"></param>
+    /// Author: Jeremy Casada
+    private void SetTurnUI(ActiveUnits activeSide)
+    {
+        switch (activeSide)
+        {
+            case ActiveUnits.Players:
+                activeSideImage.sprite = playerTurnSprite;
+                activeSideTextImage.sprite = playerTurnTextSprite;
+                break;
+            case ActiveUnits.Enemies:
+                activeSideImage.sprite = enemyTurnSprite;
+                activeSideTextImage.sprite = enemyTurnTextSprite;
+                break;
+            default:
+                break;
+        }
+        activeSideTextImage.GetComponent<Animation>().Play();
+        activeSideImage.GetComponent<Animation>().Play();
+    }
+
     /// <summary>
     /// Sets enemiesAliveText
     /// </summary>
@@ -557,6 +646,10 @@ public class CombatSystem : MonoBehaviour
             {
                 abilityInfo.sprite = tempP.Ability2Sprites[4];
             }
+            else if (button.gameObject.name == "Defend")
+            {
+                abilityInfo.sprite = defendInfoSprite;
+            }
             abilityInfo.gameObject.SetActive(true);
         }
 
@@ -580,7 +673,7 @@ public class CombatSystem : MonoBehaviour
     /// 10/6/20
     public void SetCoolDownText(Player player)
     {
-        if (CharacterSelector.Instance.SelectedPlayerUnit == player || (CharacterSelector.Instance.SelectedPlayerUnit == null && CharacterSelector.Instance.LastSelectedPlayerUnit == player))
+        if (CharacterSelector.Instance.SelectedPlayerUnit == player )
         {
             if (player.RemainingAbilityOneCD > 0)
             {
@@ -603,10 +696,6 @@ public class CombatSystem : MonoBehaviour
                 abilityTwoCDText.transform.parent.gameObject.SetActive(false);
             }
         }
-
-
-
-
     }
 
     /// <summary>
@@ -619,6 +708,7 @@ public class CombatSystem : MonoBehaviour
 
         foreach (Button button in combatButtons)
         {
+            button.gameObject.SetActive(true);
             button.interactable = true;
 
             if (button.gameObject.name == "Normal Attack")
@@ -686,7 +776,12 @@ public class CombatSystem : MonoBehaviour
     /// </summary>
     public void DeactivateCombatButtons()
     {
-        foreach (Button button in combatButtons) { button.interactable = false; }
+        foreach (Button button in combatButtons)
+        {
+            button.gameObject.SetActive(false);
+            button.interactable = false;
+        }
+        HideAbilityInfo();
     }
 
     /// <summary>
@@ -709,25 +804,7 @@ public class CombatSystem : MonoBehaviour
         GameObject.Find("Ability Two").GetComponent<Button>().interactable = activeState;
     }
     #endregion
-
-    private void SetTurnUI(ActiveUnits activeSide)
-    {
-        switch (activeSide)
-        {
-            case ActiveUnits.Players:
-                activeSideImage.sprite = playerTurnSprite;
-                activeSideTextImage.sprite = playerTurnTextSprite;
-                break;
-            case ActiveUnits.Enemies:
-                activeSideImage.sprite = enemyTurnSprite;
-                activeSideTextImage.sprite = enemyTurnTextSprite;
-                break;
-            default:
-                break;
-        }
-        activeSideTextImage.GetComponent<Animation>().Play();
-        activeSideImage.GetComponent<Animation>().Play();
-    }
+    
     /// <summary>
     /// Checks if there are any units left to go this round.
     /// </summary>
@@ -747,12 +824,59 @@ public class CombatSystem : MonoBehaviour
     /// <returns>True if win condition met, false otherwise.</returns>
     private bool CheckWinCondition()
     {
+        Condition winCondition = WinConditions.Instance.condition;
+        EnemyType typeToKill = WinConditions.Instance.typeToKill;
+
+        bool winConditionMet = true;
+
         foreach (Humanoid unit in unitsAlive)
         {
-            if (unit is Enemy) return false;
+            if (unit is Player) continue;
+
+            switch (typeToKill)
+            {
+                case EnemyType.AllTypes:
+                    if (unit is Enemy) winConditionMet = false;
+                    break;
+
+                case EnemyType.Larva:
+                    if (unit is Larva) winConditionMet = false;
+                    break;
+
+                case EnemyType.Shambler:
+                    if (unit is Shambler) winConditionMet = false;
+                    break;
+
+                case EnemyType.Spiker:
+                    if (unit is Spiker) winConditionMet = false;
+                    break;
+
+                case EnemyType.Charger:
+                    if (unit is Charger) winConditionMet = false;
+                    break;
+
+                case EnemyType.Brood:
+                    if (unit is Brood) winConditionMet = false;
+                    break;
+
+                case EnemyType.Hive:
+                    if (unit is Hive) winConditionMet = false;
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (winConditionMet == false) break;
+
         }
 
-        return true;
+        if (winCondition == Condition.KillEnemiesOrGetKeyItem)
+        {
+            ///For Ryan.?
+        }
+
+        return winConditionMet;
     }
 
     /// <summary> Checks the lose condition to see if it's met. </summary>
@@ -846,9 +970,6 @@ public class CombatSystem : MonoBehaviour
             playersToGo.Add(player);
             unitsAlive.Add(player);
             SubscribeTimerUnit(player);
-            if (player is Mage) Upgrades.Instance.mage = (Mage)player;
-            else if (player is Warrior) Upgrades.Instance.knight = (Warrior)player;
-            else if (player is Archer) Upgrades.Instance.archer = (Archer)player;
         }
 
         foreach (Enemy enemy in tempE)
@@ -857,6 +978,14 @@ public class CombatSystem : MonoBehaviour
             if (enemy.Revealed == true) enemiesToGo.Add(enemy);
             unitsAlive.Add(enemy);
             SubscribeTimerUnit(enemy);
+        }
+
+        if (IgnoreDoubleMoveCheck == false && enemiesToGo.Count == 0)
+        {
+            foreach(Player player in tempP)
+            {
+                player.DoubleMoveSpeed();
+            }
         }
 
         DeactivateCombatButtons();
