@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour
     //reference to unit currently on tile
     [HideInInspector]
     public Humanoid occupant;
-    int gridMask = (1 << 9);
+    //int gridMask = (1 << 9);
 
     private void Start()
     {

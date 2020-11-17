@@ -183,9 +183,7 @@ public class UI : MonoBehaviour
 
     public void SetGraphics(float qualityIndex)
     {
-        Debug.Log("Quality Index: " + qualityIndex);
         QualitySettings.SetQualityLevel((int)qualityIndex);
-        Debug.Log("Quality Level: " + QualitySettings.GetQualityLevel());
         PlayerPrefs.SetInt("Quality Level", (int)qualityIndex);
         qualityText.text = "Quality: " + QualitySettings.names[(int)qualityIndex];
 
@@ -231,7 +229,7 @@ public class UI : MonoBehaviour
         SetPivotText(CameraMovement.Instance.useRotateAround);
 
         PlayerPrefs.SetInt("Camera Pivot", CameraMovement.Instance.useRotateAround ? 1 : 0);
-        Debug.Log("Cummies: " + PlayerPrefs.GetInt("Camera Pivot"));
+        
 
     }
 
