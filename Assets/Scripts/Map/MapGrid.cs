@@ -36,9 +36,8 @@ public class MapGrid : MonoBehaviour
         {
             Instance = this;
         }
-        grid = new Tile[columns, rows];
         //find tile fill tile array
-        GetTiles();
+        grid = GetTiles(columns, rows);
     }
 
     private void Update()
@@ -48,14 +47,15 @@ public class MapGrid : MonoBehaviour
     }
 
     //fills grid array with tiles in the scene
-    public void GetTiles()
+    public Tile[,] GetTiles(int w,int h)
     {
         Transform tiles = transform.Find("Tiles");
+        Tile[,] gridTiles = new Tile[w, h];
         int z = 0;
         int x = 0;
         if (tiles.childCount == 0)
         {
-            return;
+            return null;
         }
         else
         {
@@ -66,9 +66,9 @@ public class MapGrid : MonoBehaviour
                 foreach(Transform column in row.transform)
                 {
                     //add Tile to array
-                    grid[x, z] = column.GetComponent<Tile>();
+                    gridTiles[x, z] = column.GetComponent<Tile>();
                     //set variable of tiles grid position in each tile
-                    grid[x, z].gridPosition = new Vector2(x, z);
+                    gridTiles[x, z].gridPosition = new Vector2(x, z);
                     x++;
                     
                 }
@@ -76,6 +76,7 @@ public class MapGrid : MonoBehaviour
                 z++;
             }
         }
+        return gridTiles;
     }
 
     public Tile TileFromPosition(Vector3 pos)
