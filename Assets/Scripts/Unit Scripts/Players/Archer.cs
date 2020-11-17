@@ -13,7 +13,7 @@ using UnityEngine;
 public class Archer : Player
 {
     /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
-    private bool hasTrueDamage = false;
+    [SerializeField] private bool hasTrueDamage = false;
 
     /// <summary> Public variable telling us if the projectile has hit the target yet. </summary>
     [HideInInspector] public bool potionHitTarget = false, arrowHitTarget = false;
@@ -75,22 +75,26 @@ public class Archer : Player
         StartCoroutine(LookToTarget());
         yield return new WaitForFixedUpdate();
         yield return new WaitUntil(() => IsTurning == false);
-        ActivateAttackParticle();
 
         int extraDamage = 0;
 
         _arrow.SetActive(true);
 
-        if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade1, UnitToUpgrade.archer))
+        if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, UnitToUpgrade.archer))
         {
+            print("Activating golden trail.");
             extraDamage = AttackStat;
-            MovementStat = _baseMovement;
-            AttackRange = _baseRange;
+            if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.archer))
+            {
+                MovementStat = _baseMovement;
+                AttackRange = _baseRange;
+            }
             _arrow.transform.GetChild(1).gameObject.SetActive(true);
             _arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
         else
         {
+            print("Activating standard trail.");
             _arrow.transform.GetChild(0).gameObject.SetActive(true);
             _arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         }
@@ -137,7 +141,11 @@ public class Archer : Player
             }
         }
 
-        hasTrueDamage = false;
+        if (hasTrueDamage)
+        {
+            hasTrueDamage = false;
+            DeactivateAbilityTwoParticle();
+        }
 
         callback();
     }
@@ -227,6 +235,8 @@ public class Archer : Player
         StartAbilityTwoCD();
 
         //animatorController.SetTrigger("CastEagleEye");
+
+        ActivateAbilityTwoParticle();
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
