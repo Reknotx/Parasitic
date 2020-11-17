@@ -147,6 +147,8 @@ public abstract class Player : Humanoid, IPlayer
         CombatSystem.Instance.SetPlayer(this);
         selected = true;
 
+        FindMovementRange();
+
         if (!HasMoved)
             CharacterSelector.Instance.BoarderLine.SetActive(true);
 
@@ -377,12 +379,14 @@ public abstract class Player : Humanoid, IPlayer
     /// <summary> Doubles the move speed of the player, storing it in a global variable. </summary>
     public void DoubleMoveSpeed()
     {
+        print("Doubling move speed of " + name);
         moveSpeedModifier = MovementStat;
     }
 
     /// <summary> Resets the speed modifier back to zero. </summary>
     public void SetMoveSpeedNormal()
     {
+        print("Normalizing move speed of " + name);
         moveSpeedModifier = 0;
     }
 

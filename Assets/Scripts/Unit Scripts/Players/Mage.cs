@@ -45,7 +45,7 @@ public class Mage : Player
         }
         healthBar = CombatSystem.Instance.mageHealthSlider;
         healthText = CombatSystem.Instance.mageHealthText;
-        fireBallTransform = AbilityOneParticle.transform.position;
+        fireBallTransform = AbilityOneParticle.transform.localPosition;
         base.Start();
     }
 
@@ -199,7 +199,7 @@ public class Mage : Player
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
 
-        AbilityOneParticle.transform.position = fireBallTransform;
+        AbilityOneParticle.transform.localPosition = fireBallTransform;
 
         firePlane.transform.position = new Vector3(focus.transform.position.x,
                                                    firePlane.transform.position.y,
