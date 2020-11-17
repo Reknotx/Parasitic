@@ -127,6 +127,8 @@ public class CombatSystem : MonoBehaviour
     public ParticleSystem blood;
     public ParticleSystem bloodAndGuts;
 
+    public bool IgnoreDoubleMoveCheck = false;
+
     #region Player Combat
 
     #region Combat Button Functions
@@ -447,16 +449,18 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
-
-        foreach (Player player in playersToGo)
+        if (IgnoreDoubleMoveCheck == false)
         {
-            if (enemiesToGo.Count == 0)
+            foreach (Player player in playersToGo)
             {
-                player.DoubleMoveSpeed();
-            }
-            else
-            {
-                player.SetMoveSpeedNormal();
+                if (enemiesToGo.Count == 0)
+                {
+                    player.DoubleMoveSpeed();
+                }
+                else
+                {
+                    player.SetMoveSpeedNormal();
+                }
             }
         }
 
@@ -933,7 +937,7 @@ public class CombatSystem : MonoBehaviour
             SubscribeTimerUnit(enemy);
         }
 
-        if (enemiesToGo.Count == 0)
+        if (IgnoreDoubleMoveCheck == false && enemiesToGo.Count == 0)
         {
             foreach(Player player in tempP)
             {
