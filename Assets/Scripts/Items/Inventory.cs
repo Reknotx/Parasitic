@@ -15,4 +15,9 @@ public class Inventory : MonoBehaviour
         }
         Instance = this;
     }
+
+    public bool InventoryContains(Item item)
+    {
+        return items.Contains(item);
+    }
 }

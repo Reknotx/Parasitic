@@ -24,6 +24,9 @@ public abstract class Player : Humanoid, IPlayer
         AbilityTwo
     }
 
+    /// <summary> ObjectiveZone the player currently occupies </summary>
+    ObjectiveZone currentObjectiveZone = null;
+
     bool selected = false;
     //public Material defaultMat;
     ///// <summary> The material for the player when they are selected. </summary>
@@ -390,4 +393,25 @@ public abstract class Player : Humanoid, IPlayer
         moveSpeedModifier = 0;
     }
 
+    /// <summary>
+    /// Sets currentObjectZone to zone entered or null if zone exited
+    /// </summary>
+    /// <param name="zone"></param>
+    /// <param name="entered"></param>
+    public void InObjectiveZone(ObjectiveZone zone, bool entered)
+    {
+        if (entered)
+        {
+            currentObjectiveZone = zone;
+        }
+        else
+        {
+            currentObjectiveZone = null;
+        }
+    }
+
+    public bool AtTargetObjective(ObjectiveZone target)
+    {
+        return target == currentObjectiveZone;
+    }
 }

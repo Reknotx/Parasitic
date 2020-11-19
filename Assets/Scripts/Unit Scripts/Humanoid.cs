@@ -459,8 +459,18 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
             CombatSystem.Instance.ActivateCombatButtons();
         }
 
-        CombatSystem.Instance.SetBattleState(BattleState.Idle);
-        State = HumanoidState.Selected;
+        //Check if player has reach objective / collected objective item
+        if(this is Player && (WinConditions.Instance.CheckWinCondition(Condition.ReachArea) || WinConditions.Instance.CheckWinCondition(Condition.GetKeyItem)))
+        {
+            CombatSystem.Instance.GameWon();
+        }
+        else
+        {
+            CombatSystem.Instance.SetBattleState(BattleState.Idle);
+            State = HumanoidState.Selected;
+        }
+
+        
 
     }
     #endregion
