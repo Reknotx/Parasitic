@@ -8,30 +8,70 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
+    public static CameraMovement Instance;
 
     private Camera _mainCamera;
     private Transform _mainTransform;
-    
+
+    public bool useRotateAround = false;
+
+    private Vector3 rotationPoint;
+
+    Plane plane = new Plane(Vector3.up, 0);
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
     private void Start()
     {
         _mainTransform = this.transform;
         _mainCamera = Camera.main;
         zoomPoint1 = _mainTransform.Find("ZoomPoint_1");
         zoomPoint2 = _mainTransform.Find("ZoomPoint_2");
+
+        if(PlayerPrefs.GetInt("Camera Pivot", 0) == 0)
+        {
+            useRotateAround = false;
+        }
+        else
+        {
+            useRotateAround = true;
+        }
+
+        UI.Instance.SetPivotText(useRotateAround);
+            
+        Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
+        float dist;
+        if (plane.Raycast(ray, out dist))
+        {
+            rotationPoint = ray.GetPoint(dist);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-            DoMovement();  
+        DoMovement();   
     }
 
     void DoMovement()
     {
         Move();
 
-        Rotate();
+        if(useRotateAround)
+        {
+            CenterRotate();
+        }
+        else
+        {
+            NormalRotate();
+        }
 
         Zoom();
 
@@ -56,14 +96,32 @@ public class CameraMovement : MonoBehaviour
         desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
 
         _mainTransform.Translate(desiredMove, Space.World);
+        rotationPoint += desiredMove;
     }
 
     /// <summary>
     /// Rotates Camera Position Using the "Rotation" axis (Q and E keys)
     /// </summary>
-    private void Rotate()
+    private void NormalRotate()
     {
         _mainTransform.Rotate(Vector3.up, Time.deltaTime * cameraRotationSpeed * Input.GetAxis("Rotation"), Space.World);
+    }
+
+    private void CenterRotate()
+    {
+        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Q))
+        {
+            float dist;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
+
+            if (plane.Raycast(ray, out dist))
+            {
+                rotationPoint = ray.GetPoint(dist);
+            }
+        }
+
+        _mainTransform.RotateAround(rotationPoint, Vector3.up, -Time.deltaTime * cameraRotationSpeed * Input.GetAxis("Rotation"));
+ 
     }
     #endregion
 
@@ -131,6 +189,8 @@ public class CameraMovement : MonoBehaviour
     private void LimitCamPos()
     {
         _mainTransform.position = new Vector3(Mathf.Clamp(_mainTransform.position.x, mapLimitX2, mapLimitX1), _mainTransform.position.y, Mathf.Clamp(_mainTransform.position.z, mapLimitY2, mapLimitY1));
+
+        
     }
 
     /*private void LimitCamRotation()

@@ -17,6 +17,38 @@ public class Mage : Player
 
     public Animator staffAndBookController;
 
+    public GameObject lightningPlane, firePlane;
+    public ParticleSystem FireBlastParticle;
+    private Vector3 fireBallTransform;
+
+    public static Mage Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
+
+    public override void Start()
+    {
+        if (CombatSystem.Instance)
+        {
+            print("Combat system exists");
+        }
+        else
+        {
+            print("Combat system gone");
+        }
+        healthBar = CombatSystem.Instance.mageHealthSlider;
+        healthText = CombatSystem.Instance.mageHealthText;
+        fireBallTransform = AbilityOneParticle.transform.localPosition;
+        base.Start();
+    }
+
     public override void Move(List<Tile> path, bool bypassRangeCheck = false)
     {
         staffAndBookController.SetBool("IsWalking", true);
@@ -29,20 +61,42 @@ public class Mage : Player
     /// </summary>
     public override void NormalAttack(Action callback)
     {
-        Debug.Log("Mage Normal Attack");
+        //Debug.Log("Mage Normal Attack");
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
         StartCoroutine(NormalAttackCR(callback));
     }
 
+    /// <summary>
+    /// The coroutine for the mage's normal attack.
+    /// </summary>
+    /// <param name="callback">The function to call back to when the attack is completed.</param>
+    /// <returns></returns>
     protected override IEnumerator NormalAttackCR(Action callback)
     {
-        Debug.Log("Select a target for the mage's normal attack.");
+        //Debug.Log("Select a target for the mage's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
-
         ActionRange.Instance.ActionDeselected();
 
-        Debug.Log("Given a target");
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+
+        Vector3 lightningPlanePos = GetTargetPos();
+
+        lightningPlane.transform.position = lightningPlanePos;
+        
+        lightningPlane.transform.LookAt(parentTransform.position + Vector3.up);
+
+        //lightningPlane.transform.Rotate(90f,
+        //                                lightningPlane.transform.rotation.y,
+        //                                lightningPlane.transform.rotation.z);
+        
+        lightningPlane.transform.Rotate(90f, 0f, 0f);
+
+        
+
+        //Debug.Log("Given a target");
         if (CharacterSelector.Instance.SelectedTargetUnit == this)
         {
             Debug.Log("Can't attack yourself.");
@@ -81,6 +135,8 @@ public class Mage : Player
 
             yield return new WaitUntil(() => AnimationComplete);
 
+            ActivateAttackParticle();
+
             if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
             {
                 if (!attackedEnemy.playersWhoAttacked.Contains(this)) attackedEnemy.playersWhoAttacked.Add(this);
@@ -114,7 +170,7 @@ public class Mage : Player
     /// </summary>
     public override void AbilityOne(Action callback)
     {
-        Debug.Log("Mage Ability One");
+        //Debug.Log("Mage Ability One");
 
         CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
 
@@ -122,9 +178,9 @@ public class Mage : Player
     }
 
     /// <summary>
-    /// AOE
+    /// The coroutine for the mage's fireball ability.
     /// </summary>
-    /// <param name="callback"></param>
+    /// <param name="callback">The function to call back to when the ability is completed.</param>
     /// <returns></returns>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
@@ -132,11 +188,26 @@ public class Mage : Player
 
         ActionRange.Instance.ActionDeselected();
 
+
+        StartCoroutine(LookToTarget());
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+
         int damageModifier = CheckForEffectOfType(StatusEffect.StatusEffectType.AttackUp) ? AttackStat / 2 : 0;
         Enemy focus = (Enemy)CharacterSelector.Instance.SelectedTargetUnit;
         bool[,] range = MapGrid.Instance.FindTilesInRange(focus.currentTile, 1, true, ActionShape.Square);
         Tile[,] tempGrid = MapGrid.Instance.grid;
         List<Enemy> enemies = new List<Enemy>();
+
+        AbilityOneParticle.transform.localPosition = fireBallTransform;
+
+        firePlane.transform.position = new Vector3(focus.transform.position.x,
+                                                   firePlane.transform.position.y,
+                                                   focus.transform.position.z);
+
+        FireBlastParticle.transform.position = new Vector3(focus.transform.position.x,
+                                                           firePlane.transform.position.y,
+                                                           focus.transform.position.z);
 
         enemies.Add(focus);
 
@@ -167,6 +238,9 @@ public class Mage : Player
         staffAndBookController.SetTrigger("CastAbilityOne");
 
         yield return new WaitUntil(() => AnimationComplete);
+
+        yield return new WaitUntil(() => FireBlastParticle.isStopped);
+        //yield return new WaitForSeconds(1.0f);
 
         foreach (Enemy enemy in enemies)
         {
@@ -207,9 +281,10 @@ public class Mage : Player
     /// <summary>
     /// Mage's second ability. Damage boost.
     /// </summary>
+    /// <param name="callback">The function to call back to when the ability is completed. Not used currently for this ability.</param>
     public override void AbilityTwo(Action callback)
     {
-        Debug.Log("Mage Ability Two");
+        //Debug.Log("Mage Ability Two");
 
         //CreateAttackUpStatusEffect(this, this);
 
@@ -230,12 +305,13 @@ public class Mage : Player
         }
 
         AbilityTwoAnim();
+        AbilityTwoParticle.Play();
         staffAndBookController.SetTrigger("CastAbilityTwo");
 
         ActionRange.Instance.ActionDeselected(false);
 
         CombatSystem.Instance.SetAbilityTwoButtonState(false);
-
+            
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
 
         killedUnitWhileEnchantActive = false;
@@ -277,7 +353,7 @@ public class Mage : Player
 
     protected override void AbilityTwoUpgradeTwo()
     {
-        Debug.Log("When you get an enemy while enchantment is active, the damage will be raised to 2x for remaining durations.");
+        Debug.Log("When you kill an enemy while enchantment is active, the damage will be raised to 2x for remaining durations.");
     }
 
     public override void ProcessUpgrade(Abilities abilityToUpgrade)

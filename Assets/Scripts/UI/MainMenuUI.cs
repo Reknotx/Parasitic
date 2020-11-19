@@ -11,8 +11,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
+    public GameObject mainMenu;
     public GameObject levelSelect;
     public GameObject options;
+    public GameObject credits;
+    
 
 
     private void Start()
@@ -22,21 +25,24 @@ public class MainMenuUI : MonoBehaviour
         SetGraphics(PlayerPrefs.GetInt("Quality Level", 5));
     }
 
+
+
     /// <summary>
-    /// Shows Level Select Screen
+    /// Shows the GameObject screenToShow
     /// </summary>
-    public void StartGame()
+    /// <param name="screenToShow">GameObject / Screen to Show</param>
+    public void ShowScreen(GameObject screenToShow)
     {
-        //SceneManager.LoadScene("scene to load");
-        levelSelect.SetActive(true);
+        screenToShow.SetActive(true);
     }
 
     /// <summary>
-    /// Show Options UI
+    /// Hides the GameObject screenToHide
     /// </summary>
-    public void ShowOptions()
+    /// <param name="screenToHide">GameObject / Screen to Hide</param>
+    public void HideScreen(GameObject screenToHide)
     {
-        options.SetActive(true);
+        screenToHide.SetActive(false);
     }
 
 
@@ -46,7 +52,8 @@ public class MainMenuUI : MonoBehaviour
     /// <param name="levelName">name of level to be loaded</param>
     public void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        PlayerPrefs.SetString("SelectedLevel", levelName);
+        SceneManager.LoadScene("LoadingScreen");
     }
 
 
@@ -59,14 +66,7 @@ public class MainMenuUI : MonoBehaviour
         Application.Quit();
     }
 
-    /// <summary>
-    /// Returns to the Main portion of the Main Menu
-    /// </summary>
-    public void Return()
-    {
-        levelSelect.SetActive(false);
-        options.SetActive(false);
-    }
+    
 
     #region Options
     public AudioMixer mixer;

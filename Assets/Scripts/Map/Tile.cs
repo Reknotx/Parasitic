@@ -46,20 +46,20 @@ public class Tile : MonoBehaviour
     //reference to unit currently on tile
     [HideInInspector]
     public Humanoid occupant;
-    int gridMask = (1 << 9);
+    //int gridMask = (1 << 9);
 
     private void Start()
     {
         if (slope)
         {
             MovementNeighbors = MapGrid.Instance.GetNeighbors(this);
-            for(int i = MovementNeighbors.Capacity -1; i >= 0; i--)
-            {
-                if (!MovementNeighbors[i].movementTile)
-                {
-                    MovementNeighbors.RemoveAt(i);
-                }
-            }
+            //for(int i = MovementNeighbors.Capacity -1; i >= 0; i--)
+            //{
+            //    if (!MovementNeighbors[i].movementTile)
+            //    {
+            //        MovementNeighbors.RemoveAt(i);
+            //    }
+            //}
             FindTilt();
         }
     }

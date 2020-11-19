@@ -8,7 +8,6 @@
 
 
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,22 +15,30 @@ using UnityEngine.EventSystems;
 public class CharacterSelector : MonoBehaviour
 {
 
+    /// <summary> Enum representing if we are targetting players or enemies. </summary>
     public enum TargettingType
     {
         TargetPlayers,
         TargetEnemies
     }
 
+    /// <summary> The singleton instance of the character selector. </summary>
     public static CharacterSelector Instance;
 
+    /// <summary> Our current focus of targetting in the system. </summary>
     [HideInInspector] public TargettingType targettingType;
 
     //layermask only hits player and grid layers
+    /// <summary> Layer mask representing the layers for the players and the grid. </summary>
     int layermask = ((1 << 8) | (1 << 9));
+
+    /// <summary> Layer mask representing the layer for the enemies. </summary>
     int enemyLayerMask = (1 << 10);
 
     /// <summary> The selected player unit. </summary>
     [HideInInspector] public Player SelectedPlayerUnit;
+
+    /// <summary> DEPRECATED Ryan? No, this is Jeremy </summary>
     [HideInInspector] public Player LastSelectedPlayerUnit;
 
     /// <summary> The selected enemy unit. </summary>
@@ -48,6 +55,7 @@ public class CharacterSelector : MonoBehaviour
 
     /// <summary> Line drawn from selcted player to tile </summary>
     public GameObject PathLine;
+
     /// <summary> GameObject that shows which tile the mouse is hovering over at the end of the line</summary>
     public GameObject EndPoint;
 
@@ -67,9 +75,6 @@ public class CharacterSelector : MonoBehaviour
     /// <summary> When true a player can still move after they have already moved </summary>
     public bool debugKeepMoving = false;
 
-    //[HideInInspector] public bool selectPlayer = true;
-    //[HideInInspector] public bool selectTarget = false;
-
     private void Start()
     {
         if (Instance != null && Instance != this)
@@ -84,10 +89,14 @@ public class CharacterSelector : MonoBehaviour
 
     void Update()
     {
+        /// If the currently active units are the enemies we don't want to select anything.
         if (CombatSystem.Instance.activeUnits == ActiveUnits.Enemies) return;
 
+        /// If an action is being performed in the system, player attack or abilities, we 
+        /// don't want to select anything until it's done.
         if (CombatSystem.Instance.state == BattleState.PerformingAction) return;
 
+        /// If the level is won, or lost, we don't want to have the player's still move around.
         if (CombatSystem.Instance.state == BattleState.Won || CombatSystem.Instance.state == BattleState.Lost) return;
 
         RaycastHit info = new RaycastHit();
@@ -119,15 +128,11 @@ public class CharacterSelector : MonoBehaviour
                     {
                         if (SelectedPlayerUnit != null)
                         {
-                            SetLastSelected();
                             SelectedPlayerUnit.UnitDeselected();
                         }
                         SelectedUnitObj = playerObj.gameObject;
                         SelectedPlayerUnit = playerObj;
-                        if(LastSelectedPlayerUnit == null)
-                        {
-                            SetLastSelected();
-                        }
+
                         SelectedPlayerUnit.UnitSelected();
                         BoarderLine.SetActive(false);
                         CombatSystem.Instance.SetCoolDownText(SelectedPlayerUnit);
@@ -145,12 +150,12 @@ public class CharacterSelector : MonoBehaviour
                     else if (SelectedPlayerUnit != null && playerObj.gameObject == SelectedPlayerUnit.gameObject)
                     {
                         //print("Deselecting the already selected unit.");
-                        SetLastSelected();
+                        
                         SelectedPlayerUnit.UnitDeselected();
                         SelectedUnitObj = null;
                         SelectedPlayerUnit = null;
                         BoarderLine.SetActive(false);
-                        CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
+                        
                     }
                 }
                 else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
@@ -165,7 +170,9 @@ public class CharacterSelector : MonoBehaviour
                         Debug.Log(info.point);
                     }
                     //if the tile selected is a valid tile to move to find the path
-                    if (selectedTile.movementTile && !selectedTile.occupied && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
+                    if (selectedTile.movementTile
+                        && !selectedTile.occupied
+                        && SelectedPlayerUnit.TileRange[(int)selectedTile.gridPosition.x, (int)selectedTile.gridPosition.y])
                     {
                         //only recalculate path if tile has changed
                         if (lastTile != selectedTile)
@@ -177,13 +184,13 @@ public class CharacterSelector : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             SelectedPlayerUnit.Move(path);
-                            SetLastSelected();
+                            
                             //SelectedPlayerUnit.UnitDeselected();
                             //SelectedPlayerUnit = null;
                             selectedTile = null;
                             BoarderLine.SetActive(false);
                             HidePath();
-                            CombatSystem.Instance.SetCoolDownText(LastSelectedPlayerUnit);
+                            
                         }
                     }
                     else
@@ -256,7 +263,9 @@ public class CharacterSelector : MonoBehaviour
     void DrawPath()
     {
         List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x, SelectedPlayerUnit.currentTile.Elevation + pathHeight + (SelectedPlayerUnit.currentTile.slope ? MapGrid.Instance.tileHeight/2f : 0), SelectedPlayerUnit.transform.position.z));
+        points.Add(new Vector3(SelectedPlayerUnit.transform.position.x,
+                               SelectedPlayerUnit.currentTile.Elevation + pathHeight + (SelectedPlayerUnit.currentTile.slope ? MapGrid.Instance.tileHeight / 2f : 0),
+                               SelectedPlayerUnit.transform.position.z));
         for (int i = 0; i < path.Count; i++)
         {
             if(path[i].slope)
@@ -271,20 +280,27 @@ public class CharacterSelector : MonoBehaviour
                 {
                     fromSlope = SelectedPlayerUnit.currentTile.slope;
                 }
+                
                 //if coming from slope dont add another point
                 if(!fromSlope)
-                points.Add(new Vector3((points[points.Count-1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
-                    points[points.Count - 1].y, 
-                    (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                {
+                    points.Add(new Vector3((points[points.Count - 1].x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                                           points[points.Count - 1].y,
+                                           (points[points.Count - 1].z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                }
                 //print((path[i - 1].transform.position.x - path[i].transform.position.x) / 2f + path[i].transform.position.x);
-                points.Add(new Vector3( path[i].transform.position.x,path[i].Elevation+MapGrid.Instance.tileHeight/2 + pathHeight, path[i].transform.position.z));
+
+                points.Add(new Vector3(path[i].transform.position.x,
+                                       path[i].Elevation + (MapGrid.Instance.tileHeight / 2) + pathHeight,
+                                       path[i].transform.position.z));
+                
                 if (path[i].slope && i != path.Count - 1)
                 {
                     //if entering an adjacent slope dont add another point 
                     if(!(path[i + 1].slope /*&& path[i].level == path[i + 1].level*/))
-                    points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
-                        path[i + 1].Elevation + pathHeight /*+ (path[i + 1].slope ? MapGrid.Instance.tileHeight / 2f : 0)*/,
-                        (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
+                        points.Add(new Vector3((path[i + 1].transform.position.x - path[i].transform.position.x) / 2 + path[i].transform.position.x,
+                                                path[i + 1].Elevation + pathHeight /*+ (path[i + 1].slope ? MapGrid.Instance.tileHeight / 2f : 0)*/,
+                                               (path[i + 1].transform.position.z - path[i].transform.position.z) / 2 + path[i].transform.position.z));
                 }
             }
             else
@@ -296,7 +312,9 @@ public class CharacterSelector : MonoBehaviour
         }
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
-        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x, pathHeight + selectedTile.Elevation, selectedTile.transform.position.z);
+        EndPoint.transform.position = new Vector3(selectedTile.transform.position.x,
+                                                  pathHeight + selectedTile.Elevation,
+                                                  selectedTile.transform.position.z);
         if (path[path.Count - 1].slope)
         {
             EndPoint.transform.position += Vector3.up * MapGrid.Instance.tileHeight/2;
@@ -317,12 +335,15 @@ public class CharacterSelector : MonoBehaviour
         EndPoint.SetActive(false);
     }
 
+    /// <summary> Sets the value of the current focus in the targetting system. </summary>
+    /// <param name="type"> Represents the focus of targetting.</param>
     public void SetTargettingType(TargettingType type)
     {
         targettingType = type;
     }
 
     /// <summary>
+    /// DEPRECATED
     /// Sets the Last Selected Player to the Current Selected Player
     /// </summary>
     /// Author: Jeremy Casada

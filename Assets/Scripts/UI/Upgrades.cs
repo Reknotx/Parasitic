@@ -31,8 +31,16 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
 
+    [Header("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
+    [Tooltip("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
+    public bool doLoadUpgrades = false;
+
     public GameObject upgradeWindow;
+    public GameObject knightUpgrades;
+    public GameObject mageUpgrades;
+    public GameObject archerUpgrades;
     public GameObject infoWindow;
+    public GameObject upgradesMenuToggle;
     public GameObject notification;
 
     public Text magePointText;
@@ -75,7 +83,9 @@ public class Upgrades : MonoBehaviour
     private Text _knightXpText;
     private Text _archerXpText;
 
-
+    /// <summary>
+    /// Mage EXP Property
+    /// </summary>
     public int MageXp
     {
         get { return _mageXp; }
@@ -97,6 +107,9 @@ public class Upgrades : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Knight EXP Property
+    /// </summary>
     public int KnightXp
     {
         get { return _knightXp; }
@@ -118,6 +131,9 @@ public class Upgrades : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Archer EXP Property
+    /// </summary>
     public int ArcherXp
     {
         get { return _archerXp; }
@@ -134,7 +150,6 @@ public class Upgrades : MonoBehaviour
                     ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
-                Debug.Log(archerXpBar.value);
                 _archerXpText.text = _archerXp + " / " + maxXP;
             }
         }
@@ -172,7 +187,18 @@ public class Upgrades : MonoBehaviour
         set
         {
             _magePoints = value;
-            magePointText.text = _magePoints.ToString();
+            magePointText.text = _magePoints + " point";
+            if (_magePoints > 1 || _magePoints < 1)
+                magePointText.text += "s";
+
+            if(MagePoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
 
@@ -182,7 +208,19 @@ public class Upgrades : MonoBehaviour
         set
         {
             _knightPoints = value;
-            knightPointText.text = _knightPoints.ToString();
+            knightPointText.text = _knightPoints + " point";
+            if (_knightPoints > 1 || _knightPoints < 1)
+                knightPointText.text += "s";
+
+            
+            if (KnightPoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
 
@@ -192,7 +230,18 @@ public class Upgrades : MonoBehaviour
         set
         {
             _archerPoints = value;
-            archerPointText.text = _archerPoints.ToString();
+            archerPointText.text = _archerPoints + " point";
+            if (_archerPoints > 1 || _archerPoints < 1)
+                archerPointText.text += "s";
+
+            if (ArcherPoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
     #endregion
@@ -211,6 +260,9 @@ public class Upgrades : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mage = Mage.Instance;
+        knight = Warrior.Instance;
+        archer = Archer.Instance;
         //Gets Components of Info Hover Window
         Text[] info = infoWindow.GetComponentsInChildren<Text>();
         infoTitleText = info[0];
@@ -235,6 +287,10 @@ public class Upgrades : MonoBehaviour
         unlockedKnightAbilities = new List<Abilities>();
         unlockedArcherAbilities = new List<Abilities>();
 
+        if(doLoadUpgrades)
+        {
+            LoadUpgrades();
+        }
 
         DisplayPoints();
         SetButtonStates();
@@ -252,13 +308,13 @@ public class Upgrades : MonoBehaviour
             infoWindow.transform.position = Input.mousePosition;
         }
 
-        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus)
+        if(Input.GetKeyDown(KeyCode.Tab) && !UI.Instance.PausedStatus && CharacterSelector.Instance.SelectedPlayerUnit != null)
         {
             ToggleUpgradeMenu();
         }
     }
 
-    #region Saving/Loading (if needed in future)
+    #region Saving/Loading 
     public void SaveUpgrades()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -272,6 +328,10 @@ public class Upgrades : MonoBehaviour
         upgradeSave.mageSkillPoints = MagePoints;
         upgradeSave.knightSkillPoints = KnightPoints;
         upgradeSave.archerSkillPoints = ArcherPoints;
+
+        upgradeSave.mageXp = MageXp;
+        upgradeSave.knightXp = KnightXp;
+        upgradeSave.archerXp = ArcherXp;
 
         bf.Serialize(file, upgradeSave);
         file.Close();
@@ -297,6 +357,10 @@ public class Upgrades : MonoBehaviour
             MagePoints = upgradeSave.mageSkillPoints;
             KnightPoints = upgradeSave.knightSkillPoints;
             ArcherPoints = upgradeSave.archerSkillPoints;
+
+            MageXp = upgradeSave.mageXp;
+            KnightXp = upgradeSave.knightXp;
+            ArcherXp = upgradeSave.archerXp;
         }
 
 
@@ -548,17 +612,35 @@ public class Upgrades : MonoBehaviour
     {
         if (upgradeWindow.activeInHierarchy)
         {
+            knightUpgrades.SetActive(false);
+            mageUpgrades.SetActive(false);
+            archerUpgrades.SetActive(false);
             upgradeWindow.SetActive(false);
+            HideInfo();
         }
         else
         {
+            Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
+            if(temp is Warrior)
+            {
+                knightUpgrades.SetActive(true);
+            }
+            else if (temp is Mage)
+            {
+                mageUpgrades.SetActive(true);
+            }
+            else if (temp is Archer)
+            {
+                archerUpgrades.SetActive(true);
+            }
+
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
             CombatSystem.Instance.Cancel(false);
         }
 
-        ClearUpgradeNotification();
+        //ClearUpgradeNotification();
     }
 
     /// <summary>
@@ -579,18 +661,28 @@ public class Upgrades : MonoBehaviour
     }
 
 
-    private void ShowUpgradeNotification()
+    public void ShowUpgradeNotification()
     {
-
-        if ((MagePoints + KnightPoints + ArcherPoints) > 0)
+        Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
+        if (temp is Warrior && KnightPoints > 0)
         {
             notification.SetActive(true);
-            notificationText.text = (MagePoints + KnightPoints + ArcherPoints) + "";
+            notificationText.text = KnightPoints + "";
+        }
+        else if (temp is Mage && MagePoints > 0)
+        {
+            notification.SetActive(true);
+            notificationText.text = MagePoints + "";
+        }
+        else if (temp is Archer && ArcherPoints > 0)
+        {
+            notification.SetActive(true);
+            notificationText.text = ArcherPoints + "";
         }
 
     }
 
-    private void ClearUpgradeNotification()
+    public void ClearUpgradeNotification()
     {
         notification.SetActive(false);
     }
@@ -598,7 +690,7 @@ public class Upgrades : MonoBehaviour
 }
 
 
-//for loading and saving if we need it
+
 [Serializable]
 public class UpgradeSave
 {
@@ -606,22 +698,13 @@ public class UpgradeSave
     public int knightSkillPoints;
     public int archerSkillPoints;
 
+    public int mageXp;
+    public int knightXp;
+    public int archerXp;
+
     public List<Abilities> unlockedMageAbilities;
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
-
-    // public UpgradeSave()
-    // {
-    //     unlockedMageAbilities = new List<Abilities>();
-    //     unlockedKnightAbilities = new List<Abilities>();
-    //     unlockedArcherAbilities = new List<Abilities>();
-    //
-    //     mageSkillPoints = 0;
-    //     knightSkillPoints = 0;
-    //     archerSkillPoints = 0;
-    // }
-
-
 
 
 }
