@@ -175,7 +175,6 @@ public class Archer : Player
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
-            ActivateAbilityTwoParticle();
             ActionRange.Instance.ActionDeselected();
 
             StartCoroutine(LookToTarget());
