@@ -36,6 +36,11 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
+        if(Upgrades.Instance != null)
+        {
+            Upgrades.Instance.SaveUpgrades();
+        }
+        
         //Play the animation
         transition.SetTrigger("FadeOut");
 

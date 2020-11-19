@@ -31,6 +31,10 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
 
+    [Header("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
+    [Tooltip("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
+    public bool doLoadUpgrades = false;
+
     public GameObject upgradeWindow;
     public GameObject knightUpgrades;
     public GameObject mageUpgrades;
@@ -79,7 +83,9 @@ public class Upgrades : MonoBehaviour
     private Text _knightXpText;
     private Text _archerXpText;
 
-
+    /// <summary>
+    /// Mage EXP Property
+    /// </summary>
     public int MageXp
     {
         get { return _mageXp; }
@@ -101,6 +107,9 @@ public class Upgrades : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Knight EXP Property
+    /// </summary>
     public int KnightXp
     {
         get { return _knightXp; }
@@ -122,6 +131,9 @@ public class Upgrades : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Archer EXP Property
+    /// </summary>
     public int ArcherXp
     {
         get { return _archerXp; }
@@ -178,6 +190,15 @@ public class Upgrades : MonoBehaviour
             magePointText.text = _magePoints + " point";
             if (_magePoints > 1 || _magePoints < 1)
                 magePointText.text += "s";
+
+            if(MagePoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
 
@@ -190,6 +211,16 @@ public class Upgrades : MonoBehaviour
             knightPointText.text = _knightPoints + " point";
             if (_knightPoints > 1 || _knightPoints < 1)
                 knightPointText.text += "s";
+
+            
+            if (KnightPoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
 
@@ -202,6 +233,15 @@ public class Upgrades : MonoBehaviour
             archerPointText.text = _archerPoints + " point";
             if (_archerPoints > 1 || _archerPoints < 1)
                 archerPointText.text += "s";
+
+            if (ArcherPoints > 0)
+            {
+                ShowUpgradeNotification();
+            }
+            else
+            {
+                ClearUpgradeNotification();
+            }
         }
     }
     #endregion
@@ -247,6 +287,10 @@ public class Upgrades : MonoBehaviour
         unlockedKnightAbilities = new List<Abilities>();
         unlockedArcherAbilities = new List<Abilities>();
 
+        if(doLoadUpgrades)
+        {
+            LoadUpgrades();
+        }
 
         DisplayPoints();
         SetButtonStates();
@@ -270,7 +314,7 @@ public class Upgrades : MonoBehaviour
         }
     }
 
-    #region Saving/Loading (if needed in future)
+    #region Saving/Loading 
     public void SaveUpgrades()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -284,6 +328,10 @@ public class Upgrades : MonoBehaviour
         upgradeSave.mageSkillPoints = MagePoints;
         upgradeSave.knightSkillPoints = KnightPoints;
         upgradeSave.archerSkillPoints = ArcherPoints;
+
+        upgradeSave.mageXp = MageXp;
+        upgradeSave.knightXp = KnightXp;
+        upgradeSave.archerXp = ArcherXp;
 
         bf.Serialize(file, upgradeSave);
         file.Close();
@@ -309,6 +357,10 @@ public class Upgrades : MonoBehaviour
             MagePoints = upgradeSave.mageSkillPoints;
             KnightPoints = upgradeSave.knightSkillPoints;
             ArcherPoints = upgradeSave.archerSkillPoints;
+
+            MageXp = upgradeSave.mageXp;
+            KnightXp = upgradeSave.knightXp;
+            ArcherXp = upgradeSave.archerXp;
         }
 
 
@@ -588,7 +640,7 @@ public class Upgrades : MonoBehaviour
             CombatSystem.Instance.Cancel(false);
         }
 
-        ClearUpgradeNotification();
+        //ClearUpgradeNotification();
     }
 
     /// <summary>
@@ -638,7 +690,7 @@ public class Upgrades : MonoBehaviour
 }
 
 
-//for loading and saving if we need it
+
 [Serializable]
 public class UpgradeSave
 {
@@ -646,22 +698,13 @@ public class UpgradeSave
     public int knightSkillPoints;
     public int archerSkillPoints;
 
+    public int mageXp;
+    public int knightXp;
+    public int archerXp;
+
     public List<Abilities> unlockedMageAbilities;
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
-
-    // public UpgradeSave()
-    // {
-    //     unlockedMageAbilities = new List<Abilities>();
-    //     unlockedKnightAbilities = new List<Abilities>();
-    //     unlockedArcherAbilities = new List<Abilities>();
-    //
-    //     mageSkillPoints = 0;
-    //     knightSkillPoints = 0;
-    //     archerSkillPoints = 0;
-    // }
-
-
 
 
 }
