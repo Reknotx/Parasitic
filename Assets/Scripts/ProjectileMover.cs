@@ -153,7 +153,19 @@ public class ProjectileMover : MonoBehaviour
             parentTransform = transform.parent;
         }
         //print("Parent transform is " + parentTransform.name);
-        transform.parent = transform.root;
+        switch (owner)
+        {
+            case Owner.Mage:
+                transform.parent = Mage.Instance.parentTransform;
+                break;
+
+            case Owner.Archer:
+                transform.parent = Archer.Instance.parentTransform;
+                break;
+
+            default:
+                break;
+        }
 
         StartCoroutine(Move());
     }
