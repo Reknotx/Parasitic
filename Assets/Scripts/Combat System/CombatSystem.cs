@@ -177,7 +177,7 @@ public class CombatSystem : MonoBehaviour
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
 
         CharacterSelector.Instance.SelectedPlayerUnit.Defend();
-
+        CharacterSelector.Instance.HidePath();
         AttackComplete();
     }
 
@@ -212,6 +212,8 @@ public class CombatSystem : MonoBehaviour
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
+
+        CharacterSelector.Instance.HidePath();
 
         if (state != BattleState.Won)
             SetBattleState(BattleState.Idle);
@@ -413,7 +415,7 @@ public class CombatSystem : MonoBehaviour
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             //player.GetComponent<MeshRenderer>().material = player.defaultMat;
-            if (playersToGo.Count == 0)
+            if (playersToGo.Count == 0 && (state != BattleState.Won && state != BattleState.Lost))
             {
                 if (enemiesToGo.Count > 0)
                 {
@@ -912,6 +914,8 @@ public class CombatSystem : MonoBehaviour
 
         endGameText.text = "You Win!";
 
+        DeactivateCombatButtons();
+
         endCanvas.SetActive(true);
     }
 
@@ -922,6 +926,7 @@ public class CombatSystem : MonoBehaviour
 
         endGameText.text = "You Lose!";
 
+        DeactivateCombatButtons();
         endCanvas.SetActive(true);
     }
 

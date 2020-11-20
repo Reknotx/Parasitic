@@ -158,7 +158,7 @@ public class CharacterSelector : MonoBehaviour
                         
                     }
                 }
-                else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving))
+                else if (SelectedPlayerUnit && (SelectedPlayerUnit.HasMoved == false || debugKeepMoving) && BoarderLine.activeSelf)
                 {
                     //Selected player unit can move this turn.
 

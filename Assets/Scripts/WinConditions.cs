@@ -68,7 +68,7 @@ public class WinConditions : MonoBehaviour
         if(!allKillingObjectives)
         objectivesText.Add(GetKillMessage(defaultEnemiesKillRequirement, allEnemiesInScene, typeToKill));
         RectTransform itemRect = objectiveDropdown.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<RectTransform>();
-        itemRect.sizeDelta = new Vector2(itemRect.sizeDelta.x, itemRect.sizeDelta.y - 10*Mathf.Clamp(objectives.Count - 1, 0, 3));
+        itemRect.sizeDelta = new Vector2(itemRect.sizeDelta.x, itemRect.sizeDelta.y - Mathf.Clamp(13 * (objectives.Count - 1), 0, 30));
 
         if(objectives.Count > 0)
         {
@@ -120,7 +120,7 @@ public class WinConditions : MonoBehaviour
             }
             else if (enemy == EnemyType.Larva)
             {
-                killMessage = "Kill " + (killReq > 1 ? "all " : "the ") + "Kill " + (killReq > 1 ? "Larvae " : "Larva") + "!";
+                killMessage = "Kill " + (killReq > 1 ? "all " : "the ") + (killReq > 1 ? "Larvae " : "Larva") + "!";
             }
             else
             {
