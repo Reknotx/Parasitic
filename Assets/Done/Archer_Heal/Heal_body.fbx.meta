@@ -1,0 +1,917 @@
+fileFormatVersion: 2
+guid: 5a0d7364d86002b4c994060eb3741d25
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Archer_Heal
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Archer_Rig_Final__2_:BaseModel_Body_1_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Body_2_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Body_2_Jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Body_3_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Shoulder_R_Jnt'
+      has translation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Archer_Rig_Final__2_:BaseModel_Shoulder_L_Jnt'
+      has translation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Archer_Heal
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 85
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Hip_Translate_L_Jnt
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Hip_Translate_R_Jnt
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Knee_L_Jnt
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Knee_R_Jnt
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Ankle_L_Jnt
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Ankle_R_Jnt
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Body_1_Jnt
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Body_3_Jnt
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Neck_Jnt
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Head_1_Jnt
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Elbow_1_L_Jnt
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Elbow_1_R_Jnt
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Elbow_2_L_Jnt
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Elbow_2_R_Jnt
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Arm_Wrist_R_Jnt
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Foot_L_Jnt
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Foot_R_Jnt
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_1_Jnt
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_2_Jnt
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_3_Jnt
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_1_Jnt
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_2_Jnt
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_1_Jnt
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_2_Jnt
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_1_Jnt
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_2_Jnt
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_L_1_Jnt
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_2_Jnt
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_1_Jnt
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_2_Jnt
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_3_Jnt
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_1_Jnt
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_2_Jnt
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_1_Jnt
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_2_Jnt
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_1_Jnt
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_2_Jnt
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_1_Jnt
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_2_Jnt
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Shoulder_L_Jnt
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Archer_Rig_Final__2_:BaseModel_Shoulder_R_Jnt
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Heal_body(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_GlobalTransform_Grp
+      parentName: Heal_body(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_GlobalScale_Grp
+      parentName: Archer_Rig_Final__2_:BaseModel_GlobalTransform_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Controls
+      parentName: Archer_Rig_Final__2_:BaseModel_GlobalScale_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Local_Ctrl
+      parentName: Archer_Rig_Final__2_:BaseModel_Controls
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0.31951338, z: -0, w: 0.94758177}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Back_Ctrl
+      parentName: Archer_Rig_Final__2_:BaseModel_Local_Ctrl
+      position: {x: 0.00408, y: 0.48363256, z: -0.14989}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Ctrl
+      parentName: Archer_Rig_Final__2_:BaseModel_Back_Ctrl
+      position: {x: 0.012713373, y: 0, z: -0.0015265858}
+      rotation: {x: 0.21335761, y: 0.024722671, z: -0.112417795, w: 0.9701699}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Joints
+      parentName: Archer_Rig_Final__2_:BaseModel_GlobalScale_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:transform10
+      parentName: Archer_Rig_Final__2_:BaseModel_Joints
+      position: {x: 9.499486e-32, y: 0.000000012403821, z: -7.9162374e-33}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      parentName: Archer_Rig_Final__2_:transform10
+      position: {x: -0.000000007450581, y: 0.8374452, z: -0.1306696}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.0000006297331, w: 0.0000000041159027}
+      scale: {x: 0.99999976, y: 0.99999976, z: 1.0000002}
+    - name: Archer_Rig_Final__2_:BaseModel_Rig_FIX_5_1:transform2
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      position: {x: -1.4210854e-16, y: 1.6940659e-23, z: 0}
+      rotation: {x: 0.36920643, y: 0.00000038396794, z: -0.00000015254084, w: 0.92934746}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Body_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Rig_FIX_5_1:transform2
+      position: {x: -0.14104007, y: 0.030106401, z: -0.009365761}
+      rotation: {x: -0.369206, y: 0.000000070431184, z: -0.000000027980349, w: 0.92934763}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000012}
+    - name: Archer_Rig_Final__2_:BaseModel_Body_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Body_1_Jnt
+      position: {x: 0.0044639874, y: 0.015248185, z: 0.04949825}
+      rotation: {x: -0, y: 8.021742e-10, z: -0, w: 1}
+      scale: {x: 1.0000007, y: 1.0000008, z: 1.0000008}
+    - name: Archer_Rig_Final__2_:BaseModel_Rig_FIX_5_1:transform5
+      parentName: Archer_Rig_Final__2_:BaseModel_Body_2_Jnt
+      position: {x: -1.4210854e-16, y: 1.6940659e-23, z: 0}
+      rotation: {x: 0.22946045, y: 0.00000004240755, z: -0.00000020787877, w: 0.973318}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Body_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Rig_FIX_5_1:transform5
+      position: {x: -0.25127593, y: 0.01615825, z: -0.115726106}
+      rotation: {x: 0.22946045, y: 0.000000087738016, z: 0.000000057008336, w: -0.973318}
+      scale: {x: 1.0000013, y: 1.0000007, z: 1.0000014}
+    - name: Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Body_3_Jnt
+      position: {x: -0.113750435, y: -0.000000051430405, z: -0.000000007985752}
+      rotation: {x: 0.00000005960465, y: 0.000000040745444, z: -3.641532e-14, w: 1}
+      scale: {x: 1.0000005, y: 1.0000008, z: 1.0000014}
+    - name: Archer_Rig_Final__2_:transform3
+      parentName: Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000043158423, z: 0.00000015825296}
+      rotation: {x: 0.7071069, y: -0.70710665, z: -5.373273e-10, w: -0.00000008648675}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Neck_Jnt
+      parentName: Archer_Rig_Final__2_:transform3
+      position: {x: 0.000000007822464, y: 1.4402065, z: -0.000000022905109}
+      rotation: {x: 0.5, y: -0.50000006, z: 0.4999999, w: -0.5}
+      scale: {x: 1.000001, y: 1.000001, z: 1.0000007}
+    - name: Archer_Rig_Final__2_:BaseModel_Head_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Neck_Jnt
+      position: {x: -0.038677726, y: -0.000000029518723, z: 0.000000015947087}
+      rotation: {x: -0.000000029802319, y: 0.000000029802319, z: -0.000000119209275,
+        w: 1}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000008}
+    - name: Archer_Rig_Final__2_:BaseModel_Head_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Head_1_Jnt
+      position: {x: -0.3529102, y: 0, z: 0}
+      rotation: {x: 0.70710677, y: 0.00000006322026, z: 0.00000007228743, w: 0.7071069}
+      scale: {x: 1.0000007, y: 1.0000007, z: 1}
+    - name: Archer_Rig_Final__2_:transform4
+      parentName: Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000043158423, z: 0.00000015825296}
+      rotation: {x: 0.7071069, y: -0.70710665, z: -5.373273e-10, w: -0.00000008648675}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Shoulder_R_Jnt
+      parentName: Archer_Rig_Final__2_:transform4
+      position: {x: 0.21586278, y: 1.337815, z: -0.019275341}
+      rotation: {x: -0.0004481197, y: 0.031104673, z: -0.9994123, w: -0.014399704}
+      scale: {x: 1.0000002, y: 1.0000013, z: 1.0000007}
+    - name: Archer_Rig_Final__2_:BaseModel_Elbow_1_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Shoulder_R_Jnt
+      position: {x: -0.27271423, y: -0.000000039002582, z: -0.00000001171549}
+      rotation: {x: 0.068550356, y: 0.037155036, z: 0.015041071, w: 0.9968421}
+      scale: {x: 1.0000007, y: 1.0000008, z: 0.99999976}
+    - name: Archer_Rig_Final__2_:BaseModel_Elbow_2_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Elbow_1_R_Jnt
+      position: {x: -0.041826315, y: 0.0000000035354975, z: -3.7825032e-10}
+      rotation: {x: -0.0000083521, y: -0.000017747281, z: -0.000022921708, w: 1}
+      scale: {x: 1.0000005, y: 0.9999999, z: 0.9999999}
+    - name: Archer_Rig_Final__2_:BaseModel_Arm_Wrist_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Elbow_2_R_Jnt
+      position: {x: -0.18261573, y: 0.000000021725068, z: -0.000000009743928}
+      rotation: {x: -0, y: -0, z: -8.889416e-13, w: 1}
+      scale: {x: 1.0000008, y: 1.0000011, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Arm_Wrist_R_Jnt
+      position: {x: 0.000000010451704, y: -0.00000002298157, z: -0.000000006688633}
+      rotation: {x: -0.05199591, y: -0.16519302, z: -0.12871869, w: 0.97644216}
+      scale: {x: 1.0000015, y: 1.0000014, z: 0.9999989}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.03214915, y: 0.014278397, z: 0.058166254}
+      rotation: {x: 0.06099714, y: 0.5385441, z: -0.05521118, w: 0.8385711}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000011}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_1_Jnt
+      position: {x: -0.0410907, y: 7.105427e-17, z: 0}
+      rotation: {x: 0.030076325, y: -0.031437807, z: 0.00038047312, w: 0.9990531}
+      scale: {x: 1, y: 1.0000008, z: 1.0000011}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_2_Jnt
+      position: {x: -0.03166747, y: 1.7763567e-16, z: 0}
+      rotation: {x: 0.000000033527606, y: -0.00000502169, z: 0.0000046077175, w: 1}
+      scale: {x: 0.99999976, y: 1.0000008, z: 1.0000004}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_4_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_R_3_Jnt
+      position: {x: -0.03783304, y: -7.105427e-17, z: -2.1316282e-16}
+      rotation: {x: -0, y: -0, z: 1.6836524e-13, w: 1}
+      scale: {x: 1.0000004, y: 0.99999964, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.105293326, y: -0.023959367, z: 0.08313969}
+      rotation: {x: 0.0428863, y: 0.21834673, z: 0.016040906, w: 0.97479653}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_1_Jnt
+      position: {x: -0.03195487, y: -1.4210854e-16, z: 0}
+      rotation: {x: 0.002578466, y: -0.0031634704, z: -0.037012, w: 0.9993065}
+      scale: {x: 0.9999999, y: 1.0000004, z: 1.0000004}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_R_2_Jnt
+      position: {x: -0.056395523, y: 1.0658141e-16, z: 2.1316282e-16}
+      rotation: {x: -2.3283062e-10, y: -0, z: 0.0000000016152624, w: 1}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.12596852, y: -0.027715422, z: 0.05510211}
+      rotation: {x: 0.03675367, y: 0.19807552, z: 0.016796602, w: 0.9793535}
+      scale: {x: 1, y: 1.0000002, z: 1.000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_1_Jnt
+      position: {x: -0.040678, y: -2.842171e-16, z: -2.842171e-16}
+      rotation: {x: -0.0077679297, y: 0.006059643, z: -0.034344573, w: 0.9993615}
+      scale: {x: 0.99999976, y: 1.0000011, z: 1.0000002}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_R_2_Jnt
+      position: {x: -0.048320368, y: -5.3290704e-17, z: 4.6185276e-16}
+      rotation: {x: -0, y: -0, z: 0.0000000017462294, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.13116972, y: -0.014014943, z: 0.02739}
+      rotation: {x: 0.035195746, y: 0.19313142, z: 0.017660104, w: 0.98038244}
+      scale: {x: 0.99999976, y: 0.9999999, z: 1.0000008}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_1_Jnt
+      position: {x: -0.04600933, y: -1.4210854e-16, z: 3.5527136e-17}
+      rotation: {x: -0.015736226, y: 0.0062355683, z: -0.030527117, w: 0.99939066}
+      scale: {x: 0.9999994, y: 1.0000007, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_R_2_Jnt
+      position: {x: -0.03859853, y: 3.375078e-16, z: 2.1316282e-16}
+      rotation: {x: 1, y: -0.000000040105075, z: 0.000000007217749, w: -0.000000017695127}
+      scale: {x: 1.0000007, y: 1.0000002, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_R_Jnt
+      position: {x: -0.121638164, y: 2.842171e-16, z: 8.881784e-18}
+      rotation: {x: 0.023632927, y: 0.16120577, z: 0.039676607, w: 0.9858398}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000004}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_1_Jnt
+      position: {x: -0.029398264, y: -4.2632563e-16, z: -9.7699626e-17}
+      rotation: {x: -0.041401308, y: 0.017365016, z: -0.026321284, w: 0.9986449}
+      scale: {x: 1, y: 1.000001, z: 1.0000006}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_R_2_Jnt
+      position: {x: -0.047685325, y: 7.5495166e-17, z: 2.4868996e-16}
+      rotation: {x: -0, y: -0, z: -0.000000004190951, w: 1}
+      scale: {x: 1.0000004, y: 1, z: 0.9999999}
+    - name: Archer_Rig_Final__2_:transform5
+      parentName: Archer_Rig_Final__2_:BaseModel_Shoulder_Jnt
+      position: {x: 1.3500003, y: 0.00000043158423, z: 0.00000015825296}
+      rotation: {x: 0.7071069, y: -0.70710665, z: -5.373273e-10, w: -0.00000008648675}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Shoulder_L_Jnt
+      parentName: Archer_Rig_Final__2_:transform5
+      position: {x: -0.21586281, y: 1.337815, z: -0.019275274}
+      rotation: {x: 0.68469673, y: 0.010498762, z: -0.009865015, w: -0.72868574}
+      scale: {x: 1.0000014, y: 1.0000014, z: 1.000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Elbow_1_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Shoulder_L_Jnt
+      position: {x: -0.27271426, y: -0.000000017030818, z: -0.00000003086609}
+      rotation: {x: -0.068550415, y: 0.015040789, z: 0.03715565, w: 0.996842}
+      scale: {x: 0.9999994, y: 1.000001, z: 1.0000005}
+    - name: Archer_Rig_Final__2_:BaseModel_Elbow_2_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Elbow_1_L_Jnt
+      position: {x: -0.041826315, y: 0.0000000027311882, z: -0.0000000059003797}
+      rotation: {x: 0.000006802379, y: -0.000023027878, z: -0.000017855664, w: 1}
+      scale: {x: 1.0000008, y: 0.99999976, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Arm_Wrist_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Elbow_2_L_Jnt
+      position: {x: -0.18261573, y: 0.000000008095077, z: -0.000000021741466}
+      rotation: {x: -0, y: -0, z: 2.1128929e-13, w: 1}
+      scale: {x: 1.0000007, y: 1.000001, z: 1.0000008}
+    - name: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Arm_Wrist_L_Jnt
+      position: {x: 1.9984014e-17, y: -1.4210854e-16, z: 1.4210854e-16}
+      rotation: {x: 0.7027926, y: 0.04059088, z: -0.027440537, w: 0.70970565}
+      scale: {x: 1.0000004, y: 1, z: 0.9999993}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.041183583, y: -0.034117136, z: 0.041914552}
+      rotation: {x: -0.10965407, y: 0.36232767, z: 0.22400294, w: 0.8980631}
+      scale: {x: 0.99999857, y: 1.0000007, z: 1.0000014}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_1_Jnt
+      position: {x: -0.041119084, y: -1.4210854e-16, z: 0}
+      rotation: {x: 0.99905306, y: -0.00038268408, z: 0.031433832, w: 0.030079052}
+      scale: {x: 1.000003, y: 1.0000008, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_2_Jnt
+      position: {x: -0.03166747, y: -1.0658141e-16, z: -7.105427e-17}
+      rotation: {x: -0.0000007506457, y: 0.000004935593, z: 0.0000045392644, w: 1}
+      scale: {x: 0.99999917, y: 1.0000001, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_4_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Thumb_L_3_Jnt
+      position: {x: -0.03783304, y: 1.7763567e-16, z: 0}
+      rotation: {x: -0.70584613, y: -0.042203087, z: 0.04219991, w: 0.70584655}
+      scale: {x: 1.0000011, y: 1.0000006, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.1270764, y: -0.026316212, z: 0.041617163}
+      rotation: {x: 0.9860274, y: 0.16175263, z: -0.036845572, w: 0.015119458}
+      scale: {x: 1.0000001, y: 1.0000017, z: 1.0000018}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_1_Jnt
+      position: {x: -0.03195487, y: 0, z: -2.842171e-16}
+      rotation: {x: -0.0025786932, y: 0.0031624401, z: -0.037012603, w: 0.99930644}
+      scale: {x: 0.9999994, y: 0.9999988, z: 0.9999987}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pointer_L_2_Jnt
+      position: {x: -0.056395523, y: 3.5527136e-17, z: -2.1316282e-16}
+      rotation: {x: -0.7071069, y: -0.000000020489091, z: 0.00000009645007, w: 0.70710665}
+      scale: {x: 1.0000004, y: 1.0000008, z: 1.0000007}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.13789453, y: -0.024243291, z: 0.008355363}
+      rotation: {x: 0.98668796, y: 0.16158842, z: -0.017575199, w: 0.005216165}
+      scale: {x: 0.9999995, y: 1.0000008, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_1_Jnt
+      position: {x: -0.040678, y: -2.842171e-16, z: 7.105427e-17}
+      rotation: {x: 0.0077675725, y: -0.0060606943, z: -0.034340106, w: 0.99936163}
+      scale: {x: 1.000001, y: 0.9999994, z: 1.0000013}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Middle_L_2_Jnt
+      position: {x: -0.048320368, y: 7.105427e-17, z: -7.105427e-17}
+      rotation: {x: -0.7071067, y: 0.000000081956365, z: 0.000000022351736, w: 0.70710677}
+      scale: {x: 0.9999988, y: 0.9999993, z: 0.9999999}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.1289092, y: -0.033567354, z: -0.020193584}
+      rotation: {x: 0.9868846, y: 0.160886, z: -0.012942725, w: 0.0026292272}
+      scale: {x: 0.9999995, y: 1.0000006, z: 0.9999994}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_1_Jnt
+      position: {x: -0.04600933, y: 2.842171e-16, z: 0}
+      rotation: {x: 0.015735583, y: -0.0062356796, z: -0.030527484, w: 0.9993906}
+      scale: {x: 1.0000002, y: 0.9999999, z: 1.0000011}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Ring_L_2_Jnt
+      position: {x: -0.03859853, y: 2.3980816e-16, z: -1.0658141e-16}
+      rotation: {x: -1, y: 0.000000005413311, z: 0.00000003143213, w: 0.00000008009372}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000002}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_L_1_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hand_Wrist_L_Jnt
+      position: {x: -0.10695604, y: -0.038571272, z: -0.043226197}
+      rotation: {x: 0.98978925, y: 0.14051345, z: 0.015453175, w: -0.018286806}
+      scale: {x: 1.0000015, y: 1.0000013, z: 1.0000006}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_2_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_L_1_Jnt
+      position: {x: -0.029398264, y: 1.4210854e-16, z: 7.5495166e-17}
+      rotation: {x: 0.041401196, y: -0.017361252, z: -0.026316445, w: 0.9986451}
+      scale: {x: 1.0000001, y: 0.99999976, z: 1.0000006}
+    - name: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_3_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Finger_Pinky_2_Jnt
+      position: {x: -0.047685325, y: -3.1530333e-16, z: 3.5527136e-17}
+      rotation: {x: -1, y: 0.00000010430808, z: -0.000000041909495, w: -0.000000046566107}
+      scale: {x: 1.0000013, y: 1.0000008, z: 1.0000011}
+    - name: Archer_Rig_Final__2_:transform11
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      position: {x: 0.82950115, y: -0.00000012592851, z: -0.00000071089977}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.0000006097243, w: 0.000000003719133}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Archer_Rig_Final__2_:transform12
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      position: {x: 0.82950115, y: -0.00000012592851, z: -0.00000071089977}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.0000006097243, w: 0.000000003719133}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Rotate_R_Jnt
+      parentName: Archer_Rig_Final__2_:transform12
+      position: {x: 0.06207913, y: 0.8418351, z: 1.2154188e-11}
+      rotation: {x: -0.000000006565976, y: -0.000000045908372, z: -0.15385184, w: -0.988094}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Translate_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Rotate_R_Jnt
+      position: {x: 0.047402468, y: -0.033688247, z: 1.6591464e-10}
+      rotation: {x: -0.00009411093, y: -0.000084840016, z: 0.5600691, w: 0.828446}
+      scale: {x: 1.000001, y: 1.000001, z: 0.9999997}
+    - name: Archer_Rig_Final__2_:BaseModel_Knee_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Translate_R_Jnt
+      position: {x: -0.32677594, y: -0.047985613, z: 0.0014314584}
+      rotation: {x: 0.000000002226443, y: 0.000000016822014, z: 0.005943797, w: 0.99998236}
+      scale: {x: 0.99999964, y: 0.9999999, z: 0.99999994}
+    - name: Archer_Rig_Final__2_:BaseModel_Ankle_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Knee_R_Jnt
+      position: {x: -0.39040613, y: -0.047878455, z: -0.07443583}
+      rotation: {x: 0.6671375, y: 0.2343667, z: -0.19325094, w: 0.6801867}
+      scale: {x: 1.0000013, y: 1.0000004, z: 1.0000012}
+    - name: Archer_Rig_Final__2_:BaseModel_Foot_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Ankle_R_Jnt
+      position: {x: -0.1417038, y: 0.0518686, z: 0.015705341}
+      rotation: {x: 0.68048507, y: -0.19220416, z: -0.36655515, w: 0.60467756}
+      scale: {x: 0.9999999, y: 1.0000005, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Toes_R_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Foot_R_Jnt
+      position: {x: -0.120472975, y: -0.0010348596, z: 0.0000019414397}
+      rotation: {x: 0.000000029802315, y: 0.000000014901158, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 0.99999964, z: 1.0000006}
+    - name: Archer_Rig_Final__2_:transform13
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Jnt
+      position: {x: 0.82950115, y: -0.00000012592851, z: -0.00000071089977}
+      rotation: {x: -0.7071067, y: 0.7071068, z: 0.0000006097243, w: 0.000000003719133}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Rotate_L_Jnt
+      parentName: Archer_Rig_Final__2_:transform13
+      position: {x: -0.06207913, y: 0.8418351, z: -1.4549101e-10}
+      rotation: {x: -0.000000006565976, y: -0.000000045908372, z: -0.15385184, w: -0.988094}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Archer_Rig_Final__2_:BaseModel_Hip_Translate_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Rotate_L_Jnt
+      position: {x: -0.05815404, y: 8.6677825e-11, z: 2.5228245e-11}
+      rotation: {x: 0.00010441592, y: 0.00007159853, z: 0.56009024, w: 0.8284316}
+      scale: {x: 1.000001, y: 1.0000007, z: 0.9999997}
+    - name: Archer_Rig_Final__2_:BaseModel_Knee_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Hip_Translate_L_Jnt
+      position: {x: -0.33028036, y: 1.02875023e-16, z: 0.0014314584}
+      rotation: {x: -1.4551914e-10, y: -0.0000000098880255, z: 0.005943707, w: 0.99998236}
+      scale: {x: 1.0000004, y: 1.0000006, z: 0.9999999}
+    - name: Archer_Rig_Final__2_:BaseModel_Ankle_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Knee_L_Jnt
+      position: {x: -0.39333102, y: -2.1938007e-15, z: -0.07443583}
+      rotation: {x: 0.66713744, y: 0.23436679, z: -0.19325091, w: 0.68018675}
+      scale: {x: 1.000001, y: 1.0000004, z: 1.0000008}
+    - name: Archer_Rig_Final__2_:BaseModel_Foot_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Ankle_L_Jnt
+      position: {x: -0.1417038, y: 0.0518686, z: -0.015705341}
+      rotation: {x: 0.9092715, y: -0.39532167, z: 0.11938071, w: 0.051907778}
+      scale: {x: 1.0000008, y: 0.9999988, z: 1.0000007}
+    - name: Archer_Rig_Final__2_:BaseModel_Toes_L_Jnt
+      parentName: Archer_Rig_Final__2_:BaseModel_Foot_L_Jnt
+      position: {x: -0.12069898, y: 4.440892e-18, z: 1.7763567e-16}
+      rotation: {x: -0, y: -0, z: 0.000000029802319, w: 1}
+      scale: {x: 1.0000004, y: 1.000001, z: 0.9999995}
+    - name: Archer_Rig_Final__2_:BaseModel_Geo
+      parentName: Heal_body(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:Skin
+      parentName: Archer_Rig_Final__2_:BaseModel_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:Hair1
+      parentName: Archer_Rig_Final__2_:BaseModel_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:Archer1
+      parentName: Archer_Rig_Final__2_:BaseModel_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:Potions1
+      parentName: Archer_Rig_Final__2_:BaseModel_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Archer_Rig_Final__2_:Potions2
+      parentName: Archer_Rig_Final__2_:BaseModel_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 1
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -638,6 +638,7 @@ MonoBehaviour:
   animatorController: {fileID: 0}
   attackParticle: {fileID: 0}
   defendParticle: {fileID: 0}
+  activeParticle: {fileID: 0}
   healthCanvas: {fileID: 7786142372032996600}
   iconCanvas: {fileID: 5250584851990199859}
   playersWhoAttacked: []
@@ -996,7 +997,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 266469334271560273, guid: 2a1d082ea46a8ec42952540a6792dcb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a1d082ea46a8ec42952540a6792dcb3, type: 3}
 --- !u!4 &6429594620688191230 stripped
 Transform:

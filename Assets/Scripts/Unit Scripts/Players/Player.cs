@@ -244,12 +244,12 @@ public abstract class Player : Humanoid, IPlayer
     #region Particle Deactivators
     protected void DeactivateAbilityOneParticle()
     {
-
+        AbilityOneParticle.Stop();
     }
 
     protected void DeactivateAbilityTwoParticle()
     {
-
+        AbilityTwoParticle.Stop();
     }
     #endregion
     #endregion
