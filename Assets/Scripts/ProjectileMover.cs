@@ -13,11 +13,11 @@ using UnityEngine;
 public class ProjectileMover : MonoBehaviour
 {
     /// <summary>
-    /// Enum representing the owner of the projectile. Probably useless honestly.
+    /// Enum representing the owner of the projectile. Used in ensuring the parent
+    /// transform of the projectile is properly set at all times.
     /// </summary>
     public enum Owner
-    { 
-        Warrior,
+    {
         Mage,
         Archer
     }
