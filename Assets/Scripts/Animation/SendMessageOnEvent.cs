@@ -22,6 +22,7 @@ public class SendMessageOnEvent : MonoBehaviour
     /// <summary> Sets the animation complete property for the selected player to be true. </summary>
     public void AnimationEnd()
     {
+        print("Animation end.");
         transform.parent.GetComponentInChildren<Humanoid>().SetAnimationComplete(true);
     }
 
@@ -36,6 +37,20 @@ public class SendMessageOnEvent : MonoBehaviour
     public enum ParticleToTrigger
     {
         Fireball
+    }
+
+    /// <summary>
+    /// Enum representing the projectile that needs to be activated.
+    /// </summary>
+    /// Notes: Unlike the ParticleToTrigger enum, this enum is used for
+    /// projectiles that will have an actual 3D model in the animation as 
+    /// well. It would be more efficient to simply add onto the ParticleToTrigger
+    /// enum, but this will aid in keep things more clear and obvious as 
+    /// to what they are in the game.
+    public enum ProjectileToActivate
+    {
+        Archer_Arrow,
+        Archer_Potion
     }
 
     /// <summary>
@@ -73,6 +88,39 @@ public class SendMessageOnEvent : MonoBehaviour
         if (particle == ParticleToTrigger.Fireball)
         {
             Mage.Instance.AbilityOneParticle.GetComponent<ProjectileMover>().EnableMove();
+        }
+    }
+
+
+    public void ActivateProjectile(ProjectileToActivate projectile)
+    {
+        switch (projectile)
+        {
+            case ProjectileToActivate.Archer_Arrow:
+                break;
+
+            case ProjectileToActivate.Archer_Potion:
+                Archer.Instance.potion.SetActive(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void LaunchProjectile(ProjectileToActivate projectile)
+    {
+        switch (projectile)
+        {
+            case ProjectileToActivate.Archer_Arrow:
+                break;
+
+            case ProjectileToActivate.Archer_Potion:
+                Archer.Instance.LaunchPotion();
+                break;
+
+            default:
+                break;
         }
     }
 }

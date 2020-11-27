@@ -25,7 +25,7 @@ public class Archer : Player
     public ParticleSystem potionSplash;
 
     /// <summary> The potion game object. </summary>
-    [SerializeField] private GameObject _potion;
+    public GameObject potion;
 
     /// <summary> The arrow game object. </summary>
     [SerializeField] private GameObject _arrow;
@@ -77,6 +77,10 @@ public class Archer : Player
         yield return new WaitUntil(() => IsTurning == false);
 
         int extraDamage = 0;
+
+        AttackAnim();
+
+        yield return new WaitUntil(() => AnimationComplete);
 
         _arrow.SetActive(true);
 
@@ -171,7 +175,7 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
-        _potion.SetActive(true);
+        //_potion.SetActive(true);
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player)
         {
@@ -181,15 +185,11 @@ public class Archer : Player
             yield return new WaitForFixedUpdate();
             yield return new WaitUntil(() => IsTurning == false);
 
+            print("Done turning");
+
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
-            //animatorController.SetTrigger("CastHeal");
-
-            //yield return new WaitUntil(() => AnimationComplete);
-
-            //_potion.GetComponent<ProjectileAtTarget>().EnableMove();
-            _potion.GetComponent<ProjectileMover>().SetTarget(target);
-            _potion.GetComponent<ProjectileMover>().EnableMove();
+            animatorController.SetTrigger("CastAbilityOne");
 
             yield return new WaitUntil(() => potionHitTarget == true);
 
@@ -203,11 +203,23 @@ public class Archer : Player
 
             print("Potion hit target");
             target.Heal();
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => AnimationComplete);
+
+            print("Archer heal anim complete.");
 
             StartAbilityOneCD();
 
             callback();
         }
+    }
+
+    public void LaunchPotion()
+    {
+        Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
+
+        potion.GetComponent<ProjectileMover>().SetTarget(target);
+        potion.GetComponent<ProjectileMover>().EnableMove();
     }
     #endregion
 

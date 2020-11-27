@@ -56,6 +56,9 @@ public class ProjectileMover : MonoBehaviour
     [Header("The speed of the projectile.")]
     public int SpeedModifer = 1;
 
+    private Vector3 _potionPos = Vector3.zero;
+
+
     /// <summary> Coroutine moving the projectile towards the target. </summary>
     IEnumerator Move()
     {
@@ -160,6 +163,10 @@ public class ProjectileMover : MonoBehaviour
                 break;
 
             case Owner.Archer:
+                if (projectileType == ProjectileType.ArcherPotion)
+                {
+                    _potionPos = transform.localPosition;
+                }
                 transform.parent = Archer.Instance.parentTransform;
                 break;
 
@@ -182,6 +189,7 @@ public class ProjectileMover : MonoBehaviour
         Mage.Instance.FireBlastParticle.Play();
     }
 
+
     /// <summary>
     /// Coroutine for resetting the position of the potion. Waits until the 
     /// potion trail particle system is ended so that a smoother transition can occur.
@@ -192,7 +200,9 @@ public class ProjectileMover : MonoBehaviour
 
         yield return new WaitUntil(() => potionTrail.isStopped);
 
-        transform.localPosition = new Vector3(0f, 0.5f, 0f);
+        transform.parent = parentTransform;
+
+        transform.localPosition = _potionPos;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.SetActive(false);
     }
