@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class Archer : Player
 {
+    /// <summary> The animtor controler for the Archer's accessories. </summary>
+    public Animator ArcherAccController;
+
     /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
     private bool hasTrueDamage = false;
 
@@ -189,7 +192,10 @@ public class Archer : Player
 
             Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
 
-            animatorController.SetTrigger("CastAbilityOne");
+            AbilityOneAnim();
+
+            if (ArcherAccController != null)
+                ArcherAccController.SetTrigger("CastAbilityOne");
 
             yield return new WaitUntil(() => potionHitTarget == true);
 
