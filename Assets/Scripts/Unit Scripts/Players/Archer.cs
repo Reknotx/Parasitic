@@ -180,7 +180,7 @@ public class Archer : Player
 
         //_potion.SetActive(true);
 
-        if (CharacterSelector.Instance.SelectedTargetUnit is Player)
+        if (CharacterSelector.Instance.SelectedTargetUnit is Player player)
         {
             ActionRange.Instance.ActionDeselected();
 
@@ -190,7 +190,7 @@ public class Archer : Player
 
             print("Done turning");
 
-            Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
+            Player target = player;
 
             AbilityOneAnim();
 
@@ -199,7 +199,7 @@ public class Archer : Player
 
             yield return new WaitUntil(() => potionHitTarget == true);
 
-            Vector3 targetPos = CharacterSelector.Instance.SelectedTargetUnit.transform.position;
+            Vector3 targetPos = player.transform.position;
 
             potionSplash.transform.position = new Vector3(targetPos.x,
                                                           potionSplash.transform.position.y,
