@@ -177,7 +177,7 @@ public class CombatSystem : MonoBehaviour
         if (CharacterSelector.Instance.SelectedPlayerUnit == null) return;
 
         CharacterSelector.Instance.SelectedPlayerUnit.Defend();
-
+        CharacterSelector.Instance.HidePath();
         AttackComplete();
     }
 
@@ -212,6 +212,8 @@ public class CombatSystem : MonoBehaviour
 
         CharacterSelector.Instance.SelectedPlayerUnit = null;
         CharacterSelector.Instance.SelectedTargetUnit = null;
+
+        CharacterSelector.Instance.HidePath();
 
         if (state != BattleState.Won)
             SetBattleState(BattleState.Idle);
@@ -413,7 +415,7 @@ public class CombatSystem : MonoBehaviour
             DeactivateCombatButtons();
             // player.GetComponent<MeshRenderer>().material.color = Color.gray;
             //player.GetComponent<MeshRenderer>().material = player.defaultMat;
-            if (playersToGo.Count == 0)
+            if (playersToGo.Count == 0 && (state != BattleState.Won && state != BattleState.Lost))
             {
                 if (enemiesToGo.Count > 0)
                 {
@@ -570,7 +572,7 @@ public class CombatSystem : MonoBehaviour
 
             Instantiate(bloodAndGuts, unit.transform.position, bloodAndGuts.transform.rotation);
 
-            if (CheckWinCondition()) GameWon();
+            if (WinConditions.Instance.CheckWinCondition(Condition.KillEnemies)) GameWon();
         }
 
 
@@ -822,10 +824,10 @@ public class CombatSystem : MonoBehaviour
 
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>
-    private bool CheckWinCondition()
+    public bool CheckKillCondition(EnemyType typeToKill)
     {
-        Condition winCondition = WinConditions.Instance.condition;
-        EnemyType typeToKill = WinConditions.Instance.typeToKill;
+        //Condition winCondition = WinConditions.Instance.condition;
+        //EnemyType typeToKill = WinConditions.Instance.typeToKill;
 
         bool winConditionMet = true;
 
@@ -871,11 +873,25 @@ public class CombatSystem : MonoBehaviour
 
         }
 
-        if (winCondition == Condition.KillEnemiesOrGetKeyItem)
-        {
-            ///For Ryan.?
-        }
+        return winConditionMet;
+    }
 
+    /// <summary>
+    /// Checks if each player is in the target zone;
+    /// </summary>
+    /// <param name="zone"></param>
+    /// <returns></returns>
+    public bool CheckAreaCondition(ObjectiveZone zone)
+    {
+        bool winConditionMet = true;
+        foreach (Humanoid unit in unitsAlive)
+        {
+            if(unit is Player playerUnit)
+            {
+                winConditionMet = playerUnit.AtTargetObjective(zone);
+            }
+            if (winConditionMet == false) break;
+        }
         return winConditionMet;
     }
 
@@ -892,11 +908,13 @@ public class CombatSystem : MonoBehaviour
     }
 
     /// <summary> Activate the win screen canvas here when the win condition is met. </summary>
-    private void GameWon()
+    public void GameWon()
     {
         SetBattleState(BattleState.Won);
 
         endGameText.text = "You Win!";
+
+        DeactivateCombatButtons();
 
         endCanvas.SetActive(true);
     }
@@ -908,6 +926,7 @@ public class CombatSystem : MonoBehaviour
 
         endGameText.text = "You Lose!";
 
+        DeactivateCombatButtons();
         endCanvas.SetActive(true);
     }
 

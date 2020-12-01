@@ -610,6 +610,7 @@ public class Upgrades : MonoBehaviour
     /// </summary>
     public void ToggleUpgradeMenu()
     {
+        Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
         if (upgradeWindow.activeInHierarchy)
         {
             knightUpgrades.SetActive(false);
@@ -618,9 +619,8 @@ public class Upgrades : MonoBehaviour
             upgradeWindow.SetActive(false);
             HideInfo();
         }
-        else
+        else if (temp.State != HumanoidState.Moving && CombatSystem.Instance.state != BattleState.Lost && CombatSystem.Instance.state != BattleState.Won)
         {
-            Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
             if(temp is Warrior)
             {
                 knightUpgrades.SetActive(true);

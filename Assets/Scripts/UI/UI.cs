@@ -61,7 +61,7 @@ public class UI : MonoBehaviour
             {
                 UnPause();
             }
-            else
+            else if (CombatSystem.Instance.state != BattleState.Lost && CombatSystem.Instance.state != BattleState.Won)
             {
                 Pause();
             }
