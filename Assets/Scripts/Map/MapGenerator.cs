@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public class MapGenerator : MonoBehaviour
 {
 
@@ -338,3 +339,4 @@ public class MapGenerator : MonoBehaviour
             Gizmos.DrawMesh(gizmoMesh, gizmoPos, Quaternion.identity, gizmoScale);
     }
 }
+#endif
