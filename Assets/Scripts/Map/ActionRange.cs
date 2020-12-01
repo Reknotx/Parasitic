@@ -119,6 +119,7 @@ public class ActionRange : MonoBehaviour
         {
             movementActive = true;
             CharacterSelector.Instance.BoarderLine.SetActive(false);
+            CharacterSelector.Instance.HidePath();
         }
         lineMaterial.color = color;
         MapGrid.Instance.DrawBoarder(range, ref lineRenderer,height);

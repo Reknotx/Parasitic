@@ -7,7 +7,8 @@ using UnityEditor;
 public enum Condition
 {
     KillEnemies,
-    KillEnemiesOrGetKeyItem
+    GetKeyItem,
+    ReachArea
 }
 
 public enum EnemyType
@@ -24,16 +25,29 @@ public enum EnemyType
 public class WinConditions : MonoBehaviour
 {
     public static WinConditions Instance;
-    public Condition condition;
     public EnemyType typeToKill;
-
-
-    public int enemiesKillRequirement = 0;
-    public int numEnemiesInScene = 0;
-    public string keyObjectiveMessage;
+    public int defaultEnemiesKillRequirement = 0;
+    public int allEnemiesInScene = 0;
+    
 
     public Dropdown objectiveDropdown;
     public Text objectiveText;
+
+    public bool orderedObjectives;
+    [System.Serializable]
+    public class Objective
+    {
+        public Condition condition = Condition.KillEnemies;
+        public EnemyType typeToKill = EnemyType.Larva;
+        public int enemiesKillRequirement = 0;
+        public int numEnemiesInScene = 0;
+        public string objectiveMessage = "Objective";
+        public Item item = null;
+        public ObjectiveZone objectiveZone = null;
+        public bool complete;
+    }
+
+    public List<Objective> objectives = new List<Objective>();
 
     private void Awake()
     {
@@ -46,93 +60,40 @@ public class WinConditions : MonoBehaviour
 
     private void Start()
     {
-        numEnemiesInScene = FindObjectsOfType<Enemy>().Length;
-        switch (typeToKill)
+       
+        List<string> objectivesText = new List<string>();
+        allEnemiesInScene = GetNumberOfEnemy(typeToKill);
+        defaultEnemiesKillRequirement = allEnemiesInScene;
+        bool allKillingObjectives = AllConditionsAreKilling();
+        if(!allKillingObjectives)
+        objectivesText.Add(GetKillMessage(defaultEnemiesKillRequirement, allEnemiesInScene, typeToKill));
+        RectTransform itemRect = objectiveDropdown.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<RectTransform>();
+        itemRect.sizeDelta = new Vector2(itemRect.sizeDelta.x, itemRect.sizeDelta.y - Mathf.Clamp(13 * (objectives.Count - 1), 0, 30));
+
+        if(objectives.Count > 0)
         {
-            case EnemyType.AllTypes:
-                numEnemiesInScene = FindObjectsOfType<Enemy>().Length;
-                break;
-            case EnemyType.Larva:
-                numEnemiesInScene = FindObjectsOfType<Larva>().Length;
-                break;
-            case EnemyType.Shambler:
-                numEnemiesInScene = FindObjectsOfType<Shambler>().Length;
-                break;
-            case EnemyType.Spiker:
-                numEnemiesInScene = FindObjectsOfType<Spiker>().Length;
-                break;
-            case EnemyType.Charger:
-                numEnemiesInScene = FindObjectsOfType<Charger>().Length;
-                break;
-            case EnemyType.Brood:
-                numEnemiesInScene = FindObjectsOfType<Brood>().Length;
-                break;
-            case EnemyType.Hive:
-                numEnemiesInScene = FindObjectsOfType<Hive>().Length;
-                break;
-            default:
-                break;
-        }
-
-        List<string> objectives = new List<string>();
-
-
-        if (enemiesKillRequirement == numEnemiesInScene)
-        {
-            if(typeToKill == EnemyType.AllTypes)
+            if (!allKillingObjectives)
             {
-                objectives.Add("Kill all Enemies!");
+                objectivesText.Add("or");
             }
-            else
+
+            for (int i = 0; i < objectives.Count; i++)
             {
-                if(typeToKill == EnemyType.Larva || typeToKill == EnemyType.Brood)
+                if(objectives[i].condition == Condition.KillEnemies)
                 {
-                    objectives.Add("Kill all " + typeToKill + "!");
+                    Objective tempObj = objectives[i];
+                    tempObj.numEnemiesInScene = GetNumberOfEnemy(objectives[i].typeToKill);
+                    objectives[i] = tempObj;
+                    objectivesText.Add(GetKillMessage(objectives[i].enemiesKillRequirement, objectives[i].numEnemiesInScene, objectives[i].typeToKill));
                 }
                 else
                 {
-                    objectives.Add("Kill all " + typeToKill + "s!");
+                    objectivesText.Add(objectives[i].objectiveMessage);
                 }
             }
-            
-        }
-        else
-        {
-            if(enemiesKillRequirement > 1)
-            {
-                if(typeToKill == EnemyType.Larva || typeToKill == EnemyType.Brood)
-                {
-                    objectives.Add("Kill " + enemiesKillRequirement + " " + typeToKill + "!");
-                }
-                else
-                {
-                    objectives.Add("Kill " + enemiesKillRequirement + " " + typeToKill + "s!");
-                }
-                
-            }
-            else
-            {
-                if (typeToKill == EnemyType.AllTypes)
-                {
-                    objectives.Add("Kill " + enemiesKillRequirement + " Enemy!");
-                }
-                else
-                {
-                    objectives.Add("Kill " + enemiesKillRequirement + " " + typeToKill + "!");
-                }
-            }
-            
         }
 
-
-        if((int)condition == 1)
-        {
-            objectives.Add("or");
-            objectives.Add(keyObjectiveMessage);
-        }
-
-        objectiveDropdown.AddOptions(objectives);
-
+        objectiveDropdown.AddOptions(objectivesText);
 
        // switch (condition)
        // {
@@ -146,7 +107,144 @@ public class WinConditions : MonoBehaviour
        //         break;
        // }
     }
+
+
+    string GetKillMessage(int killReq, int inScene, EnemyType enemy)
+    {
+        string killMessage;
+        if (killReq == inScene)
+        {
+            if (enemy == EnemyType.AllTypes)
+            {
+                killMessage = "Kill all Enemies!";
+            }
+            else if (enemy == EnemyType.Larva)
+            {
+                killMessage = "Kill " + (killReq > 1 ? "all " : "the ") + (killReq > 1 ? "Larvae " : "Larva") + "!";
+            }
+            else
+            {
+                killMessage = "Kill " + (killReq > 1 ? "all " : "the ") + enemy + (killReq > 1 ? "s!" : "!");
+            }
+        }
+        else
+        {
+            if (enemy == EnemyType.AllTypes)
+            {
+                killMessage = "Kill " + killReq + (killReq > 1 ? " Enemies!" : " Enemy!");
+            }
+            else if (enemy == EnemyType.Larva)
+            {
+                killMessage = "Kill " + killReq + (killReq > 1 ? "Larvae " : "Larva") + "!";
+            }
+            else
+            {
+                killMessage = "Kill " + killReq + " " + enemy + (killReq > 1 ? "s!" : "!");
+            }
+
+        }
+        return killMessage;
+    }
+
+    public int GetNumberOfEnemy(EnemyType enemy)
+    {
+        int amount = 0;
+        switch (enemy)
+        {
+            case EnemyType.AllTypes:
+                amount = FindObjectsOfType<Enemy>().Length;
+                break;
+            case EnemyType.Larva:
+                amount = FindObjectsOfType<Larva>().Length;
+                break;
+            case EnemyType.Shambler:
+                amount = FindObjectsOfType<Shambler>().Length;
+                break;
+            case EnemyType.Spiker:
+                amount = FindObjectsOfType<Spiker>().Length;
+                break;
+            case EnemyType.Charger:
+                amount = FindObjectsOfType<Charger>().Length;
+                break;
+            case EnemyType.Brood:
+                amount = FindObjectsOfType<Brood>().Length;
+                break;
+            case EnemyType.Hive:
+                foreach (Hive hive in FindObjectsOfType<Hive>())
+                {
+                    if (hive is Brood) { }
+                    else
+                    {
+                        amount++;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return amount;
+    }
+    
+    bool AllConditionsAreKilling()
+    {
+        bool allKilling = true;
+        if(objectives.Count == 0)
+        {
+            return false;
+        }
+        foreach (Objective objective in objectives)
+        {
+            if(objective.condition != Condition.KillEnemies)
+            {
+                allKilling = false;
+                break;
+            }
+        }
+        return allKilling;
+    }
+
+    public bool CheckWinCondition(Condition condition)
+    {
+        if (condition == Condition.KillEnemies && CombatSystem.Instance.CheckKillCondition(EnemyType.AllTypes))
+        {
+            return true;
+        }
+        if(objectives.Count == 0)
+        {
+            return false;
+        }
+        bool objectivesComplete = true;
+        foreach (Objective objective in objectives)
+        {
+            if(objective.condition == condition && !objective.complete)
+            {
+                switch (objective.condition)
+                {
+                    case Condition.KillEnemies:
+                        objective.complete = CombatSystem.Instance.CheckKillCondition(objective.typeToKill);
+                        break;
+                    case Condition.GetKeyItem:
+                        objective.complete = Inventory.Instance.InventoryContains(objective.item);
+                        break;
+                    case Condition.ReachArea:
+                        objective.complete = CombatSystem.Instance.CheckAreaCondition(objective.objectiveZone);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (!objective.complete)
+            {
+                objectivesComplete = false;
+                if (orderedObjectives) break;
+            }
+        }
+        return objectivesComplete;
+    }
 }
+
+
+
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(WinConditions))]
@@ -154,7 +252,7 @@ public class WinConditionEditor : Editor
 {
     
     WinConditions winCondition;
-
+    bool showObjectives = false;
     //bool ShowEnumOption(System.Enum Enum)
     //{
     //    Condition cond = (Condition)Enum;
@@ -168,8 +266,8 @@ public class WinConditionEditor : Editor
     //
     //    return result;
     //}
-    
-    
+
+
 
     void OnEnable()
     {
@@ -183,60 +281,71 @@ public class WinConditionEditor : Editor
         winCondition.objectiveDropdown = (Dropdown)EditorGUILayout.ObjectField("Objectives Drop Down(dont touch)", winCondition.objectiveDropdown, typeof(Dropdown), true);
         //winCondition.objectiveText = (Text)EditorGUILayout.ObjectField("Objective Text(dont touch)", winCondition.objectiveText, typeof(Text), true);
 
-        winCondition.condition = (Condition)EditorGUILayout.EnumPopup("Conditions", winCondition.condition);
+        //winCondition.condition = (Condition)EditorGUILayout.EnumPopup("Conditions", winCondition.condition);
 
-        winCondition.typeToKill = (EnemyType)EditorGUILayout.EnumPopup("Type of Enemy to Kill", winCondition.typeToKill);
+        //winCondition.typeToKill = (EnemyType)EditorGUILayout.EnumPopup("Type of Enemy to Kill", winCondition.typeToKill);
 
+        winCondition.orderedObjectives = (bool)EditorGUILayout.Toggle("Ordered Objectives",winCondition.orderedObjectives);
+        //serializedObject.Update();
+        //EditorGUILayout.PropertyField(serializedObject.FindProperty("objectives"),);
+        //serializedObject.ApplyModifiedProperties();
 
+        //
 
-        
-        if (GUILayout.Button("Click to Set Requirement to All of Type: " + winCondition.typeToKill))
+        List<WinConditions.Objective> list = winCondition.objectives;
+
+        showObjectives = EditorGUILayout.Foldout(showObjectives, "Objectives");
+        if (showObjectives)
         {
-            switch (winCondition.typeToKill)
+            int newCount = Mathf.Max(0, EditorGUILayout.DelayedIntField("size", list.Count));
+            while (newCount < list.Count)
+                list.RemoveAt(list.Count - 1);
+            while (newCount > list.Count)
+                list.Add(new WinConditions.Objective());
+            EditorGUI.indentLevel++;
+            //List<WinConditions.Objective> tmpList = new List<WinConditions.Objective>();
+            for (int i = 0; i < list.Count; i++)
             {
-                case EnemyType.AllTypes:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Enemy>().Length;
-                    break;
-                case EnemyType.Larva:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Larva>().Length;
-                    break;
-                case EnemyType.Shambler:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Shambler>().Length;
-                    break;
-                case EnemyType.Spiker:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Spiker>().Length;
-                    break;
-                case EnemyType.Charger:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Charger>().Length;
-                    break;
-                case EnemyType.Brood:
-                    winCondition.enemiesKillRequirement = FindObjectsOfType<Brood>().Length;
-                    break;
-                case EnemyType.Hive:
-                    winCondition.enemiesKillRequirement = 0;
-                    foreach(Hive hive in FindObjectsOfType<Hive>())
+                EditorGUILayout.Separator();
+                EditorGUILayout.LabelField("Condition " + (i + 1), EditorStyles.boldLabel);
+                //WinConditions.Objective tmp = new WinConditions.Objective();
+                list[i].condition = (Condition)EditorGUILayout.EnumPopup("Condition", list[i].condition);
+
+
+                if (list[i].condition == Condition.KillEnemies)
+                {
+                    list[i].typeToKill = (EnemyType)EditorGUILayout.EnumPopup("Type of Enemy to Kill", winCondition.objectives[i].typeToKill);
+
+                    if (GUILayout.Button("Click to Set Requirement to All of Type: " + winCondition.objectives[i].typeToKill))
                     {
-                        if (hive is Brood) { }
-                        else
-                        {
-                            winCondition.enemiesKillRequirement++;
-                        }
+                        list[i].enemiesKillRequirement = winCondition.GetNumberOfEnemy(winCondition.objectives[i].typeToKill);
+
                     }
-                    break;
-                default:
-                    break;
+                    list[i].enemiesKillRequirement = EditorGUILayout.IntField("Required Kills for Type: " + winCondition.objectives[i].typeToKill, winCondition.objectives[i].enemiesKillRequirement);
+                }
+                else
+                {
+                    list[i].objectiveMessage = EditorGUILayout.TextField("Objective Message: ", winCondition.objectives[i].objectiveMessage);
+                    if (list[i].condition == Condition.GetKeyItem)
+                    {
+                        list[i].item = (Item)EditorGUILayout.ObjectField("Item: ", winCondition.objectives[i].item, typeof(Item), true);
+                    }
+                    else if (list[i].condition == Condition.ReachArea)
+                    {
+                        list[i].objectiveZone = (ObjectiveZone)EditorGUILayout.ObjectField("Area: ", winCondition.objectives[i].objectiveZone, typeof(ObjectiveZone), true);
+                    }
+                }
             }
-            
+            EditorGUI.indentLevel--;
         }
-        winCondition.enemiesKillRequirement = EditorGUILayout.IntField("Required Kills for Type: " + winCondition.typeToKill, winCondition.enemiesKillRequirement);
+        
+        //winCondition.objectives = new List<WinConditions.Objective>(tmpList);
+        
+        
+       
 
-        if ((int)winCondition.condition == 1)
-        {
-            winCondition.keyObjectiveMessage = EditorGUILayout.TextField("Message for Key Condition", winCondition.keyObjectiveMessage);
-        }
-
-
-
+        //
+        //winCondition.objectives = (List<T>)EditorGUILayout.li
     }
 
     
