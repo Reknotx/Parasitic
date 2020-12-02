@@ -31,7 +31,7 @@ public class Archer : Player
     public GameObject potion;
 
     /// <summary> The arrow game object. </summary>
-    [SerializeField] private GameObject _arrow;
+    public GameObject arrow;
 
 
     private void Awake()
@@ -83,9 +83,10 @@ public class Archer : Player
 
         AttackAnim();
 
+        //yield return new WaitUntil(() => arrow.activ);
         yield return new WaitUntil(() => AnimationComplete);
 
-        _arrow.SetActive(true);
+        arrow.SetActive(true);
 
         if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, UnitToUpgrade.archer))
         {
@@ -96,17 +97,17 @@ public class Archer : Player
                 MovementStat = _baseMovement;
                 AttackRange = _baseRange;
             }
-            _arrow.transform.GetChild(1).gameObject.SetActive(true);
-            _arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            arrow.transform.GetChild(1).gameObject.SetActive(true);
+            arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
         else
         {
             print("Activating standard trail.");
-            _arrow.transform.GetChild(0).gameObject.SetActive(true);
-            _arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            arrow.transform.GetChild(0).gameObject.SetActive(true);
+            arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         }
-        _arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
-        _arrow.GetComponent<ProjectileMover>().EnableMove();
+        arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
+        arrow.GetComponent<ProjectileMover>().EnableMove();
 
         yield return new WaitUntil(() => arrowHitTarget == true);
 

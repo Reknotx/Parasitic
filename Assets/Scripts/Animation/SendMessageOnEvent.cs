@@ -97,6 +97,7 @@ public class SendMessageOnEvent : MonoBehaviour
         switch (projectile)
         {
             case ProjectileToActivate.Archer_Arrow:
+                Archer.Instance.arrow.SetActive(true);
                 break;
 
             case ProjectileToActivate.Archer_Potion:

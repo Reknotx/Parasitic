@@ -129,6 +129,33 @@ public class CombatSystem : MonoBehaviour
 
     public bool IgnoreDoubleMoveCheck = false;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
+    void Start()
+    {
+        state = BattleState.Start;
+
+        SetupBattle();
+        SetEnemyCountText();
+        roundCounterText.text = _roundCounter.ToString();
+    }
+
+    private void Update()
+    {
+        if (abilityInfo.gameObject.activeInHierarchy)
+        {
+            abilityInfo.rectTransform.position = Input.mousePosition;
+        }
+    }
+
+
     #region Player Combat
 
     #region Combat Button Functions
@@ -576,6 +603,28 @@ public class CombatSystem : MonoBehaviour
         }
 
 
+        //StartCoroutine(KillUnit());
+
+        Destroy(unit.parentTransform.gameObject);
+
+    }
+
+    /// <summary>
+    /// The point of this coroutine is to allow the audio death clip of the killed
+    /// unit to play out all the way to the end before the gameobject is completed.
+    /// 
+    /// Will be utilized once the death audio clips have been added. To prevent a 
+    /// hiccup in gameplay the unit's mesh renderer will be disabled, as we have no
+    /// death animations in the project at this current time. 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator KillUnitCR(Humanoid unit)
+    {
+        AudioSource tempSource = unit.unitAudio.GetAudioSource();
+        unit.PlayAudio(UnitAudioPlayer.AudioToPlay.Death);
+
+        yield return new WaitUntil(() => tempSource.isPlaying == false);
+
         Destroy(unit.parentTransform.gameObject);
 
     }
@@ -951,31 +1000,7 @@ public class CombatSystem : MonoBehaviour
     }
     #endregion
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(Instance.gameObject);
-        }
-        Instance = this;
-    }
 
-    void Start()
-    {
-        state = BattleState.Start;
-
-        SetupBattle();
-        SetEnemyCountText();
-        roundCounterText.text = _roundCounter.ToString();
-    }
-
-    private void Update()
-    {
-        if (abilityInfo.gameObject.activeInHierarchy)
-        {
-            abilityInfo.rectTransform.position = Input.mousePosition;
-        }
-    }
     /// <summary>
     /// Sets up the map and necessary information.
     /// </summary>
