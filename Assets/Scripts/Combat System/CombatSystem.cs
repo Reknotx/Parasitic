@@ -1,4 +1,4 @@
-﻿#pragma warning disable IDE0020 // Use pattern matching
+﻿#pragma warning disable IDE0020 
 /*
  * Author: Chase O'Connor
  * Date: 9/20/2020
@@ -105,7 +105,7 @@ public class CombatSystem : MonoBehaviour
     public static CombatSystem Instance;
 
     /// <summary> The selected player for combat. </summary>
-    private Player player;
+    //private Player player;
 
     /// <summary> The target of combat. </summary>
     //private Humanoid target;
@@ -470,7 +470,7 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
-        player = null;
+        //player = null;
         //target = null;
 
         unit.State = HumanoidState.Done;
@@ -996,7 +996,7 @@ public class CombatSystem : MonoBehaviour
             return;
         }
 
-        player = selection;
+        //player = selection;
     }
     #endregion
 
