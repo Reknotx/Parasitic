@@ -19,7 +19,7 @@ public enum BattleState
     Start,
     Idle,
     PerformingAction,
-    Targetting,
+    Targeting,
     Won,
     Lost
 }
@@ -40,9 +40,9 @@ public class CombatSystem : MonoBehaviour
 {
     #region UI References
 
-    [Header("The UI Variables.")]
-    [Header("The canvas that is displayed when you have met the win/lose condition.")]
-    /// <summary> The canvas that is displayed when the game has been won.</summary>
+    /// <summary> The canvas that is displayed when the game has been won or lost. </summary>
+    [Header("The UI Variables.", order = 0)]
+    [Header("The canvas that is displayed when you have met the win/lose condition.", order = 1)]
     public GameObject endCanvas;
 
     [Space]
@@ -167,7 +167,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(NormalAttackCR());
         ProcessAttack(Attack.NormalAttack);
     }
@@ -180,7 +180,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(AbilityOneCR());
         ProcessAttack(Attack.AbilityOne);
     }
@@ -193,7 +193,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(AbilityTwoCR());
         ProcessAttack(Attack.AbilityTwo);
     }
@@ -264,9 +264,9 @@ public class CombatSystem : MonoBehaviour
         }
 
 
-        if (state == BattleState.Targetting)
+        if (state == BattleState.Targeting)
         {
-            ///Assumes that you have a player character in the process of targetting an ability.
+            ///Assumes that you have a player character in the process of targeting an ability.
             ///Cancel the targetting
             SetBattleState(BattleState.Idle);
             if (selectedPlayer != null && selectedPlayer.HasMoved == false)
@@ -736,7 +736,6 @@ public class CombatSystem : MonoBehaviour
                 abilityOneCDText.transform.parent.gameObject.SetActive(false);
             }
 
-
             if (player.RemainingAbilityTwoCD > 0)
             {
                 abilityTwoCDText.text = player.RemainingAbilityTwoCD.ToString();
@@ -856,21 +855,6 @@ public class CombatSystem : MonoBehaviour
     }
     #endregion
     
-    /// <summary>
-    /// Checks if there are any units left to go this round.
-    /// </summary>
-    /// <returns>Returns true if everyone has gone, false otherwise.</returns>
-    private bool CheckUnitsLeft()
-    {
-        if (playersToGo.Count == 0 && enemiesToGo.Count == 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    
-
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>
     public bool CheckKillCondition(EnemyType typeToKill)
@@ -929,7 +913,7 @@ public class CombatSystem : MonoBehaviour
     /// Checks if each player is in the target zone;
     /// </summary>
     /// <param name="zone"></param>
-    /// <returns></returns>
+    /// <returns>Returns true if the player is in the target zone, false otherwise.</returns>
     public bool CheckAreaCondition(ObjectiveZone zone)
     {
         bool winConditionMet = true;

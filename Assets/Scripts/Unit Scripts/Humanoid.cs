@@ -207,11 +207,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Indicates if the unit is turning towards the target. </summary>
     protected bool IsTurning { get; set; } = false;
 
-    [HideInInspector] public AudioClip attackSoundEffect;
-    [HideInInspector] public AudioClip damagedSoundEffect;
-
-    [HideInInspector] public AudioSource audioSource;
-
     public Animator animatorController;
 
     public UnitAudioPlayer unitAudio;
@@ -223,7 +218,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public ParticleSystem defendParticle;
 
-    [SerializeField] protected ParticleSystem activeParticle;
+    protected ParticleSystem activeParticle;
     #endregion
 
     public virtual void Start()
@@ -690,21 +685,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
 
-    /// <summary> Plays the attacking sound effect for this unit. </summary>
-    protected void PlayAttackSoundEffect()
-    {
-        audioSource.clip = attackSoundEffect;
-
-        audioSource.Play();
-    }
-
-    /// <summary> Plays the damaged sound effect for this unit when they take damage. </summary>
-    protected void PlayDamagedSoundEffect()
-    {
-        audioSource.clip = damagedSoundEffect;
-
-        audioSource.Play();
-    }
 
     /// <summary>
     /// Advances the timer on the unit's buff/debuff clock.
