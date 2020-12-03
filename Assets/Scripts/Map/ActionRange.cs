@@ -38,7 +38,8 @@ public class ActionRange : MonoBehaviour
 
     bool movementActive = false;
 
-    
+    /// <summary> The last tile that the range from tile was calculated on</summary>
+    Tile lastTile;
 
     private void Start()
     {
@@ -162,5 +163,38 @@ public class ActionRange : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Displays the what the attack range of player would be from a tile location
+    /// </summary>
+    /// <param name="tile">Tile to display range from</param>
+    /// <param name="unit">Player whose attack range will be used</param>
+    public void ShowRangeFromTile(Tile tile, Player unit)
+    {
+        if(tile == lastTile)
+        {
+            return;
+        }
+        else
+        {
+            lastTile = tile;
+            Color color = attackLineColor;
+            //find range at tile
+            bool[,] range = MapGrid.Instance.FindTilesInRange(tile, unit.AttackRange, true, unit.AttackShape);
+            //set color
+            lineMaterial.color = color;
+            MapGrid.Instance.DrawBoarder(range, ref lineRenderer, height);
+            gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Used to hide the attack range displayed from ShowRangeFromTile()
+    /// </summary>
+    public void HideRangeFromTile()
+    {
+        lastTile = null;
+        gameObject.SetActive(false);
     }
 }
