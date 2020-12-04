@@ -83,10 +83,9 @@ public class Archer : Player
 
         AttackAnim();
 
-        //yield return new WaitUntil(() => arrow.activ);
-        yield return new WaitUntil(() => AnimationComplete);
+        yield return new WaitUntil(() => arrow.activeSelf == true);
 
-        arrow.SetActive(true);
+        //arrow.SetActive(true);
 
         if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, UnitToUpgrade.archer))
         {
@@ -154,6 +153,8 @@ public class Archer : Player
             hasTrueDamage = false;
             DeactivateAbilityTwoParticle();
         }
+
+        yield return new WaitUntil(() => AnimationComplete);
 
         callback();
     }
