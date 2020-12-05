@@ -18,7 +18,7 @@ public enum HumanoidState
     Idle,
     Selected,
     Moving,
-    Targetting,
+    Targeting,
     Attacking,
     Done
 }
@@ -526,7 +526,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     #endregion
 
     /// <summary>
-    /// Sets the animation complete parameter, used through animation events.
+    /// Sets the animation complete property, used through animation events.
     /// </summary>
     /// <param name="value">States if the animation is complete or not.</param>
     public void SetAnimationComplete(bool value)
@@ -563,10 +563,10 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         activeParticle.Play();
     }
 
-    public void DeactivateActiveParticle()
-    {
-        ///Possibly might need this in the future if things get funky.
-    }
+    //public void DeactivateActiveParticle()
+    //{
+    //    ///Possibly might need this in the future if things get funky.
+    //}
 
     /// <summary>
     /// Activates the attack particle system if it exists.
@@ -683,7 +683,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     // /// </summary>
     // protected void AttackComplete() { HasAttacked = true; }
 
-    public void SetHumanoidState(HumanoidState state) { State = state; }
+    //public void SetHumanoidState(HumanoidState state) { State = state; }
 
 
     /// <summary>
@@ -721,14 +721,7 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         removeList.Clear();
     }
 
-
     #region Status Effects
-    private void AddEffectToList(StatusEffect effect)
-    {
-        statusEffects.Add(effect);
-        CombatSystem.Instance.SubscribeTimerUnit(this);
-    }
-
     public void ResetSpecificStat(StatusEffect.StatusEffectType stat)
     {
         switch (stat)
@@ -776,14 +769,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
 
         return null;
-    }
-
-    /// <summary>
-    /// Placeholder to remind me to do this tomorrow.
-    /// </summary>
-    public void ResetTheStatOnStatusEffectEnd()
-    {
-
     }
 
     /// <summary>

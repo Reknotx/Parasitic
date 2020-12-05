@@ -17,13 +17,6 @@ using UnityEngine.UI;
 #pragma warning disable CS0414
 public abstract class Player : Humanoid, IPlayer
 {
-    protected enum AttackType
-    {
-        NormalAttack,
-        AbilityOne,
-        AbilityTwo
-    }
-
     /// <summary> ObjectiveZone the player currently occupies </summary>
     ObjectiveZone currentObjectiveZone = null;
 
@@ -120,9 +113,6 @@ public abstract class Player : Humanoid, IPlayer
     public abstract void ProcessUpgrade(Abilities abilityToUpgrade);
     #endregion
 
-    [Space]
-    [HideInInspector] public AudioClip abilityOneSoundEffect;
-    [HideInInspector] public AudioClip abilityTwoSoundEffect;
 
     public override void Start()
     {
