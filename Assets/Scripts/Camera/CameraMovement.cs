@@ -44,7 +44,7 @@ public class CameraMovement : MonoBehaviour
             useRotateAround = true;
         }
 
-        UI.Instance.SetPivotText(useRotateAround);
+        UI.Instance.SetPivotState(useRotateAround);
             
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
         float dist;
