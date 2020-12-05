@@ -14881,6 +14881,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad13ba8b9d2dd654499e763016cd16f2, type: 3}
+--- !u!1001 &1376018577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8692331170428761325, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_Name
+      value: ObjectiveZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692331170428761362, guid: c997cef4130604e41877f48a868160c4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3476759
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c997cef4130604e41877f48a868160c4, type: 3}
 --- !u!1 &1377354266
 GameObject:
   m_ObjectHideFlags: 0
@@ -36432,13 +36506,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae19f17780bcfb549a1d58a347394775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: 0
   typeToKill: 0
-  enemiesKillRequirement: 1
-  numEnemiesInScene: 0
-  keyObjectiveMessage: Get Key and Escape!
+  defaultEnemiesKillRequirement: 0
+  allEnemiesInScene: 0
   objectiveDropdown: {fileID: 9052287778458506589}
   objectiveText: {fileID: 0}
+  orderedObjectives: 0
+  objectives:
+  - condition: 2
+    typeToKill: 1
+    enemiesKillRequirement: 0
+    numEnemiesInScene: 0
+    objectiveMessage: Get to the Center of the Airship!
+    item: {fileID: 0}
+    objectiveZone: {fileID: 0}
+    complete: 0
 --- !u!224 &9052287777708453480
 RectTransform:
   m_ObjectHideFlags: 0
