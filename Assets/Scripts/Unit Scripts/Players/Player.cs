@@ -308,22 +308,6 @@ public abstract class Player : Humanoid, IPlayer
         _remainingAbilityTwoCD = AbilityTwoCooldown;
         CombatSystem.Instance.SetCoolDownText(this);
     }
-
-    /// <summary> Play's the sound effect for this player's first ability. </summary>
-    protected void PlayAbilityOneSoundEffect()
-    {
-        audioSource.clip = abilityOneSoundEffect;
-
-        audioSource.Play();
-    }
-
-    /// <summary> Play's the sound effect for this player's second ability. </summary>
-    protected void PlayAbilityTwoSoundEffect()
-    {
-        audioSource.clip = abilityTwoSoundEffect;
-
-        audioSource.Play();
-    }
     #endregion
 
     /// <summary> Find the tile range of the player's normal attack, first ability, and second ability. </summary>

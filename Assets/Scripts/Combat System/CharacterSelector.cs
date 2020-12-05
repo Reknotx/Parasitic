@@ -117,7 +117,7 @@ public class CharacterSelector : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!EventSystem.current.IsPointerOverGameObject() && !upgradeUiUp && !pauseUiUp)
         {
-            if (CombatSystem.Instance.state != BattleState.Targetting && Physics.Raycast(ray, out info, 100f, layermask))
+            if (CombatSystem.Instance.state != BattleState.Targeting && Physics.Raycast(ray, out info, 100f, layermask))
             {
                 Transform objectHit = info.transform;
                 if (Input.GetMouseButtonDown(0) && objectHit.CompareTag("Player") && !unitMoving)
@@ -200,7 +200,7 @@ public class CharacterSelector : MonoBehaviour
                 }
 
             }
-            else if (CombatSystem.Instance.state == BattleState.Targetting &&
+            else if (CombatSystem.Instance.state == BattleState.Targeting &&
                 ((targettingType == TargettingType.TargetEnemies && Physics.Raycast(ray, out info, 100f, enemyLayerMask))
                 || (targettingType == TargettingType.TargetPlayers && Physics.Raycast(ray, out info, 100f, layermask))
                 ))

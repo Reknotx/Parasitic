@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class Archer : Player
 {
+    /// <summary> The animtor controler for the Archer's accessories. </summary>
+    public Animator ArcherAccController;
+
     /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
     private bool hasTrueDamage = false;
 
@@ -25,10 +28,10 @@ public class Archer : Player
     public ParticleSystem potionSplash;
 
     /// <summary> The potion game object. </summary>
-    [SerializeField] private GameObject _potion;
+    public GameObject potion;
 
     /// <summary> The arrow game object. </summary>
-    [SerializeField] private GameObject _arrow;
+    public GameObject arrow;
 
 
     private void Awake()
@@ -78,7 +81,11 @@ public class Archer : Player
 
         int extraDamage = 0;
 
-        _arrow.SetActive(true);
+        AttackAnim();
+
+        yield return new WaitUntil(() => arrow.activeSelf == true);
+
+        //arrow.SetActive(true);
 
         if (hasTrueDamage && Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2, UnitToUpgrade.archer))
         {
@@ -89,17 +96,17 @@ public class Archer : Player
                 MovementStat = _baseMovement;
                 AttackRange = _baseRange;
             }
-            _arrow.transform.GetChild(1).gameObject.SetActive(true);
-            _arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            arrow.transform.GetChild(1).gameObject.SetActive(true);
+            arrow.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
         else
         {
             print("Activating standard trail.");
-            _arrow.transform.GetChild(0).gameObject.SetActive(true);
-            _arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            arrow.transform.GetChild(0).gameObject.SetActive(true);
+            arrow.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         }
-        _arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
-        _arrow.GetComponent<ProjectileMover>().EnableMove();
+        arrow.GetComponent<ProjectileMover>().SetTarget(CharacterSelector.Instance.SelectedTargetUnit);
+        arrow.GetComponent<ProjectileMover>().EnableMove();
 
         yield return new WaitUntil(() => arrowHitTarget == true);
 
@@ -147,6 +154,8 @@ public class Archer : Player
             DeactivateAbilityTwoParticle();
         }
 
+        yield return new WaitUntil(() => AnimationComplete);
+
         callback();
     }
     #endregion
@@ -171,9 +180,9 @@ public class Archer : Player
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
 
-        _potion.SetActive(true);
+        //_potion.SetActive(true);
 
-        if (CharacterSelector.Instance.SelectedTargetUnit is Player)
+        if (CharacterSelector.Instance.SelectedTargetUnit is Player player)
         {
             ActionRange.Instance.ActionDeselected();
 
@@ -181,19 +190,18 @@ public class Archer : Player
             yield return new WaitForFixedUpdate();
             yield return new WaitUntil(() => IsTurning == false);
 
-            Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
+            print("Done turning");
 
-            //animatorController.SetTrigger("CastHeal");
+            Player target = player;
 
-            //yield return new WaitUntil(() => AnimationComplete);
+            AbilityOneAnim();
 
-            //_potion.GetComponent<ProjectileAtTarget>().EnableMove();
-            _potion.GetComponent<ProjectileMover>().SetTarget(target);
-            _potion.GetComponent<ProjectileMover>().EnableMove();
+            if (ArcherAccController != null)
+                ArcherAccController.SetTrigger("CastAbilityOne");
 
             yield return new WaitUntil(() => potionHitTarget == true);
 
-            Vector3 targetPos = CharacterSelector.Instance.SelectedTargetUnit.transform.position;
+            Vector3 targetPos = player.transform.position;
 
             potionSplash.transform.position = new Vector3(targetPos.x,
                                                           potionSplash.transform.position.y,
@@ -203,11 +211,23 @@ public class Archer : Player
 
             print("Potion hit target");
             target.Heal();
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => AnimationComplete);
+
+            print("Archer heal anim complete.");
 
             StartAbilityOneCD();
 
             callback();
         }
+    }
+
+    public void LaunchPotion()
+    {
+        Player target = (Player)CharacterSelector.Instance.SelectedTargetUnit;
+
+        potion.GetComponent<ProjectileMover>().SetTarget(target);
+        potion.GetComponent<ProjectileMover>().EnableMove();
     }
     #endregion
 

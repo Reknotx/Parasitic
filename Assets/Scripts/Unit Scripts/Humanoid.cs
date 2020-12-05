@@ -207,12 +207,9 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     /// <summary> Indicates if the unit is turning towards the target. </summary>
     protected bool IsTurning { get; set; } = false;
 
-    [HideInInspector] public AudioClip attackSoundEffect;
-    [HideInInspector] public AudioClip damagedSoundEffect;
-
-    [HideInInspector] public AudioSource audioSource;
-
     public Animator animatorController;
+
+    public UnitAudioPlayer unitAudio;
 
     public bool AnimationComplete { get; set; } = false;
 
@@ -221,50 +218,8 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public ParticleSystem defendParticle;
 
-    [SerializeField] protected ParticleSystem activeParticle;
+    protected ParticleSystem activeParticle;
     #endregion
-    /// <summary>
-    /// Sets the animation complete parameter, used through animation events.
-    /// </summary>
-    /// <param name="value">States if the animation is complete or not.</param>
-    public void SetAnimationComplete(bool value)
-    {
-        AnimationComplete = value;
-        //if (attackParticle != null)
-        //    attackParticle.Stop();
-
-        //if (activeParticle != null)
-        //{
-        //    activeParticle.Stop();
-        //}
-        //activeParticle = null;
-    }
-
-    /// <summary>
-    /// Sets the active particle that we wish to execute;
-    /// </summary>
-    /// <param name="particle">The particle system we want to play.</param>
-    public void SetActiveParticle(ParticleSystem particle)
-    {
-        activeParticle = particle;
-        activeParticle.Play();
-    }
-
-    public void DeactivateActiveParticle()
-    {
-        ///Possibly might need this in the future if things get funky.
-    }
-
-    /// <summary>
-    /// Activates the attack particle system if it exists.
-    /// </summary>
-    protected void ActivateAttackParticle()
-    {
-        if (attackParticle != null)
-        {
-            SetActiveParticle(attackParticle);
-        }
-    }
 
     public virtual void Start()
     {
@@ -516,6 +471,11 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         }
         
         Health -= damageDealt;
+
+        if (damageDealt > 0)
+        {
+            PlayAudio(UnitAudioPlayer.AudioToPlay.Damaged);
+        }
         
         StartCoroutine(ShowDamage(damageDealt, blocked));
 
@@ -564,6 +524,60 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
         damageText.text = "";
     }
     #endregion
+
+    /// <summary>
+    /// Sets the animation complete parameter, used through animation events.
+    /// </summary>
+    /// <param name="value">States if the animation is complete or not.</param>
+    public void SetAnimationComplete(bool value)
+    {
+        AnimationComplete = value;
+        //if (attackParticle != null)
+        //    attackParticle.Stop();
+
+        //if (activeParticle != null)
+        //{
+        //    activeParticle.Stop();
+        //}
+        //activeParticle = null;
+    }
+
+    /// <summary>
+    /// Makes a reference to this unit's audio player and, if it exists, sends
+    /// in an enum value to have it play the necessary clip locally.
+    /// </summary>
+    /// <param name="toPlay"></param>
+    public void PlayAudio(UnitAudioPlayer.AudioToPlay toPlay)
+    {
+        if (unitAudio != null)
+            unitAudio.PlayAudio(toPlay);
+    }
+
+    /// <summary>
+    /// Sets the active particle that we wish to execute;
+    /// </summary>
+    /// <param name="particle">The particle system we want to play.</param>
+    public void SetActiveParticle(ParticleSystem particle)
+    {
+        activeParticle = particle;
+        activeParticle.Play();
+    }
+
+    public void DeactivateActiveParticle()
+    {
+        ///Possibly might need this in the future if things get funky.
+    }
+
+    /// <summary>
+    /// Activates the attack particle system if it exists.
+    /// </summary>
+    protected void ActivateAttackParticle()
+    {
+        if (attackParticle != null)
+        {
+            SetActiveParticle(attackParticle);
+        }
+    }
 
     /// <summary>
     /// Coroutine that turns the unit in the direction of their target.
@@ -671,21 +685,6 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
 
     public void SetHumanoidState(HumanoidState state) { State = state; }
 
-    /// <summary> Plays the attacking sound effect for this unit. </summary>
-    protected void PlayAttackSoundEffect()
-    {
-        audioSource.clip = attackSoundEffect;
-
-        audioSource.Play();
-    }
-
-    /// <summary> Plays the damaged sound effect for this unit when they take damage. </summary>
-    protected void PlayDamagedSoundEffect()
-    {
-        audioSource.clip = damagedSoundEffect;
-
-        audioSource.Play();
-    }
 
     /// <summary>
     /// Advances the timer on the unit's buff/debuff clock.
