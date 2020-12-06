@@ -47,8 +47,10 @@ public class CombatSystem : MonoBehaviour
 
     [Space]
 
-    //[Header("The text that tells you whether you win or lose.")]
-    public Text endGameText;
+    [Header("The Image that tells you whether you win or lose.")]
+    public Image endGameImage;
+    public Sprite loseSprite;
+    public Sprite winSprite;
 
     public Text enemiesAliveText;
 
@@ -65,15 +67,33 @@ public class CombatSystem : MonoBehaviour
     public Image activeSideTextImage;
     public Image activeSideImage;
 
-    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite;
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite, cancelInfoSprite, endTurnInfoSprite;
 
-    [Header("Player Health Bars and Text References")]
+    [Header("Knight Health Bar and Text References")]
     public Slider knightHealthSlider;
-    public Slider mageHealthSlider;
-    public Slider archerHealthSlider;
     public Text knightHealthText;
+
+    [Header("Mage Health Bar and Text References")]
+    public Slider mageHealthSlider;
     public Text mageHealthText;
+
+    [Header("Archer Health Bar and Text References")]
+    public Slider archerHealthSlider;
     public Text archerHealthText;
+
+    [Header("Knight XP Bar and Text References")]
+    public Slider knightXpSlider;
+    public Text knightXpText;
+
+    [Header("Mage XP Bar and Text References")]
+    public Slider mageXpSlider;
+    public Text mageXpText;
+
+    [Header("Archer XP Bar and Text References")]
+    public Slider archerXpSlider;
+    public Text archerXpText;
+
+    [Header("Player Icons")]
     public Image knightIcon;
     public Image mageIcon;
     public Image archerIcon;
@@ -701,6 +721,14 @@ public class CombatSystem : MonoBehaviour
             {
                 abilityInfo.sprite = defendInfoSprite;
             }
+            else if (button.gameObject.name == "End Turn")
+            {
+                abilityInfo.sprite = endTurnInfoSprite;
+            }
+            else if(button.name == "Cancel")
+            {
+                abilityInfo.sprite = cancelInfoSprite;
+            }
             abilityInfo.gameObject.SetActive(true);
         }
 
@@ -945,7 +973,7 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Won);
 
-        endGameText.text = "You Win!";
+        endGameImage.sprite = winSprite;
 
         DeactivateCombatButtons();
 
@@ -957,7 +985,7 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Lost);
 
-        endGameText.text = "You Lose!";
+        endGameImage.sprite = loseSprite;
 
         DeactivateCombatButtons();
         endCanvas.SetActive(true);
