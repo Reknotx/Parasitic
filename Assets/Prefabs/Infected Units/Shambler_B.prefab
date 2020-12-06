@@ -112,8 +112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.04999733, y: -1.9299998}
-  m_SizeDelta: {x: -0.14000353, y: 0}
+  m_AnchoredPosition: {x: -0.04999733, y: -2}
+  m_SizeDelta: {x: -0.14000353, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6977174040979260971
 CanvasRenderer:
@@ -144,7 +144,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 41c656e6fbc496f46aa1db84473dc4da, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -500,13 +500,10 @@ MonoBehaviour:
   damageText: {fileID: 3295113924814276789}
   healthBar: {fileID: 501854993809897599}
   parentTransform: {fileID: 0}
-  attackSoundEffect: {fileID: 0}
-  damagedSoundEffect: {fileID: 0}
-  audioSource: {fileID: 0}
   animatorController: {fileID: 0}
+  unitAudio: {fileID: 0}
   attackParticle: {fileID: 0}
   defendParticle: {fileID: 8569282524309807587}
-  activeParticle: {fileID: 0}
   healthCanvas: {fileID: 7937638126971262785}
   iconCanvas: {fileID: 6518874063678282653}
   playersWhoAttacked: []

@@ -67,7 +67,7 @@ public class CombatSystem : MonoBehaviour
     public Image activeSideTextImage;
     public Image activeSideImage;
 
-    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite;
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite, cancelInfoSprite, endTurnInfoSprite;
 
     [Header("Knight Health Bar and Text References")]
     public Slider knightHealthSlider;
@@ -720,6 +720,14 @@ public class CombatSystem : MonoBehaviour
             else if (button.gameObject.name == "Defend")
             {
                 abilityInfo.sprite = defendInfoSprite;
+            }
+            else if (button.gameObject.name == "End Turn")
+            {
+                abilityInfo.sprite = endTurnInfoSprite;
+            }
+            else if(button.name == "Cancel")
+            {
+                abilityInfo.sprite = cancelInfoSprite;
             }
             abilityInfo.gameObject.SetActive(true);
         }
