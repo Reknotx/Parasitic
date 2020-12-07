@@ -21,7 +21,9 @@ public class UI : MonoBehaviour
     public GameObject pauseBG;
     public GameObject howToPlay;
 
-    public Text cameraPivotText;
+
+    public Sprite screenCenterDefault, screenCenterHover, screenCenterClick;
+    public Sprite cameraDefault, cameraHover, cameraClick;
 
     public static UI Instance;
 
@@ -30,6 +32,9 @@ public class UI : MonoBehaviour
     public bool PausedStatus { get { return _isPaused; } }
 
     private CombatSystem combatSystem;
+
+    private SpriteState cameraSpriteState;
+    private SpriteState centerSpriteState;
 
     private void Awake()
     {
@@ -48,7 +53,9 @@ public class UI : MonoBehaviour
         combatSystem = CombatSystem.Instance;
         //Time.timeScale = 0;
         _isPaused = true;
-        
+
+        SetPivotSpriteState();
+
         
     }
 
@@ -180,6 +187,7 @@ public class UI : MonoBehaviour
 
 
     public Text masterText, musicText, sfxText, qualityText;
+    public Button camPivotButton;
 
     public void SetGraphics(float qualityIndex)
     {
@@ -208,10 +216,22 @@ public class UI : MonoBehaviour
         //StartCoroutine(DebugResolution());
     }
 
+    public void SetPivotSpriteState()
+    {
+        cameraSpriteState = new SpriteState();
+        cameraSpriteState.highlightedSprite = cameraHover;
+        cameraSpriteState.pressedSprite = cameraClick;
+
+        centerSpriteState = new SpriteState();
+        centerSpriteState.highlightedSprite = screenCenterHover;
+        centerSpriteState.pressedSprite = screenCenterClick;
+
+        SetPivotState(CameraMovement.Instance.useRotateAround);
+    }
+
     /// <summary>
     /// Toggles the Camera Pivot and Sets Text if isInitialSet is false, else just Sets Text
     /// </summary>
-    /// <param name="isInitialSet">if true, only set text, else set text and pivot</param>
     public void ToggleCameraPivot()
     {
         
@@ -226,7 +246,7 @@ public class UI : MonoBehaviour
             
         }
 
-        SetPivotText(CameraMovement.Instance.useRotateAround);
+        SetPivotState(CameraMovement.Instance.useRotateAround);
 
         PlayerPrefs.SetInt("Camera Pivot", CameraMovement.Instance.useRotateAround ? 1 : 0);
         
@@ -234,29 +254,28 @@ public class UI : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets text based on rotateAround
+    /// Sets Sprites based on rotateAround
     /// </summary>
     /// <param name="rotateAround">if true, pivot is center, else pivot is camera</param>
-    public void SetPivotText(bool rotateAround)
+    public void SetPivotState(bool rotateAround)
     {
         if(rotateAround)
         {
-            cameraPivotText.text = "Pivot: Screen Center";
+            camPivotButton.image.sprite = screenCenterDefault;
+            camPivotButton.spriteState = centerSpriteState;
         }
         else
         {
-            cameraPivotText.text = "Pivot: Camera";
+            camPivotButton.image.sprite = cameraDefault;
+            camPivotButton.spriteState = cameraSpriteState;
         }
     }
 
-    IEnumerator DebugResolution()
-    {
-        yield return null;
-        yield return null;
-        Debug.LogAssertion("(Current) Width: " + Screen.width + "  " + "Height: " + Screen.height);
-        Debug.LogAssertion("Ratio: " + (float)Screen.width / Screen.height);
-    }
 
+    /// <summary>
+    /// Sets the Volume of Master based on the float sliderValue
+    /// </summary>
+    /// <param name="sliderValue">value to set Master Volume to</param>
     public void SetMasterLevel(float sliderValue)
     {
         mixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
@@ -265,6 +284,10 @@ public class UI : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets the Volume of Music based on the float sliderValue
+    /// </summary>
+    /// <param name="sliderValue">value to set Music Volume to</param>
     public void SetMusicLevel(float sliderValue)
     {
         mixer.SetFloat("Music", Mathf.Log10(sliderValue) * 20);
@@ -273,6 +296,10 @@ public class UI : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets the Volume of SFX based on the float sliderValue
+    /// </summary>
+    /// <param name="sliderValue">value to set SFX Volume to</param>
     public void SetSFXLevel(float sliderValue)
     {
         mixer.SetFloat("SFX", Mathf.Log10(sliderValue) * 20);
@@ -280,6 +307,10 @@ public class UI : MonoBehaviour
         sfxText.text = "SFX: " + Mathf.Round(sliderValue * 100);
     }
 
+    /// <summary>
+    /// Loads the Audio Levels from Player Prefs if Possible,
+    /// if not then the current values are saved to Player Prefs
+    /// </summary>
     private void LoadAudioLevels()
     {
         mixer.GetFloat("Master", out float mastValue);

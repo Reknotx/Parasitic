@@ -23,6 +23,8 @@ public class Mage : Player
 
     public static Mage Instance;
 
+    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,6 +78,7 @@ public class Mage : Player
         //Debug.Log("Select a target for the mage's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+        CombatSystem.Instance.DeactivateCombatButtons();
         ActionRange.Instance.ActionDeselected();
 
         StartCoroutine(LookToTarget());
@@ -185,7 +188,7 @@ public class Mage : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
-
+        CombatSystem.Instance.DeactivateCombatButtons();
         ActionRange.Instance.ActionDeselected();
 
 

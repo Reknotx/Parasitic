@@ -58,6 +58,11 @@ public class Upgrades : MonoBehaviour
     public List<Abilities> unlockedKnightAbilities;
     public List<Abilities> unlockedArcherAbilities;
 
+    [Header("Sprites for Character Upgrade Background")]
+    public Sprite mageBG;
+    public Sprite knightBG;
+    public Sprite archerBG;
+
     [HideInInspector]
     public Mage mage;
     [HideInInspector]
@@ -69,9 +74,9 @@ public class Upgrades : MonoBehaviour
     /// Experience System Vars
     /// </summary>
     #region EXP
-    public Slider mageXpBar;
-    public Slider knightXpBar;
-    public Slider archerXpBar;
+    public Slider mageXpBar, mageXpBar2;
+    public Slider knightXpBar, knightXpBar2;
+    public Slider archerXpBar, archerXpBar2;
 
     public float maxXP = 100f;
 
@@ -79,9 +84,9 @@ public class Upgrades : MonoBehaviour
     private int _knightXp;
     private int _archerXp;
 
-    private Text _mageXpText;
-    private Text _knightXpText;
-    private Text _archerXpText;
+    private Text _mageXpText, _mageXpText2;
+    private Text _knightXpText, _knightXpText2;
+    private Text _archerXpText, _archerXpText2;
 
     /// <summary>
     /// Mage EXP Property
@@ -99,10 +104,12 @@ public class Upgrades : MonoBehaviour
                 {
                     _mageXp -= (int)maxXP;
                     MagePoints++;
-                    ShowUpgradeNotification();
                 }
                 mageXpBar.value = _mageXp / maxXP;
-                _mageXpText.text = _mageXp + " / " + maxXP;
+                _mageXpText.text = _mageXp + "/" + maxXP;
+
+                mageXpBar2.value = mageXpBar.value;
+                _mageXpText2.text = _mageXpText.text;
             }
         }
     }
@@ -123,10 +130,12 @@ public class Upgrades : MonoBehaviour
                 {
                     _knightXp -= (int)maxXP;
                     KnightPoints++;
-                    ShowUpgradeNotification();
                 }
                 knightXpBar.value = _knightXp / maxXP;
-                _knightXpText.text = _knightXp + " / " + maxXP;
+                _knightXpText.text = _knightXp + "/" + maxXP;
+
+                knightXpBar2.value = knightXpBar.value;
+                _knightXpText2.text = _knightXpText.text;
             }
         }
     }
@@ -147,10 +156,12 @@ public class Upgrades : MonoBehaviour
                 {
                     _archerXp -= (int)maxXP;
                     ArcherPoints++;
-                    ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
-                _archerXpText.text = _archerXp + " / " + maxXP;
+                _archerXpText.text = _archerXp + "/" + maxXP;
+
+                archerXpBar2.value = archerXpBar.value;
+                _archerXpText2.text = _archerXpText.text;
             }
         }
     }
@@ -191,14 +202,7 @@ public class Upgrades : MonoBehaviour
             if (_magePoints > 1 || _magePoints < 1)
                 magePointText.text += "s";
 
-            if(MagePoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
 
@@ -213,14 +217,7 @@ public class Upgrades : MonoBehaviour
                 knightPointText.text += "s";
 
             
-            if (KnightPoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
 
@@ -234,14 +231,7 @@ public class Upgrades : MonoBehaviour
             if (_archerPoints > 1 || _archerPoints < 1)
                 archerPointText.text += "s";
 
-            if (ArcherPoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
     #endregion
@@ -276,6 +266,14 @@ public class Upgrades : MonoBehaviour
         _knightXpText = knightXpBar.GetComponentInChildren<Text>();
         _archerXpText = archerXpBar.GetComponentInChildren<Text>();
 
+        mageXpBar2 = CombatSystem.Instance.mageXpSlider;
+        knightXpBar2 = CombatSystem.Instance.knightXpSlider;
+        archerXpBar2 = CombatSystem.Instance.archerXpSlider;
+
+        _mageXpText2 = CombatSystem.Instance.mageXpText;
+        _knightXpText2 = CombatSystem.Instance.knightXpText;
+        _archerXpText2 = CombatSystem.Instance.archerXpText;
+
         //Get references to each upgrade button and add UnlockAbility Function to OnClick()
         upgradeButtons = new List<UpgradeButton>(GetComponentsInChildren<UpgradeButton>(true));
         foreach (UpgradeButton upgradeButton in upgradeButtons)
@@ -294,7 +292,6 @@ public class Upgrades : MonoBehaviour
 
         DisplayPoints();
         SetButtonStates();
-        ShowUpgradeNotification();
     }
 
 
@@ -624,23 +621,27 @@ public class Upgrades : MonoBehaviour
             if(temp is Warrior)
             {
                 knightUpgrades.SetActive(true);
+                upgradeWindow.GetComponent<Image>().sprite = knightBG;
             }
             else if (temp is Mage)
             {
                 mageUpgrades.SetActive(true);
+                upgradeWindow.GetComponent<Image>().sprite = mageBG;
             }
             else if (temp is Archer)
             {
                 archerUpgrades.SetActive(true);
+                upgradeWindow.GetComponent<Image>().sprite = archerBG;
             }
 
+            
             upgradeWindow.SetActive(true);
             DisplayPoints();
             SetButtonStates();
             CombatSystem.Instance.Cancel(false);
         }
 
-        //ClearUpgradeNotification();
+        
     }
 
     /// <summary>
@@ -661,31 +662,7 @@ public class Upgrades : MonoBehaviour
     }
 
 
-    public void ShowUpgradeNotification()
-    {
-        Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
-        if (temp is Warrior && KnightPoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = KnightPoints + "";
-        }
-        else if (temp is Mage && MagePoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = MagePoints + "";
-        }
-        else if (temp is Archer && ArcherPoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = ArcherPoints + "";
-        }
 
-    }
-
-    public void ClearUpgradeNotification()
-    {
-        notification.SetActive(false);
-    }
     #endregion
 }
 
