@@ -146,7 +146,7 @@ public abstract class Player : Humanoid, IPlayer
             CharacterSelector.Instance.BoarderLine.SetActive(true);
 
         Upgrades.Instance.upgradesMenuToggle.SetActive(true);
-        Upgrades.Instance.ShowUpgradeNotification();
+        
 
         SpriteState st;
         Upgrades.Instance.upgradesMenuToggle.GetComponent<Image>().sprite = UpgradeToggleSprites[0];
@@ -173,7 +173,6 @@ public abstract class Player : Humanoid, IPlayer
         selected = false;
         CharacterSelector.Instance.BoarderLine.SetActive(false);
         Upgrades.Instance.upgradesMenuToggle.SetActive(false);
-        Upgrades.Instance.ClearUpgradeNotification();
     }
     #endregion
 
