@@ -37,6 +37,9 @@ public abstract class Player : Humanoid, IPlayer
 
     /// <summary> The particle system for the player's second ability. </summary>
     public ParticleSystem AbilityTwoParticle;
+
+    /// <summary> The particle system to be played when the player gets healed. </summary>
+    public ParticleSystem HealParticle;
     #endregion
 
     #region Ability Variables
@@ -320,6 +323,9 @@ public abstract class Player : Humanoid, IPlayer
         float healPercent = archerAbility1U1 ? 0.3f : 0.2f;
 
         Health += Mathf.FloorToInt(MaxHealth * healPercent);
+
+        HealParticle.Play();
+
         StartCoroutine(ShowHealText(Mathf.FloorToInt(MaxHealth * healPercent)));
     }
 

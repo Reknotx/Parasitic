@@ -235,24 +235,26 @@ public class CombatSystem : MonoBehaviour
     /// Date: 11/15/2020
     public void AllDefend()
     {
-        if(Mage.Instance != null && playersToGo.Contains(Mage.Instance))
+        List<Player> defending = new List<Player>();
+
+        if (Mage.Instance != null && playersToGo.Contains(Mage.Instance))
         {
             Mage.Instance.Defend();
-            EndUnitTurn(Mage.Instance);
+            defending.Add(Mage.Instance);
             Mage.Instance.SetAnimationComplete(false);
         }
 
         if (Warrior.Instance != null && playersToGo.Contains(Warrior.Instance))
         {
             Warrior.Instance.Defend();
-            EndUnitTurn(Warrior.Instance);
+            defending.Add(Warrior.Instance);
             Warrior.Instance.SetAnimationComplete(false);
         }
 
         if (Archer.Instance != null && playersToGo.Contains(Archer.Instance))
         {
             Archer.Instance.Defend();
-            EndUnitTurn(Archer.Instance);
+            defending.Add(Archer.Instance);
             Archer.Instance.SetAnimationComplete(false);
         }
 
@@ -261,6 +263,11 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedTargetUnit = null;
 
         CharacterSelector.Instance.HidePath();
+
+        foreach (Player player in defending)
+        {
+            EndUnitTurn(player);
+        }
 
         if (state != BattleState.Won)
             SetBattleState(BattleState.Idle);
