@@ -72,7 +72,7 @@ public class Archer : Player
     protected override IEnumerator NormalAttackCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
-
+        CombatSystem.Instance.DeactivateCombatButtons();
 
         ActionRange.Instance.ActionDeselected();
         StartCoroutine(LookToTarget());
@@ -179,6 +179,7 @@ public class Archer : Player
     protected override IEnumerator AbilityOneCR(Action callback)
     {
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+        CombatSystem.Instance.DeactivateCombatButtons();
 
         //_potion.SetActive(true);
 
