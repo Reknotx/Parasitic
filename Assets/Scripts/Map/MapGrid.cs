@@ -516,7 +516,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.up;
                         //add point to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.left))
+                        if ((currentTile.slope && (currentTile.facing == Dir.up || currentTile.facing == Dir.left)))
                         {
                             Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
                             if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
@@ -563,7 +563,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.right;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z + tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.up || currentTile.facing == Dir.right))
+                        if ((currentTile.slope && (currentTile.facing == Dir.up || currentTile.facing == Dir.right)))
                         {
                             Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
                             if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
@@ -611,7 +611,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.down;
                         //add pint to list
                         hitPoint = new Vector3(pos.x + tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if((currentTile.slope && currentTile.facing == Dir.right || currentTile.facing == Dir.down))
+                        if((currentTile.slope && (currentTile.facing == Dir.right || currentTile.facing == Dir.down)))
                         {
                             Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
                             if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)
@@ -659,7 +659,7 @@ public class MapGrid : MonoBehaviour
                         facing = Dir.left;
                         //add pint to list
                         hitPoint = new Vector3(pos.x - tileSize / 2, height + pos.y, pos.z - tileSize / 2);
-                        if ((currentTile.slope && currentTile.facing == Dir.down || currentTile.facing == Dir.left))
+                        if ((currentTile.slope && (currentTile.facing == Dir.down || currentTile.facing == Dir.left)))
                         {
                             Vector3 pastHit = new Vector3(points[points.Count - 1].x, hitPoint.y, points[points.Count - 1].z);
                             if (currentTile.level != lastTile.level && points[points.Count - 1] != pastHit)

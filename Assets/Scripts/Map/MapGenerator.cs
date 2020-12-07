@@ -19,7 +19,7 @@ public class MapGenerator : MonoBehaviour
     public bool drawGizmoMesh = true;
     public GameObject grid;
     public MeshFilter meshFilter;
-    GameObject gridline = null;
+    public GameObject gridline = null;
 
     public Vector2 TileCount()
     {
@@ -134,10 +134,11 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateGridlines()
     {
-        #if UNITY_EDITOR
-        gridline = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Misc/Gridline.prefab", typeof(GameObject)) as GameObject;
-        #endif
-        print(gridline.name);
+        if(gridline == null)
+        {
+            Debug.LogError("Add gridline prefab");
+            return;
+        }
         GameObject gridlines;
         MapGrid mapGrid = GetComponent<MapGrid>();
         Tile[,] tiles = mapGrid.GetTiles(columns, rows);
