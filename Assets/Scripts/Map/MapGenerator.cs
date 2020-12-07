@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
+
 public class MapGenerator : MonoBehaviour
 {
 
@@ -134,7 +134,9 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateGridlines()
     {
+        #if UNITY_EDITOR
         gridline = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Misc/Gridline.prefab", typeof(GameObject)) as GameObject;
+        #endif
         print(gridline.name);
         GameObject gridlines;
         MapGrid mapGrid = GetComponent<MapGrid>();
@@ -339,4 +341,4 @@ public class MapGenerator : MonoBehaviour
             Gizmos.DrawMesh(gizmoMesh, gizmoPos, Quaternion.identity, gizmoScale);
     }
 }
-#endif
+

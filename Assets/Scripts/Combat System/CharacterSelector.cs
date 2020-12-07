@@ -190,7 +190,15 @@ public class CharacterSelector : MonoBehaviour
                             selectedTile = null;
                             BoarderLine.SetActive(false);
                             HidePath();
-                            
+                            ActionRange.Instance.HideRangeFromTile();
+                        }
+                        else if (Input.GetMouseButton(1))
+                        {
+                            ActionRange.Instance.ShowRangeFromTile(selectedTile, SelectedPlayerUnit);
+                        }
+                        else
+                        {
+                            ActionRange.Instance.HideRangeFromTile();
                         }
                     }
                     else
