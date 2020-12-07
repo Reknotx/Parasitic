@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-
+    public bool showHowToPlayOnStart = false; 
     public GameObject pauseMenu;
     public GameObject controlMenu;
     public GameObject optionMenu;
@@ -51,8 +51,17 @@ public class UI : MonoBehaviour
         LoadAudioLevels();
         SetGraphics(PlayerPrefs.GetInt("Quality Level", 5));
         combatSystem = CombatSystem.Instance;
-        //Time.timeScale = 0;
-        _isPaused = true;
+        
+        if(showHowToPlayOnStart)
+        {
+            _isPaused = true;
+        }
+        else
+        {
+            Hide(pauseBG);
+            Hide(howToPlay);
+        }
+        
 
         SetPivotSpriteState();
 

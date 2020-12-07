@@ -104,7 +104,6 @@ public class Upgrades : MonoBehaviour
                 {
                     _mageXp -= (int)maxXP;
                     MagePoints++;
-                    ShowUpgradeNotification();
                 }
                 mageXpBar.value = _mageXp / maxXP;
                 _mageXpText.text = _mageXp + "/" + maxXP;
@@ -131,7 +130,6 @@ public class Upgrades : MonoBehaviour
                 {
                     _knightXp -= (int)maxXP;
                     KnightPoints++;
-                    ShowUpgradeNotification();
                 }
                 knightXpBar.value = _knightXp / maxXP;
                 _knightXpText.text = _knightXp + "/" + maxXP;
@@ -158,7 +156,6 @@ public class Upgrades : MonoBehaviour
                 {
                     _archerXp -= (int)maxXP;
                     ArcherPoints++;
-                    ShowUpgradeNotification();
                 }
                 archerXpBar.value = _archerXp / maxXP;
                 _archerXpText.text = _archerXp + "/" + maxXP;
@@ -205,14 +202,7 @@ public class Upgrades : MonoBehaviour
             if (_magePoints > 1 || _magePoints < 1)
                 magePointText.text += "s";
 
-            if(MagePoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
 
@@ -227,14 +217,7 @@ public class Upgrades : MonoBehaviour
                 knightPointText.text += "s";
 
             
-            if (KnightPoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
 
@@ -248,14 +231,7 @@ public class Upgrades : MonoBehaviour
             if (_archerPoints > 1 || _archerPoints < 1)
                 archerPointText.text += "s";
 
-            if (ArcherPoints > 0)
-            {
-                ShowUpgradeNotification();
-            }
-            else
-            {
-                ClearUpgradeNotification();
-            }
+            
         }
     }
     #endregion
@@ -316,7 +292,6 @@ public class Upgrades : MonoBehaviour
 
         DisplayPoints();
         SetButtonStates();
-        ShowUpgradeNotification();
     }
 
 
@@ -666,7 +641,7 @@ public class Upgrades : MonoBehaviour
             CombatSystem.Instance.Cancel(false);
         }
 
-        //ClearUpgradeNotification();
+        
     }
 
     /// <summary>
@@ -687,31 +662,7 @@ public class Upgrades : MonoBehaviour
     }
 
 
-    public void ShowUpgradeNotification()
-    {
-        Player temp = CharacterSelector.Instance.SelectedPlayerUnit;
-        if (temp is Warrior && KnightPoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = KnightPoints + "";
-        }
-        else if (temp is Mage && MagePoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = MagePoints + "";
-        }
-        else if (temp is Archer && ArcherPoints > 0)
-        {
-            notification.SetActive(true);
-            notificationText.text = ArcherPoints + "";
-        }
 
-    }
-
-    public void ClearUpgradeNotification()
-    {
-        notification.SetActive(false);
-    }
     #endregion
 }
 
