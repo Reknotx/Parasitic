@@ -20828,17 +20828,15 @@ MonoBehaviour:
   damageText: {fileID: 0}
   healthBar: {fileID: 0}
   parentTransform: {fileID: 0}
-  attackSoundEffect: {fileID: 0}
-  damagedSoundEffect: {fileID: 0}
-  audioSource: {fileID: 0}
   animatorController: {fileID: 0}
+  unitAudio: {fileID: 0}
   attackParticle: {fileID: 0}
   defendParticle: {fileID: 0}
-  activeParticle: {fileID: 0}
   ExpParticle: {fileID: 0}
   SelectedParticle: {fileID: 0}
   AbilityOneParticle: {fileID: 0}
   AbilityTwoParticle: {fileID: 0}
+  HealParticle: {fileID: 0}
   AbilityOneRange: 0
   AbilityTwoRange: 0
   AbilityOneCooldown: 0
@@ -20865,8 +20863,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  abilityOneSoundEffect: {fileID: 0}
-  abilityTwoSoundEffect: {fileID: 0}
 --- !u!54 &1436156573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56501,6 +56497,8 @@ MonoBehaviour:
   drawGizmoMesh: 0
   grid: {fileID: 8820341766138399104}
   meshFilter: {fileID: 8820341766138399118}
+  gridline: {fileID: 2009698230531911551, guid: 64298c08166fd114aad33068d2efe326,
+    type: 3}
 --- !u!1 &8820341766008489274
 GameObject:
   m_ObjectHideFlags: 0
