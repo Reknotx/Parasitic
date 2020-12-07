@@ -1,4 +1,4 @@
-﻿#pragma warning disable IDE0020 // Use pattern matching
+﻿#pragma warning disable IDE0020 
 /*
  * Author: Chase O'Connor
  * Date: 9/20/2020
@@ -19,7 +19,7 @@ public enum BattleState
     Start,
     Idle,
     PerformingAction,
-    Targetting,
+    Targeting,
     Won,
     Lost
 }
@@ -40,15 +40,17 @@ public class CombatSystem : MonoBehaviour
 {
     #region UI References
 
-    [Header("The UI Variables.")]
-    [Header("The canvas that is displayed when you have met the win/lose condition.")]
-    /// <summary> The canvas that is displayed when the game has been won.</summary>
+    /// <summary> The canvas that is displayed when the game has been won or lost. </summary>
+    [Header("The UI Variables.", order = 0)]
+    [Header("The canvas that is displayed when you have met the win/lose condition.", order = 1)]
     public GameObject endCanvas;
 
     [Space]
 
-    //[Header("The text that tells you whether you win or lose.")]
-    public Text endGameText;
+    [Header("The Image that tells you whether you win or lose.")]
+    public Image endGameImage;
+    public Sprite loseSprite;
+    public Sprite winSprite;
 
     public Text enemiesAliveText;
 
@@ -65,15 +67,33 @@ public class CombatSystem : MonoBehaviour
     public Image activeSideTextImage;
     public Image activeSideImage;
 
-    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite;
+    public Sprite playerTurnSprite, playerTurnTextSprite, enemyTurnSprite, enemyTurnTextSprite, defendInfoSprite, cancelInfoSprite, endTurnInfoSprite;
 
-    [Header("Player Health Bars and Text References")]
+    [Header("Knight Health Bar and Text References")]
     public Slider knightHealthSlider;
-    public Slider mageHealthSlider;
-    public Slider archerHealthSlider;
     public Text knightHealthText;
+
+    [Header("Mage Health Bar and Text References")]
+    public Slider mageHealthSlider;
     public Text mageHealthText;
+
+    [Header("Archer Health Bar and Text References")]
+    public Slider archerHealthSlider;
     public Text archerHealthText;
+
+    [Header("Knight XP Bar and Text References")]
+    public Slider knightXpSlider;
+    public Text knightXpText;
+
+    [Header("Mage XP Bar and Text References")]
+    public Slider mageXpSlider;
+    public Text mageXpText;
+
+    [Header("Archer XP Bar and Text References")]
+    public Slider archerXpSlider;
+    public Text archerXpText;
+
+    [Header("Player Icons")]
     public Image knightIcon;
     public Image mageIcon;
     public Image archerIcon;
@@ -105,7 +125,7 @@ public class CombatSystem : MonoBehaviour
     public static CombatSystem Instance;
 
     /// <summary> The selected player for combat. </summary>
-    private Player player;
+    //private Player player;
 
     /// <summary> The target of combat. </summary>
     //private Humanoid target;
@@ -129,6 +149,33 @@ public class CombatSystem : MonoBehaviour
 
     public bool IgnoreDoubleMoveCheck = false;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
+    void Start()
+    {
+        state = BattleState.Start;
+
+        SetupBattle();
+        SetEnemyCountText();
+        roundCounterText.text = _roundCounter.ToString();
+    }
+
+    private void Update()
+    {
+        if (abilityInfo.gameObject.activeInHierarchy)
+        {
+            abilityInfo.rectTransform.position = Input.mousePosition;
+        }
+    }
+
+
     #region Player Combat
 
     #region Combat Button Functions
@@ -140,7 +187,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(NormalAttackCR());
         ProcessAttack(Attack.NormalAttack);
     }
@@ -153,7 +200,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(AbilityOneCR());
         ProcessAttack(Attack.AbilityOne);
     }
@@ -166,7 +213,7 @@ public class CombatSystem : MonoBehaviour
         CharacterSelector.Instance.SelectedPlayerUnit.FindActionRanges();
         ActionRange.Instance.ActionSelected();
         StopAllCoroutines();
-        SetBattleState(BattleState.Targetting);
+        SetBattleState(BattleState.Targeting);
         //StartCoroutine(AbilityTwoCR());
         ProcessAttack(Attack.AbilityTwo);
     }
@@ -237,9 +284,9 @@ public class CombatSystem : MonoBehaviour
         }
 
 
-        if (state == BattleState.Targetting)
+        if (state == BattleState.Targeting)
         {
-            ///Assumes that you have a player character in the process of targetting an ability.
+            ///Assumes that you have a player character in the process of targeting an ability.
             ///Cancel the targetting
             SetBattleState(BattleState.Idle);
             if (selectedPlayer != null && selectedPlayer.HasMoved == false)
@@ -443,7 +490,7 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
-        player = null;
+        //player = null;
         //target = null;
 
         unit.State = HumanoidState.Done;
@@ -576,6 +623,28 @@ public class CombatSystem : MonoBehaviour
         }
 
 
+        //StartCoroutine(KillUnit());
+
+        Destroy(unit.parentTransform.gameObject);
+
+    }
+
+    /// <summary>
+    /// The point of this coroutine is to allow the audio death clip of the killed
+    /// unit to play out all the way to the end before the gameobject is completed.
+    /// 
+    /// Will be utilized once the death audio clips have been added. To prevent a 
+    /// hiccup in gameplay the unit's mesh renderer will be disabled, as we have no
+    /// death animations in the project at this current time. 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator KillUnitCR(Humanoid unit)
+    {
+        AudioSource tempSource = unit.unitAudio.GetAudioSource();
+        unit.PlayAudio(UnitAudioPlayer.AudioToPlay.Death);
+
+        yield return new WaitUntil(() => tempSource.isPlaying == false);
+
         Destroy(unit.parentTransform.gameObject);
 
     }
@@ -652,6 +721,14 @@ public class CombatSystem : MonoBehaviour
             {
                 abilityInfo.sprite = defendInfoSprite;
             }
+            else if (button.gameObject.name == "End Turn")
+            {
+                abilityInfo.sprite = endTurnInfoSprite;
+            }
+            else if(button.name == "Cancel")
+            {
+                abilityInfo.sprite = cancelInfoSprite;
+            }
             abilityInfo.gameObject.SetActive(true);
         }
 
@@ -686,7 +763,6 @@ public class CombatSystem : MonoBehaviour
             {
                 abilityOneCDText.transform.parent.gameObject.SetActive(false);
             }
-
 
             if (player.RemainingAbilityTwoCD > 0)
             {
@@ -807,21 +883,6 @@ public class CombatSystem : MonoBehaviour
     }
     #endregion
     
-    /// <summary>
-    /// Checks if there are any units left to go this round.
-    /// </summary>
-    /// <returns>Returns true if everyone has gone, false otherwise.</returns>
-    private bool CheckUnitsLeft()
-    {
-        if (playersToGo.Count == 0 && enemiesToGo.Count == 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    
-
     /// <summary> Checks the win condition to see if it's met. </summary>
     /// <returns>True if win condition met, false otherwise.</returns>
     public bool CheckKillCondition(EnemyType typeToKill)
@@ -880,7 +941,7 @@ public class CombatSystem : MonoBehaviour
     /// Checks if each player is in the target zone;
     /// </summary>
     /// <param name="zone"></param>
-    /// <returns></returns>
+    /// <returns>Returns true if the player is in the target zone, false otherwise.</returns>
     public bool CheckAreaCondition(ObjectiveZone zone)
     {
         bool winConditionMet = true;
@@ -912,7 +973,7 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Won);
 
-        endGameText.text = "You Win!";
+        endGameImage.sprite = winSprite;
 
         DeactivateCombatButtons();
 
@@ -924,7 +985,7 @@ public class CombatSystem : MonoBehaviour
     {
         SetBattleState(BattleState.Lost);
 
-        endGameText.text = "You Lose!";
+        endGameImage.sprite = loseSprite;
 
         DeactivateCombatButtons();
         endCanvas.SetActive(true);
@@ -947,35 +1008,11 @@ public class CombatSystem : MonoBehaviour
             return;
         }
 
-        player = selection;
+        //player = selection;
     }
     #endregion
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(Instance.gameObject);
-        }
-        Instance = this;
-    }
 
-    void Start()
-    {
-        state = BattleState.Start;
-
-        SetupBattle();
-        SetEnemyCountText();
-        roundCounterText.text = _roundCounter.ToString();
-    }
-
-    private void Update()
-    {
-        if (abilityInfo.gameObject.activeInHierarchy)
-        {
-            abilityInfo.rectTransform.position = Input.mousePosition;
-        }
-    }
     /// <summary>
     /// Sets up the map and necessary information.
     /// </summary>

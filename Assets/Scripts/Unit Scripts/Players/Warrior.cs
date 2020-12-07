@@ -51,7 +51,7 @@ public class Warrior : Player
         //Debug.Log("Select a target for the warrior's normal attack.");
 
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
-
+        CombatSystem.Instance.DeactivateCombatButtons();
         ActionRange.Instance.ActionDeselected();
 
         StartCoroutine(LookToTarget());
@@ -112,6 +112,7 @@ public class Warrior : Player
     /// </summary>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
+        CombatSystem.Instance.DeactivateCombatButtons();
         ActionRange.Instance.ActionDeselected();
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
@@ -175,6 +176,7 @@ public class Warrior : Player
     /// </summary>
     protected override IEnumerator AbilityTwoCR(Action callback)
     {
+        CombatSystem.Instance.DeactivateCombatButtons();
         ActionRange.Instance.ActionDeselected();
         bool[,] range = MapGrid.Instance.FindTilesInRange(currentTile, AbilityOneRange, true);
         Tile[,] tempGrid = MapGrid.Instance.grid;
