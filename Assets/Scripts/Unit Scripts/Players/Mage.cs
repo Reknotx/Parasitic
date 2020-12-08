@@ -317,6 +317,8 @@ public class Mage : Player
         }
 
         AbilityTwoAnim();
+        PlayAudio(UnitAudioPlayer.AudioToPlay.AbilityTwo);
+
         AbilityTwoParticle.Play();
         staffAndBookController.SetTrigger("CastAbilityTwo");
 
