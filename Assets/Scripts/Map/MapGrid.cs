@@ -96,6 +96,11 @@ public class MapGrid : MonoBehaviour
         //print((columns - 1) * percentX);
         int posX = (int)((columns) * percentX);
         int posZ = (int)((rows) * percentZ);
+        //print(posX + ", " + posZ);
+        if (posX >= columns)
+            posX = columns - 1;
+        if (posZ >= rows)
+            posZ = rows - 1;
         return grid[posX, posZ];
         
     }
