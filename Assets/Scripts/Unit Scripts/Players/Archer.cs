@@ -185,13 +185,22 @@ public class Archer : Player
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player player)
         {
+
+            if (CharacterSelector.Instance.SelectedPlayerUnit is Archer)
+            {
+                this.Heal();
+                StartAbilityOneCD();
+                callback();
+            }
+
+
             ActionRange.Instance.ActionDeselected();
 
             StartCoroutine(LookToTarget());
             yield return new WaitForFixedUpdate();
             yield return new WaitUntil(() => IsTurning == false);
 
-            print("Done turning");
+            //print("Done turning");
 
             Player target = player;
 
