@@ -66,7 +66,7 @@ public class Mage : Player
     public override void NormalAttack(Action callback)
     {
         //Debug.Log("Mage Normal Attack");
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies,Attack.NormalAttack);
         StartCoroutine(NormalAttackCR(callback));
     }
 
@@ -182,7 +182,7 @@ public class Mage : Player
     {
         //Debug.Log("Mage Ability One");
 
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies,Attack.AbilityOne);
 
         StartCoroutine(AbilityOneCR(callback));
     }
