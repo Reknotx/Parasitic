@@ -181,44 +181,50 @@ public class Archer : Player
         yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
         CombatSystem.Instance.DeactivateCombatButtons();
 
-        //_potion.SetActive(true);
-
         if (CharacterSelector.Instance.SelectedTargetUnit is Player player)
         {
-            ActionRange.Instance.ActionDeselected();
+            if (CharacterSelector.Instance.SelectedTargetUnit is Archer)
+            {
+                this.Heal();
+                StartAbilityOneCD();
+            }
+            else
+            {
+                ActionRange.Instance.ActionDeselected();
 
-            StartCoroutine(LookToTarget());
-            yield return new WaitForFixedUpdate();
-            yield return new WaitUntil(() => IsTurning == false);
+                StartCoroutine(LookToTarget());
+                yield return new WaitForFixedUpdate();
+                yield return new WaitUntil(() => IsTurning == false);
 
-            print("Done turning");
+                //print("Done turning");
 
-            Player target = player;
+                Player target = player;
 
-            AbilityOneAnim();
+                AbilityOneAnim();
 
-            if (ArcherAccController != null)
-                ArcherAccController.SetTrigger("CastAbilityOne");
+                if (ArcherAccController != null)
+                    ArcherAccController.SetTrigger("CastAbilityOne");
 
-            yield return new WaitUntil(() => potionHitTarget == true);
+                yield return new WaitUntil(() => potionHitTarget == true);
 
-            Vector3 targetPos = player.transform.position;
+                Vector3 targetPos = player.transform.position;
 
-            potionSplash.transform.position = new Vector3(targetPos.x,
-                                                          potionSplash.transform.position.y,
-                                                          targetPos.z);
+                potionSplash.transform.position = new Vector3(targetPos.x,
+                                                              potionSplash.transform.position.y,
+                                                              targetPos.z);
 
-            potionSplash.Play();
+                potionSplash.Play();
 
-            print("Potion hit target");
-            target.Heal();
-            yield return new WaitForFixedUpdate();
-            yield return new WaitUntil(() => AnimationComplete);
+                print("Potion hit target");
+                target.Heal();
+                yield return new WaitForFixedUpdate();
+                yield return new WaitUntil(() => AnimationComplete);
 
-            print("Archer heal anim complete.");
+                print("Archer heal anim complete.");
 
-            StartAbilityOneCD();
+                StartAbilityOneCD();
 
+            }
             callback();
         }
     }
