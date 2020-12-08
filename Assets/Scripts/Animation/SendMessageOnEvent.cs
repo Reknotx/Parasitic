@@ -26,6 +26,11 @@ public class SendMessageOnEvent : MonoBehaviour
         transform.parent.GetComponentInChildren<Humanoid>().SetAnimationComplete(true);
     }
 
+    public void PlayAudio(UnitAudioPlayer.AudioToPlay toPlay)
+    {
+        transform.parent.GetComponentInChildren<Humanoid>().PlayAudio(toPlay);
+    }
+
     /// <summary>
     /// Enum representing the particle to be triggered.
     /// </summary>

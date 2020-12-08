@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     {
         if (SpawnsRemaining() && !tile.occupied)
         {
-            GameObject spawnedObject = Instantiate(spawnee, tile.ElevatedPos() + Vector3.up * spawnee.transform.position.y, Quaternion.Euler(0,90*Random.Range(0,4),0));
+            GameObject spawnedObject = Instantiate(spawnee, tile.ElevatedPos() + Vector3.up * (spawnee.transform.position.y + (tile.slope ? MapGrid.Instance.tileHeight/2f : 0)), Quaternion.Euler(0,90*Random.Range(0,4),0));
             _currentSpawns++;
             Humanoid unit = spawnedObject.GetComponent<Humanoid>();
             if (unit)

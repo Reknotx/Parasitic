@@ -21,20 +21,13 @@ public class LevelLoader : MonoBehaviour
     //    }
     //}
 
-    public void LoadNextLevel()
+        public void LoadLevel(string level)
     {
-        Debug.Log("In Load next Level");
-        loading = true;
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        Debug.Log("Loading level: " + level);
+        StartCoroutine(LoadLevelCR(level));
     }
 
-    public void LoadSpecificLevel(int index)
-    {
-        Debug.Log("Loading level at index " + index);
-        StartCoroutine(LoadLevel(index));
-    }
-
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevelCR(string level)
     {
         if(Upgrades.Instance != null)
         {
@@ -44,12 +37,12 @@ public class LevelLoader : MonoBehaviour
         //Play the animation
         transition.SetTrigger("FadeOut");
 
-        Debug.Log("Loading Level");
+        //Debug.Log("Loading Level");
 
         //Wait
         yield return new WaitForSeconds(1);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
 
         while (!operation.isDone)
         {

@@ -2034,7 +2034,8 @@ AudioSource:
   m_GameObject: {fileID: 7432678444946528185}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2202838250374354500, guid: f2987fb7fbe63dc479821d0573609ba4,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 7ca977511eb10ac48bdca9b0042b450d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.179
@@ -2135,9 +2136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damaged: {fileID: 8300000, guid: 7ca977511eb10ac48bdca9b0042b450d, type: 3}
   Death: {fileID: 0}
-  NormalAttack: {fileID: 0}
+  NormalAttack: {fileID: 8300000, guid: 9309cbbd0847ccd43aaa4aee491daab5, type: 3}
   AbilityOne: {fileID: 0}
-  AbilityTwo: {fileID: 0}
+  AbilityTwo: {fileID: 8300000, guid: 20f7db784a6f63841b76f335ba1a5b8e, type: 3}
   ExpGain: {fileID: 0}
   AttackMissed: {fileID: 0}
 --- !u!1 &7498956831422749097
@@ -3070,11 +3071,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arrow
-      objectReference: {fileID: 0}
-    - target: {fileID: 2355875737909964315, guid: f3e12375eb80d944e98c6ec3b7bdb6a3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3e12375eb80d944e98c6ec3b7bdb6a3, type: 3}
