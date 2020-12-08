@@ -302,6 +302,14 @@ public class Upgrades : MonoBehaviour
         {
             LoadUpgrades();
         }
+        else
+        {
+            mageAttackRange = mage.AttackRange;
+            knightAttackRange = knight.AttackRange;
+            knightAbility1Range = knight.AbilityOneRange;
+            knightAbility2Range = knight.AbilityTwoRange;
+            archerAbility1Range = archer.AbilityOneRange;
+        }
 
         DisplayPoints();
         SetButtonStates();
@@ -334,10 +342,6 @@ public class Upgrades : MonoBehaviour
         UpgradeSave upgradeSave = new UpgradeSave();
 
         upgradeSave.mageAttackRange = mageAttackRange;
-        upgradeSave.knightAttackRange = knightAttackRange;
-        upgradeSave.knightAbility1Range = knightAbility1Range;
-        upgradeSave.knightAbility2Range = knightAbility2Range;
-        upgradeSave.archerAbility1Range = archerAbility1Range;
         
 
         upgradeSave.unlockedMageAbilities = new List<Abilities>(unlockedMageAbilities);
@@ -355,7 +359,7 @@ public class Upgrades : MonoBehaviour
         bf.Serialize(file, upgradeSave);
         file.Close();
 
-        Debug.Log("saved to " + Application.persistentDataPath + "/upgrades_save.dat");
+        //Debug.Log("saved to " + Application.persistentDataPath + "/upgrades_save.dat");
     }
 
     public void LoadUpgrades()
@@ -366,20 +370,30 @@ public class Upgrades : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/upgrades_save.dat", FileMode.Open);
             UpgradeSave upgradeSave = (UpgradeSave)bf.Deserialize(file);
             file.Close();
+           
+            //Debug.Log("loaded from " + Application.persistentDataPath + "/upgrades_save.dat");
+            //Debug.Log("Mage Attack: " + upgradeSave.mageAttackRange);
+           
+            
+           
+            foreach (Abilities ability in upgradeSave.unlockedMageAbilities)
+            {
+                UnlockAbility(UnitToUpgrade.mage, ability, Abilities.none, 0);
+            }
+           
+            foreach (Abilities ability in upgradeSave.unlockedKnightAbilities)
+            {
+                UnlockAbility(UnitToUpgrade.knight, ability, Abilities.none, 0);
+            }
+           
+            foreach (Abilities ability in upgradeSave.unlockedArcherAbilities)
+            {
+                UnlockAbility(UnitToUpgrade.archer, ability, Abilities.none, 0);
+            }
 
-            Debug.Log("loaded from " + Application.persistentDataPath + "/upgrades_save.dat");
-            Debug.Log("Mage Attack: " + upgradeSave.mageAttackRange);
             mage.AttackRange = upgradeSave.mageAttackRange;
-            knight.AttackRange = upgradeSave.knightAttackRange;
-            knight.AbilityOneRange = upgradeSave.knightAbility1Range;
-            knight.AbilityTwoRange = upgradeSave.knightAbility2Range;
-            archer.AbilityOneRange = upgradeSave.archerAbility1Range;
-
 
             
-            unlockedMageAbilities.AddRange(upgradeSave.unlockedMageAbilities);
-            unlockedKnightAbilities.AddRange(upgradeSave.unlockedKnightAbilities);
-            unlockedArcherAbilities.AddRange(upgradeSave.unlockedArcherAbilities);
 
             MagePoints = upgradeSave.mageSkillPoints;
             KnightPoints = upgradeSave.knightSkillPoints;
@@ -419,11 +433,11 @@ public class Upgrades : MonoBehaviour
                             unlockedMageAbilities.Add(ability);
                             SetAbilityButtonState(ability, unit);
                             MagePoints -= pointRequirement;
-                            Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+                            //Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
 
                             if (ability != Abilities.ability1 || ability != Abilities.ability2)
                             {
-                                FindObjectOfType<Mage>().ProcessUpgrade(ability);
+                                mage.ProcessUpgrade(ability);
                             }
                         }
                         else
@@ -435,11 +449,11 @@ public class Upgrades : MonoBehaviour
                             unlockedKnightAbilities.Add(ability);
                             SetAbilityButtonState(ability, unit);
                             KnightPoints -= pointRequirement;
-                            Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+                            //Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
 
                             if (ability != Abilities.ability1 || ability != Abilities.ability2)
                             {
-                                FindObjectOfType<Warrior>().ProcessUpgrade(ability);
+                               knight.ProcessUpgrade(ability);
                             }
                         }
                         else
@@ -451,11 +465,11 @@ public class Upgrades : MonoBehaviour
                             unlockedArcherAbilities.Add(ability);
                             SetAbilityButtonState(ability, unit);
                             ArcherPoints -= pointRequirement;
-                            Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
+                            //Debug.Log("Unlocked " + unit + " " + ability + " for " + pointRequirement + " points");
 
                             if (ability != Abilities.ability1 || ability != Abilities.ability2)
                             {
-                                FindObjectOfType<Archer>().ProcessUpgrade(ability);
+                                archer.ProcessUpgrade(ability);
                             }
                         }
                         else
@@ -754,10 +768,7 @@ public class Upgrades : MonoBehaviour
 public class UpgradeSave
 {
     public int mageAttackRange;
-    public int knightAttackRange;
-    public int knightAbility1Range;
-    public int knightAbility2Range;
-    public int archerAbility1Range;
+
 
     public int mageSkillPoints;
     public int knightSkillPoints;
