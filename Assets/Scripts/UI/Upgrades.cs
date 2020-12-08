@@ -72,6 +72,17 @@ public class Upgrades : MonoBehaviour
     [HideInInspector]
     public Archer archer;
 
+    [HideInInspector]
+    public int mageAttackRange;
+    [HideInInspector]
+    public int knightAttackRange;
+    [HideInInspector]
+    public int knightAbility1Range;
+    [HideInInspector]
+    public int knightAbility2Range;
+    [HideInInspector]
+    public int archerAbility1Range;
+
     /// <summary>
     /// Experience System Vars
     /// </summary>
@@ -321,6 +332,14 @@ public class Upgrades : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/upgrades_save.dat");
 
         UpgradeSave upgradeSave = new UpgradeSave();
+
+        upgradeSave.mageAttackRange = mageAttackRange;
+        upgradeSave.knightAttackRange = knightAttackRange;
+        upgradeSave.knightAbility1Range = knightAbility1Range;
+        upgradeSave.knightAbility2Range = knightAbility2Range;
+        upgradeSave.archerAbility1Range = archerAbility1Range;
+        
+
         upgradeSave.unlockedMageAbilities = new List<Abilities>(unlockedMageAbilities);
         upgradeSave.unlockedKnightAbilities = new List<Abilities>(unlockedKnightAbilities);
         upgradeSave.unlockedArcherAbilities = new List<Abilities>(unlockedArcherAbilities);
@@ -349,7 +368,15 @@ public class Upgrades : MonoBehaviour
             file.Close();
 
             Debug.Log("loaded from " + Application.persistentDataPath + "/upgrades_save.dat");
+            Debug.Log("Mage Attack: " + upgradeSave.mageAttackRange);
+            mage.AttackRange = upgradeSave.mageAttackRange;
+            knight.AttackRange = upgradeSave.knightAttackRange;
+            knight.AbilityOneRange = upgradeSave.knightAbility1Range;
+            knight.AbilityTwoRange = upgradeSave.knightAbility2Range;
+            archer.AbilityOneRange = upgradeSave.archerAbility1Range;
 
+
+            
             unlockedMageAbilities.AddRange(upgradeSave.unlockedMageAbilities);
             unlockedKnightAbilities.AddRange(upgradeSave.unlockedKnightAbilities);
             unlockedArcherAbilities.AddRange(upgradeSave.unlockedArcherAbilities);
@@ -726,6 +753,12 @@ public class Upgrades : MonoBehaviour
 [Serializable]
 public class UpgradeSave
 {
+    public int mageAttackRange;
+    public int knightAttackRange;
+    public int knightAbility1Range;
+    public int knightAbility2Range;
+    public int archerAbility1Range;
+
     public int mageSkillPoints;
     public int knightSkillPoints;
     public int archerSkillPoints;

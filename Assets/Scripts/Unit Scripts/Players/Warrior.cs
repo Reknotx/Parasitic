@@ -235,6 +235,8 @@ public class Warrior : Player
     {
         Debug.Log("Attack range increased by 1.");
         AttackRange++;
+        Upgrades.Instance.knightAttackRange = AttackRange;
+        Debug.Log("Knight Attack: " + Upgrades.Instance.knightAttackRange);
         FindActionRanges();
     }
 
@@ -246,6 +248,7 @@ public class Warrior : Player
     protected override void AbilityOneUpgradeTwo()
     {
         AbilityOneRange += 2;
+        Upgrades.Instance.knightAbility1Range = AbilityOneRange;
         FindActionRanges();
         Debug.Log("Ability range is increased by 2 tiles.");
     }
@@ -258,6 +261,7 @@ public class Warrior : Player
     protected override void AbilityTwoUpgradeTwo()
     {
         AbilityTwoRange += 1;
+        Upgrades.Instance.knightAbility2Range = AbilityTwoRange;
         FindActionRanges();
         Debug.Log("Ability range is increased by 1 tile.");
     }
