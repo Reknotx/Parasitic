@@ -42,12 +42,15 @@ public class LevelLoader : MonoBehaviour
         //Wait
         yield return new WaitForSeconds(1);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
+        // AsyncOperation operation = SceneManager.LoadSceneAsync(level);
 
-        while (!operation.isDone)
-        {
-            yield return null;
-        }
+        PlayerPrefs.SetString("SelectedLevel", level);
+        SceneManager.LoadScene("LoadingScreen");
+
+        // while (!operation.isDone)
+        // {
+        //     yield return null;
+        // }
     }
 
 }
