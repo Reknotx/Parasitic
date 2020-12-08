@@ -326,7 +326,7 @@ public abstract class Player : Humanoid, IPlayer
 
         HealParticle.Play();
 
-        StartCoroutine(ShowHealText(Mathf.FloorToInt(MaxHealth * healPercent)));
+        //StartCoroutine(ShowHealText(Mathf.FloorToInt(MaxHealth * healPercent)));
     }
 
     /// <summary>
