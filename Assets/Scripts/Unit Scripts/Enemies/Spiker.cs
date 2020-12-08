@@ -95,13 +95,13 @@ public class Spiker : Enemy
             ///Step 2. Gain a reference to the tile at that map coord as well as the neighbors
             ///around that tile that are within attack range.
             Debug.Log("Executing step 2.");
-            if ((mapCoord.X > MapGrid.Instance.columns || mapCoord.X < 0)
-                || (mapCoord.Y > MapGrid.Instance.rows || mapCoord.Y < 0))
+            if ((mapCoord.X >= MapGrid.Instance.columns || mapCoord.X < 0)
+                || (mapCoord.Y >= MapGrid.Instance.rows || mapCoord.Y < 0))
             {
                 break;
             }
 
-            if (tempGrid[mapCoord.X, mapCoord.Y].movementTile)
+            if (tempGrid[mapCoord.X, mapCoord.Y].movementTile && !tempGrid[mapCoord.X, mapCoord.Y].occupied)
             {
                 tempTile = tempGrid[mapCoord.X, mapCoord.Y];
             }
@@ -122,7 +122,7 @@ public class Spiker : Enemy
                     break;
                 }
 
-                if (tempGrid[mapCoord.X, mapCoord.Y].movementTile)
+                if (tempGrid[mapCoord.X, mapCoord.Y].movementTile && !tempGrid[mapCoord.X, mapCoord.Y].occupied)
                 {
                     tempTile = tempGrid[mapCoord.X, mapCoord.Y];
                 }
