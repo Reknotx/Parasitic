@@ -75,6 +75,8 @@ public class CharacterSelector : MonoBehaviour
     /// <summary> When true a player can still move after they have already moved </summary>
     public bool debugKeepMoving = false;
 
+    Attack actionType = Attack.NormalAttack;
+
     private void Start()
     {
         if (Instance != null && Instance != this)
@@ -222,7 +224,22 @@ public class CharacterSelector : MonoBehaviour
                         Humanoid tempE = objectHit.gameObject.GetComponent<Enemy>();
 
                         //bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
-                        bool[,] tempRange = SelectedPlayerUnit.AttackTileRange;
+                        bool[,] tempRange; 
+                        switch (actionType)
+                        {
+                            case Attack.NormalAttack:
+                                tempRange = SelectedPlayerUnit.AttackTileRange;
+                                break;
+                            case Attack.AbilityOne:
+                                tempRange = SelectedPlayerUnit.AbilityOneTileRange;
+                                break;
+                            case Attack.AbilityTwo:
+                                tempRange = SelectedPlayerUnit.AbilityTwoTileRange;
+                                break;
+                            default:
+                                tempRange = SelectedPlayerUnit.AttackTileRange;
+                                break;
+                        }
 
                         if (!tempRange[(int)tempE.currentTile.gridPosition.x, (int)tempE.currentTile.gridPosition.y])
                         {
@@ -243,7 +260,22 @@ public class CharacterSelector : MonoBehaviour
                         Humanoid tempP = objectHit.gameObject.GetComponent<Player>();
 
                         //bool[,] tempRange = MapGrid.Instance.FindTilesInRange(SelectedPlayerUnit.currentTile, SelectedPlayerUnit.AttackRange, true);
-                        bool[,] tempRange = SelectedPlayerUnit.AttackTileRange;
+                        bool[,] tempRange;
+                        switch (actionType)
+                        {
+                            case Attack.NormalAttack:
+                                tempRange = SelectedPlayerUnit.AttackTileRange;
+                                break;
+                            case Attack.AbilityOne:
+                                tempRange = SelectedPlayerUnit.AbilityOneTileRange;
+                                break;
+                            case Attack.AbilityTwo:
+                                tempRange = SelectedPlayerUnit.AbilityTwoTileRange;
+                                break;
+                            default:
+                                tempRange = SelectedPlayerUnit.AttackTileRange;
+                                break;
+                        }
 
                         if (!tempRange[(int)tempP.currentTile.gridPosition.x, (int)tempP.currentTile.gridPosition.y])
                         {
@@ -345,9 +377,15 @@ public class CharacterSelector : MonoBehaviour
 
     /// <summary> Sets the value of the current focus in the targetting system. </summary>
     /// <param name="type"> Represents the focus of targetting.</param>
-    public void SetTargettingType(TargettingType type)
+    public void SetTargettingType(TargettingType type, Attack action)
     {
         targettingType = type;
+        SetActionType(action);
+    }
+
+    private void SetActionType(Attack action)
+    {
+        actionType = action;
     }
 
     /// <summary>

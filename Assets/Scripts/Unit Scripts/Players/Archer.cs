@@ -60,7 +60,7 @@ public class Archer : Player
     {
         //Debug.Log("Archer Normal Attack");
         arrowHitTarget = false;
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies);
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetEnemies,Attack.NormalAttack);
         StartCoroutine(NormalAttackCR(callback));
 
     }
@@ -168,7 +168,7 @@ public class Archer : Player
     {
         //Debug.Log("Archer Ability One");
         potionHitTarget = false;
-        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers);
+        CharacterSelector.Instance.SetTargettingType(CharacterSelector.TargettingType.TargetPlayers,Attack.AbilityOne);
         StartCoroutine(AbilityOneCR(callback));
     }
 
@@ -178,7 +178,7 @@ public class Archer : Player
     /// <param name="callback">The function to call back to when the ability is completed.</param>
     protected override IEnumerator AbilityOneCR(Action callback)
     {
-        yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null);
+        yield return new WaitUntil(() => CharacterSelector.Instance.SelectedTargetUnit != null && CharacterSelector.Instance.SelectedPlayerUnit);
         CombatSystem.Instance.DeactivateCombatButtons();
 
         if (CharacterSelector.Instance.SelectedTargetUnit is Player player)

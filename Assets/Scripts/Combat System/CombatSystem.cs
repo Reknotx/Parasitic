@@ -33,6 +33,14 @@ public enum ActiveUnits
     Enemies
 }
 
+/// <summary> Enum representing which attack was executed. </summary>
+public enum Attack
+{
+    NormalAttack,
+    AbilityOne,
+    AbilityTwo
+}
+
 /// <summary>
 /// Main entry point of the program (for the moment) where all data is handled.
 /// </summary>
@@ -102,15 +110,6 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The list of buttons used for combat when a player is selected. </summary>
     public List<Button> combatButtons = new List<Button>();
     #endregion
-
-
-    /// <summary> Enum representing which attack was executed. </summary>
-    enum Attack
-    {
-        NormalAttack,
-        AbilityOne,
-        AbilityTwo
-    }
 
     /// <summary>
     /// The current state of the battle system.
