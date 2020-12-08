@@ -13,7 +13,7 @@ using UnityEngine;
 public class Archer : Player
 {
     /// <summary> The animtor controler for the Archer's accessories. </summary>
-    public Animator ArcherAccController;
+    //public Animator ArcherAccController;
 
     /// <summary> Indicates if the Archer's eagle eye ability is active. </summary>
     private bool hasTrueDamage = false;
@@ -202,8 +202,8 @@ public class Archer : Player
 
                 AbilityOneAnim();
 
-                if (ArcherAccController != null)
-                    ArcherAccController.SetTrigger("CastAbilityOne");
+                //if (ArcherAccController != null)
+                //    ArcherAccController.SetTrigger("CastAbilityOne");
 
 
 
@@ -265,6 +265,7 @@ public class Archer : Player
         //animatorController.SetTrigger("CastEagleEye");
 
         ActivateAbilityTwoParticle();
+        PlayAudio(UnitAudioPlayer.AudioToPlay.AbilityTwo);
 
         CombatSystem.Instance.SetBattleState(BattleState.Idle);
         CombatSystem.Instance.SetAbilityTwoButtonState(false);

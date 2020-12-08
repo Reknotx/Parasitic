@@ -140,6 +140,8 @@ public class Mage : Player
 
             yield return new WaitUntil(() => AnimationComplete);
 
+            PlayAudio(UnitAudioPlayer.AudioToPlay.NormalAttack);
+
             ActivateAttackParticle();
 
             if (attackedEnemy.TakeDamage(AttackStat + damageModifier + (int)currentTile.TileBoost(TileEffect.Attack)))
@@ -249,6 +251,8 @@ public class Mage : Player
 
         yield return new WaitUntil(() => FireBlastParticle.isStopped);
         //yield return new WaitForSeconds(1.0f);
+
+        PlayAudio(UnitAudioPlayer.AudioToPlay.AbilityOne);
 
         foreach (Enemy enemy in enemies)
         {
