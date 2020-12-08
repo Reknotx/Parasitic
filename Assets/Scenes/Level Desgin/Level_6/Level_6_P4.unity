@@ -13327,6 +13327,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1081236398952046454, guid: e4de99bbe11d8094badf5e34d277aa3b,
+        type: 3}
+      propertyPath: doLoadUpgrades
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1718682164990410204, guid: e4de99bbe11d8094badf5e34d277aa3b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14641,7 +14646,7 @@ Transform:
   m_LocalScale: {x: 3.6850376, y: 19.798811, z: 115.33507}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &835922962
 GameObject:
@@ -19712,7 +19717,7 @@ PrefabInstance:
     - target: {fileID: 7786142373577817973, guid: 3de22dc6608e9bd48be318bdae9273f6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7786142373577817973, guid: 3de22dc6608e9bd48be318bdae9273f6,
         type: 3}
@@ -37932,7 +37937,7 @@ PrefabInstance:
     - target: {fileID: 4737964080908496577, guid: 699ac6bde8cb119448fd007ff4bb8327,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4737964080908496577, guid: 699ac6bde8cb119448fd007ff4bb8327,
         type: 3}
@@ -40348,15 +40353,7 @@ MonoBehaviour:
   objectiveDropdown: {fileID: 2931713500377264493}
   objectiveText: {fileID: 0}
   orderedObjectives: 0
-  objectives:
-  - condition: 0
-    typeToKill: 0
-    enemiesKillRequirement: 0
-    numEnemiesInScene: 0
-    objectiveMessage: Objective
-    item: {fileID: 0}
-    objectiveZone: {fileID: 0}
-    complete: 0
+  objectives: []
 --- !u!114 &2931713499380177576
 MonoBehaviour:
   m_ObjectHideFlags: 0

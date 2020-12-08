@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    public static LevelLoader Instance;
     public Animator transition;
 
     private bool loading = false;
@@ -21,7 +22,16 @@ public class LevelLoader : MonoBehaviour
     //    }
     //}
 
-        public void LoadLevel(string level)
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
+    public void LoadLevel(string level)
     {
         Debug.Log("Loading level: " + level);
         StartCoroutine(LoadLevelCR(level));

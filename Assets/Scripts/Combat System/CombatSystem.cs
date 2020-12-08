@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Enum for the various states of combat we can be in.
@@ -52,6 +53,7 @@ public class CombatSystem : MonoBehaviour
     [Header("The UI Variables.", order = 0)]
     [Header("The canvas that is displayed when you have met the win/lose condition.", order = 1)]
     public GameObject endCanvas;
+    public GameObject nextLevelButton;
 
     [Space]
 
@@ -629,7 +631,12 @@ public class CombatSystem : MonoBehaviour
 
             Instantiate(bloodAndGuts, unit.transform.position, bloodAndGuts.transform.rotation);
 
-            if (WinConditions.Instance.CheckWinCondition(Condition.KillEnemies)) GameWon();
+            if (WinConditions.Instance.CheckWinCondition(Condition.KillEnemies))
+            {
+                GameWon();
+                
+            }
+
         }
 
 
@@ -989,9 +996,43 @@ public class CombatSystem : MonoBehaviour
 
         endCanvas.SetActive(true);
 
-        EndGameAudioSource.clip = GameWonAudio;
+        
 
-        EndGameAudioSource.Play();
+        if(SceneManager.GetActiveScene().name.Contains("Level_6"))
+        {
+            endCanvas.SetActive(false);
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Level_6_P1":
+                    LevelLoader.Instance.LoadLevel("Level_6_P2");
+                    break;
+                case "Level_6_P2":
+                    LevelLoader.Instance.LoadLevel("Level_6_P3");
+                    break;
+                case "Level_6_P3":
+                    LevelLoader.Instance.LoadLevel("Level_6_P4");
+                    break;
+                default:
+                    break;
+            }
+            if (SceneManager.GetActiveScene().name == "Level_6_P4")
+            {
+                nextLevelButton.SetActive(false);
+                endCanvas.SetActive(true);
+            }
+        }
+        else
+        {
+            EndGameAudioSource.clip = GameWonAudio;
+
+            EndGameAudioSource.Play();
+        }
+    }
+
+    private IEnumerator LoadMultiScene()
+    {
+        yield return new WaitUntil(() => EndGameAudioSource.isPlaying == true);
+        
     }
 
     /// <summary> Active the end screen canvas and change the text to You Lose! when the game is lost. </summary>
