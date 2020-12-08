@@ -11148,12 +11148,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!1 &599974523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5245908529373590957, guid: 9e0ff8ee1ff56094baf44f98a6fea9a3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1665524764}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &605500946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7915100790801393467, guid: ad13ba8b9d2dd654499e763016cd16f2,
@@ -15976,6 +15970,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fd4d6c06d5a8f4e971d3adb896287b, type: 3}
+--- !u!114 &918435935 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8692331170428761326, guid: c997cef4130604e41877f48a868160c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1376018577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be4356568e9550428e28fa8e8452760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &922404430
 GameObject:
   m_ObjectHideFlags: 0
@@ -23223,7 +23229,8 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnee
       value: 
-      objectReference: {fileID: 599974523}
+      objectReference: {fileID: 7282138462873858109, guid: 3861744d439171048b40e7f84b48b1da,
+        type: 3}
     - target: {fileID: 7786142373577817870, guid: 3de22dc6608e9bd48be318bdae9273f6,
         type: 3}
       propertyPath: m_Name
@@ -33441,7 +33448,7 @@ PrefabInstance:
     - target: {fileID: 7786142373577817973, guid: c48d8b284e875be4ea9b99d83da98a7f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.832039
+      value: 15.57
       objectReference: {fileID: 0}
     - target: {fileID: 7786142373577817973, guid: c48d8b284e875be4ea9b99d83da98a7f,
         type: 3}
@@ -48793,7 +48800,7 @@ MonoBehaviour:
     numEnemiesInScene: 0
     objectiveMessage: Get to the Center of the Airship!
     item: {fileID: 0}
-    objectiveZone: {fileID: 0}
+    objectiveZone: {fileID: 918435935}
     complete: 0
 --- !u!224 &9052287777708453480
 RectTransform:
