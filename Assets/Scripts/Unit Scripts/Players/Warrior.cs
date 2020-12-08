@@ -221,6 +221,8 @@ public class Warrior : Player
 
         StartAbilityTwoCD();
 
+        Defend();
+
         callback();
     }
     #endregion
