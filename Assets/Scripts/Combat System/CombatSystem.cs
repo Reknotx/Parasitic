@@ -141,13 +141,17 @@ public class CombatSystem : MonoBehaviour
     /// <summary> The master list of all units that are currently alive. </summary>
     private List<Humanoid> unitsAlive = new List<Humanoid>();
 
-
     public List<Tile> coolingTiles = new List<Tile>();
 
     public ParticleSystem blood;
     public ParticleSystem bloodAndGuts;
 
     public bool IgnoreDoubleMoveCheck = false;
+
+    public AudioClip GameWonAudio;
+    public AudioClip GameLostAudio;
+
+    public AudioSource EndGameAudioSource;
 
     private void Awake()
     {
@@ -985,6 +989,10 @@ public class CombatSystem : MonoBehaviour
         DeactivateCombatButtons();
 
         endCanvas.SetActive(true);
+
+        EndGameAudioSource.clip = GameWonAudio;
+
+        EndGameAudioSource.Play();
     }
 
     /// <summary> Active the end screen canvas and change the text to You Lose! when the game is lost. </summary>
@@ -996,10 +1004,11 @@ public class CombatSystem : MonoBehaviour
 
         DeactivateCombatButtons();
         endCanvas.SetActive(true);
+
+        EndGameAudioSource.clip = GameLostAudio;
+
+        EndGameAudioSource.Play();
     }
-
-
-
     #endregion
 
     #region Deprecated Functions
