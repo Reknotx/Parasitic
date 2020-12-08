@@ -209,6 +209,8 @@ public class Archer : Player
 
                 yield return new WaitUntil(() => potionHitTarget == true);
 
+                PlayAudio(UnitAudioPlayer.AudioToPlay.AbilityOne);
+
                 Vector3 targetPos = player.transform.position;
 
                 potionSplash.transform.position = new Vector3(targetPos.x,

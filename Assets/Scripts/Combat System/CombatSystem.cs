@@ -658,7 +658,7 @@ public class CombatSystem : MonoBehaviour
     IEnumerator KillUnitCR(Humanoid unit)
     {
         AudioSource tempSource = unit.unitAudio.GetAudioSource();
-        unit.PlayAudio(UnitAudioPlayer.AudioToPlay.Death);
+        unit.PlayAudio(UnitAudioPlayer.AudioToPlay.Damaged);
 
         yield return new WaitUntil(() => tempSource.isPlaying == false);
 
