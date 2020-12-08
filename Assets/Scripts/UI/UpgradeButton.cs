@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum UnitToUpgrade
@@ -18,5 +19,5 @@ public class UpgradeButton : MonoBehaviour
 
     public int pointRequirement = 1;
 
-
+    public Image lockImage;
 }

@@ -62,6 +62,8 @@ public class Upgrades : MonoBehaviour
     public Sprite mageBG;
     public Sprite knightBG;
     public Sprite archerBG;
+    public Sprite lockedSprite;
+    public Sprite unlockedSprite;
 
     [HideInInspector]
     public Mage mage;
@@ -202,7 +204,7 @@ public class Upgrades : MonoBehaviour
             if (_magePoints > 1 || _magePoints < 1)
                 magePointText.text += "s";
 
-            
+            SetLockStates();
         }
     }
 
@@ -216,8 +218,8 @@ public class Upgrades : MonoBehaviour
             if (_knightPoints > 1 || _knightPoints < 1)
                 knightPointText.text += "s";
 
-            
-            
+            SetLockStates();
+
         }
     }
 
@@ -231,7 +233,7 @@ public class Upgrades : MonoBehaviour
             if (_archerPoints > 1 || _archerPoints < 1)
                 archerPointText.text += "s";
 
-            
+            SetLockStates();
         }
     }
     #endregion
@@ -292,6 +294,7 @@ public class Upgrades : MonoBehaviour
 
         DisplayPoints();
         SetButtonStates();
+        SetLockStates();
     }
 
 
@@ -436,6 +439,7 @@ public class Upgrades : MonoBehaviour
                 }
                 //SaveUpgrades();
                 SetButtonStates();
+                SetLockStates();
             }
             else
             {
@@ -447,7 +451,7 @@ public class Upgrades : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if Ability is Unlockable
+    /// Checks if Ability is Unlocked
     /// </summary>
     /// <param name="ability"> Enumerator Describing Ability to Check for</param>
     /// <param name="unit"> Enumerator Describing Unit Type </param>
@@ -565,6 +569,57 @@ public class Upgrades : MonoBehaviour
                 upgradeButton.GetComponent<Image>().color = Color.green;
             }
         }
+    }
+
+    public void SetLockStates()
+    {
+        foreach (UpgradeButton upgradeButton in upgradeButtons)
+        {
+            if (IsAbilityUnlocked(upgradeButton.abilityToUnlock, upgradeButton.unitToUpgrade))
+            {
+                upgradeButton.lockImage.gameObject.SetActive(false);
+            }
+            else if (upgradeButton.abilityToUnlock != Abilities.none && IsAbilityUnlocked(upgradeButton.requiredAbility, upgradeButton.unitToUpgrade) && doHaveEnoughPoints(upgradeButton))
+            {
+                upgradeButton.lockImage.sprite = unlockedSprite;
+            }
+            else
+            {
+                upgradeButton.lockImage.sprite = lockedSprite;
+            }
+            
+        }
+    }
+
+    public bool doHaveEnoughPoints(UpgradeButton upgradeButton)
+    {
+        bool result = false;
+        switch (upgradeButton.unitToUpgrade)
+        {
+            case UnitToUpgrade.mage:
+                if(MagePoints >= upgradeButton.pointRequirement)
+                {
+                    result = true;
+                }
+                break;
+            case UnitToUpgrade.knight:
+                if (KnightPoints >= upgradeButton.pointRequirement)
+                {
+                    result = true;
+                }
+                break;
+            case UnitToUpgrade.archer:
+                if (ArcherPoints >= upgradeButton.pointRequirement)
+                {
+                    result = true;
+                }
+                break;
+            case UnitToUpgrade.none:
+                break;
+            default:
+                break;
+        }
+        return result;
     }
 
 

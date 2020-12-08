@@ -598,6 +598,26 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     }
 
     /// <summary>
+    /// Overloaded function used for enemies turning.
+    /// </summary>
+    /// <param name="target">The target player</param>
+    /// <returns></returns>
+    protected virtual IEnumerator LookToTarget(Player target)
+    {
+        IsTurning = true;
+        Vector3 thisUnit = currentTile.transform.position;
+        Vector3 targetUnit = target.currentTile.transform.position;
+
+        Vector3 angle = (targetUnit - thisUnit).normalized;
+
+        while (LookInDirection(angle))
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        IsTurning = false;
+    }
+
+    /// <summary>
     /// Checks to see if the player is on a healing tile.
     /// </summary>
     void HealingTileCheck()

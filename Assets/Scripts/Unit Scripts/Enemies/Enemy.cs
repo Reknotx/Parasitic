@@ -29,8 +29,12 @@ public abstract class Enemy : Humanoid, IEnemy
         ///with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
         //animatorController.SetTrigger("CastAttack");
 
-        //yield return new WaitUntil(() => AnimationComplete);
-        yield return null;
+        StartCoroutine(LookToTarget(_currTarget));
+        yield return new WaitForFixedUpdate();
+        yield return new WaitUntil(() => IsTurning == false);
+
+        PlayAudio(UnitAudioPlayer.AudioToPlay.NormalAttack);
+
         int attack = AttackStat;
 
         if (CheckForEffectOfType(StatusEffect.StatusEffectType.AttackDown))
