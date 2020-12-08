@@ -296,7 +296,6 @@ public class Archer : Player
     {
         Debug.Log("Ability range is now 4 tiles.");
         AbilityOneRange = 4;
-        Upgrades.Instance.archerAbility1Range = AbilityOneRange;
         FindActionRanges();
     }
 

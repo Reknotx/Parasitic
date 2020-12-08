@@ -74,14 +74,7 @@ public class Upgrades : MonoBehaviour
 
     [HideInInspector]
     public int mageAttackRange;
-    [HideInInspector]
-    public int knightAttackRange;
-    [HideInInspector]
-    public int knightAbility1Range;
-    [HideInInspector]
-    public int knightAbility2Range;
-    [HideInInspector]
-    public int archerAbility1Range;
+    
 
     /// <summary>
     /// Experience System Vars
@@ -305,10 +298,6 @@ public class Upgrades : MonoBehaviour
         else
         {
             mageAttackRange = mage.AttackRange;
-            knightAttackRange = knight.AttackRange;
-            knightAbility1Range = knight.AbilityOneRange;
-            knightAbility2Range = knight.AbilityTwoRange;
-            archerAbility1Range = archer.AbilityOneRange;
         }
 
         DisplayPoints();
