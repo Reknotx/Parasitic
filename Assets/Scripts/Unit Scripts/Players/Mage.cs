@@ -23,7 +23,20 @@ public class Mage : Player
 
     public static Mage Instance;
 
-    
+    private int _mageRangeIncrease;
+
+    public int MageRangeIncrease
+    {
+        get
+        {
+            return _mageRangeIncrease;
+        }
+
+        set
+        {
+            _mageRangeIncrease = Mathf.Clamp(value, 0, 10);
+        }
+    }
 
     private void Awake()
     {
@@ -148,6 +161,7 @@ public class Mage : Player
                 {
                     ///If the second upgrade is purchased and we have successfully killed the enemy, increase range by 1.
                     AttackRange++;
+                    MageRangeIncrease++;
                 }
 
                 if (Upgrades.Instance.IsAbilityUnlocked(Abilities.ability2Upgrade2, UnitToUpgrade.mage))
