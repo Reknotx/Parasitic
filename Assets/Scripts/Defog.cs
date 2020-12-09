@@ -29,16 +29,25 @@ public class Defog : MonoBehaviour
         {
             _defaultLayers[index] = objectsToReveal[index].layer;
 
-            objectsToReveal[index].layer = 14;
-            foreach (Transform child in objectsToReveal[index].GetComponentsInChildren<Transform>())
+            if(objectsToReveal[index].layer == 14)
             {
-                child.gameObject.layer = 14;
+                Debug.LogAssertion("This Object: " + objectsToReveal[index].name + " is either used in more than one Fog Trigger, or you accidentally set its layer to FogStencil by hand");
             }
+            else
+            {
+                objectsToReveal[index].layer = 14;
+                foreach (Transform child in objectsToReveal[index].GetComponentsInChildren<Transform>())
+                {
 
-            if (objectsToReveal[index].GetComponent<Enemy>() != null)
-            {
-                objectsToReveal[index].GetComponent<Enemy>().Revealed = false;
+                    child.gameObject.layer = 14;
+                }
+
+                if (objectsToReveal[index].GetComponent<Enemy>() != null)
+                {
+                    objectsToReveal[index].GetComponent<Enemy>().Revealed = false;
+                }
             }
+            
             
         }
 
