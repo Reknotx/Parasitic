@@ -77,7 +77,7 @@ public class UI : MonoBehaviour
             {
                 UnPause();
             }
-            else if (CombatSystem.Instance.state != BattleState.Lost && CombatSystem.Instance.state != BattleState.Won)
+            else if (CombatSystem.Instance.state != BattleState.Lost && CombatSystem.Instance.state != BattleState.Won && Time.timeSinceLevelLoad > 1)
             {
                 Pause();
             }

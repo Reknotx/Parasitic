@@ -16,7 +16,7 @@ public class EnemyPath : MonoBehaviour
     public static EnemyPath Instance;
     LineRenderer lineRenderer;
     
-    float pathHeight = 0.1f;
+    public float pathHeight = 0.1f;
 
     private void Awake()
     {
