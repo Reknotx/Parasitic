@@ -47,18 +47,15 @@ public abstract class Player : Humanoid, IPlayer
     [Header("The range of the player's first ability.")]
     public int AbilityOneRange;
 
-    [Space]
+    [Space, Header("The range of the player's second ability.")]
     /// <summary> Range of player's second ability. </summary>
-    [Header("The range of the player's second ability.")]
     public int AbilityTwoRange;
 
-    [Space]
-    [Header("The cooldown of the player's first ability.")]
+    [Space, Header("The cooldown of the player's first ability.")]
     /// <summary> The cooldown of the player's first ability. </summary>
     public int AbilityOneCooldown;
 
-    [Space]
-    [Header("The cooldown of the player's second ability.")]
+    [Space, Header("The cooldown of the player's second ability.")]
     /// <summary> The cooldown of the player's second ability. </summary>
     public int AbilityTwoCooldown;
 

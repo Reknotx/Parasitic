@@ -170,18 +170,16 @@ public class Humanoid : MonoBehaviour, IMove, IStatistics
     protected List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     #region Health UI
-    [Space]
-    [Header("The text component representing this unit's health.")]
+
+    [Space, Header("The text component representing this unit's health.")]
     /// <summary> The text component representing this unit's Health. </summary>
     public Text healthText;
 
-    [Space]
-    [Header("The text component representing how much damage was dealt to this unit.")]
+    [Space, Header("The text component representing how much damage was dealt to this unit.")]
     /// <summary> The text component representing how much damage was dealt to this unit. </summary>
     public Text damageText;
 
-    [Space]
-    [Header("The graphical slider representing our health bar.")]
+    [Space, Header("The graphical slider representing our health bar.")]
     /// <summary> The graphical slider representing our health bar. </summary>
     public Slider healthBar;
     #endregion

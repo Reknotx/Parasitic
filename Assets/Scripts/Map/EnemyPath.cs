@@ -5,7 +5,6 @@
  * Brief: Set Path of enemy;
  */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

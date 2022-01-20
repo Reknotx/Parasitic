@@ -2,8 +2,7 @@
 /// DATE: 9/2/2020
 /// 
 /// Controls movement of the Camera. Provides in Editor Tools to limit the camera's movement range
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour

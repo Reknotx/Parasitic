@@ -50,14 +50,12 @@ public class CombatSystem : MonoBehaviour
     #region UI References
 
     /// <summary> The canvas that is displayed when the game has been won or lost. </summary>
-    [Header("The UI Variables.", order = 0)]
-    [Header("The canvas that is displayed when you have met the win/lose condition.", order = 1)]
+    [Header("The UI Variables.", order = 0),
+     Header("The canvas that is displayed when you have met the win/lose condition.", order = 1)]
     public GameObject endCanvas;
     public GameObject nextLevelButton;
 
-    [Space]
-
-    [Header("The Image that tells you whether you win or lose.")]
+    [Space, Header("The Image that tells you whether you win or lose.")]
     public Image endGameImage;
     public Sprite loseSprite;
     public Sprite winSprite;

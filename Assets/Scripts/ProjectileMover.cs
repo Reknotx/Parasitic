@@ -33,27 +33,23 @@ public class ProjectileMover : MonoBehaviour
         MageFireball
     }
 
-    [Header("Who casts this projectile.")]
     /// <summary> Who casts this projectile. </summary>
+    [Header("Who casts this projectile.")]
     public Owner owner;
 
-    [Space]
-    [Header("The type of projectile being cast.")]
     /// <summary> The type of projectile being cast. </summary>
+    [Space, Header("The type of projectile being cast.")]
     public ProjectileType projectileType;
 
-    [Space]
-    [Header("The transform of the target. Can be set either in code or in the inspector.")]
     /// <summary> The transform of the target. Can be set either in code or in the inspector. </summary>
+    [Space, Header("The transform of the target. Can be set either in code or in the inspector.")]
     public Transform target;
 
-    [Space]
-    [Header("The parent transform of the projectile before casting.")]
     /// <summary> The parent transform of the projectile before casting. </summary>
+    [Space, Header("The parent transform of the projectile before casting.")]
     public Transform parentTransform;
 
-    [Range(1, 5)]
-    [Header("The speed of the projectile.")]
+    [Range(1, 5), Header("The speed of the projectile.")]
     public int SpeedModifer = 1;
 
     private Vector3 _potionPos = Vector3.zero;
@@ -83,7 +79,6 @@ public class ProjectileMover : MonoBehaviour
                 p01 = (1 - u) * p0 + u * p1;
                 gameObject.transform.position = p01;
                 yield return new WaitForFixedUpdate();
-
             }
         }
         else
@@ -141,10 +136,7 @@ public class ProjectileMover : MonoBehaviour
     /// Sets the target of the projectile, can be either player or enemy.
     /// </summary>
     /// <param name="target">The target of the projectile. Transform is gained from game object.</param>
-    public void SetTarget(Humanoid target)
-    {
-        this.target = target.transform;
-    }
+    public void SetTarget(Humanoid target) => this.target = target.transform;
 
     /// <summary>
     /// Triggers the movement coroutine to move the projectile.

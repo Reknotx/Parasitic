@@ -22,11 +22,11 @@ public abstract class Enemy : Humanoid, IEnemy
 
     IEnumerator AttackCR()
     {
-        ///MESSAGE FOR RYAN 10/27/2020
-        ///Hey dude if you get to this point where you need to set up the animations and trigger the behavior so that
-        ///the damage is only applied on the animation event as well as activating the animations themselves just
-        ///uncomment these two lines and you should be just fine :) Just make sure that your triggers are set
-        ///with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
+        //MESSAGE FOR RYAN 10/27/2020
+        //Hey dude if you get to this point where you need to set up the animations and trigger the behavior so that
+        //the damage is only applied on the animation event as well as activating the animations themselves just
+        //uncomment these two lines and you should be just fine :) Just make sure that your triggers are set
+        //with the proper naming or you can adjust the trigger name here too, up to you too. Good luck
         //animatorController.SetTrigger("CastAttack");
 
         StartCoroutine(LookToTarget(_currTarget));
@@ -64,7 +64,7 @@ public abstract class Enemy : Humanoid, IEnemy
     /// <summary> The current target of the enemy. </summary>
     protected Player _currTarget;
 
-    /// <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
+    // <summary> Indicates that this enemy currently being taunted by the warrior. </summary>
     //public bool Taunted { get; set; } = false;
 
     /// <summary> Indicates that an enemy is not hidden by fog. </summary>
@@ -204,15 +204,10 @@ public abstract class Enemy : Humanoid, IEnemy
         {
             if (CheckIfInRangeOfTarget(path[i]))
             {
-                if(path.Count - 1 != i)
-                {
-                    path.RemoveRange(i+1,1);
-                }
+                if (path.Count - 1 == i) continue;
+                path.RemoveRange(i + 1, 1);
             }
-            else
-            {
-                break;
-            }
+            else break;
         }
         int movementDist = Mathf.Min(MovementStat, path.Count);
         //truncate path to movement range

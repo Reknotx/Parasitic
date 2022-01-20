@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -31,8 +30,8 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
 
-    [Header("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
-    [Tooltip("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
+    [Header("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)"),
+     Tooltip("Only Have This Checked For Scenes that are Part of A Multi Scene Level(But not the First Scene)")]
     public bool doLoadUpgrades = false;
 
     public GameObject upgradeWindow;

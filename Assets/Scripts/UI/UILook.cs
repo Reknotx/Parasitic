@@ -2,10 +2,8 @@
 /// DATE: 9/10/2020
 /// 
 /// Used to make World Space UI Face the Camera 
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UILook : MonoBehaviour
 {

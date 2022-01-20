@@ -3,8 +3,7 @@
 /// 
 /// Disables All objects in fogObjects while revealing all objects 
 /// in objectsToReveal when player unit enters the attached trigger
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Defog : MonoBehaviour

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,17 +9,6 @@ public class LevelLoader : MonoBehaviour
 
     private bool loading = false;
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (CombatSystem.Instance == null) return;
-
-    //    if (CombatSystem.Instance.state == BattleState.Won && loading == false)
-    //    {
-    //        Debug.Log("Level Won");
-    //        LoadNextLevel();
-    //    }
-    //}
 
     private void Awake()
     {

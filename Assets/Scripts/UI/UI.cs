@@ -2,8 +2,7 @@
 /// DATE: 9/15/2020
 /// 
 /// Used to Control Menu UI while In-Game
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
